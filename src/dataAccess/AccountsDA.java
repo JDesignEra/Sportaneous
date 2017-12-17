@@ -9,7 +9,7 @@ import org.mapdb.DBMaker;
 
 import entity.AccountsEntity;
 
-public class AccountDA {
+public class AccountsDA {
 	
 	private static DB db;
 	private static ConcurrentMap<String, AccountsEntity> accounts;
@@ -28,7 +28,7 @@ public class AccountDA {
 	}
 	
 	public static Object[][] getAllData() {
-		Object[][] rowData = new Object[accounts.size()][13];
+		Object[][] rowData = new Object[accounts.size()][15];
 		
 		int i = 0;
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -41,22 +41,24 @@ public class AccountDA {
 			rowData[i][6] = accountsEntity.getIntro();
 			rowData[i][7] = accountsEntity.getHeight();
 			rowData[i][8] = accountsEntity.getWeight();
-			rowData[i][9] = accountsEntity.getRating();
-			rowData[i][10] = accountsEntity.getNoRate();
-			rowData[i][11] = accountsEntity.getMatchPlayed();
-			rowData[i][12] = accountsEntity.getTotalMatch();
+			rowData[i][9] = accountsEntity.getHeightVisibility();
+			rowData[i][10] = accountsEntity.getWeightVisibility();
+			rowData[i][11] = accountsEntity.getRating();
+			rowData[i][12] = accountsEntity.getNoRate();
+			rowData[i][13] = accountsEntity.getMatchPlayed();
+			rowData[i][14] = accountsEntity.getTotalMatch();
 			i++;
 		}
 		
 		return rowData;
 	}
 	
-	public static int addAccount(String adminNo, String email, String name, String password) {
+	public static int addAccount(String adminNo, String email, String password, String name) {
 		if (adminNo.isEmpty() || password.isEmpty() || name.isEmpty() || password.isEmpty()) {
 			return 0; // Fields required
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, null, null, null, 0, 0, null, 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, null, null, null, 0, 0, false, false, null, 0, 0, 0)) != null) {
 			return 1; // Fail
 		}
 		
@@ -64,7 +66,7 @@ public class AccountDA {
 		return 2; // Success
 	}
 	
-	public static int editAccount(String adminNo, String password, String name, String favSport, String interestedSports, String intro, double height, double weight) {
+	public static int editAccount(String adminNo, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
 		
 		if (password.isEmpty()) {
@@ -82,6 +84,8 @@ public class AccountDA {
 		accountsEntity.setIntro(intro);
 		accountsEntity.setHeight(height);
 		accountsEntity.setWeight(weight);
+		accountsEntity.setHeightVisibility(heightVisibility);
+		accountsEntity.setWeightVisibility(weightVisibility);
 		
 		accounts.replace(adminNo, accountsEntity);
 		db.commit();

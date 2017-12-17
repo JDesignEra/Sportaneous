@@ -9,23 +9,9 @@ public class AccountsEntity implements Serializable {
 	private double height, weight;
 	private BigDecimal rating;
 	private int noRate, matchPlayed, totalMatch;
+	private boolean heightVisibility, weightVisibility;
 	
-	/**
-	 * @param adminNo
-	 * @param email
-	 * @param password
-	 * @param name
-	 * @param favSport
-	 * @param interestedSports
-	 * @param intro
-	 * @param height
-	 * @param weight
-	 * @param rating
-	 * @param noRating
-	 * @param matchPlayed
-	 * @param totalMatched
-	 */
-	public AccountsEntity(String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
+	public AccountsEntity(String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
@@ -35,6 +21,8 @@ public class AccountsEntity implements Serializable {
 		this.intro = intro;
 		this.height = height;
 		this.weight = weight;
+		this.heightVisibility = heightVisibility;
+		this.weightVisibility = weightVisibility;
 		this.rating = rating;
 		this.noRate = noRating;
 		this.matchPlayed = matchPlayed;
@@ -75,6 +63,14 @@ public class AccountsEntity implements Serializable {
 	
 	public double getWeight() {
 		return weight;
+	}
+	
+	public boolean getHeightVisibility() {
+		return heightVisibility;
+	}
+	
+	public boolean getWeightVisibility() {
+		return weightVisibility;
 	}
 	
 	public BigDecimal getRating() {
@@ -123,6 +119,14 @@ public class AccountsEntity implements Serializable {
 	
 	public void setWeight(double weight) {
 		this.weight = weight;
+	}
+	
+	public void setHeightVisibility(boolean heightVisibility) {
+		this.heightVisibility = heightVisibility;
+	}
+	
+	public void setWeightVisibility(boolean weightVisibility) {
+		this.weightVisibility = weightVisibility;
 	}
 	
 	public void setRating(BigDecimal rating) {
