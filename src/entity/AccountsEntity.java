@@ -10,6 +10,21 @@ public class AccountsEntity implements Serializable {
 	private BigDecimal rating;
 	private int noRate, matchPlayed, totalMatch;
 	
+	/**
+	 * @param adminNo
+	 * @param email
+	 * @param password
+	 * @param name
+	 * @param favSport
+	 * @param interestedSports
+	 * @param intro
+	 * @param height
+	 * @param weight
+	 * @param rating
+	 * @param noRating
+	 * @param matchPlayed
+	 * @param totalMatched
+	 */
 	public AccountsEntity(String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
 		this.adminNo = adminNo;
 		this.email = email;
