@@ -23,12 +23,12 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
 	public static Object[][] getAllData() {
-		Object[][] rowData = new Object[accounts.size()][15];
+		Object[][] rowData = new Object[accounts.size()][16];
 		
 		int i = 0;
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -36,17 +36,18 @@ public class AccountsDA {
 			rowData[i][1] = accountsEntity.getEmail();
 			rowData[i][2] = accountsEntity.getPassword();
 			rowData[i][3] = accountsEntity.getName();
-			rowData[i][4] = accountsEntity.getFavSport();
-			rowData[i][5] = accountsEntity.getInterestedSports();
-			rowData[i][6] = accountsEntity.getIntro();
-			rowData[i][7] = accountsEntity.getHeight();
-			rowData[i][8] = accountsEntity.getWeight();
-			rowData[i][9] = accountsEntity.getHeightVisibility();
-			rowData[i][10] = accountsEntity.getWeightVisibility();
-			rowData[i][11] = accountsEntity.getRating();
-			rowData[i][12] = accountsEntity.getNoRate();
-			rowData[i][13] = accountsEntity.getMatchPlayed();
-			rowData[i][14] = accountsEntity.getTotalMatch();
+			rowData[i][4] = accountsEntity.getPhoto();
+			rowData[i][5] = accountsEntity.getFavSport();
+			rowData[i][6] = accountsEntity.getInterestedSports();
+			rowData[i][7] = accountsEntity.getIntro();
+			rowData[i][8] = accountsEntity.getHeight();
+			rowData[i][9] = accountsEntity.getWeight();
+			rowData[i][10] = accountsEntity.getHeightVisibility();
+			rowData[i][11] = accountsEntity.getWeightVisibility();
+			rowData[i][12] = accountsEntity.getRating();
+			rowData[i][13] = accountsEntity.getNoRate();
+			rowData[i][14] = accountsEntity.getMatchPlayed();
+			rowData[i][15] = accountsEntity.getTotalMatch();
 			i++;
 		}
 		
@@ -58,7 +59,7 @@ public class AccountsDA {
 			return 0; // Fields required
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 1; // Fail
 		}
 		
@@ -66,7 +67,7 @@ public class AccountsDA {
 		return 2; // Success
 	}
 	
-	public static int editAccount(String adminNo, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
+	public static int editAccount(String adminNo, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
 		
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
@@ -75,6 +76,7 @@ public class AccountsDA {
 		
 		accountsEntity.setPassword(password);
 		accountsEntity.setName(name);
+		accountsEntity.setPhoto(photo);
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);

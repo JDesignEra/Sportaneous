@@ -5,17 +5,18 @@ import java.math.BigDecimal;
 
 public class AccountsEntity implements Serializable {
 	
-	private String adminNo, email, password, name, favSport, interestedSports, intro;
+	private String adminNo, email, password, name, photo, favSport, interestedSports, intro;
 	private double height, weight;
 	private BigDecimal rating;
 	private int noRate, matchPlayed, totalMatch;
 	private boolean heightVisibility, weightVisibility;
 	
-	public AccountsEntity(String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
+	public AccountsEntity(String adminNo, String email, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
 		this.name = name;
+		this.photo = photo;
 		this.favSport = favSport;
 		this.interestedSports = interestedSports;
 		this.intro = intro;
@@ -43,6 +44,10 @@ public class AccountsEntity implements Serializable {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public String getPhoto() {
+		return photo;
 	}
 	
 	public String getFavSport() {
@@ -99,6 +104,10 @@ public class AccountsEntity implements Serializable {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	public void setFavSport(String favSport) {
