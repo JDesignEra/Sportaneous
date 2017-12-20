@@ -8,7 +8,7 @@ import org.mapdb.DBMaker;
 
 import entity.FacilitiesEntity;
 
-public class facilitiesDA {
+public class FacilitiesDA {
 	private static DB db;
 	private static ConcurrentMap<String, FacilitiesEntity> facilities;
 	private static FacilitiesEntity session;
