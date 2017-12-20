@@ -23,7 +23,7 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//account.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "Basketball", "Badminton,Frisbee,Soccer,Squash,Tennis", null, 0, 0, new BigDecimal(0), 0, 0, 0));
+		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
@@ -54,11 +54,11 @@ public class AccountsDA {
 	}
 	
 	public static int addAccount(String adminNo, String email, String password, String name) {
-		if (adminNo.isEmpty() || password.isEmpty() || name.isEmpty() || password.isEmpty()) {
+		if (adminNo.isEmpty() || email.isEmpty() || password.isEmpty() || name.isEmpty()) {
 			return 0; // Fields required
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, null, null, null, 0, 0, false, false, null, 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 1; // Fail
 		}
 		
@@ -69,12 +69,8 @@ public class AccountsDA {
 	public static int editAccount(String adminNo, String password, String name, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
 		
-		if (password.isEmpty()) {
-			return 0; // Field required
-		}
-		
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
-			return 1; // Does not exist
+			return 0; // Does not exist
 		}
 		
 		accountsEntity.setPassword(password);
@@ -94,10 +90,17 @@ public class AccountsDA {
 			session = accountsEntity;
 		}
 		
-		return 2; // Success
+		return 1; // Success
 	}
 	
 	public static void main(String args[]) {
+		initDA();
 		
+		for (int i = 0; i < getAllData().length; i++) {
+			int x = 0;
+			for (Object j : getAllData()[i]) {
+				System.out.println(j.toString());
+			}
+		}
 	}
 }
