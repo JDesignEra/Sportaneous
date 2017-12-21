@@ -1,16 +1,18 @@
 package entity;
 
-public class EquipmentsEntity {
-	private String sports;
+import java.io.Serializable;
+
+public class EquipmentsEntity implements Serializable {
+	private String sport;
 	private int equipmentQty;
 	
 	public EquipmentsEntity(String sports, int equipmentQty) {
-		this.sports = sports;
+		this.sport = sports;
 		this.equipmentQty = equipmentQty;
 	}
 	
 	public String getSports() {
-		return sports;
+		return sport;
 	}
 	
 	public int getEquipmentQty() {
@@ -18,7 +20,7 @@ public class EquipmentsEntity {
 	}
 	
 	public void setSports(String equipmentName) {
-		this.sports = equipmentName;
+		this.sport = equipmentName;
 	}
 	
 	public void setEquipmentQty(int equipmentQty) {
