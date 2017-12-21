@@ -38,7 +38,7 @@ public class EquipmentDA {
 		int i = 0;
 		
 		for (EquipmentsEntity equipmentsEntity : equipments.values()) {
-			data[i][0] = equipmentsEntity.getSports();
+			data[i][0] = equipmentsEntity.getSport();
 			data[i][1] = equipmentsEntity.getEquipmentQty();
 			
 			i++;
