@@ -4,7 +4,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class HostsEntity {
-	private final Logger logMsg = Logger.getGlobal();
+	private Logger logMsg = Logger.getGlobal();
 	
 	private String adminNo, name, date, time;
 	private String[] userID = new String[11], userName = new String[11];

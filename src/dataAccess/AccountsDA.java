@@ -27,52 +27,31 @@ public class AccountsDA {
 		db.commit();
 	}
 	
-	public String getName() {
-		return session.getName();
-	}
-	
-	public String getPhoto() {
-		return session.getPhoto();
-	}
-	
-	public String getFavSport() {
-		return session.getFavSport();
-	}
-	
-	public String getInterestedSports() {
-		return session.getInterestedSports();
-	}
-	
-	public String getIntro() {
-		return session.getIntro();
-	}
-	
-	public double getHeight() {
-		return session.getHeight();
-	}
-	
-	public double getWeight() {
-		return session.getHeight();
-	}
-	
-	public boolean getHeightVisibility() {
-		return session.getHeightVisibility();
-	}
-	
-	public BigDecimal getRating() {
-		return session.getRating();
-	}
-	
-	public int getNoRate() {
-		return session.getNoRate();
-	}
-	
-	public int getMatchPlayed() {
-		return session.getMatchPlayed();
-	}
-	
-	public int getTotalMatch() {
-		return session.getTotalMatch();
+	public static Object[][] getAllData() {
+		Object[][] data = new Object[accounts.size()][16];
+		int i = 0;
+		
+		for (AccountsEntity accountsEntity : accounts.values()) {
+			data[i][0] = accountsEntity.getAdminNo();
+			data[i][1] = accountsEntity.getEmail();
+			data[i][2] = accountsEntity.getPassword();
+			data[i][3] = accountsEntity.getName();
+			data[i][4] = accountsEntity.getPhoto();
+			data[i][5] = accountsEntity.getFavSport();
+			data[i][6] = accountsEntity.getInterestedSports();
+			data[i][7] = accountsEntity.getIntro();
+			data[i][8] = accountsEntity.getHeight();
+			data[i][9] = accountsEntity.getWeight();
+			data[i][10] = accountsEntity.getHeightVisibility();
+			data[i][11] = accountsEntity.getWeightVisibility();
+			data[i][12] = accountsEntity.getRating();
+			data[i][13] = accountsEntity.getNoRate();
+			data[i][14] = accountsEntity.getMatchPlayed();
+			data[i][15] = accountsEntity.getTotalMatch();
+			i++;
+		}
+		
+		return data;
 	}
 	
 	public static int login(String adminNo, String password) {
@@ -135,31 +114,52 @@ public class AccountsDA {
 		session = null;
 	}
 	
-	public static Object[][] getAllData() {
-		Object[][] rowData = new Object[accounts.size()][16];
-		
-		int i = 0;
-		for (AccountsEntity accountsEntity : accounts.values()) {
-			rowData[i][0] = accountsEntity.getAdminNo();
-			rowData[i][1] = accountsEntity.getEmail();
-			rowData[i][2] = accountsEntity.getPassword();
-			rowData[i][3] = accountsEntity.getName();
-			rowData[i][4] = accountsEntity.getPhoto();
-			rowData[i][5] = accountsEntity.getFavSport();
-			rowData[i][6] = accountsEntity.getInterestedSports();
-			rowData[i][7] = accountsEntity.getIntro();
-			rowData[i][8] = accountsEntity.getHeight();
-			rowData[i][9] = accountsEntity.getWeight();
-			rowData[i][10] = accountsEntity.getHeightVisibility();
-			rowData[i][11] = accountsEntity.getWeightVisibility();
-			rowData[i][12] = accountsEntity.getRating();
-			rowData[i][13] = accountsEntity.getNoRate();
-			rowData[i][14] = accountsEntity.getMatchPlayed();
-			rowData[i][15] = accountsEntity.getTotalMatch();
-			i++;
-		}
-		
-		return rowData;
+	public String getName() {
+		return session.getName();
+	}
+	
+	public String getPhoto() {
+		return session.getPhoto();
+	}
+	
+	public String getFavSport() {
+		return session.getFavSport();
+	}
+	
+	public String getInterestedSports() {
+		return session.getInterestedSports();
+	}
+	
+	public String getIntro() {
+		return session.getIntro();
+	}
+	
+	public double getHeight() {
+		return session.getHeight();
+	}
+	
+	public double getWeight() {
+		return session.getHeight();
+	}
+	
+	public boolean getHeightVisibility() {
+		return session.getHeightVisibility();
+	}
+	
+	public BigDecimal getRating() {
+		return session.getRating();
+	}
+	
+	public int getNoRate() {
+		return session.getNoRate();
+	}
+	
+	public int getMatchPlayed() {
+		return session.getMatchPlayed();
+	}
+	
+	public int getTotalMatch() {
+		return session.getTotalMatch();
 	}
 	
 	public static void main(String args[]) {
@@ -167,7 +167,7 @@ public class AccountsDA {
 		
 		for (int i = 0; i < getAllData().length; i++) {
 			for (Object j : getAllData()[i]) {
-				System.out.println(j.toString());
+				System.out.println(j);
 			}
 		}
 	}

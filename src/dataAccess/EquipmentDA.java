@@ -15,8 +15,6 @@ public class EquipmentDA {
 	
 	private static DB db;
 	private static ConcurrentMap<String, EquipmentsEntity> equipments;
-	private static String[] typesOfEq = new String[] {"badminton", "basketball", "frisbee", "soccer", "squash", "tennis"};
-	private static int[] totalStock = {0, 0, 0, 0, 0, 0};
 	
 	public static void initDA() {
 		db = DBMaker
@@ -26,20 +24,30 @@ public class EquipmentDA {
 		
 		equipments = db.getTreeMap("equipments");
 		
+		equipments.put("Badminton", new EquipmentsEntity("Badminton", 10));
+		equipments.put("Basketball", new EquipmentsEntity("Basketball", 10));
+		equipments.put("Frisbee", new EquipmentsEntity("Frisbee", 10));
+		equipments.put("Soccer", new EquipmentsEntity("Soccer", 10));
+		equipments.put("Squash", new EquipmentsEntity("Squash", 10));
+		equipments.put("Tennis", new EquipmentsEntity("Tennis", 10));
 		db.commit();
 	}
 	
 	public static Object[][] getAllData() {
-		// 6 rows, 2 columns
-		Object[][] rowData = new Object[6][2];
+		Object[][] data = new Object[equipments.size()][2];
 			
+		int i = 0;
 		
-		for (int i = 0; i < 6; i++) {
-			rowData[i][0] = typesOfEq[i];
-			rowData[i][1] = equipments.get("current").getEquipments()[i];
+		for (EquipmentsEntity equipmentsEntity : equipments.values()) {
+			data[i][0] = equipmentsEntity.getSports();
+			data[i][1] = equipmentsEntity.getEquipmentQty();
 		}
 		
-		return rowData;
+		return data;
+	}
+	
+	public static void rentEquipment(String sports) {
+		int qty = equipments.get(sports).getEquipmentQty();
 	}
 	
 	public static void borrowEquipment(String n, int x) { // n = name of equipment, x = no of sets of equipment 
@@ -107,8 +115,9 @@ public class EquipmentDA {
 		if (allPositiveNo == true) {
 			totalStock = stock;
 		}
-		
-		
-		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(equipments.get("Basletball").getEquipmentQty(););
 	}
 }
