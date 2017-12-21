@@ -57,16 +57,6 @@ public class EquipmentDA {
 		return equipmentQty;
 	}
 	
-	public static void main(String[] args) {
-		initDA();
-		
-		for (int i = 0; i < getAllData().length; i++) {
-			for (Object j : getAllData()[i]) {
-				System.out.println(j);
-			}
-		}
-	}
-	
 	public static Object[][] getAllData() {
 		Object[][] data = new Object[equipments.size()][2];
 			
@@ -80,5 +70,15 @@ public class EquipmentDA {
 		}
 		
 		return data;
+	}
+	
+	public static void main(String[] args) {
+		initDA();
+		
+		for (int i = 0; i < getAllData().length; i++) {
+			for (Object j : getAllData()[i]) {
+				System.out.println(j);
+			}
+		}
 	}
 }
