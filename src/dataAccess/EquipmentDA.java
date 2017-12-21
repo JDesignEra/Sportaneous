@@ -79,6 +79,7 @@ public class EquipmentDA {
 			if (typesOfEq[i].equals(n)) {
 				combinedNoOfEq = equipments.get("current").getEquipments()[i] + tobereturned;
 				index = i;
+				
 			}
 		}
 		
@@ -94,7 +95,7 @@ public class EquipmentDA {
 	public static void setTotalStock(int a, int b, int c, int d, int e, int f) { //*NOT COMPLETED YET*
 		
 		int[] stock = new int[] {a,b,c,d,e,f};
-		int[] newCurrent = new int[6];
+
 		boolean allPositiveNo = true;
 		
 		for (int i = 0; i < 6; i++) {
@@ -103,8 +104,10 @@ public class EquipmentDA {
 			}
 		}
 		
+		if (allPositiveNo == true) {
+			totalStock = stock;
+		}
 		
-			
 		
 		
 	}
