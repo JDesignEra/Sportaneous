@@ -11,7 +11,7 @@ public class EquipmentsEntity implements Serializable {
 		this.equipmentQty = equipmentQty;
 	}
 	
-	public String getSports() {
+	public String getSport() {
 		return sport;
 	}
 	
@@ -19,7 +19,7 @@ public class EquipmentsEntity implements Serializable {
 		return equipmentQty;
 	}
 	
-	public void setSports(String equipmentName) {
+	public void setSport(String equipmentName) {
 		this.sport = equipmentName;
 	}
 	
