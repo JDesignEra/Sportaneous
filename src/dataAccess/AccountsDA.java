@@ -21,7 +21,7 @@ public class AccountsDA {
 				.closeOnJvmShutdown()
 				.make();
 		
-		accounts = db.getTreeMap("saccounts");
+		accounts = db.getTreeMap("accounts");
 		
 		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
