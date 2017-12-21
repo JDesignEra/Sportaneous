@@ -32,21 +32,6 @@ public class EquipmentDA {
 		db.commit();
 	}
 	
-	public static Object[][] getAllData() {
-		Object[][] data = new Object[equipments.size()][2];
-			
-		int i = 0;
-		
-		for (EquipmentsEntity equipmentsEntity : equipments.values()) {
-			data[i][0] = equipmentsEntity.getSport();
-			data[i][1] = equipmentsEntity.getEquipmentQty();
-			
-			i++;
-		}
-		
-		return data;
-	}
-	
 	public static int rentEquipment(String sport) {
 		int equipmentsQty = equipments.get(sport).getEquipmentQty();
 		
@@ -80,5 +65,20 @@ public class EquipmentDA {
 				System.out.println(j);
 			}
 		}
+	}
+	
+	public static Object[][] getAllData() {
+		Object[][] data = new Object[equipments.size()][2];
+			
+		int i = 0;
+		
+		for (EquipmentsEntity equipmentsEntity : equipments.values()) {
+			data[i][0] = equipmentsEntity.getSport();
+			data[i][1] = equipmentsEntity.getEquipmentQty();
+			
+			i++;
+		}
+		
+		return data;
 	}
 }
