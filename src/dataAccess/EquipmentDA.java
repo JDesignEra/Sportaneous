@@ -16,7 +16,7 @@ public class EquipmentDA {
 	private static DB db;
 	private static ConcurrentMap<String, EquipmentsEntity> equipments;
 	private static String[] typesOfEq = new String[] {"badminton", "basketball", "frisbee", "soccer", "squash", "tennis"};
-	private static int[] totalStock = {0, 0, 0, 0, 0, 0};
+	public static int[] totalStock = {0,0,0,0,0,0};
 	
 	public static void initDA() {
 		db = DBMaker
@@ -55,8 +55,13 @@ public class EquipmentDA {
 		
 		for (int i = 0; i < typesOfEq.length; i++) { //update cloned array with newest value
 			if (typesOfEq[i].equals(n)) {
-				dup[i] = equipments.get("current").getEquipments()[i] - x;
+				combinedNoOfEq = equipments.get("current").getEquipments()[i] - x;
+				index = i;
 			}
+		}
+		
+		if (combinedNoOfEq >= 0) {
+			dup[index] = combinedNoOfEq;
 		}
 		
 		equipments.replace("current", new EquipmentsEntity(dup)); //replaces old array with cloned array that has the updated values
@@ -92,23 +97,30 @@ public class EquipmentDA {
 		db.commit(); //save changes
 	}
 	
-	public static void setTotalStock(int a, int b, int c, int d, int e, int f) { //*NOT COMPLETED YET*
+	public static void setInitialTotalStock(int a, int b, int c, int d, int e, int f) { //this can be used only once - order of parameters is the same as typesOfEq's
 		
 		int[] stock = new int[] {a,b,c,d,e,f};
 
-		boolean allPositiveNo = true;
-		
+		int y = 0;
 		for (int i = 0; i < 6; i++) {
-			if (stock[i] < 0) {
-				allPositiveNo = false;
+			if (stock[i] > 0) {
+				y++;
 			}
 		}
 		
-		if (allPositiveNo == true) {
+		int x = 0;
+		for (int i = 0; i < 6; i++) {
+			if (totalStock[i] == 0) {
+				x++;
+			}
+		}
+		
+		if (y==6 && x==6) {
 			totalStock = stock;
 		}
 		
 		
-		
 	}
+	
+	
 }
