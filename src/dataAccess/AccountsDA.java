@@ -55,10 +55,10 @@ public class AccountsDA {
 	}
 	
 	public static int login(String adminNo, String password) {
-		AccountsEntity accountsEntity = null;
+		AccountsEntity accountsEntity;
 		
 		if (adminNo.isEmpty() || password.isEmpty()) {
-			return 0; // Success
+			return 0; // Fields required
 		}
 		
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
@@ -66,7 +66,7 @@ public class AccountsDA {
 		}
 		
 		session = accountsEntity;
-		return 3; // Success
+		return 2; // Success
 	}
 	
 	public static int addAccount(String adminNo, String email, String password, String name) {
