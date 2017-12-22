@@ -33,6 +33,31 @@ public class FacilitiesDA {
 		db.commit();
 	}
 	
+	public static int rentFacility(String facility) {
+		int facilityQty = facilities.get(facility).getFacilityQty();
+		
+		if (facilities.get(facility).getFacilityQty() <= 0) {
+			return 0; // no facility
+		}
+		else {
+			facilities.replace(facility, new FacilitiesEntity(facility, --facilityQty));
+		}
+		
+		db.commit();
+		return 1;	// success
+	}
+	
+	public static int returnFacility(String facility) {
+		int factilityQty = facilities.get(facility).getFacilityQty();
+		
+		if (facilities.replace(facility, new FacilitiesEntity(facility, ++factilityQty)) == null) {
+			return 0; // fail
+		}
+		
+		db.commit();		
+		return 1;	// success
+	}
+	
 	public static Object[][] getAllData() {
 		Object[][] data = new Object[facilities.size()][2];
 		
