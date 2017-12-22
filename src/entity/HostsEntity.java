@@ -6,27 +6,25 @@ import java.util.logging.Logger;
 public class HostsEntity {
 	private Logger logMsg = Logger.getGlobal();
 	
-	private String adminNo, name, date, time;
-	private String[] userID = new String[11], userName = new String[11];
+	private String adminNo, name, date, time, sports, facility;
+	private String[] userID, userName;
 	private int sportsType;
+	private boolean equipment;
 	
-	public HostsEntity(String adminNo, String name, String date, String time, String[] userID, String[] userName, int sportsType) {
-		if (userID.length == this.userID.length) {
-			if (userName.length == this.userName.length) {
-				this.adminNo = adminNo;
-				this.name = name;
-				this.date = date;
-				this.time = time;
-				this.userID = userID;
-				this.userName = userName;
-				this.sportsType = sportsType;
-			}
-			else {
-				logMsg.log(Level.SEVERE, "String[] userName pointer length doesn't match.", new Exception("Please change the size to " + this.userName.length + "."));
-			}
+	public HostsEntity(String adminNo, String name, String date, String time, String sports, String facility, String[] userID, String[] userName, int sportsType, boolean equipment) {
+		if (userID.length == userName.length) {
+			this.adminNo = adminNo;
+			this.name = name;
+			this.date = date;
+			this.time = time;
+			this.sports = sports;
+			this.userID = userID;
+			this.userName = userName;
+			this.sportsType = sportsType;
+			this.equipment = equipment;
 		}
 		else {
-			logMsg.log(Level.SEVERE, "String[] userID pointer length doesn't match.", new Exception("Please change the size to " + this.userID.length + "."));
+			logMsg.log(Level.SEVERE, "String[] userID length does not match with userName length.", new Exception("Please change the size of of userID[] or userName[]."));
 		}
 	}
 	
@@ -46,6 +44,14 @@ public class HostsEntity {
 		return time;
 	}
 	
+	public String getSports() {
+		return sports;
+	}
+	
+	public String getFacility() {
+		return facility;
+	}
+	
 	public String[] getUserID() {
 		return userID;
 	}
@@ -56,5 +62,9 @@ public class HostsEntity {
 	
 	public int getSportsType() {
 		return sportsType;
+	}
+	
+	public boolean getEquipment() {
+		return equipment;
 	}
 }
