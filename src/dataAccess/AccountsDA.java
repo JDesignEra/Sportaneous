@@ -23,12 +23,12 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
 	public static Object[][] getAllData() {
-		Object[][] data = new Object[accounts.size()][16];
+		Object[][] data = new Object[accounts.size()][17];
 		int i = 0;
 		
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -48,6 +48,7 @@ public class AccountsDA {
 			data[i][13] = accountsEntity.getNoRate();
 			data[i][14] = accountsEntity.getMatchPlayed();
 			data[i][15] = accountsEntity.getTotalMatch();
+			data[i][16] = accountsEntity.getMatchID();
 			i++;
 		}
 		
@@ -74,7 +75,7 @@ public class AccountsDA {
 			return 0; // Fields required
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 1; // Fail
 		}
 		
@@ -89,16 +90,23 @@ public class AccountsDA {
 			return 0; // Does not exist
 		}
 		
+		accountsEntity.setAdminNo(session.getAdminNo());
+		accountsEntity.setEmail(session.getEmail());
 		accountsEntity.setPassword(password);
 		accountsEntity.setName(name);
 		accountsEntity.setPhoto(photo);
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);
+		accountsEntity.setMatchID(session.getMatchID());
 		accountsEntity.setHeight(height);
 		accountsEntity.setWeight(weight);
 		accountsEntity.setHeightVisibility(heightVisibility);
 		accountsEntity.setWeightVisibility(weightVisibility);
+		accountsEntity.setRating(session.getRating());
+		accountsEntity.setNoRate(session.getNoRate());
+		accountsEntity.setMatchPlayed(session.getMatchPlayed());
+		accountsEntity.setTotalMatch(session.getTotalMatch());
 		
 		accounts.replace(adminNo, accountsEntity);
 		db.commit();
@@ -136,6 +144,10 @@ public class AccountsDA {
 	
 	public static String getIntro() {
 		return session.getIntro();
+	}
+	
+	public static String getMatchID() {
+		return session.getMatchID();
 	}
 	
 	public static double getHeight() {

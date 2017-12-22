@@ -9,9 +9,10 @@ public class AccountsEntity implements Serializable {
 	private double height, weight;
 	private BigDecimal rating;
 	private int noRate, matchPlayed, totalMatch;
+	String matchID;
 	private boolean heightVisibility, weightVisibility;
 	
-	public AccountsEntity(String adminNo, String email, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
+	public AccountsEntity(String adminNo, String email, String password, String name, String photo, String favSport, String interestedSports, String intro, String matchID, double height, double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
@@ -20,6 +21,7 @@ public class AccountsEntity implements Serializable {
 		this.favSport = favSport;
 		this.interestedSports = interestedSports;
 		this.intro = intro;
+		this.matchID = matchID;
 		this.height = height;
 		this.weight = weight;
 		this.heightVisibility = heightVisibility;
@@ -62,6 +64,10 @@ public class AccountsEntity implements Serializable {
 		return intro;
 	}
 	
+	public String getMatchID() {
+		return matchID;
+	}
+	
 	public double getHeight() {
 		return height;
 	}
@@ -94,6 +100,10 @@ public class AccountsEntity implements Serializable {
 		return totalMatch;
 	}
 	
+	public void setAdminNo(String adminNo) {
+		this.adminNo = adminNo;
+	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -120,6 +130,10 @@ public class AccountsEntity implements Serializable {
 	
 	public void setIntro(String intro) {
 		this.intro = intro;
+	}
+	
+	public void setMatchID(String matchID) {
+		this.matchID = matchID;
 	}
 	
 	public void setHeight(double height) {
