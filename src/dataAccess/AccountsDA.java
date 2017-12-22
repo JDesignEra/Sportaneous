@@ -114,51 +114,55 @@ public class AccountsDA {
 		session = null;
 	}
 	
-	public String getName() {
+	public static String getAdminNo() {
+		return session.getAdminNo();
+	}
+	
+	public static String getName() {
 		return session.getName();
 	}
 	
-	public String getPhoto() {
+	public static String getPhoto() {
 		return session.getPhoto();
 	}
 	
-	public String getFavSport() {
+	public static String getFavSport() {
 		return session.getFavSport();
 	}
 	
-	public String getInterestedSports() {
+	public static String getInterestedSports() {
 		return session.getInterestedSports();
 	}
 	
-	public String getIntro() {
+	public static String getIntro() {
 		return session.getIntro();
 	}
 	
-	public double getHeight() {
+	public static double getHeight() {
 		return session.getHeight();
 	}
 	
-	public double getWeight() {
+	public static double getWeight() {
 		return session.getHeight();
 	}
 	
-	public boolean getHeightVisibility() {
+	public static boolean getHeightVisibility() {
 		return session.getHeightVisibility();
 	}
 	
-	public BigDecimal getRating() {
+	public static BigDecimal getRating() {
 		return session.getRating();
 	}
 	
-	public int getNoRate() {
+	public static int getNoRate() {
 		return session.getNoRate();
 	}
 	
-	public int getMatchPlayed() {
+	public static int getMatchPlayed() {
 		return session.getMatchPlayed();
 	}
 	
-	public int getTotalMatch() {
+	public static int getTotalMatch() {
 		return session.getTotalMatch();
 	}
 	
