@@ -3,179 +3,109 @@ package dataAccess;
 
 
 import java.io.File;
-
-import java.math.BigDecimal;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
-
-
+import org.mapdb.Atomic;
 import org.mapdb.DB;
-
 import org.mapdb.DBMaker;
-
-
-
-import entity.AccountsEntity;
 
 import entity.FriendsEntity;
 
-
-
 public class FriendsDA {
-
-
-
 	private static DB db;
-
+	private static Atomic.Integer keyIndex;
 	private static ConcurrentMap<Integer, FriendsEntity> friends;
 
-	private static FriendsEntity session;
-
-
-
 	public static void initDA() {
-
 		db = DBMaker
-
-				.newFileDB(new File("tmp/accounts.db"))
-
+				.newFileDB(new File("tmp/friends.db"))
 				.closeOnJvmShutdown()
-
 				.make();
 
-
-
+		keyIndex = db.getAtomicInteger("friends_keyIndex");
 		friends = db.getTreeMap("friends");
 
-
-
+		//friends.put(keyIndex.getAndIncrement(), new FriendsEntity("admin", "admin1", "admin", "admin1", 0));
 		db.commit();
 
 	}
-
-
-
-	public static Object[][] getAllData() {
-
-		Object[][] rowData = new Object[friends.size()][5];
-
-
-
-		int i = 0;
-
-		for (FriendsEntity  friendsEntity : friends.values()) {
-
-			rowData[i][0] = friendsEntity.getUserID1();
-
-			rowData[i][1] = friendsEntity.getUserID2();
-
-			rowData[i][2] = friendsEntity.getUserName1();
-
-			rowData[i][3] = friendsEntity.getUserName2();
-
-			rowData[i][4] = friendsEntity.getStatus();
-
-
-
-			i++;
-
-		}
-
-
-
-		return rowData;
-
+	
+	public static List<FriendsEntity> getSessionFriends() {
+		String sessionID = AccountsDA.getAdminNo();
+		List<FriendsEntity> friendsList = new ArrayList<>();
+		
+		for (FriendsEntity friendsEntity : friends.values()) {
+            String[] userID = new String[] {friendsEntity.getUserID1(), friendsEntity.getUserID2()};
+            
+            if (userID[0] == sessionID || userID[1] == sessionID) {
+                friendsList.add(friendsEntity);
+            }
+        }
+		
+		return friendsList;
 	}
 
-
-
-	public static int addFriend(String userID1, String userID2, String userName1, String userName2 , int status) {
-
-		if (userID1.isEmpty() || userID2.isEmpty() || userName1.isEmpty() || userName2.isEmpty()) {
-
-			return 0; // Fields required
-
+	public static int addFriend(String friendID, String friendName) {
+		String sessionID = AccountsDA.getAdminNo();
+		
+		for (FriendsEntity friendsEntity : friends.values()) {
+			String[] userID = new String[] {friendsEntity.getUserID1(), friendsEntity.getUserID2()};
+			
+			if (userID[0] == sessionID && userID[1] == friendID || userID[1] == sessionID && userID[0] == friendID) {
+				return 0; // Already friends
+			}
 		}
-
-
-
-		if (friends.putIfAbsent(friends.size() + 1, new FriendsEntity(userID1, userID2, userName1, userName2, 0)) != null) {
-
-			return 1; // Fail
-
+		
+		if (friends.putIfAbsent(keyIndex.getAndIncrement(), new FriendsEntity(sessionID, friendID, AccountsDA.getName(), friendName, 1)) != null) {
+			return 1; // fail
 		}
-
-
 
 		db.commit();
-
 		return 2; // Success
-
 	}
-
-	public static int removeAccount(String username) {
-
-
-
-		for (int i = 0; i < getAllData().length; i++) {
-
-
-
-			if (session.getUserName1().equals(username)){
-
-				return 0; //delete session
-
+	
+	public static int removeFriend(String friendID) {
+		String sessionID = AccountsDA.getAdminNo();
+		int i = 0;
+		
+		for (FriendsEntity friendsENtity : friends.values()) {
+			String[] userID = new String[] {friendsENtity.getUserID1(), friendsENtity.getUserID2()};
+			
+			if (userID[0] == sessionID && userID[1] == friendID || userID[1] == sessionID && userID[0] == friendID) {
+				friends.remove(i);
+				keyIndex.decrementAndGet();
+				
+				return 1; // Success
 			}
-
-			else if (session.getUserName1().equals(username)){
-
-				return 0;
-
-			}
-
-			if (friends.remove(username) == null){
-
-				return 1; //fail
-
-			}
-
-
-
+			
+			i++;
 		}
-
-		db.commit();
-
-		return 2; //success
-
-
-
+		
+		return 0; // fail
 	}
-
-
-
-
 
 	public static void main(String args[]) {
-
 		initDA();
-
-
-
+		
+		/*
+		for (FriendsEntity fe : getSessionFriends("admin")) {
+            System.out.println(fe.getUserID1());
+            System.out.println(fe.getUserID2());
+            System.out.println(fe.getUserName1());
+            System.out.println(fe.getUserName2());
+            System.out.println(fe.getStatus());
+        }
+        */
+		
+		/*
 		for (int i = 0; i < getAllData().length; i++) {
-
 			int x = 0;
-
 			for (Object j : getAllData()[i]) {
-
 				System.out.println(j.toString());
-
 			}
-
-
-
 		}
-
+		*/
 	}
-
 }
