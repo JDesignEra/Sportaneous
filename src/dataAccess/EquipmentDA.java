@@ -50,7 +50,7 @@ public class EquipmentDA {
 	public static int returnEquipment(String sport) {
 		int equipmentQty = equipments.get(sport).getEquipmentQty();
 		
-		equipments.replace(sport, new EquipmentsEntity(sport, ++equipmentQty));
+		equipments.replace(sport, new EquipmentsEntity(sport, equipmentQty));
 		
 		db.commit();
 		
