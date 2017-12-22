@@ -73,7 +73,7 @@ public class HostsDA {
 			rowData[i][3] = hostsEntity.getTime();
 			rowData[i][4] = hostsEntity.getUserID();
 			rowData[i][5] = hostsEntity.getUserName();
-			rowData[i][6] = hostsEntity.getSportsType();
+			rowData[i][6] = hostsEntity.getSportType();
 			i++;
 		}
 		

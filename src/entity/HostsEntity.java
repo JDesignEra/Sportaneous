@@ -6,21 +6,21 @@ import java.util.logging.Logger;
 public class HostsEntity {
 	private Logger logMsg = Logger.getGlobal();
 	
-	private String adminNo, name, date, time, sports, facility;
+	private String adminNo, name, date, time, sport, facility;
 	private String[] userID, userName;
-	private int sportsType;
+	private int sportType;
 	private boolean equipment;
 	
-	public HostsEntity(String adminNo, String name, String date, String time, String sports, String facility, String[] userID, String[] userName, int sportsType, boolean equipment) {
+	public HostsEntity(String adminNo, String name, String date, String time, String sport, String facility, String[] userID, String[] userName, int sportType, boolean equipment) {
 		if (userID.length == userName.length) {
 			this.adminNo = adminNo;
 			this.name = name;
 			this.date = date;
 			this.time = time;
-			this.sports = sports;
+			this.sport = sport;
 			this.userID = userID;
 			this.userName = userName;
-			this.sportsType = sportsType;
+			this.sportType = sportType;
 			this.equipment = equipment;
 		}
 		else {
@@ -44,8 +44,8 @@ public class HostsEntity {
 		return time;
 	}
 	
-	public String getSports() {
-		return sports;
+	public String getSport() {
+		return sport;
 	}
 	
 	public String getFacility() {
@@ -60,8 +60,8 @@ public class HostsEntity {
 		return userName;
 	}
 	
-	public int getSportsType() {
-		return sportsType;
+	public int getSportType() {
+		return sportType;
 	}
 	
 	public boolean getEquipment() {
