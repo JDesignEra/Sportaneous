@@ -1,7 +1,6 @@
 package dataAccess;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
@@ -22,7 +21,6 @@ public class EquipmentDA {
 		
 		equipments = db.getTreeMap("equipments");
 		
-		
 		if (equipments.keySet().isEmpty()) {
 			equipments.put("badminton", new EquipmentsEntity("Badminton", 100));
 			equipments.put("basketball", new EquipmentsEntity("Basketball", 100));
@@ -32,6 +30,17 @@ public class EquipmentDA {
 			equipments.put("tennis", new EquipmentsEntity("Tennis", 100));
 		}
 			
+		db.commit();
+
+
+		/*
+		equipments.put("Badminton", new EquipmentsEntity("Badminton", 10));
+		equipments.put("Basketball", new EquipmentsEntity("Basketball", 10));
+		equipments.put("Frisbee", new EquipmentsEntity("Frisbee", 10));
+		equipments.put("Soccer", new EquipmentsEntity("Soccer", 10));
+		equipments.put("Squash", new EquipmentsEntity("Squash", 10));
+		equipments.put("Tennis", new EquipmentsEntity("Tennis", 10));
+		*/
 		db.commit();
 
 	}
@@ -52,7 +61,7 @@ public class EquipmentDA {
 	}
 	
 	public static int returnEquipment(String sport) {
-		
+
 		int equipmentQty = equipments.get(sport).getEquipmentQty();
 	
 		equipments.replace(sport, new EquipmentsEntity(sport, ++equipmentQty));
@@ -61,7 +70,6 @@ public class EquipmentDA {
 		
 		return equipmentQty;
 	}
-	
 	
 	public static Object[][] getAllData() {
 		Object[][] data = new Object[equipments.size()][2];
