@@ -1,0 +1,107 @@
+@font-face {
+	src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Bold.ttf");
+}
+
+.root{
+    -fx-background: #EDEDED;
+    -fx-text-fill: #4D4D4D;
+}
+
+.text-field {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 13px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10, 0, 3, 6);
+}
+
+.jfx-button {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 14px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 5px 30px 5px 30px;
+}
+
+#loginView {
+	-fx-background-image: url(../img/Background_1.png);
+}
+
+.lrfAccordion > .titled-pane > .title > .arrow-button .arrow { 
+	-fx-background-color: transparent;
+}
+
+#loginView .login.titled-pane,
+#loginView .register.titled-pane,
+#loginView .fpass.titled-pane {
+	-fx-text-fill: #ffffff;
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 18px;
+}
+
+#loginView .login.titled-pane > .title {
+	-fx-background-color: rgba(38, 198, 218, 0.6);
+	-fx-background-radius: 6px 6px 0 0;
+}
+
+#loginView .login.titled-pane > .content {
+	-fx-background-color: rgba(38, 198, 218, 0.6);
+	-fx-box-border: transparent;
+}
+
+#loginView .login.titled-pane > .content .gridPane {
+	-fx-vgap: 8px;
+	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .login.titled-pane .content .loginBtn.jfx-button {
+	-fx-background-color: #26C6DA;
+}
+
+#loginView .register.titled-pane > .title {
+	-fx-background-color: rgba(38, 166, 154,0.6);
+}
+
+#loginView .register.titled-pane > .content {
+	-fx-background-color: rgba(38, 166, 154,0.6);
+	-fx-box-border: transparent;
+}
+
+#loginView .register.titled-pane > .content .gridPane {
+	-fx-vgap: 8px;
+	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .register.titled-pane .content .regBtn.jfx-button {
+	-fx-background-color: #26A69A;
+}
+
+#loginView .fpass.titled-pane > .title {
+	-fx-background-color:  rgba(239, 73, 86, 0.6);
+	-fx-background-radius: 0 0 6px 6px;
+}
+
+#loginView .fpass.titled-pane.inactive > .title {
+	-fx-background-radius: 0;
+}
+
+
+#loginView .fpass.titled-pane > .content {
+	-fx-background-color:  rgba(239, 73, 86, 0.6);
+	-fx-background-radius: 0 0 6px 6px;
+	-fx-box-border: transparent;
+}
+
+#loginView .fpass.titled-pane > .content .gridPane {
+	-fx-vgap: 8px;
+	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .fpass.titled-pane .content .fpassBtn.jfx-button {
+	-fx-background-color: #EF4956;
+}
