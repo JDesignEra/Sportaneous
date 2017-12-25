@@ -58,15 +58,19 @@ public class AccountsDA {
 		AccountsEntity accountsEntity = null;
 		
 		if (adminNo.isEmpty() || password.isEmpty()) {
-			return 0; // Success
+			return 1;	// Required field
 		}
 		
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
-			return 1; // user does not exist
+			return 2;	// User does not exist
+		}
+		
+		if (!accountsEntity.getPassword().equals(password)) {
+			return 3;	// Invalid password
 		}
 		
 		session = accountsEntity;
-		return 3; // Success
+		return 0; // Success
 	}
 	
 	public static int addAccount(String adminNo, String email, String password, String name) {

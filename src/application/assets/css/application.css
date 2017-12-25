@@ -16,13 +16,23 @@
 
 .root{
     -fx-background: #EDEDED;
-    -fx-text-fill: #4D4D4D;
+    -fx-text-fill: #434343;
 }
 
 .text-field {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-font-size: 13px;
+	-fx-text-fill: #434343;
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10, 0, 3, 6);
+	-fx-background-radius: 3px;
+}
+
+.text-field.danger {
+	-fx-prompt-text-fill: #EF4956cc;
+	-fx-border-color: #EF4956cc;
+	-fx-border-style: solid;
+	-fx-border-width: 1.5px;
+	-fx-border-radius: 3px;
 }
 
 .jfx-button {
@@ -36,6 +46,52 @@
 	-fx-font-family: "FontAwesome", "Roboto";
 	-fx-font-size: 14px;
 	-fx-text-fill: #434343;
+}
+
+.jfx-snackbar-content {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 4px 4px 0 0;
+}
+
+.jfx-snackbar-toast {
+	-fx-font-family: "Roboto Medium", "Verdana";
+	-fx-text-fill: #434343;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+    -fx-min-width: 500px;
+}
+
+.info .jfx-snackbar-content {
+	-fx-background-color: #26C6DA99;
+}
+
+.info .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.success .jfx-snackbar-content {
+	-fx-background-color: #26A69A99;
+}
+
+.success .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.warning .jfx-snackbar-content {
+	-fx-background-color: #FFC10799;
+	-fx-text-fill: #ffffff;
+}
+
+.warning .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.danger .jfx-snackbar-content {
+	-fx-background-color: #EF495699;
+}
+
+.danger .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
 }
 
 #nav {
