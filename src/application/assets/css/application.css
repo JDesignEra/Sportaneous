@@ -51,6 +51,7 @@
 .jfx-snackbar-content {
     -fx-background-color: #ffffff;
     -fx-background-radius: 4px 4px 0 0;
+    -fx-alignment: center;
 }
 
 .jfx-snackbar-toast {
@@ -58,7 +59,6 @@
 	-fx-text-fill: #434343;
     -fx-font-size: 14px;
     -fx-alignment: center;
-    -fx-min-width: 500px;
 }
 
 .info .jfx-snackbar-content {
@@ -98,6 +98,7 @@
 	-fx-background-color: #ffffff;
 	-fx-background-radius: 8px 8px 0 0;
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10, 0, 0, -2);
+	-fx-background-insets: 5px 10px 0 10px;
 }
 
 #nav .fontAwesome {
@@ -106,6 +107,8 @@
 	-fx-text-fill: #AEAEAE;
 	-fx-max-width: infinity;
 	-fx-background-radius: 0;
+	-fx-background-insets: 5px 0 0 0;
+	-fx-padding: 10px 5px 5px 5px;
 }
 
 #nav .fontAwesome.active {
@@ -114,10 +117,12 @@
 
 #nav .fontAwesome.profileBtn {
 	-fx-background-radius: 8px 0 0 0;
+	-fx-background-insets: 5px 0 0 10px;
 }
 
 #nav .fontAwesome.logoutBtn {
 	-fx-background-radius: 0 8px 0 0;
+	-fx-background-insets: 5px 10px 0 0;
 }
 
 #loginView {

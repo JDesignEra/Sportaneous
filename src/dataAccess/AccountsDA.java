@@ -14,6 +14,7 @@ public class AccountsDA {
 	private static DB db;
 	private static ConcurrentMap<String, AccountsEntity> accounts;
 	private static AccountsEntity session;
+	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
 	
 	public static void initDA() {
 		db = DBMaker
@@ -23,7 +24,7 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
@@ -70,20 +71,30 @@ public class AccountsDA {
 		}
 		
 		session = accountsEntity;
-		return 0; // Success
+		return 0;	// Success
 	}
 	
-	public static int addAccount(String adminNo, String email, String password, String name) {
+	public static int addAccount(String name, String adminNo, String email, String password) {
 		if (adminNo.isEmpty() || email.isEmpty() || password.isEmpty() || name.isEmpty()) {
-			return 0; // Fields required
+			return 1;	// Fields required
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
-			return 1; // Fail
+		if (!email.matches(EMAIL_REGEX)) {
+			return 2;
+		}
+		
+		for (AccountsEntity accountsEntity : accounts.values()) {
+			if (accountsEntity.getEmail() == email) {
+				return 3;	// Registered Email
+			}
+		}
+		
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+			return 4;	// Registered Admin Number
 		}
 		
 		db.commit();
-		return 2; // Success
+		return 0;	// Success
 	}
 	
 	public static int editAccount(String adminNo, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
@@ -118,6 +129,10 @@ public class AccountsDA {
 		session = null;
 	}
 	
+	public static AccountsEntity getSession() {
+		return session;
+	}
+	
 	public static String getAdminNo() {
 		return session.getAdminNo();
 	}
@@ -140,6 +155,10 @@ public class AccountsDA {
 	
 	public static String getIntro() {
 		return session.getIntro();
+	}
+	
+	public static String getMatchID() {
+		return session.getMatchID();
 	}
 	
 	public static double getHeight() {
@@ -171,6 +190,7 @@ public class AccountsDA {
 	}
 	
 	public static void main(String args[]) {
+		//new SendMail().send("tgm.joel@gmail.com", "Test", "Testing Java Mail");
 		initDA();
 		
 		for (int i = 0; i < getAllData().length; i++) {

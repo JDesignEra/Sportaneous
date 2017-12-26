@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane id="nav" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NavigationViewController">
+<GridPane id="nav" fx:id="rootPane" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NavigationViewController">
    <children>
       <JFXButton fx:id="navProfileBtn" onAction="#navProfileBtnOnAction" ripplerFill="#ed4a571a" text="" textAlignment="CENTER" textOverrun="CLIP" GridPane.hgrow="ALWAYS">
          <styleClass>
