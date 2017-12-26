@@ -59,6 +59,7 @@ public class AccountsDA {
 	
 	public static int login(String adminNo, String password) {
 		AccountsEntity accountsEntity = null;
+		adminNo = adminNo.toLowerCase();
 		
 		if (adminNo.isEmpty() || password.isEmpty()) {
 			return 1;	// Required field
@@ -77,6 +78,9 @@ public class AccountsDA {
 	}
 	
 	public static int addAccount(String name, String adminNo, String email, String password) {
+		adminNo = adminNo.toLowerCase();
+		email = email.toLowerCase();
+		
 		if (adminNo.isEmpty() || email.isEmpty() || password.isEmpty() || name.isEmpty()) {
 			return 1;	// Fields required
 		}
@@ -91,7 +95,7 @@ public class AccountsDA {
 			}
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo.toLowerCase(), email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 4;	// Registered Admin Number
 		}
 		
@@ -108,6 +112,7 @@ public class AccountsDA {
 	
 	public static int editAccount(String adminNo, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight, boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
+		adminNo = adminNo.toLowerCase();
 		
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
 			return 0; // Does not exist
@@ -136,6 +141,8 @@ public class AccountsDA {
 	
 	public static int passwordReset(String adminNo, String email) {
 		AccountsEntity accountsEntity;
+		adminNo = adminNo.toLowerCase();
+		email = email.toLowerCase();
 		String newPass = new PasswordGenerator().newPassword();
 		
 		if (adminNo.isEmpty() || email.isEmpty()) {
