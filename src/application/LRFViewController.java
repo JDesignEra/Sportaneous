@@ -186,8 +186,6 @@ public class LRFViewController {
 		String adminNo = regAdminNoTF.getText();
 		String email = regEmailTF.getText();
 		String pass = regPassTF.getText();
-		String msg = "";
-		List<String> emptyMsg = new ArrayList<>();
 		
 		regNameTF.getStyleClass().removeAll("danger");
 		regAdminNoTF.getStyleClass().removeAll("danger");
@@ -200,6 +198,9 @@ public class LRFViewController {
 				break;
 				
 			case 1:
+				List<String> emptyMsg = new ArrayList<>();
+				StringBuilder msg = new StringBuilder();
+				
 				if (name.isEmpty()) {
 					regNameTF.getStyleClass().add("danger");
 					emptyMsg.add("Name");
@@ -222,14 +223,14 @@ public class LRFViewController {
 				
 				// Build empty field name message.
 				for (int i = 0; i < emptyMsg.size(); i++) {
-					msg += emptyMsg.get(i);
+					msg.append(emptyMsg.get(i));
 					
 					if (i < emptyMsg.size() - 1) {
-						msg += ", ";
+						msg.append(", ");
 					}
 				}
 				
-				Snackbar.danger(rootPane, msg + " field is empty.");
+				Snackbar.danger(rootPane, msg.toString() + " field is empty.");
 				break;
 				
 			case 2:
@@ -290,6 +291,7 @@ public class LRFViewController {
 			
 		case 4:
 			Snackbar.danger(rootPane, "Whoops! Something went wrong, please try again.");
+			break;
 
 		default:
 			break;

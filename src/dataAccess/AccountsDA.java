@@ -95,7 +95,7 @@ public class AccountsDA {
 			}
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo.toLowerCase(), email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 4;	// Registered Admin Number
 		}
 		
