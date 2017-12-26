@@ -7,6 +7,8 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
+import application.assets.modules.PasswordGenerator;
+import application.assets.modules.SendMail;
 import entity.AccountsEntity;
 
 public class AccountsDA {
@@ -24,7 +26,7 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//accounts.put("admin", new AccountsEntity("admin", "admin@nype.edu.sg", "password", "Administrator", "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		//accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
@@ -93,6 +95,13 @@ public class AccountsDA {
 			return 4;	// Registered Admin Number
 		}
 		
+		String body = "You have registered an account with Sportaneous successfully.<br /><br />"
+				+ "Your account details are as follow:<br />"
+				+ "<strong>Admin Number: </strong>" + adminNo + "<br />"
+				+ "<strong>Password: </strong>" + password;
+
+		new SendMail().send(email, "[Sportaneous] Account Registered Successfully", body);
+		
 		db.commit();
 		return 0;	// Success
 	}
@@ -116,13 +125,46 @@ public class AccountsDA {
 		accountsEntity.setWeightVisibility(weightVisibility);
 		
 		accounts.replace(adminNo, accountsEntity);
-		db.commit();
 		
 		if (session != null && session.getAdminNo().equals(adminNo)) {
 			session = accountsEntity;
 		}
 		
+		db.commit();
 		return 1; // Success
+	}
+	
+	public static int passwordReset(String adminNo, String email) {
+		AccountsEntity accountsEntity;
+		String newPass = new PasswordGenerator().newPassword();
+		
+		if (adminNo.isEmpty() || email.isEmpty()) {
+			return 1;	// Required fields
+		}
+		
+		if (accounts.get(adminNo) == null) {
+			return 2;	// Invalid adminNo
+		}
+		
+		if (!accounts.get(adminNo).getEmail().equals(email)) {
+			return 3;	// Invalid email
+		}
+		
+		accountsEntity = accounts.get(adminNo);
+		accountsEntity.setPassword(newPass);
+		
+		if (accounts.replace(adminNo, accountsEntity) == null) {
+			return 4;	// fail
+		}
+		
+		String body = "You have recently reset you account's password.<br /><br />"
+				+ "Your account's new password details are as follow:<br />"
+				+ "<strong style='font-size: 18px'>" + newPass + "</strong>";
+
+		new SendMail().send(email, "[Sportaneous] Account Password Reset", body);
+		
+		db.commit();
+		return 0;
 	}
 	
 	public static void logout() {
