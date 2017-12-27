@@ -78,7 +78,7 @@
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-font-size: 14px;
 	-fx-text-fill: #ffffff;
-	-fx-padding: 5px 30px 5px 30px;
+	-fx-padding: 10px 20px 10px 20px;
 }
 
 .jfx-button.success {
@@ -197,8 +197,13 @@
 }
 
 #loginView .login.titled-pane > .content .gridPane {
-	-fx-vgap: 8px;
+	-fx-vgap: 15px;
 	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .login .loginBtn {
+	-fx-background-color: #26C6DA;
+	-fx-padding: 10px 50px 10px 50px;
 }
 
 #loginView .register.titled-pane > .title {
@@ -211,8 +216,13 @@
 }
 
 #loginView .register.titled-pane > .content .gridPane {
-	-fx-vgap: 8px;
+	-fx-vgap: 15px;
 	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .register .content .regBtn {
+	-fx-background-color: #26A69A;
+	-fx-padding: 10px 40px 10px 40px;
 }
 
 #loginView .fpass.titled-pane > .title {
@@ -224,7 +234,6 @@
 	-fx-background-radius: 0;
 }
 
-
 #loginView .fpass.titled-pane > .content {
 	-fx-background-color:  rgba(239, 73, 86, 0.6);
 	-fx-background-radius: 0 0 6px 6px;
@@ -232,8 +241,19 @@
 }
 
 #loginView .fpass.titled-pane > .content .gridPane {
-	-fx-vgap: 8px;
+	-fx-vgap: 15px;
 	-fx-padding: 15px 100px 15px 100px;
+}
+
+#loginView .fpass .content .fpassBtn {
+	-fx-background-color: #EF4956;
+	-fx-padding: 10px 30px 10px 30px;
+}
+
+#profile .card {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 4px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10, 0, 3, 6);
 }
 
 #profile .ratingStars {
@@ -243,8 +263,11 @@
 	-fx-fill: #EF4956;
 }
 
-#profile .card {
-	-fx-background-color: #ffffff;
-	-fx-background-radius: 6px;
-	-fx-effect: dropshadow(three-pass-box, #0000003b, 10, 0, 3, 6);
+#profile .sportChip {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 5px 15px 5px 15px;
+	-fx-background-color: #EF4956;
+	-fx-background-radius: 24px;
 }

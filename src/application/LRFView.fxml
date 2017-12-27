@@ -22,60 +22,60 @@
         <panes>
           <TitledPane fx:id="loginTitledPane" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#loginTitledPaneOnClick" styleClass="login" text="LOGIN">
                <content>
-                  <GridPane styleClass="gridPane">
+                  <GridPane alignment="CENTER" styleClass="gridPane">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
                         <TextField fx:id="loginAdminNoTF" onKeyPressed="#loginTxtFieldOnKeyPress" promptText="Admin Number *" />
                         <PasswordField fx:id="loginPassTF" onKeyPressed="#loginTxtFieldOnKeyPress" promptText="Password *" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="loginBtn" buttonType="RAISED" onAction="#loginBtnOnAction" ripplerFill="#ffffff4d" styleClass="info" text="LOGIN" GridPane.rowIndex="2" />
+                        <JFXButton fx:id="loginBtn" buttonType="RAISED" onAction="#loginBtnOnAction" ripplerFill="#ffffff4d" styleClass="loginBtn" text="LOGIN" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </content>
             </TitledPane>
           <TitledPane fx:id="regTitledPane" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#regTitledPaneOnClick" styleClass="register" text="REGISTER">
                <content>
-                  <GridPane styleClass="gridPane">
+                  <GridPane alignment="CENTER" styleClass="gridPane">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                        <RowConstraints minHeight="10.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
                         <TextField fx:id="regNameTF" onKeyPressed="#regTxtFieldOnKeyPress" promptText="Name *" />
                         <TextField fx:id="regEmailTF" onKeyPressed="#regTxtFieldOnKeyPress" promptText="NYP Email *" GridPane.rowIndex="1" />
                         <TextField fx:id="regAdminNoTF" onKeyPressed="#regTxtFieldOnKeyPress" promptText="Admin Number *" GridPane.rowIndex="2" />
                         <PasswordField fx:id="regPassTF" onKeyPressed="#regTxtFieldOnKeyPress" promptText="Password *" GridPane.rowIndex="3" />
-                        <JFXButton fx:id="regBtn" buttonType="RAISED" onAction="#regBtnOnAction" ripplerFill="#ffffff4d" styleClass="success" text="REGISTER" GridPane.rowIndex="4" />
+                        <JFXButton fx:id="regBtn" buttonType="RAISED" onAction="#regBtnOnAction" ripplerFill="#ffffff4d" styleClass="regBtn" text="REGISTER" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </content></TitledPane>
             <TitledPane fx:id="fpassTitledPane" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#fpassTitledPaneOnClick" prefHeight="200.0" prefWidth="200.0" styleClass="fpass" text="FORGOT PASSWORD">
                <content>
-                  <GridPane styleClass="gridPane">
+                  <GridPane alignment="CENTER" styleClass="gridPane">
                     <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
                     </rowConstraints>
                      <children>
                         <TextField fx:id="fpassAdminNoTF" onKeyPressed="#fpassOnKeyPress" promptText="Admin Number *" />
                         <TextField fx:id="fpassEmailTF" onKeyPressed="#fpassOnKeyPress" promptText="NYP Email *" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="fpassBtn" buttonType="RAISED" onAction="#fpassBtnOnAction" ripplerFill="#ffffff4d" styleClass="danger" text="RESET PASSWORD" GridPane.rowIndex="2" />
+                        <JFXButton fx:id="fpassBtn" buttonType="RAISED" onAction="#fpassBtnOnAction" ripplerFill="#ffffff4d" styleClass="fpassBtn" text="RESET PASSWORD" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </content>
@@ -85,7 +85,7 @@
    </children>
    <rowConstraints>
       <RowConstraints valignment="CENTER" />
-      <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="300.0" valignment="TOP" />
+      <RowConstraints minHeight="10.0" prefHeight="350.0" valignment="TOP" />
    </rowConstraints>
    <columnConstraints>
       <ColumnConstraints halignment="CENTER" prefWidth="600.0" />
