@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
 
-import application.assets.modules.Snackbar;
 import dataAccess.AccountsDA;
 import javafx.scene.control.TextField;
 import javafx.animation.KeyFrame;
@@ -27,6 +26,7 @@ import javafx.scene.input.KeyEvent;
 
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+import modules.Snackbar;
 
 public class LRFViewController {
 	@FXML private GridPane rootPane;

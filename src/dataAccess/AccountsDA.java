@@ -7,9 +7,9 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import application.assets.modules.PasswordGenerator;
-import application.assets.modules.SendMail;
 import entity.AccountsEntity;
+import modules.PasswordGenerator;
+import modules.SendMail;
 
 public class AccountsDA {
 	
