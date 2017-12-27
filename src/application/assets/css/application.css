@@ -81,6 +81,26 @@
 	-fx-padding: 10px 20px 10px 20px;
 }
 
+.jfx-button.fontAwesome {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 14px;
+	-fx-font-weight: 800;
+}
+
+.jfx-button.fontAwesome.square {
+	-fx-pref-width: 35px;
+	-fx-pref-height: 35px;
+	-fx-padding: 0;
+}
+
+.jfx-button.right {
+	-fx-background-radius: 0 3px 3px 0;
+}
+
+.jfx-button.left {
+	-fx-background-radius: 3px 0 0 3px;
+}
+
 .jfx-button.success {
 	-fx-background-color: #26A69A;
 }
@@ -91,6 +111,10 @@
 
 .jfx-button.info {
 	-fx-background-color: #26C6DA;
+}
+
+.jfx-button.inactive {
+	-fx-background-color: #AEAEAE;
 }
 
 .jfx-snackbar-content {
@@ -270,4 +294,9 @@
 	-fx-padding: 5px 15px 5px 15px;
 	-fx-background-color: #EF4956;
 	-fx-background-radius: 24px;
+}
+
+#profile .comBtnFlowPane {
+	-fx-background-radius: 3px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 8, 0, 1, 3);
 }
