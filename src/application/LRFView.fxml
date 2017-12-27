@@ -18,7 +18,7 @@
             <Image url="@assets/img/Sportaneous.gif" />
          </image>
       </ImageView>
-      <Accordion styleClass="lrfAccordion" GridPane.rowIndex="1">
+      <Accordion styleClass="lrfAccordion" GridPane.rowIndex="1" expandedPane="$loginTitledPane">
         <panes>
           <TitledPane fx:id="loginTitledPane" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#loginTitledPaneOnClick" styleClass="login" text="LOGIN">
                <content>
