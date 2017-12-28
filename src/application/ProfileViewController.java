@@ -74,7 +74,8 @@ public class ProfileViewController {
 					WritableImage newImage = new WritableImage(pr, 0, (h - w) / 2, w, w);
 
 					imgView.setImage(newImage);
-				} else {
+				}
+				else {
 					PixelReader pr = img.getPixelReader();
 					WritableImage newImage = new WritableImage(pr, (w - h) / 2, 0, h, h);
 
@@ -82,7 +83,7 @@ public class ProfileViewController {
 				}
 			}
 		}
-		catch (IllegalArgumentException e) {}
+		finally {}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
@@ -94,12 +95,15 @@ public class ProfileViewController {
 		if (AccountsDA.getHeightVisibility() || AccountsDA.getWeightVisibility()) {
 			if (AccountsDA.getHeightVisibility() && AccountsDA.getWeightVisibility()) {
 				heightWeightTxt.setText(Double.toString(height) + " m | " + Double.toString(weight) + " kg");
-			} else if (AccountsDA.getHeightVisibility()) {
+			}
+			else if (AccountsDA.getHeightVisibility()) {
 				heightWeightTxt.setText(Double.toString(height) + " m");
-			} else if (AccountsDA.getWeightVisibility()) {
+			}
+			else if (AccountsDA.getWeightVisibility()) {
 				heightWeightTxt.setText(Double.toString(weight) + " kg");
 			}
-		} else {
+		}
+		else {
 			heightWeightTxt.setVisible(false);
 			heightWeightTxt.setManaged(false);
 		}
@@ -111,9 +115,11 @@ public class ProfileViewController {
 			for (int i = 0; i < 5; i++) {
 				if (i < rating.toBigInteger().intValue()) {
 					ratingStars.append("\uf005 ");
-				} else if (rating.subtract(BigDecimal.valueOf(i)).compareTo(new BigDecimal(0.5)) >= 0) {
+				}
+				else if (rating.subtract(BigDecimal.valueOf(i)).compareTo(new BigDecimal(0.5)) >= 0) {
 					ratingStars.append("\uf123 ");
-				} else {
+				}
+				else {
 					ratingStars.append((i < 4 ? "\uf006 " : "\uf006"));
 				}
 			}
