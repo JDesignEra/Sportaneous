@@ -4,8 +4,6 @@ import javafx.fxml.FXML;
 
 import javafx.scene.text.Text;
 
-import java.math.BigDecimal;
-
 import com.jfoenix.controls.JFXButton;
 
 import dataAccess.AccountsDA;

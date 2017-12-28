@@ -1,13 +1,11 @@
 package dataAccess;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import entity.AccountsEntity;
 import entity.HostsEntity;
 
 public class HostsDA {

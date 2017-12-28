@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 
 public class EquipmentsEntity implements Serializable {
+	private static final long serialVersionUID = 7674994437516139215L;
 	private String sport;
 	private int equipmentQty;
 	

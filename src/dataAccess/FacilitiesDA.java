@@ -7,7 +7,6 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
 import entity.FacilitiesEntity;
-import sun.util.logging.resources.logging;
 
 public class FacilitiesDA {
 	private static DB db;

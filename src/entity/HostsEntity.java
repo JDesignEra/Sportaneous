@@ -1,11 +1,12 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HostsEntity {
+public class HostsEntity implements Serializable {
+	private static final long serialVersionUID = -821229972284685153L;
 	private Logger logMsg = Logger.getGlobal();
-	
 	private String adminNo, name, date, time;
 	private String[] userID = new String[11], userName = new String[11];
 	private int sportsType;

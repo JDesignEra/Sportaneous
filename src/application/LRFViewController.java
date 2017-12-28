@@ -49,8 +49,7 @@ public class LRFViewController {
 	@FXML
 	public void initialize() {
 		AccountsDA.initDA();
-
-		// Re-Animate Sportaneous.gif
+		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
 				ae -> logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()))));
@@ -110,6 +109,8 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
+		
+		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 
 	// Event Listener on TitledPane[#regTitledPane].onMouseClicked
@@ -121,6 +122,8 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
+		
+		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 
 	// Event Listener on TitledPane[#fpassTitledPane].onMouseClicked
@@ -132,6 +135,8 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
+		
+		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 
 	private void login() {

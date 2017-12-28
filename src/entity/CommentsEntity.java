@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 
 public class CommentsEntity implements Serializable {
+	private static final long serialVersionUID = 8118192445132088506L;
 	private String adminNo, name, comment;
 	private double rating;
 
