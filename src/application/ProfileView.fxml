@@ -4,6 +4,8 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,19 +17,25 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane id="profile" alignment="CENTER" hgap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileViewController">
+<GridPane id="profile" alignment="CENTER" hgap="25.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileViewController">
    <children>
-      <Pane styleClass="card" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
+      <Pane styleClass="card" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets top="140.0" />
          </GridPane.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
       </Pane>
       <GridPane fx:id="profileGridPane" alignment="CENTER" vgap="50.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
           <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
@@ -46,14 +54,14 @@
                         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <Text fx:id="nameTxt" fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Name" textAlignment="CENTER" />
@@ -107,7 +115,7 @@
                      </styleClass>
                   </Text>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="INTRODUCTION" GridPane.columnIndex="1" />
-                  <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                  <TextFlow GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                      <children>
                         <Text fx:id="introTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="Introduce yourself to the world..." />
                      </children>
@@ -126,9 +134,9 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints vgrow="NEVER" />
-          <RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+          <RowConstraints minHeight="15.0" valignment="TOP" vgrow="NEVER" />
+            <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" vgrow="NEVER" />
             <RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -179,18 +187,37 @@
                   <JFXButton fx:id="nxtComBtn" onAction="#nxtComBtnOnAction" ripplerFill="#ffffff4d" text="">
                      <styleClass>
                         <String fx:value="fontAwesome" />
-                        <String fx:value="danger" />
+                        <String fx:value="inactive" />
                         <String fx:value="square" />
                         <String fx:value="right" />
                      </styleClass>
                   </JFXButton>
                </children>
             </FlowPane>
-            <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+            <GridPane fx:id="comContentGridpane" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints prefHeight="186.5" valignment="BOTTOM" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="186.5" valignment="TOP" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/img/empty_comments.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Whoops! You do not have any comments..." GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
          </children>
          <GridPane.margin>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            <Insets />
          </GridPane.margin>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
       </GridPane>
    </children>
    <columnConstraints>

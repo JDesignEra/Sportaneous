@@ -35,6 +35,7 @@ public class ProfileViewController {
 	@FXML private JFXButton prevComBtn;
 	@FXML private JFXButton nxtComBtn;
 	@FXML private GridPane profileGridPane;
+	@FXML private GridPane comContentGridpane;
 
 	@FXML
 	public void initialize() {

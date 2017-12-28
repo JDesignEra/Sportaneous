@@ -21,7 +21,7 @@ public class Main extends Application {
 			root = new BorderPane();
 			loc = getClass().getResource("/application/LRFView.fxml");
 			root.setCenter(FXMLLoader.load(loc));
-			Scene scene = new Scene(root, 1280, 720);
+			Scene scene = new Scene(root, 1600, 900);
 			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_alt.png"));
 			primaryStage.setTitle(title);
 			scene.getStylesheets().add(getClass().getResource("/application/assets/css/application.css").toExternalForm());
