@@ -48,7 +48,7 @@ public class ProfileViewController {
 		int totalMatch = AccountsDA.getTotalMatch();
 		double height = AccountsDA.getHeight();
 		double weight = AccountsDA.getWeight();
-		BigDecimal rating = AccountsDA.getRating();
+		double rating = AccountsDA.getRating();
 
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
@@ -108,14 +108,14 @@ public class ProfileViewController {
 		}
 
 		// Ratings
-		if (rating.compareTo(BigDecimal.ZERO) > 0) {
+		if (rating > 0) {
 			StringBuilder ratingStars = new StringBuilder();
 
 			for (int i = 0; i < 5; i++) {
-				if (i < rating.toBigInteger().intValue()) {
+				if (i < (int) rating) {
 					ratingStars.append("\uf005 ");
 				}
-				else if (rating.subtract(BigDecimal.valueOf(i)).compareTo(new BigDecimal(0.5)) >= 0) {
+				else if ((rating - i) >= 0.5) {
 					ratingStars.append("\uf123 ");
 				}
 				else {

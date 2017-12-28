@@ -6,13 +6,12 @@ import java.math.BigDecimal;
 public class AccountsEntity implements Serializable {
 
 	private String adminNo, email, password, name, favSport, interestedSports, intro, matchID;
-	private double height, weight;
-	private BigDecimal rating;
+	private double height, weight, rating;
 	private int noRate, matchPlayed, totalMatch;
 	private boolean heightVisibility, weightVisibility;
 
 	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, String matchID, double height,
-							double weight, boolean heightVisibility, boolean weightVisibility, BigDecimal rating, int noRating, int matchPlayed, int totalMatched) {
+							double weight, boolean heightVisibility, boolean weightVisibility, double rating, int noRating, int matchPlayed, int totalMatched) {
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
@@ -79,7 +78,7 @@ public class AccountsEntity implements Serializable {
 		return weightVisibility;
 	}
 
-	public BigDecimal getRating() {
+	public double getRating() {
 		return rating;
 	}
 
@@ -139,7 +138,7 @@ public class AccountsEntity implements Serializable {
 		this.weightVisibility = weightVisibility;
 	}
 
-	public void setRating(BigDecimal rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 

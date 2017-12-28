@@ -98,7 +98,7 @@
 .jfx-button.fontAwesome {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 14.0px;
-	-fx-font-weight: 800.0;
+	-fx-font-weight: 800;
 }
 
 .jfx-button.fontAwesome.square {

@@ -1,7 +1,6 @@
 package dataAccess;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
@@ -23,7 +22,7 @@ public class AccountsDA {
 
 		accounts = db.getTreeMap("accounts");
 
-		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
 		db.commit();
 	}
 
@@ -91,7 +90,7 @@ public class AccountsDA {
 			}
 		}
 
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, 0, 0, 0, 0)) != null) {
 			return 4; // Registered Admin Number
 		}
 
@@ -215,7 +214,7 @@ public class AccountsDA {
 		return session.getWeightVisibility();
 	}
 
-	public static BigDecimal getRating() {
+	public static double getRating() {
 		return session.getRating();
 	}
 
