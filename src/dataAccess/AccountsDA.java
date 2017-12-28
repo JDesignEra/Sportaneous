@@ -222,6 +222,10 @@ public class AccountsDA {
 		return session.getHeightVisibility();
 	}
 	
+	public static boolean getWeightVisibility() {
+		return session.getWeightVisibility();
+	}
+	
 	public static BigDecimal getRating() {
 		return session.getRating();
 	}
