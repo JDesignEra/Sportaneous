@@ -30,7 +30,7 @@ public class Main extends Application {
 			primaryStage.setMinHeight(900);
 			primaryStage.setMinWidth(1600);
 			primaryStage.setX(screenBounds.getMaxX() > 1600 ? screenBounds.getMaxX() - 1600 / 2 : 0);
-			primaryStage.setX(screenBounds.getMaxX() > 900 ? screenBounds.getMaxX() - 900 / 2 : 0);
+			primaryStage.setY(screenBounds.getMaxY() > 900 ? screenBounds.getMaxX() - 900 / 2 : 0);
 			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_alt.png"));
 			primaryStage.setTitle(title);
 			primaryStage.setScene(scene);
