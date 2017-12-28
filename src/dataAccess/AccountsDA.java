@@ -26,7 +26,7 @@ public class AccountsDA {
 		
 		accounts = db.getTreeMap("accounts");
 		
-		//accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
+		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0));
 		db.commit();
 	}
 	
@@ -39,7 +39,6 @@ public class AccountsDA {
 			data[i][1] = accountsEntity.getEmail();
 			data[i][2] = accountsEntity.getPassword();
 			data[i][3] = accountsEntity.getName();
-			data[i][4] = accountsEntity.getPhoto();
 			data[i][5] = accountsEntity.getFavSport();
 			data[i][6] = accountsEntity.getInterestedSports();
 			data[i][7] = accountsEntity.getIntro();
@@ -95,7 +94,7 @@ public class AccountsDA {
 			}
 		}
 		
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new BigDecimal(0), 0, 0, 0)) != null) {
 			return 4;	// Registered Admin Number
 		}
 		
@@ -120,7 +119,6 @@ public class AccountsDA {
 		
 		accountsEntity.setPassword(password);
 		accountsEntity.setName(name);
-		accountsEntity.setPhoto(photo);
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);
@@ -188,10 +186,6 @@ public class AccountsDA {
 	
 	public static String getName() {
 		return session.getName();
-	}
-	
-	public static String getPhoto() {
-		return session.getPhoto();
 	}
 	
 	public static String getFavSport() {

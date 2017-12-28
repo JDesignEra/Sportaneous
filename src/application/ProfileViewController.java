@@ -6,6 +6,8 @@ import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 
+import javax.mail.Session;
+
 import com.jfoenix.controls.JFXButton;
 
 import dataAccess.AccountsDA;
@@ -39,11 +41,11 @@ public class ProfileViewController {
 
 	@FXML
 	public void initialize() {
+		String adminNo = AccountsDA.getAdminNo();
 		String name = AccountsDA.getName();
 		String favSport = AccountsDA.getFavSport();
 		String intSports = AccountsDA.getInterestedSports();
 		String intro = AccountsDA.getIntro();
-		String photo = AccountsDA.getPhoto();
 		int matchPlayed = AccountsDA.getMatchPlayed();
 		int totalMatch = AccountsDA.getTotalMatch();
 		double height = AccountsDA.getHeight();
@@ -58,8 +60,8 @@ public class ProfileViewController {
 		ImageView imgView = new ImageView(img);
 		Circle clip = new Circle(100, 100, 100);
 
-		if (!photo.isEmpty()) {
-			img = new Image("/application/assets/uploads/" + photo);
+		try {
+			img = new Image("/application/assets/uploads/" + adminNo + ".png");
 			imgView = new ImageView(img);
 
 			// Crop
@@ -80,6 +82,7 @@ public class ProfileViewController {
 				}
 			}
 		}
+		catch (IllegalArgumentException e) {}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
