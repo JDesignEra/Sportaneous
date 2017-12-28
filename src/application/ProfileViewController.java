@@ -6,8 +6,6 @@ import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
 
-import javax.mail.Session;
-
 import com.jfoenix.controls.JFXButton;
 
 import dataAccess.AccountsDA;
@@ -83,7 +81,8 @@ public class ProfileViewController {
 				}
 			}
 		}
-		catch (IllegalArgumentException e) {}
+		catch (IllegalArgumentException e) {
+		}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
