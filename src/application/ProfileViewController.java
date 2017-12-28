@@ -83,7 +83,7 @@ public class ProfileViewController {
 				}
 			}
 		}
-		finally {}
+		catch (IllegalArgumentException e) {}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
