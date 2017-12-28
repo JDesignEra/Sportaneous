@@ -19,7 +19,6 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 			root = new BorderPane();
 			loc = getClass().getResource("/application/LRFView.fxml");
 			root.setCenter(FXMLLoader.load(loc));
@@ -29,12 +28,17 @@ public class Main extends Application {
 			
 			primaryStage.setMinHeight(900);
 			primaryStage.setMinWidth(1600);
-			primaryStage.setX(screenBounds.getMaxX() > 1600 ? screenBounds.getMaxX() - 1600 / 2 : 0);
-			primaryStage.setY(screenBounds.getMaxY() > 900 ? screenBounds.getMaxX() - 900 / 2 : 0);
 			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_alt.png"));
 			primaryStage.setTitle(title);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
+			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+			double stageHeight = primaryStage.getHeight();
+			double stageWidth = primaryStage.getWidth();
+			
+			primaryStage.setX(screenBounds.getMaxX() > stageWidth ? (screenBounds.getMaxX() - stageWidth) / 2 : 0);
+			primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 0);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
