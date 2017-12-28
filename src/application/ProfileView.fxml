@@ -15,20 +15,20 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane id="profile" alignment="CENTER" hgap="25.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileViewController">
+<GridPane id="profile" alignment="CENTER" hgap="25.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileViewController">
    <children>
       <Pane styleClass="card" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
          <GridPane.margin>
-            <Insets top="115.0" />
+            <Insets top="140.0" />
          </GridPane.margin>
       </Pane>
-      <GridPane fx:id="profileGridPane" alignment="CENTER">
+      <GridPane fx:id="profileGridPane" alignment="CENTER" vgap="50.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
             <Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp">
@@ -71,13 +71,16 @@
                </children>
             </VBox>
          </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
       </GridPane>
       <GridPane hgap="25.0" vgap="25.0" GridPane.columnIndex="1">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints fillHeight="false" prefHeight="90.0" valignment="BOTTOM" vgrow="NEVER" />
+          <RowConstraints fillHeight="false" prefHeight="115.0" valignment="BOTTOM" vgrow="NEVER" />
           <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
@@ -104,7 +107,11 @@
                      </styleClass>
                   </Text>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="INTRODUCTION" GridPane.columnIndex="1" />
-                  <Text fx:id="introTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="Introduce yourself to the world..." GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                     <children>
+                        <Text fx:id="introTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="Introduce yourself to the world..." />
+                     </children>
+                  </TextFlow>
                </children>
                <padding>
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -118,10 +125,10 @@
           <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="NEVER" />
           <RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
             <RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -179,6 +186,7 @@
                   </JFXButton>
                </children>
             </FlowPane>
+            <TextFlow prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
          </children>
          <GridPane.margin>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -190,8 +198,8 @@
       <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints valignment="CENTER" />
-      <RowConstraints valignment="CENTER" />
+      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+      <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
    </rowConstraints>
    <padding>
       <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
