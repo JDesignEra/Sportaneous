@@ -23,15 +23,19 @@ public class CommentsDA {
 	}
 
 	public static Object[][] getComments(String adminNo) {
-		Object[][] data = new Object[comments.get(adminNo).size()][4];
-		int i = 0;
+		Object[][] data = null;
+		
+		if (comments.get(adminNo) != null) {
+			data = new Object[comments.get(adminNo).size()][4];
+			int i = 0;
 
-		for (CommentsEntity commentsEntity : comments.get(adminNo)) {
-			data[i][0] = commentsEntity.getAdminNo();
-			data[i][1] = commentsEntity.getName();
-			data[i][2] = commentsEntity.getComment();
-			data[i][3] = commentsEntity.getRating();
-			i++;
+			for (CommentsEntity commentsEntity : comments.get(adminNo)) {
+				data[i][0] = commentsEntity.getAdminNo();
+				data[i][1] = commentsEntity.getName();
+				data[i][2] = commentsEntity.getComment();
+				data[i][3] = commentsEntity.getRating();
+				i++;
+			}
 		}
 
 		return data;
@@ -48,5 +52,15 @@ public class CommentsDA {
 
 		commentsList.add(new CommentsEntity(sessionAdminNo, sessionName, comment, rating));
 		comments.put(adminNo, commentsList);
+	}
+	
+	public static void getComments2(String adminNo) {
+		Object[][] data;
+		System.out.println(comments);
+	    System.out.println(adminNo);
+	    System.out.println(comments.get(adminNo));
+	    System.out.println(comments.get(adminNo).size());
+	    data = new Object[comments.get(adminNo).size()][4];
+	    System.out.println(data);
 	}
 }

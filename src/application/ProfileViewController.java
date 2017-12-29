@@ -35,27 +35,27 @@ public class ProfileViewController {
 	@FXML private GridPane profileGridPane;
 	@FXML private GridPane comContentGridpane;
 
+	private String adminNo = AccountsDA.getAdminNo();
+	private String name = AccountsDA.getName();
+	private String favSport = AccountsDA.getFavSport();
+	private String intSports = AccountsDA.getInterestedSports();
+	private String intro = AccountsDA.getIntro();
+	private int matchPlayed = AccountsDA.getMatchPlayed();
+	private int totalMatch = AccountsDA.getTotalMatch();
+	private double height = AccountsDA.getHeight();
+	private double weight = AccountsDA.getWeight();
+	private double rating = AccountsDA.getRating();
+
+	private Image img = new Image("/application/assets/uploads/default.png");
+	private ImageView imgView = new ImageView(img);
+	private Circle clip = new Circle(100, 100, 100);
+
 	@FXML
 	public void initialize() {
-		String adminNo = AccountsDA.getAdminNo();
-		String name = AccountsDA.getName();
-		String favSport = AccountsDA.getFavSport();
-		String intSports = AccountsDA.getInterestedSports();
-		String intro = AccountsDA.getIntro();
-		int matchPlayed = AccountsDA.getMatchPlayed();
-		int totalMatch = AccountsDA.getTotalMatch();
-		double height = AccountsDA.getHeight();
-		double weight = AccountsDA.getWeight();
-		double rating = AccountsDA.getRating();
-
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
 
 		// Profile Photo
-		Image img = new Image("/application/assets/uploads/default.png");
-		ImageView imgView = new ImageView(img);
-		Circle clip = new Circle(100, 100, 100);
-
 		try {
 			img = new Image("/application/assets/uploads/" + adminNo + ".png");
 			imgView = new ImageView(img);
@@ -79,8 +79,7 @@ public class ProfileViewController {
 				}
 			}
 		}
-		catch (IllegalArgumentException e) {
-		}
+		catch (IllegalArgumentException e) {}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
@@ -149,6 +148,8 @@ public class ProfileViewController {
 				intSportsTxtFlow.getChildren().add(lbl);
 			}
 		}
+		
+		// Comments
 	}
 
 	// Event Listener on JFXButton[#editBtn].onAction

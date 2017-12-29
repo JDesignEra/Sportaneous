@@ -336,6 +336,7 @@
 	-fx-stroke-type: outside;
 	-fx-stroke-line-cap: round;
 	-fx-background-color: #ffffff;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
 }
 
 
