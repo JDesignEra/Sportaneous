@@ -17,27 +17,20 @@ public class CommentsViewController {
 	@FXML private Text nameTxt;
 	@FXML private Text commentTxt;
 	@FXML private Text ratingTxt;
-	@FXML private GridPane commentGridPane;
-
-	private Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
-	private int index = 0;
+	@FXML private GridPane commContentGridPane;
 	
-	private String adminNo = comments[index][0].toString();
-	private String name = comments[index][1].toString();
-	private String comment = comments[index][2].toString();
-	private double rating = Double.valueOf(comments[index][3].toString());
-
-	private Image img;
-	private ImageView imgView;
-	private Circle clip = new Circle(75, 75, 75);
+	private int index = 0;
 
 	@FXML
 	public void initialize() {
+		CommentsDA.initDA();
 		populateComments();
 	}
 
 	// For Next Comment Button
 	public boolean nextComment() {
+		Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
+		
 		if (index < comments.length) {
 			index++;
 			populateComments();
@@ -65,11 +58,25 @@ public class CommentsViewController {
 	}
 	
 	private void populateComments() {
+		Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
+		
+		
+		String adminNo = comments[index][0].toString();
+		String name = comments[index][1].toString();
+		String comment = comments[index][2].toString();
+		double rating = Double.parseDouble(comments[index][3].toString());
+		
 		if (comments.length > 0 && index < comments.length) {
 			nameTxt.setText(name);
 			commentTxt.setText(comment);
 			
+			commContentGridPane.getChildren().remove(commContentGridPane.lookup(".dpImgView"));
+			
 			// Profile Photo
+			Image img = new Image("/application/assets/uploads/default.png");
+			ImageView imgView = new ImageView(img);
+			Circle clip = new Circle(75, 75, 75);
+			
 			try {
 				img = new Image("/application/assets/uploads/" + adminNo + ".png");
 				imgView = new ImageView(img);
@@ -93,13 +100,16 @@ public class CommentsViewController {
 					}
 				}
 			}
-			catch (IllegalArgumentException e) {}
+			catch (Exception e) {
+				e.getStackTrace();
+			}
 
 			imgView.setFitWidth(150);
 			imgView.setFitHeight(150);
 			imgView.setClip(clip);
+			imgView.getStyleClass().add("dpImgView");
 			
-			commentGridPane.add(imgView, 0, 0);
+			commContentGridPane.add(imgView, 0, 0);
 			
 			// Ratings
 			if (rating > 0) {

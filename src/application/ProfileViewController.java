@@ -1,12 +1,13 @@
 package application;
 
 import javafx.fxml.FXML;
-
+import javafx.fxml.FXMLLoader;
 import javafx.scene.text.Text;
 
 import com.jfoenix.controls.JFXButton;
 
 import dataAccess.AccountsDA;
+import dataAccess.CommentsDA;
 import javafx.event.ActionEvent;
 
 import javafx.scene.text.TextFlow;
@@ -33,7 +34,8 @@ public class ProfileViewController {
 	@FXML private JFXButton prevComBtn;
 	@FXML private JFXButton nxtComBtn;
 	@FXML private GridPane profileGridPane;
-	@FXML private GridPane comContentGridpane;
+	@FXML private GridPane commContentGridPane;
+	@FXML private GridPane commentGridPane;
 
 	private String adminNo = AccountsDA.getAdminNo();
 	private String name = AccountsDA.getName();
@@ -52,6 +54,8 @@ public class ProfileViewController {
 
 	@FXML
 	public void initialize() {
+		CommentsDA.initDA();
+		
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
 
@@ -79,7 +83,9 @@ public class ProfileViewController {
 				}
 			}
 		}
-		catch (IllegalArgumentException e) {}
+		catch (Exception e) {
+			e.getStackTrace();
+		}
 
 		imgView.setFitWidth(200);
 		imgView.setFitHeight(200);
@@ -150,6 +156,21 @@ public class ProfileViewController {
 		}
 		
 		// Comments
+		if (CommentsDA.getComments(adminNo) != null) {
+			try {
+				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContentGridPane"));
+				commContentGridPane = new GridPane();
+				
+				commContentGridPane.getStyleClass().add("commContentGridPane");
+				commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
+				
+				commentGridPane.add(commContentGridPane, 0, 1);
+				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+			}
+			catch (Exception e) {
+				e.getStackTrace();
+			}
+		}
 	}
 
 	// Event Listener on JFXButton[#editBtn].onAction

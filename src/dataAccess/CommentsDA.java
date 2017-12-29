@@ -19,6 +19,11 @@ public class CommentsDA {
 
 		comments = db.getTreeMap("comments");
 
+		List<CommentsEntity> ceList = new ArrayList<>();
+		ceList.add(new CommentsEntity("test", "test", "test", 2.5));
+		ceList.add(new CommentsEntity("test2", "test2", "test2", 3.5));
+		
+		comments.put("admin", ceList);
 		db.commit();
 	}
 
@@ -54,13 +59,14 @@ public class CommentsDA {
 		comments.put(adminNo, commentsList);
 	}
 	
-	public static void getComments2(String adminNo) {
-		Object[][] data;
-		System.out.println(comments);
-	    System.out.println(adminNo);
-	    System.out.println(comments.get(adminNo));
-	    System.out.println(comments.get(adminNo).size());
-	    data = new Object[comments.get(adminNo).size()][4];
-	    System.out.println(data);
+	public static void main(String[] args) {
+		initDA();
+		
+		for (int i = 0; i < getComments("admin").length; i++) {
+			for (Object x : getComments("admin")[i]) {
+				System.out.println(x.toString());
+			}
+		}
+		System.out.println(getComments("admin"));
 	}
 }

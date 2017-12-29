@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane id="comments" fx:id="commentGridPane" alignment="CENTER" hgap="25.0" stylesheets="@../css/application.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane id="comments" fx:id="commContentGridPane" alignment="CENTER" hgap="25.0" stylesheets="@../css/application.css" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.assets.modules.CommentsViewController">
 	<children>
 		<Circle fx:id="dpCricle" fill="WHITE" radius="75.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp" />
 		<Text fx:id="nameTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Name" GridPane.rowIndex="1" />
