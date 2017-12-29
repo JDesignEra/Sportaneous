@@ -178,7 +178,7 @@
 				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="COMMENTS" GridPane.columnIndex="1" />
 				<FlowPane alignment="CENTER_RIGHT" prefWrapLength="70.0" styleClass="comBtnFlowPane" GridPane.columnIndex="2">
 					<children>
-						<JFXButton fx:id="prevComBtn" onAction="#prevComBtn" ripplerFill="#ffffff4d" text="">
+						<JFXButton fx:id="prevComBtn" onAction="#prevComBtnOnAction" ripplerFill="#ffffff4d" text="">
 							<styleClass>
 								<String fx:value="fontAwesome" />
 								<String fx:value="inactive" />

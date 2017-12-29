@@ -22,21 +22,21 @@ public class Main extends Application {
 			root = new BorderPane();
 			loc = getClass().getResource("/application/LRFView.fxml");
 			root.setCenter(FXMLLoader.load(loc));
-			
+
 			Scene scene = new Scene(root, 1600, 900);
 			scene.getStylesheets().add(getClass().getResource("/application/assets/css/application.css").toExternalForm());
-			
+
 			primaryStage.setMinHeight(900);
 			primaryStage.setMinWidth(1600);
 			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_alt.png"));
 			primaryStage.setTitle(title);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+
 			Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 			double stageHeight = primaryStage.getHeight();
 			double stageWidth = primaryStage.getWidth();
-			
+
 			primaryStage.setX(screenBounds.getMaxX() > stageWidth ? (screenBounds.getMaxX() - stageWidth) / 2 : 0);
 			primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 0);
 		}
