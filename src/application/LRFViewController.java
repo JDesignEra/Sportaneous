@@ -109,7 +109,7 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
-		
+
 		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 
@@ -122,7 +122,7 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
-		
+
 		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 
@@ -135,7 +135,7 @@ public class LRFViewController {
 		else {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
-		
+
 		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
 	}
 

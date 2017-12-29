@@ -56,7 +56,7 @@ public class ProfileViewController {
 	@FXML
 	public void initialize() {
 		CommentsDA.initDA();
-		
+
 		if (CommentsDA.getComments(adminNo).length > 1) {
 			nxtComBtn.getStyleClass().remove("inactive");
 			nxtComBtn.getStyleClass().add("danger");
@@ -201,10 +201,10 @@ public class ProfileViewController {
 
 					commentGridPane.add(commContentGridPane, 0, 1);
 					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
-					
+
 					nxtComBtn.getStyleClass().remove("inactive");
 					nxtComBtn.getStyleClass().add("danger");
-					
+
 					if (CommentsViewController.getIndex() <= 0) {
 						prevComBtn.getStyleClass().remove("danger");
 						prevComBtn.getStyleClass().add("inactive");
@@ -237,10 +237,10 @@ public class ProfileViewController {
 
 					commentGridPane.add(commContentGridPane, 0, 1);
 					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
-					
+
 					prevComBtn.getStyleClass().remove("inactive");
 					prevComBtn.getStyleClass().add("danger");
-					
+
 					if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
 						nxtComBtn.getStyleClass().remove("danger");
 						nxtComBtn.getStyleClass().add("inactive");

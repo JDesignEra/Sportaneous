@@ -95,11 +95,11 @@ public class CommentsViewController {
 			}
 		}
 	}
-	
+
 	public static void setIndex(int index) {
 		CommentsViewController.index = index;
 	}
-	
+
 	public static int getIndex() {
 		return index;
 	}
