@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
 public class ProfileViewController {
@@ -35,7 +36,7 @@ public class ProfileViewController {
 	@FXML private JFXButton prevComBtn;
 	@FXML private JFXButton nxtComBtn;
 	@FXML private GridPane profileGridPane;
-	@FXML private GridPane commContentGridPane;
+	@FXML private VBox commContentVBox;
 	@FXML private GridPane commentGridPane;
 
 	private String adminNo = AccountsDA.getAdminNo();
@@ -52,6 +53,7 @@ public class ProfileViewController {
 	private Image img = new Image("/application/assets/uploads/default.png");
 	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(100, 100, 100);
+	private GridPane commContentGridPane;
 
 	@FXML
 	public void initialize() {
@@ -164,11 +166,11 @@ public class ProfileViewController {
 		// Comments
 		if (CommentsDA.getComments(adminNo) != null) {
 			try {
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContentGridPane"));
+				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commContentGridPane = new GridPane();
 
 				commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-				commContentGridPane.getStyleClass().add("commContentGridPane");
+				commContentGridPane.getStyleClass().add("commContent");
 
 				commentGridPane.add(commContentGridPane, 0, 1);
 				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
@@ -193,11 +195,11 @@ public class ProfileViewController {
 				try {
 					CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
 
-					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContentGridPane"));
+					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 					commContentGridPane = new GridPane();
 
 					commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-					commContentGridPane.getStyleClass().add("commContentGridPane");
+					commContentGridPane.getStyleClass().add("commContent");
 
 					commentGridPane.add(commContentGridPane, 0, 1);
 					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
@@ -229,11 +231,11 @@ public class ProfileViewController {
 				try {
 					CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
 
-					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContentGridPane"));
+					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 					commContentGridPane = new GridPane();
 
 					commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-					commContentGridPane.getStyleClass().add("commContentGridPane");
+					commContentGridPane.getStyleClass().add("commContent");
 
 					commentGridPane.add(commContentGridPane, 0, 1);
 					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);

@@ -1,5 +1,5 @@
 @font-face {
-	src: url("../fonts/Roboto-Regular.ttf");
+	src: 	url("../fonts/Roboto-Regular.ttf");
 }
 
 @font-face {
@@ -11,7 +11,34 @@
 }
 
 @font-face {
-	src: url("../fonts/fontawesome-webfont.ttf");
+	src: url("../fonts/Roboto-Black.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Thin.ttf");
+}
+
+@font-face {
+	src: 	url("../fonts/fontawesome-webfont.ttf");
+}
+
+.jfx-decorator {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-text-fill: #FFFFFF;
+	-fx-decorator-color: #EF4956;
+}
+
+.jfx-decorator .jfx-decorator-buttons-container {
+    -fx-background-color: -fx-decorator-color;
+}
+
+.jfx-decorator .resize-border {
+    -fx-border-color: -fx-decorator-color;
+    -fx-border-width: 0.0;
 }
 
 .root{
@@ -54,7 +81,6 @@
 }
 
 .small {
-	-fx-font-family: "Roboto", "Verdana";
 	-fx-font-size: 12.0px;
 	-fx-text-fill: #434343;
 	-fx-fill: #434343;
@@ -68,8 +94,18 @@
 }
 
 .fontAwesome {
-	-fx-font-family: "FontAwesome", "Roboto";
+	-fx-font-family: "FontAwesome";
 	-fx-text-fill: #434343;
+}
+
+.sportChip {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
+	-fx-background-color: #EF4956;
+	-fx-background-radius: 24.0px;
+	-fx-background-insets: 5.0px;
 }
 
 .text-field {
@@ -78,6 +114,7 @@
 	-fx-text-fill: #434343;
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
 	-fx-background-radius: 3.0px;
+	-fx-highlight-fill: #EF4956;
 }
 
 .text-field.danger {
@@ -88,6 +125,61 @@
 	-fx-border-radius: 3.0px;
 }
 
+.text-area {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #434343;
+	-fx-background-color: transparent, white, transparent, white;
+	-fx-background-radius: 4.0px;
+	-fx-background-insets: 0.0;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
+.text-area:focused {
+    -fx-highlight-fill: #EF4956;
+}
+
+.text-area .content {
+	-fx-background-color: transparent, white, transparent, white;
+	-fx-background-radius: 4.0px;
+	-fx-padding: 10.0px;
+	-fx-text-fill: #434343;
+    -fx-highlight-fill: #EF4956;
+}
+
+.text-area:focused .content {
+    -fx-background-color: transparent, white, transparent, white;
+    -fx-background-radius: 4.0px;
+}
+
+.combo-box-base.sportChip {
+    -fx-background-color: #EF4956, #EF4956, #EF4956, #EF4956;
+    -fx-background-radius: 28.0px;
+    -fx-background-insets: 0.0 0.0 -1.0 0.0, 0.0, 1.0, 2.0;
+    -fx-padding: 0.0;
+}
+
+.combo-box.sportChip .text {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-fill: #FFFFFF;
+}
+
+.combo-box.sportChip .arrow {
+	-fx-background-color: #FFFFFF;
+}
+
+.jfx-text-field {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-text-fill: #434343;
+	-fx-font-size: 14.0px;
+	-fx-prompt-text-fill: #AEAEAE;
+	-fx-highlight-fill: #EF4956;
+	-jfx-focus-color: #26C6DA;
+	-jfx-unfocus-color: #434343;
+	-jfx-label-float: true;
+}
+
 .jfx-button {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-font-size: 14.0px;
@@ -95,15 +187,35 @@
 	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
 }
 
+.jfx-toggle-button {
+	-jfx-toggle-color: #26A69A;
+	-jfx-untoggle-color: #EF4956;
+	-jfx-toggle-line-color: #26A69A80;
+	-jfx-untoggle-line-color: #EF495680;
+}
+
+.jfx-toggle-button.fontAwesome {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 18.0px;
+}
+
 .jfx-button.fontAwesome {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 14.0px;
-	-fx-font-weight: 800;
+	-fx-font-weight: 900;
 }
 
 .jfx-button.fontAwesome.square {
 	-fx-pref-width: 35.0px;
-	-fx-pref-height: 35.0px;
+	-fx-pref-height: -fx-pref-width;
+	-fx-padding: 0.0;
+}
+
+.jfx-button.fontAwesome.circle {
+	-fx-font-size: 24.0px;
+	-fx-background-radius: 100.0%;
+	-fx-pref-width: 50.0px;
+	-fx-pref-height: -fx-pref-width;
 	-fx-padding: 0.0;
 }
 
@@ -314,16 +426,6 @@
 	-fx-fill: #EF4956;
 }
 
-#profile .sportChip {
-	-fx-font-family: "Roboto", "Verdana";
-	-fx-font-size: 14.0px;
-	-fx-text-fill: #ffffff;
-	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
-	-fx-background-color: #EF4956;
-	-fx-background-radius: 24.0px;
-	-fx-background-insets: 5.0px;
-}
-
 #profile .comBtnFlowPane {
 	-fx-background-radius: 3.0px;
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 8.0, 0.0, 1.0, 3.0);
@@ -336,7 +438,7 @@
 	-fx-stroke-type: outside;
 	-fx-stroke-line-cap: round;
 	-fx-background-color: #ffffff;
-	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+	-fx-effect: dropshadow(three-pass-box, #0000004d, 10.0, 0.0, 1.0, 2.0);
 }
 
 

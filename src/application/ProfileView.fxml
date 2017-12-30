@@ -35,7 +35,7 @@
 				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 			</padding>
 		</Pane>
-		<GridPane fx:id="profileGridPane" alignment="CENTER" vgap="50.0">
+		<GridPane fx:id="profileGridPane" alignment="CENTER" vgap="15.0">
 			<columnConstraints>
 				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
 					minWidth="10.0" />
@@ -44,7 +44,7 @@
 				<RowConstraints fillHeight="false" minHeight="10.0"
 					valignment="CENTER" vgrow="ALWAYS" />
 				<RowConstraints minHeight="10.0" valignment="CENTER"
-					vgrow="ALWAYS" />
+					vgrow="NEVER" />
 			</rowConstraints>
 			<children>
 				<Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0"
@@ -58,22 +58,22 @@
 						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
 					</padding>
 					<children>
-						<GridPane fx:id="basicGridPane" alignment="CENTER" vgap="5.0">
+						<GridPane fx:id="basicGridPane" alignment="CENTER" vgap="5.0"
+							VBox.vgrow="NEVER">
 							<columnConstraints>
 								<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="0.0" valignment="CENTER"
-									vgrow="ALWAYS" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity"
-									prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
-								<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-								<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+									prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity"
-									prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
-								<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-								<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+									prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 							</rowConstraints>
 							<children>
 								<Text fx:id="nameTxt" fill="#434343" strokeType="OUTSIDE"
@@ -88,7 +88,7 @@
 								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
 									text="Player Rating" textAlignment="CENTER" GridPane.rowIndex="3" />
 								<Text fx:id="ratingTxt" strokeType="OUTSIDE" strokeWidth="0.0"
-									styleClass="ratingStars" text="    " GridPane.rowIndex="4" />
+									styleClass="ratingStars" text="" GridPane.rowIndex="4" />
 								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
 									text="Match Attendance" GridPane.rowIndex="6" />
 								<Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0"
@@ -192,7 +192,7 @@
 		</GridPane>
 		<Pane styleClass="card" GridPane.columnIndex="1"
 			GridPane.rowIndex="1" />
-		<GridPane fx:id="commentGridPane" hgap="5.0" vgap="15.0"
+		<GridPane fx:id="commentGridPane" hgap="5.0" vgap="25.0"
 			GridPane.columnIndex="1" GridPane.rowIndex="1">
 			<columnConstraints>
 				<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
@@ -236,18 +236,8 @@
 						</JFXButton>
 					</children>
 				</FlowPane>
-				<GridPane fx:id="commContentGridPane" styleClass="commContentGridPane"
+				<VBox fx:id="commContentVBox" alignment="CENTER" styleClass="commContent"
 					GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-					<columnConstraints>
-						<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
-							minWidth="10.0" />
-					</columnConstraints>
-					<rowConstraints>
-						<RowConstraints prefHeight="186.5" valignment="BOTTOM"
-							vgrow="SOMETIMES" />
-						<RowConstraints prefHeight="186.5" valignment="TOP"
-							vgrow="SOMETIMES" />
-					</rowConstraints>
 					<children>
 						<ImageView fitHeight="150.0" fitWidth="150.0"
 							pickOnBounds="true" preserveRatio="true">
@@ -256,9 +246,9 @@
 							</image>
 						</ImageView>
 						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
-							text="Whoops! You do not have any comments..." GridPane.rowIndex="1" />
+							text="Whoops! You do not have any comments..." />
 					</children>
-				</GridPane>
+				</VBox>
 			</children>
 			<GridPane.margin>
 				<Insets />
@@ -273,8 +263,8 @@
 		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 	</columnConstraints>
 	<rowConstraints>
+		<RowConstraints valignment="CENTER" vgrow="NEVER" />
 		<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-		<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
 	</rowConstraints>
 	<padding>
 		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
