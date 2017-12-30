@@ -175,6 +175,12 @@
 	-fx-background-color: #FFFFFF;
 }
 
+.tooltip {
+	-fx-font-family: "Roboto";
+	-fx-font-size: 12.0px;
+	-fx-font-weight: 400;
+}
+
 .jfx-text-field {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-text-fill: #434343;
