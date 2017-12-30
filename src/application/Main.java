@@ -2,11 +2,14 @@ package application;
 
 import java.net.URL;
 
+import com.jfoenix.controls.JFXDecorator;
+
 import javafx.application.Application;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -23,12 +26,15 @@ public class Main extends Application {
 			loc = getClass().getResource("/application/LRFView.fxml");
 			root.setCenter(FXMLLoader.load(loc));
 
-			Scene scene = new Scene(root, 1600, 900);
+			JFXDecorator decorator = new JFXDecorator(primaryStage, root);
+			decorator.setCustomMaximize(true);
+			decorator.setGraphic(new ImageView(new Image("/application/assets/img/Sportaneous_small.png")));
+			decorator.setText(title);
+
+			Scene scene = new Scene(decorator, 1600, 900);
 			scene.getStylesheets().add(getClass().getResource("/application/assets/css/application.css").toExternalForm());
 
-			primaryStage.setMinHeight(900);
-			primaryStage.setMinWidth(1600);
-			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_alt.png"));
+			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_small_alt.png"));
 			primaryStage.setTitle(title);
 			primaryStage.setScene(scene);
 			primaryStage.show();
