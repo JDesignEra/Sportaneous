@@ -27,7 +27,7 @@
 }
 
 .jfx-decorator {
-	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-family: "Roboto Medium", "Verdana";
 	-fx-text-fill: #FFFFFF;
 	-fx-decorator-color: #EF4956;
 }
@@ -38,7 +38,7 @@
 
 .jfx-decorator .resize-border {
     -fx-border-color: -fx-decorator-color;
-    -fx-border-width: 0.0;
+    -fx-border-width: 0 3px 3px 3px;
 }
 
 .root{
@@ -93,6 +93,12 @@
 	-fx-fill: #434343;
 }
 
+.card {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 4.0px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
 .fontAwesome {
 	-fx-font-family: "FontAwesome";
 	-fx-text-fill: #434343;
@@ -129,7 +135,7 @@
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-font-size: 14.0px;
 	-fx-text-fill: #434343;
-	-fx-background-color: transparent, white, transparent, white;
+	-fx-background-color: transparent, #F9F9F9, transparent, #F9F9F9;
 	-fx-background-radius: 4.0px;
 	-fx-background-insets: 0.0;
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
@@ -140,7 +146,7 @@
 }
 
 .text-area .content {
-	-fx-background-color: transparent, white, transparent, white;
+	-fx-background-color: transparent, #F9F9F9, transparent, #F9F9F9;
 	-fx-background-radius: 4.0px;
 	-fx-padding: 10.0px;
 	-fx-text-fill: #434343;
@@ -148,7 +154,7 @@
 }
 
 .text-area:focused .content {
-    -fx-background-color: transparent, white, transparent, white;
+    -fx-background-color: transparent, #F9F9F9, transparent, #F9F9F9;
     -fx-background-radius: 4.0px;
 }
 
@@ -170,6 +176,17 @@
 }
 
 .jfx-text-field {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-text-fill: #434343;
+	-fx-font-size: 14.0px;
+	-fx-prompt-text-fill: #AEAEAE;
+	-fx-highlight-fill: #EF4956;
+	-jfx-focus-color: #26C6DA;
+	-jfx-unfocus-color: #434343;
+	-jfx-label-float: true;
+}
+
+.jfx-password-field {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-text-fill: #434343;
 	-fx-font-size: 14.0px;
@@ -403,13 +420,8 @@
 	-fx-padding: 10.0px 30.0px 10.0px 30.0px;
 }
 
-#profile .card {
-	-fx-background-color: #ffffff;
-	-fx-background-radius: 4.0px;
-	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
-}
-
-#profile .dp {
+#profile .dp,
+#editProfile .dp {
 	-fx-fill: #ffffff;
 	-fx-stroke: #EF4956;
 	-fx-stroke-width: 5.0;
@@ -419,7 +431,8 @@
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
 }
 
-#profile .ratingStars {
+#profile .ratingStars,
+#editProfile .ratingStars {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 22.0px;
 	-fx-text-fill: #EF4956;

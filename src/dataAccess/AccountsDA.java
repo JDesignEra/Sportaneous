@@ -81,7 +81,7 @@ public class AccountsDA {
 		}
 
 		if (!email.matches(EMAIL_REGEX)) {
-			return 2;
+			return 2;	// Validation Fail.
 		}
 
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -103,24 +103,40 @@ public class AccountsDA {
 		return 0; // Success
 	}
 
-	public static int editAccount(	String adminNo, String password, String name, String photo, String favSport, String interestedSports, String intro, double height, double weight,
+	public static int editAccount(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
 									boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
 		adminNo = adminNo.toLowerCase();
 
 		if ((accountsEntity = accounts.get(adminNo)) == null) {
-			return 0; // Does not exist
+			return 1; // Does not exist
+		}
+		
+		if (!email.matches(EMAIL_REGEX)) {
+			return 2;	// Validation Fail
 		}
 
-		accountsEntity.setPassword(password);
+		if (password.isEmpty()) {
+			session.getPassword();
+		}
+		else {
+			accountsEntity.setPassword(password);
+		}
+		
+		accountsEntity.setAdminNo(session.getAdminNo());
 		accountsEntity.setName(name);
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);
+		accountsEntity.setMatchID(session.getMatchID());
 		accountsEntity.setHeight(height);
 		accountsEntity.setWeight(weight);
 		accountsEntity.setHeightVisibility(heightVisibility);
 		accountsEntity.setWeightVisibility(weightVisibility);
+		accountsEntity.setRating(session.getRating());
+		accountsEntity.setNoRate(session.getNoRate());
+		accountsEntity.setMatchPlayed(session.getMatchPlayed());
+		accountsEntity.setTotalMatch(session.getTotalMatch());
 
 		accounts.replace(adminNo, accountsEntity);
 
@@ -129,7 +145,7 @@ public class AccountsDA {
 		}
 
 		db.commit();
-		return 1; // Success
+		return 0; // Success
 	}
 
 	public static int passwordReset(String adminNo, String email) {

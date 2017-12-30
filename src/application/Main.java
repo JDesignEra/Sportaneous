@@ -17,25 +17,25 @@ import javafx.geometry.Rectangle2D;
 public class Main extends Application {
 	private static BorderPane root;
 	private static URL loc;
-	private static String title = "Sportaneous";
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			root = new BorderPane();
 			loc = getClass().getResource("/application/LRFView.fxml");
+			//loc = getClass().getResource("/application/EditProfileView.fxml");
 			root.setCenter(FXMLLoader.load(loc));
 
 			JFXDecorator decorator = new JFXDecorator(primaryStage, root);
 			decorator.setCustomMaximize(true);
 			decorator.setGraphic(new ImageView(new Image("/application/assets/img/Sportaneous_small.png")));
-			decorator.setText(title);
+			decorator.setText("Sportaneous");
 
 			Scene scene = new Scene(decorator, 1600, 900);
 			scene.getStylesheets().add(getClass().getResource("/application/assets/css/application.css").toExternalForm());
-
+			
 			primaryStage.getIcons().add(new Image("/application/assets/img/Sportaneous_small_alt.png"));
-			primaryStage.setTitle(title);
+			primaryStage.setTitle("Sportaneous");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -45,6 +45,8 @@ public class Main extends Application {
 
 			primaryStage.setX(screenBounds.getMaxX() > stageWidth ? (screenBounds.getMaxX() - stageWidth) / 2 : 0);
 			primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 0);
+			primaryStage.setMinWidth(1600);
+			primaryStage.setMinHeight(900);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -63,17 +65,7 @@ public class Main extends Application {
 		return loc;
 	}
 
-	public static URL setLoc(URL loc) {
+	public static void setLoc(URL loc) {
 		Main.loc = loc;
-
-		return Main.loc;
-	}
-
-	public static String getTitle() {
-		return title;
-	}
-
-	public static void setTitle(String title) {
-		Main.title = title;
 	}
 }

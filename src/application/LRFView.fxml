@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -45,10 +46,17 @@
 									promptText="Password *" GridPane.rowIndex="1" />
 								<JFXButton fx:id="loginBtn" buttonType="RAISED"
 									onAction="#loginBtnOnAction" ripplerFill="#ffffff4d"
-									styleClass="loginBtn" text="LOGIN" GridPane.rowIndex="2" />
+									styleClass="loginBtn" text="LOGIN" GridPane.rowIndex="2">
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</JFXButton>
 							</children>
 						</GridPane>
 					</content>
+					<cursor>
+						<Cursor fx:constant="DEFAULT" />
+					</cursor>
 				</TitledPane>
 				<TitledPane fx:id="regTitledPane" alignment="CENTER"
 					contentDisplay="CENTER" onMouseClicked="#regTitledPaneOnClick"
@@ -77,7 +85,11 @@
 									promptText="Password *" GridPane.rowIndex="3" />
 								<JFXButton fx:id="regBtn" buttonType="RAISED"
 									onAction="#regBtnOnAction" ripplerFill="#ffffff4d" styleClass="regBtn"
-									text="REGISTER" GridPane.rowIndex="4" />
+									text="REGISTER" GridPane.rowIndex="4">
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</JFXButton>
 							</children>
 						</GridPane>
 					</content>
@@ -103,7 +115,11 @@
 									promptText="NYP Email *" GridPane.rowIndex="1" />
 								<JFXButton fx:id="fpassBtn" buttonType="RAISED"
 									onAction="#fpassBtnOnAction" ripplerFill="#ffffff4d"
-									styleClass="fpassBtn" text="RESET PASSWORD" GridPane.rowIndex="2" />
+									styleClass="fpassBtn" text="RESET PASSWORD" GridPane.rowIndex="2">
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</JFXButton>
 							</children>
 						</GridPane>
 					</content>
