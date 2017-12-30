@@ -192,8 +192,8 @@
 		</GridPane>
 		<Pane styleClass="card" GridPane.columnIndex="1"
 			GridPane.rowIndex="1" />
-		<GridPane hgap="5.0" vgap="15.0" GridPane.columnIndex="1"
-			GridPane.rowIndex="1">
+		<GridPane fx:id="commentGridPane" hgap="5.0" vgap="15.0"
+			GridPane.columnIndex="1" GridPane.rowIndex="1">
 			<columnConstraints>
 				<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
 				<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
@@ -216,7 +216,7 @@
 				<FlowPane alignment="CENTER_RIGHT" prefWrapLength="70.0"
 					styleClass="comBtnFlowPane" GridPane.columnIndex="2">
 					<children>
-						<JFXButton fx:id="prevComBtn" onAction="#prevComBtn"
+						<JFXButton fx:id="prevComBtn" onAction="#prevComBtnOnAction"
 							ripplerFill="#ffffff4d" text="">
 							<styleClass>
 								<String fx:value="fontAwesome" />
@@ -236,8 +236,8 @@
 						</JFXButton>
 					</children>
 				</FlowPane>
-				<GridPane fx:id="comContentGridpane" GridPane.columnSpan="2147483647"
-					GridPane.rowIndex="1">
+				<GridPane fx:id="commContentGridPane" styleClass="commContentGridPane"
+					GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
 					<columnConstraints>
 						<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
 							minWidth="10.0" />

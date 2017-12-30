@@ -1,5 +1,7 @@
 package application.assets.modules;
 
+import java.io.File;
+
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
 import javafx.fxml.FXML;
@@ -17,60 +19,30 @@ public class CommentsViewController {
 	@FXML private Text nameTxt;
 	@FXML private Text commentTxt;
 	@FXML private Text ratingTxt;
-	@FXML private GridPane commentGridPane;
+	@FXML private GridPane commContentGridPane;
+
+	private static int index = 0;
 
 	private Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
-	private int index = 0;
-	
 	private String adminNo = comments[index][0].toString();
 	private String name = comments[index][1].toString();
 	private String comment = comments[index][2].toString();
-	private double rating = Double.valueOf(comments[index][3].toString());
+	private double rating = (double) comments[index][3];
 
-	private Image img;
-	private ImageView imgView;
+	private Image img = new Image("/application/assets/uploads/default.png");
+	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(75, 75, 75);
 
 	@FXML
 	public void initialize() {
-		populateComments();
-	}
-
-	// For Next Comment Button
-	public boolean nextComment() {
-		if (index < comments.length) {
-			index++;
-			populateComments();
-		}
-		
-		if (index == comments.length) {
-			return false;
-		}
-		
-		return true;
-	}
-
-	// For Previous Comment Button
-	public boolean prevComment() {
-		if (index > 0) {
-			index--;
-			populateComments();
-		}
-
-		if (index == 0) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	private void populateComments() {
-		if (comments.length > 0 && index < comments.length) {
+		if (comments.length > 0 && index < comment.length() - 1) {
 			nameTxt.setText(name);
 			commentTxt.setText(comment);
-			
+
+			commContentGridPane.getChildren().remove(commContentGridPane.lookup(".dpImgView"));
+
 			// Profile Photo
-			try {
+			if (new File("/application/assets/uploads/" + adminNo + ".png").exists()) {
 				img = new Image("/application/assets/uploads/" + adminNo + ".png");
 				imgView = new ImageView(img);
 
@@ -79,28 +51,30 @@ public class CommentsViewController {
 					int w = (int) img.getWidth();
 					int h = (int) img.getHeight();
 
-					if (img.getHeight() > img.getWidth()) {
-						PixelReader pr = img.getPixelReader();
-						WritableImage newImage = new WritableImage(pr, 0, (h - w) / 2, w, w);
+					PixelReader pr;
+					WritableImage newImg;
 
-						imgView.setImage(newImage);
+					if (img.getHeight() > img.getWidth()) {
+						pr = img.getPixelReader();
+						newImg = new WritableImage(pr, 0, (h - w) / 2, w, w);
+
+						imgView.setImage(newImg);
 					}
 					else {
-						PixelReader pr = img.getPixelReader();
-						WritableImage newImage = new WritableImage(pr, (w - h) / 2, 0, h, h);
+						pr = img.getPixelReader();
+						newImg = new WritableImage(pr, (w - h) / 2, 0, h, h);
 
-						imgView.setImage(newImage);
+						imgView.setImage(newImg);
 					}
 				}
 			}
-			catch (IllegalArgumentException e) {}
 
 			imgView.setFitWidth(150);
 			imgView.setFitHeight(150);
 			imgView.setClip(clip);
-			
-			commentGridPane.add(imgView, 0, 0);
-			
+			imgView.getStyleClass().add("dpImgView");
+			commContentGridPane.add(imgView, 0, 0);
+
 			// Ratings
 			if (rating > 0) {
 				StringBuilder ratingStars = new StringBuilder();
@@ -120,5 +94,13 @@ public class CommentsViewController {
 				ratingTxt.setText(ratingStars.toString());
 			}
 		}
+	}
+
+	public static void setIndex(int index) {
+		CommentsViewController.index = index;
+	}
+
+	public static int getIndex() {
+		return index;
 	}
 }
