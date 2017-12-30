@@ -444,6 +444,21 @@
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 8.0, 0.0, 1.0, 3.0);
 }
 
+#editProfile .dpOverlay {
+	-fx-fill: #000000b2;
+	-fx-stroke-width: 0;
+	-fx-stroke-line-cap: round;
+	-fx-stroke-type: outside;
+}
+
+#editProfile .dpOverlayIcon {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 60.0px;
+	-fx-font-weight: 900;
+	-fx-text-fill: #FFFFFF;
+	-fx-fill: #FFFFFF;
+}
+
 #comments .dp {
 	-fx-fill: #ffffff;
 	-fx-stroke: #EF4956;
