@@ -347,11 +347,8 @@ public class EditProfileViewController implements Initializable {
 			JFXButton dialogCancelBtn = new JFXButton("Cancel");
 			dialogCancelBtn.getStyleClass().addAll("danger");
 			dialogCancelBtn.setCursor(Cursor.HAND);
-
-			dialogCancelBtn.setOnAction(cancelEV -> {
-				dialog.close();
-			});
 			
+			dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
 			content.getActions().add(dialogCancelBtn);
 			dialog.show();
 		}
@@ -389,10 +386,7 @@ public class EditProfileViewController implements Initializable {
 		dialogNoBtn.getStyleClass().addAll("danger");
 		dialogNoBtn.setCursor(Cursor.HAND);
 
-		dialogNoBtn.setOnAction(noEV -> {
-			dialog.close();
-		});
-		
+		dialogNoBtn.setOnAction(noEV -> dialog.close());
 		content.getActions().add(dialogNoBtn);
 		dialog.show();
 	}
