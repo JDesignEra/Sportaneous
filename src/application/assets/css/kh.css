@@ -372,18 +372,32 @@
 	-fx-font-size: 14px;
 	-fx-font-family: Roboto;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.35) , 16, 0.0 , 3 , 3 );
+	-fx-fill: #7f7f7f;
 }
 
 .ratingElement_Sport {
 	-fx-alignment: center;
 }
 
-.ratingElement {
-	-fx-font-family: Roboto;
-}
 
 .ratingElement_Join {
 	-fx-font-size: 10px;
 	-fx-font-weight: bold;
 	-fx-font-family: Roboto;
+}
+
+.hostedGame {
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 16, 0.0 , 3 , 3 );
+	-fx-font-family: Roboto;
+}
+
+.persistent-prompt:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+    -fx-font-size: 13.5px;
+}
+.no-prompt {
+    -fx-prompt-text-fill: transparent !important;
+}
+.hostedGame_textField {
+	-fx-prompt-text-fill: #7f7f7f;
 }
