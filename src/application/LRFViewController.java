@@ -2,9 +2,12 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -28,7 +31,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 import modules.Snackbar;
 
-public class LRFViewController {
+public class LRFViewController implements Initializable {
 	@FXML private GridPane rootPane;
 	@FXML private ImageView logoImageView;
 	@FXML private TitledPane loginTitledPane;
@@ -45,9 +48,9 @@ public class LRFViewController {
 	@FXML private TextField fpassAdminNoTF;
 	@FXML private TextField fpassEmailTF;
 	@FXML private JFXButton fpassBtn;
-
-	@FXML
-	public void initialize() {
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		AccountsDA.initDA();
 		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
@@ -160,28 +163,28 @@ public class LRFViewController {
 
 		case 1:
 			if (adminNo.isEmpty() && pass.isEmpty()) {
-				Snackbar.danger(rootPane, "Admin Number & Password field is empty.");
+				new Snackbar().danger(rootPane, "Admin Number & Password field is empty.");
 				loginAdminNoTF.getStyleClass().add("danger");
 				loginPassTF.getStyleClass().add("danger");
 			}
 			else if (adminNo.isEmpty()) {
-				Snackbar.danger(rootPane, "Admin Number field is empty.");
+				new Snackbar().danger(rootPane, "Admin Number field is empty.");
 				loginAdminNoTF.getStyleClass().add("danger");
 				loginPassTF.getStyleClass().removeAll("danger");
 			}
 			else if (pass.isEmpty()) {
-				Snackbar.danger(rootPane, "Password field is empty.");
+				new Snackbar().danger(rootPane, "Password field is empty.");
 				loginPassTF.getStyleClass().add("danger");
 				loginAdminNoTF.getStyleClass().removeAll("danger");
 			}
 			break;
 
 		case 2:
-			Snackbar.danger(rootPane, "This account does not exist, please register an account instead.");
+			new Snackbar().danger(rootPane, "This account does not exist, please register an account instead.");
 			break;
 
 		case 3:
-			Snackbar.danger(rootPane, "The login credential you have entered is invalid.");
+			new Snackbar().danger(rootPane, "The login credential you have entered is invalid.");
 			break;
 
 		default:
@@ -202,7 +205,7 @@ public class LRFViewController {
 
 		switch (AccountsDA.addAccount(name, adminNo, email, pass)) {
 		case 0:
-			Snackbar.success(rootPane, "You have registered an account with us successfully.");
+			new Snackbar().success(rootPane, "You have registered an account with us successfully.");
 			break;
 
 		case 1:
@@ -238,19 +241,22 @@ public class LRFViewController {
 				}
 			}
 
-			Snackbar.danger(rootPane, msg.toString() + " field is empty.");
+			new Snackbar().danger(rootPane, msg.toString() + " field is empty.");
 			break;
 
 		case 2:
-			Snackbar.danger(rootPane, "Only NYP Email address are allowed to register an account with us.");
+			regEmailTF.getStyleClass().add("danger");
+			new Snackbar().danger(rootPane, "Only NYP Email address are allowed to register an account with us.");
 			break;
 
 		case 3:
-			Snackbar.danger(rootPane, "This Email is registered with us.");
+			regEmailTF.getStyleClass().add("danger");
+			new Snackbar().danger(rootPane, "This Email is registered with us.");
 			break;
 
 		case 4:
-			Snackbar.danger(rootPane, "This Admin Number is registered with us.");
+			regAdminNoTF.getStyleClass().add("danger");
+			new Snackbar().danger(rootPane, "This Admin Number is registered with us.");
 			break;
 
 		default:
@@ -270,35 +276,35 @@ public class LRFViewController {
 
 		switch (AccountsDA.passwordReset(adminNo, email)) {
 		case 0:
-			Snackbar.success(rootPane, "Your password had been reset succssfully, please check your email and login with your new password.");
+			new Snackbar().success(rootPane, "Your password had been reset succssfully, please check your email and login with your new password.");
 			break;
 
 		case 1:
 			if (adminNo.isEmpty() && email.isEmpty()) {
 				fpassAdminNoTF.getStyleClass().add("danger");
 				fpassEmailTF.getStyleClass().add("danger");
-				Snackbar.danger(rootPane, "Admin Number and Email field is empty.");
+				new Snackbar().danger(rootPane, "Admin Number and Email field is empty.");
 			}
 			else if (adminNo.isEmpty()) {
 				fpassAdminNoTF.getStyleClass().add("danger");
-				Snackbar.danger(rootPane, "Admin Number field is empty.");
+				new Snackbar().danger(rootPane, "Admin Number field is empty.");
 			}
 			else if (email.isEmpty()) {
 				fpassEmailTF.getStyleClass().add("danger");
-				Snackbar.danger(rootPane, "Email field is empty");
+				new Snackbar().danger(rootPane, "Email field is empty");
 			}
 			break;
 
 		case 2:
-			Snackbar.danger(rootPane, "This Admin Number is not registered with us.");
+			new Snackbar().danger(rootPane, "This Admin Number is not registered with us.");
 			break;
 
 		case 3:
-			Snackbar.danger(rootPane, "This Email is not registered with us.");
+			new Snackbar().danger(rootPane, "This Email is not registered with us.");
 			break;
 
 		case 4:
-			Snackbar.danger(rootPane, "Whoops! Something went wrong, please try again.");
+			new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
 			break;
 
 		default:

@@ -16,271 +16,299 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="editProfile" alignment="CENTER" hgap="25.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="rootStackPane" maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.EditProfileViewController">
 	<children>
-		<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-			<GridPane.margin>
-				<Insets top="140.0" />
-			</GridPane.margin>
-			<opaqueInsets>
-				<Insets />
-			</opaqueInsets>
-			<padding>
-				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-			</padding>
-		</Pane>
-		<GridPane alignment="CENTER">
-			<columnConstraints>
-				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-				<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
-			</rowConstraints>
+		<GridPane id="editProfile" fx:id="rootGridPane" alignment="CENTER" hgap="25.0" vgap="25.0">
 			<children>
-				<Circle fx:id="dpCircle" fill="DODGERBLUE" onMouseEntered="#dpCircleOnMouseEnter" onMouseExited="#dpCircleOnMouseExit" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp">
+				<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 					<GridPane.margin>
-						<Insets />
+						<Insets top="140.0" />
 					</GridPane.margin>
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</Circle>
-				<GridPane id="dpOverlayGridPane" fx:id="dpOverlayGridPane" alignment="CENTER" visible="false" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+					</padding>
+				</Pane>
+				<GridPane fx:id="profileGridPane" alignment="CENTER">
 					<columnConstraints>
-						<ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" minWidth="10.0" />
+						<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
+						<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<Circle fx:id="DPOverlayCircle" fill="DODGERBLUE" onMouseClicked="#DPOverlayCircleOnClick" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dpOverlay" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+						<Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp">
+							<GridPane.margin>
+								<Insets />
+							</GridPane.margin>
 							<cursor>
 								<Cursor fx:constant="HAND" />
 							</cursor>
 						</Circle>
-						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dpOverlayIcon" text="" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-					</children>
-					<cursor>
-						<Cursor fx:constant="DEFAULT" />
-					</cursor>
-				</GridPane>
-				<VBox id="basicInfo" alignment="CENTER" GridPane.rowIndex="1">
-					<padding>
-						<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-					</padding>
-					<children>
-						<GridPane vgap="25.0">
+						<GridPane id="dpOverlayGridPane" fx:id="dpOverlayGridPane" alignment="CENTER" opacity="0.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
 							<columnConstraints>
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+								<ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="NEVER" minWidth="10.0" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints minHeight="10.0" prefHeight="62.0" vgrow="NEVER" />
-								<RowConstraints minHeight="10.0" vgrow="NEVER" />
-								<RowConstraints minHeight="10.0" vgrow="NEVER" />
+								<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
 							</rowConstraints>
 							<children>
-								<JFXTextField fx:id="nameTxtField" labelFloat="true" onKeyPressed="#nameTxtFieldOnKeyPress" promptText="Name *" GridPane.columnSpan="2147483647" />
-								<JFXTextField fx:id="heightTxtField" onKeyPressed="#heightTxtFieldOnKeyPress" promptText="Height (Meter) *" GridPane.rowIndex="1" />
-								<JFXToggleButton fx:id="heightVisibilityToggleBtn" onAction="#heightVisibilityToggleBtnOnAction" styleClass="fontAwesome" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+								<Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dpOverlay" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
-									<tooltip>
-										<Tooltip text="Height Visibility" />
-									</tooltip>
-								</JFXToggleButton>
-								<JFXTextField fx:id="weightTxtField" onKeyPressed="#weightTxtFieldOnKeyPress" promptText="Weight (kg) *" GridPane.rowIndex="2" />
-								<JFXToggleButton fx:id="weightVisibilityToggleBtn" onAction="#weightVisibilityToggleBtnOnAction" styleClass="fontAwesome" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
-									<cursor>
-										<Cursor fx:constant="HAND" />
-									</cursor>
-									<tooltip>
-										<Tooltip text="Weight Visibility" />
-									</tooltip>
-								</JFXToggleButton>
+								</Circle>
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="dpOverlayIcon" text="" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Text>
+                        <Circle fill="DODGERBLUE" onMouseEntered="#dpOverlayOnMouseEnter" onMouseExited="#dpOverlayOnMouseExit" opacity="0.0" radius="100.0" stroke="BLACK" strokeType="INSIDE">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Circle>
 							</children>
+							<cursor>
+								<Cursor fx:constant="DEFAULT" />
+							</cursor>
 						</GridPane>
-					</children>
-				</VBox>
-			</children>
-			<padding>
-				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-			</padding>
-		</GridPane>
-		<GridPane hgap="25.0" vgap="25.0" GridPane.columnIndex="1">
-			<columnConstraints>
-				<ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
-				<ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints fillHeight="false" prefHeight="115.0" valignment="BOTTOM" vgrow="NEVER" />
-				<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-			</rowConstraints>
-			<children>
-				<JFXButton fx:id="saveBtn" buttonType="RAISED" onAction="#saveBtnOnAction" ripplerFill="#ffffff4d" styleClass="success" text="SAVE" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</JFXButton>
-				<Pane prefWidth="600.0" styleClass="card" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-					<GridPane.margin>
-						<Insets />
-					</GridPane.margin>
-				</Pane>
-				<GridPane hgap="5.0" vgap="25.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
-					<columnConstraints>
-						<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-					</columnConstraints>
-					<rowConstraints>
-						<RowConstraints minHeight="10.0" vgrow="NEVER" />
-						<RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
-					</rowConstraints>
-					<children>
-						<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
-							<styleClass>
-								<String fx:value="fontAwesome" />
-								<String fx:value="h0" />
-							</styleClass>
-						</Text>
-						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="INTRODUCTION" GridPane.columnIndex="1" />
-						<TextArea fx:id="introTxtArea" onKeyPressed="#introTxtAreaKeyPress" promptText="Introduce yourself to the world..." wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+						<VBox id="basicInfo" alignment="CENTER" GridPane.rowIndex="1">
+							<padding>
+								<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+							</padding>
+							<children>
+								<GridPane vgap="20.0">
+									<columnConstraints>
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+										<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+									</columnConstraints>
+									<rowConstraints>
+										<RowConstraints minHeight="10.0" prefHeight="62.0" vgrow="NEVER" />
+										<RowConstraints minHeight="10.0" vgrow="NEVER" />
+										<RowConstraints minHeight="10.0" vgrow="NEVER" />
+									</rowConstraints>
+									<children>
+										<JFXTextField fx:id="nameTxtField" labelFloat="true" promptText="Name" GridPane.columnSpan="2147483647" />
+										<JFXTextField fx:id="heightTxtField" promptText="Height (Meter)" GridPane.rowIndex="1" />
+										<JFXToggleButton fx:id="heightVisibilityToggleBtn" styleClass="fontAwesome" text="" GridPane.columnIndex="1" GridPane.rowIndex="1">
+											<cursor>
+												<Cursor fx:constant="HAND" />
+											</cursor>
+											<tooltip>
+												<Tooltip text="Height Visibility" />
+											</tooltip>
+										</JFXToggleButton>
+										<JFXTextField fx:id="weightTxtField" promptText="Weight (Kg)" GridPane.rowIndex="2" />
+										<JFXToggleButton fx:id="weightVisibilityToggleBtn" styleClass="fontAwesome" text="" GridPane.columnIndex="1" GridPane.rowIndex="2">
+											<cursor>
+												<Cursor fx:constant="HAND" />
+											</cursor>
+											<tooltip>
+												<Tooltip text="Weight Visibility" />
+											</tooltip>
+										</JFXToggleButton>
+									</children>
+								</GridPane>
+							</children>
+						</VBox>
 					</children>
 					<padding>
-						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+						<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
 					</padding>
 				</GridPane>
-				<JFXButton fx:id="cancelBtn" buttonType="RAISED" onAction="#cancelBtnOnAction" ripplerFill="#ffffff4d" styleClass="danger" text="CANCEL" GridPane.columnIndex="1">
-					<cursor>
-						<Cursor fx:constant="HAND" />
-					</cursor>
-				</JFXButton>
-			</children>
-		</GridPane>
-		<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
-		<GridPane alignment="CENTER" vgap="5.0" GridPane.rowIndex="1">
-			<columnConstraints>
-				<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints vgrow="NEVER" />
-				<RowConstraints minHeight="15.0" valignment="TOP" vgrow="NEVER" />
-				<RowConstraints prefHeight="20.0" vgrow="NEVER" />
-				<RowConstraints minHeight="10.0" vgrow="NEVER" />
-				<RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
-			</rowConstraints>
-			<children>
-				<HBox GridPane.rowIndex="1" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Favourite Sport" textAlignment="CENTER" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Interested Sports" GridPane.rowIndex="3" />
-				<HBox alignment="CENTER" GridPane.rowIndex="1" />
-				<VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
+				<GridPane hgap="25.0" vgap="25.0" GridPane.columnIndex="1">
+					<columnConstraints>
+						<ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+						<ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints fillHeight="false" prefHeight="115.0" valignment="BOTTOM" vgrow="NEVER" />
+						<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+					</rowConstraints>
 					<children>
-						<ComboBox fx:id="favSportComboBox" onAction="#favSportComboBoxOnAction" promptText="Favourite Sport" styleClass="sportChip">
+						<JFXButton fx:id="saveBtn" buttonType="RAISED" onAction="#saveBtnOnAction" ripplerFill="#ffffff4d" styleClass="success" text="SAVE" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
 							<cursor>
 								<Cursor fx:constant="HAND" />
 							</cursor>
-						</ComboBox>
-					</children>
-				</VBox>
-				<GridPane GridPane.rowIndex="4">
-					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-					</columnConstraints>
-					<rowConstraints>
-						<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-						<RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="NEVER" />
-					</rowConstraints>
-					<children>
-						<FlowPane fx:id="intSportFlowPane" alignment="TOP_CENTER" columnHalignment="CENTER" prefWrapLength="220.0" rowValignment="TOP">
+						</JFXButton>
+						<Pane prefWidth="600.0" styleClass="card" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+							<GridPane.margin>
+								<Insets />
+							</GridPane.margin>
+						</Pane>
+						<GridPane hgap="5.0" vgap="25.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" vgrow="NEVER" />
+								<RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+							</rowConstraints>
 							<children>
-								<ComboBox fx:id="intSportComboBox" onAction="#intSportComboBoxOnAction" promptText="Interested Sport" styleClass="sportChip">
-									<FlowPane.margin>
-										<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-									</FlowPane.margin>
-									<cursor>
-										<Cursor fx:constant="HAND" />
-									</cursor>
-								</ComboBox>
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
+									<styleClass>
+										<String fx:value="fontAwesome" />
+										<String fx:value="h0" />
+									</styleClass>
+								</Text>
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="INTRODUCTION" GridPane.columnIndex="1" />
+		                  <GridPane vgap="10.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+		                    <columnConstraints>
+		                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+		                    </columnConstraints>
+		                    <rowConstraints>
+		                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+		                      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+		                    </rowConstraints>
+		                     <children>
+		      						<TextArea fx:id="introTxtArea" onKeyTyped="#introTxtAreaOnKeyType" promptText="Introduce yourself to the world..." wrapText="true" />
+		                        <Text fx:id="introCharCountTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="small" text="0 / 120" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+		                     </children>
+		                  </GridPane>
 							</children>
-						</FlowPane>
-						<JFXButton fx:id="intSportAddBtn" alignment="CENTER" buttonType="RAISED" onAction="#intSportAddBtnOnAction" text="" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
-							<styleClass>
-								<String fx:value="success" />
-								<String fx:value="fontAwesome" />
-								<String fx:value="circle" />
-							</styleClass>
-							<tooltip>
-								<Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Add More Interested Sport" />
-							</tooltip>
+							<padding>
+								<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+							</padding>
+						</GridPane>
+						<JFXButton fx:id="cancelBtn" buttonType="RAISED" onAction="#cancelBtnOnAction" ripplerFill="#ffffff4d" styleClass="danger" text="CANCEL" GridPane.columnIndex="1">
 							<cursor>
 								<Cursor fx:constant="HAND" />
 							</cursor>
 						</JFXButton>
 					</children>
 				</GridPane>
-			</children>
-			<padding>
-				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-			</padding>
-		</GridPane>
-		<Pane styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-		<GridPane hgap="5.0" vgap="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-			<columnConstraints>
-				<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
-				<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-			</columnConstraints>
-			<rowConstraints>
-				<RowConstraints minHeight="10.0" vgrow="NEVER" />
-				<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-			</rowConstraints>
-			<children>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
-					<styleClass>
-						<String fx:value="fontAwesome" />
-						<String fx:value="h0" />
-					</styleClass>
-				</Text>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="PROFILE SETTINGS" GridPane.columnIndex="1" />
-				<GridPane vgap="15.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+				<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+				<GridPane alignment="CENTER" vgap="5.0" GridPane.rowIndex="1">
 					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-						<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+						<RowConstraints vgrow="NEVER" />
+						<RowConstraints minHeight="15.0" valignment="TOP" vgrow="NEVER" />
+						<RowConstraints prefHeight="20.0" vgrow="NEVER" />
+						<RowConstraints minHeight="10.0" vgrow="NEVER" />
+						<RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<HBox GridPane.rowIndex="1" />
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Favourite Sport" textAlignment="CENTER" />
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Interested Sports" GridPane.rowIndex="3" />
+						<HBox alignment="CENTER" GridPane.rowIndex="1" />
+						<VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
+							<children>
+								<ComboBox fx:id="favSportComboBox" promptText="Favourite Sport" styleClass="sportChip">
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+		                     <VBox.margin>
+		                        <Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+		                     </VBox.margin>
+								</ComboBox>
+							</children>
+						</VBox>
+						<GridPane vgap="10.0" GridPane.rowIndex="4">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="NEVER" />
+							</rowConstraints>
+							<children>
+								<FlowPane fx:id="intSportFlowPane" alignment="TOP_CENTER" columnHalignment="CENTER" prefWrapLength="220.0" rowValignment="TOP">
+									<children>
+										<ComboBox fx:id="intSportComboBox" promptText="Interested Sport" styleClass="sportChip">
+											<FlowPane.margin>
+												<Insets bottom="2.5" left="2.5" right="2.5" top="2.5" />
+											</FlowPane.margin>
+											<cursor>
+												<Cursor fx:constant="HAND" />
+											</cursor>
+										</ComboBox>
+									</children>
+								</FlowPane>
+								<JFXButton fx:id="intSportAddBtn" alignment="CENTER" buttonType="RAISED" onAction="#intSportAddBtnOnAction" ripplerFill="#ffffff4d" text="" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+									<styleClass>
+										<String fx:value="success" />
+										<String fx:value="fontAwesome" />
+										<String fx:value="circle" />
+									</styleClass>
+									<tooltip>
+										<Tooltip anchorLocation="CONTENT_BOTTOM_LEFT" text="Add More Interested Sport" />
+									</tooltip>
+									<cursor>
+										<Cursor fx:constant="HAND" />
+									</cursor>
+								</JFXButton>
+							</children>
+						</GridPane>
+					</children>
+					<padding>
+						<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+					</padding>
+				</GridPane>
+				<Pane styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+				<GridPane hgap="5.0" vgap="25.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+					<columnConstraints>
+						<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+						<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints minHeight="10.0" vgrow="NEVER" />
 						<RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<JFXPasswordField onAction="#cfmPassTxtField" onKeyPressed="#cfmPassTxtFieldOnAction" promptText="Confirm Change Password" GridPane.rowIndex="2" />
-						<JFXPasswordField fx:id="cPassTxtField" labelFloat="true" onKeyPressed="#cPassTxtFieldOnKeyPress" promptText="Change Password" GridPane.rowIndex="1" />
-						<JFXTextField fx:id="emailTxtField" onKeyPressed="#emailTxtFieldOnKeyPress" promptText="NYP Email *" />
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
+							<styleClass>
+								<String fx:value="fontAwesome" />
+								<String fx:value="h0" />
+							</styleClass>
+						</Text>
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="PROFILE SETTINGS" GridPane.columnIndex="1" />
+						<GridPane vgap="20.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+							<columnConstraints>
+								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<JFXTextField fx:id="emailTxtField" promptText="NYP Email" />
+								<JFXPasswordField fx:id="cPassTxtField" labelFloat="true" promptText="Change Password" GridPane.rowIndex="1" />
+								<JFXPasswordField fx:id="cfmPassTxtField" promptText="Confirm Change Password" GridPane.rowIndex="2" />
+							</children>
+						</GridPane>
 					</children>
+					<GridPane.margin>
+						<Insets />
+					</GridPane.margin>
+					<padding>
+						<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
+					</padding>
 				</GridPane>
 			</children>
-			<GridPane.margin>
-				<Insets />
-			</GridPane.margin>
+			<columnConstraints>
+				<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" prefWidth="150.0" />
+				<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+				<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+			</rowConstraints>
 			<padding>
 				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
 			</padding>
 		</GridPane>
 	</children>
-	<columnConstraints>
-		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
-	</columnConstraints>
-	<rowConstraints>
-		<RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
-		<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
-	</rowConstraints>
-	<padding>
-		<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-	</padding>
-</GridPane>
+</StackPane>

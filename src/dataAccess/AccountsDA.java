@@ -22,7 +22,8 @@ public class AccountsDA {
 
 		accounts = db.getTreeMap("accounts");
 
-		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		accounts.put("admin",
+				new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
 		db.commit();
 	}
 
@@ -81,7 +82,7 @@ public class AccountsDA {
 		}
 
 		if (!email.matches(EMAIL_REGEX)) {
-			return 2;	// Validation Fail.
+			return 2; // Validation Fail.
 		}
 
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -103,17 +104,16 @@ public class AccountsDA {
 		return 0; // Success
 	}
 
-	public static int editAccount(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
+	public static int editAccount(String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
 									boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
-		adminNo = adminNo.toLowerCase();
-
-		if ((accountsEntity = accounts.get(adminNo)) == null) {
+		
+		if ((accountsEntity = accounts.get(session.getAdminNo())) == null) {
 			return 1; // Does not exist
 		}
-		
+
 		if (!email.matches(EMAIL_REGEX)) {
-			return 2;	// Validation Fail
+			return 2; // Validation Fail
 		}
 
 		if (password.isEmpty()) {
@@ -122,9 +122,10 @@ public class AccountsDA {
 		else {
 			accountsEntity.setPassword(password);
 		}
-		
+
 		accountsEntity.setAdminNo(session.getAdminNo());
-		accountsEntity.setName(name);
+		accountsEntity.setEmail(!email.isEmpty() ? email : session.getEmail());
+		accountsEntity.setName(!name.isEmpty() ? name : session.getName());
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);
@@ -138,9 +139,9 @@ public class AccountsDA {
 		accountsEntity.setMatchPlayed(session.getMatchPlayed());
 		accountsEntity.setTotalMatch(session.getTotalMatch());
 
-		accounts.replace(adminNo, accountsEntity);
+		accounts.replace(session.getAdminNo(), accountsEntity);
 
-		if (session != null && session.getAdminNo().equals(adminNo)) {
+		if (session != null && session.getAdminNo().equals(session.getAdminNo())) {
 			session = accountsEntity;
 		}
 
@@ -194,6 +195,14 @@ public class AccountsDA {
 		return session.getAdminNo();
 	}
 
+	public static String getEmail() {
+		return session.getEmail();
+	}
+
+	public static String getPassword() {
+		return session.getPassword();
+	}
+
 	public static String getName() {
 		return session.getName();
 	}
@@ -244,16 +253,5 @@ public class AccountsDA {
 
 	public static int getTotalMatch() {
 		return session.getTotalMatch();
-	}
-
-	public static void main(String args[]) {
-		// new SendMail().send("tgm.joel@gmail.com", "Test", "Testing Java Mail");
-		initDA();
-
-		for (int i = 0; i < getAllData().length; i++) {
-			for (Object j : getAllData()[i]) {
-				System.out.println(j);
-			}
-		}
 	}
 }
