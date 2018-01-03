@@ -8,7 +8,7 @@ import org.mapdb.DBMaker;
 
 import entity.EquipmentsEntity;
 
-public class EquipmentDA {
+public class EquipmentsDA {
 	private static DB db;
 	private static ConcurrentMap<String, EquipmentsEntity> equipments;
 
@@ -45,7 +45,6 @@ public class EquipmentDA {
 	}
 
 	public static int returnEquipment(String sport) {
-
 		int equipmentQty = equipments.get(sport).getEquipmentQty();
 
 		equipments.replace(sport, new EquipmentsEntity(sport, ++equipmentQty));
@@ -56,51 +55,46 @@ public class EquipmentDA {
 	}
 
 	public static Object[][] getAllData() {
-		Object[][] data = new Object[equipments.size()][2];
+		Object[][] data = null;
 
-		int i = 0;
+		if (!equipments.isEmpty()) {
+			data = new Object[equipments.size()][2];
 
-		for (EquipmentsEntity equipmentsEntity : equipments.values()) {
-			data[i][0] = equipmentsEntity.getSport();
-			data[i][1] = equipmentsEntity.getEquipmentQty();
+			int i = 0;
 
-			i++;
+			for (EquipmentsEntity equipmentsEntity : equipments.values()) {
+				data[i][0] = equipmentsEntity.getSport();
+				data[i][1] = equipmentsEntity.getEquipmentQty();
+
+				i++;
+			}
 		}
 
 		return data;
 	}
 
 	public static void addEquipment(String sport, int no) {
-
 		if (no > 0) {
-
 			equipments.replace(sport, new EquipmentsEntity(sport, equipments.get(sport).getEquipmentQty() + no));
 
 			db.commit();
 		}
-
 	}
 
 	public static void removeEquipment(String sport, int no) {
-
 		if (no > 0) {
 			if (equipments.get(sport).getEquipmentQty() - no >= 0) {
-
 				equipments.replace(sport, new EquipmentsEntity(sport, equipments.get(sport).getEquipmentQty() - no));
 
 				db.commit();
 			}
 		}
-
 	}
 
-	public static void main(String[] args) {
-		initDA();
-
-		for (int i = 0; i < getAllData().length; i++) {
-			for (Object j : getAllData()[i]) {
-				System.out.println(j);
-			}
-		}
-	}
+	/*
+	 * public static void main(String[] args) { initDA();
+	 * 
+	 * for (int i = 0; i < getAllData().length; i++) { for (Object j :
+	 * getAllData()[i]) { System.out.println(j); } } }
+	 */
 }
