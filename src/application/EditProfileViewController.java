@@ -1,8 +1,11 @@
 package application;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -15,8 +18,6 @@ import dataAccess.EquipmentsDA;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,6 +41,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
 import modules.Snackbar;
 
 public class EditProfileViewController implements Initializable {
@@ -85,26 +87,40 @@ public class EditProfileViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
+		
+		// Force Double only for heightTxtField & weightTxtField
+		Pattern pattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
-		// Force heightTxtField to double
-		heightTxtField.textProperty().addListener(new ChangeListener<String>() {
+		UnaryOperator<TextFormatter.Change> filter = c -> {
+			String txt = c.getControlNewText();
+
+			if (pattern.matcher(txt).matches()) {
+				return c;
+			}
+			else {
+				return null;
+			}
+		};
+
+		StringConverter<Double> converter = new StringConverter<Double>() {
 			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*.{0,1}\\d*")) {
-					heightTxtField.setText(newValue.replaceAll("[^\\d]", ""));
+			public Double fromString(String s) {
+				if (s.isEmpty() || "-".equals(s) || ".".equals(s) || "-.".equals(s)) {
+					return 0.0;
+				}
+				else {
+					return Double.valueOf(s);
 				}
 			}
-		});
 
-		// Force weightTxtField to double
-		weightTxtField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("\\d*.{0,1}\\d*")) {
-					heightTxtField.setText(newValue.replaceAll("[^\\d]", ""));
-				}
+			public String toString(Double d) {
+				return d.toString();
 			}
-		});
+		};
+
+		heightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
+		weightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
 
 		// Force introTxtArea to 120 char limit.
 		introTxtArea.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= 120 ? change : null));
@@ -118,10 +134,7 @@ public class EditProfileViewController implements Initializable {
 		weightTxtField.setText(Double.toString(weight));
 		heightVisibilityToggleBtn.setSelected(heightVisibility);
 		weightVisibilityToggleBtn.setSelected(weightVisibility);
-
-		if (!intro.isEmpty()) {
-			introTxtArea.setText(intro);
-		}
+		introTxtArea.setText(intro);
 
 		introCharCountTxt.setText(introTxtArea.getText().length() + " / 120");
 
@@ -293,29 +306,25 @@ public class EditProfileViewController implements Initializable {
 			dialogSaveBtn.getStyleClass().add("success");
 			dialogSaveBtn.setCursor(Cursor.HAND);
 
-			dialogSaveBtn.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					dialog.close();
+			dialogSaveBtn.setOnAction(saveEV -> {
+				dialog.close();
 
-					switch (AccountsDA.editAccount(email, pass, name, favSport, intSport.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
+				switch (AccountsDA.editAccount(email, pass, name, favSport, intSport.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
 					case 0: // Success
-						new Snackbar().dangerSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 3500);
+						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 3500);
 
 						// Delay on screen with timeline instead of using Thread.sleep()
-						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
-							@Override
-							public void handle(ActionEvent event) {
-								try {
-									Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-									Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
-								}
-								catch (Exception e) {
-									e.printStackTrace();
-								}
+						EventHandler<ActionEvent> timelineEV = tev -> {
+							try {
+								Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
+								Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
 							}
-						}), new KeyFrame(Duration.ZERO));
+							catch (IOException e) {
+								e.printStackTrace();
+							}
+						};
 
+						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), timelineEV), new KeyFrame(Duration.ZERO));
 						timeline.play();
 						break;
 
@@ -330,7 +339,6 @@ public class EditProfileViewController implements Initializable {
 
 					default:
 						break;
-					}
 				}
 			});
 			content.setActions(dialogSaveBtn);
@@ -340,14 +348,11 @@ public class EditProfileViewController implements Initializable {
 			dialogCancelBtn.getStyleClass().addAll("danger");
 			dialogCancelBtn.setCursor(Cursor.HAND);
 
-			dialogCancelBtn.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					dialog.close();
-				}
+			dialogCancelBtn.setOnAction(cancelEV -> {
+				dialog.close();
 			});
+			
 			content.getActions().add(dialogCancelBtn);
-
 			dialog.show();
 		}
 	}
@@ -366,18 +371,15 @@ public class EditProfileViewController implements Initializable {
 		dialogYesBtn.getStyleClass().add("success");
 		dialogYesBtn.setCursor(Cursor.HAND);
 
-		dialogYesBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				dialog.close();
+		dialogYesBtn.setOnAction(yesEV -> {
+			dialog.close();
 
-				try {
-					Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-					Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+			try {
+				Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
+				Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+			}
+			catch (IOException e) {
+				e.printStackTrace();
 			}
 		});
 		content.setActions(dialogYesBtn);
@@ -387,36 +389,33 @@ public class EditProfileViewController implements Initializable {
 		dialogNoBtn.getStyleClass().addAll("danger");
 		dialogNoBtn.setCursor(Cursor.HAND);
 
-		dialogNoBtn.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				dialog.close();
-			}
+		dialogNoBtn.setOnAction(noEV -> {
+			dialog.close();
 		});
+		
 		content.getActions().add(dialogNoBtn);
-
 		dialog.show();
 	}
-	
+
 	// Event Listener for dpOverlay.onMouseEnter
 	@FXML
 	public void dpOverlayOnMouseEnter(MouseEvent event) {
 		if (dpOverlayGridPane.getOpacity() != 1.0) {
 			dpOverlayGridPane.toFront();
-			
+
 			FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), dpOverlayGridPane);
 			fadeTransition.setFromValue(0);
 			fadeTransition.setToValue(1.0);
 			fadeTransition.play();
 		}
 	}
-	
+
 	// Event Listener for dpOverlay.OnMouseExit
 	@FXML
 	public void dpOverlayOnMouseExit(MouseEvent event) {
 		if (dpOverlayGridPane.getOpacity() != 0) {
 			dpOverlayGridPane.toFront();
-			
+
 			FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), dpOverlayGridPane);
 			fadeTransition.setFromValue(1.0);
 			fadeTransition.setToValue(0);

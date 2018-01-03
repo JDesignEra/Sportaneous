@@ -363,20 +363,23 @@
 
 .jfx-dialog-layout .jfx-layout-actions,
 .jfx-dialog-layout .jfx-layout-heading,
- .jfx-dialog-layout .jfx-layout .jfx-layout-body {
+ .jfx-dialog-layout .jfx-layout-body {
 	-fx-alignment: center;
+	-fx-text-alignment: center;
 }
 
 .jfx-dialog-layout .jfx-layout-body > Text {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-font-size: 14.0px;
 	-fx-fill: #434343;
+	-fx-text-alignment: center;
 }
 
 .jfx-dialog-layout .jfx-layout-heading > Text {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-font-size: 20.0px;
 	-fx-fill: #434343;
+	-fx-text-alignment: center;
 }
 
 .jfx-dialog-overlay-pane {
