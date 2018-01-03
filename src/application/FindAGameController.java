@@ -1,6 +1,8 @@
 package application;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,11 +14,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class FindAGameController {
 
@@ -51,20 +59,24 @@ public class FindAGameController {
     private GridPane infoDisplayField;
     
     private FindAGameApp app;
-
+    
+    private static String error = "";
+    
     private int i = -1;
     
     public void initialize() throws IOException {
     	
+    	HostsDA.initializeSearchResults();
     	displayAnchor.setMaxHeight(1043);
+    	ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
     	sportMenu.setEditable(true);
-    	ObservableList<String> options = FXCollections.observableArrayList("Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
+    	sportMenu.getEditor().setEditable(false);
     		    
     	sportMenu.setItems(options);
     	sportMenu.setPromptText("Select a sport");
     	scrollPane.setFitToWidth(true);
     	
-    	infoDisplayField.setGridLinesVisible(true);
+//    	infoDisplayField.setGridLinesVisible(true);
     	
     	for (int a = 0; a < HostsDA.returnHostsList().size(); a++) {
     		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_space.fxml")),  1, ++i);
@@ -72,50 +84,72 @@ public class FindAGameController {
     	}
     	
     	displayAnchor.setMinHeight(HostsDA.returnHostsList().size()*228);
-    	System.out.println(displayAnchor.getHeight());
-
+    	
     }
     
     @FXML
-    public void handleHostAGame(ActionEvent event) {
-
+    public void handleHostAGame(ActionEvent event) throws IOException {
+    	error = "I am tired!";
+    	showError();
     }
 
     @FXML
     public void handleSearch(ActionEvent event) throws IOException {
     	
-//    	String nameORadmin = this.nameTF.getText();
-//    	String sport = this.sportMenu.getValue();
-//    	String date = this.dateTF.getText();
-//    	String time = this.timeTF.getText();
+    	HostsDA.getSearchResults().clear();
     	
+    	String adminORname = nameTF.getText();
+    	String date = dateTF.getText();
+    	String time = timeTF.getText();
+    	String sportsType = sportMenu.getValue();
+    	System.out.println(sportsType);
     	
-//    	nameTF.setText("Hello!");
-//    	AnchorPane ap = new AnchorPane();
+//    	System.out.println(nameTF.getText().isEmpty());
+//    	System.out.println(dateTF.getText().isEmpty());
+//    	System.out.println(timeTF.getText().isEmpty());
+//    	System.out.println(sportMenu.getValue()==null);
     	
-//		
-//    	infoDisplayField.setGridLinesVisible(true);
-//    	
-//    	infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/Ratings_element2.fxml")),  1, ++i);
-//    	infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/Ratings_element.fxml")),  1, ++i);
-//    	
-//    	System.out.println(infoDisplayField.getHeight());
-//    	
-//    	displayAnchor.setMinHeight(infoDisplayField.getHeight());
-//    	displayAnchor.setPrefHeight(infoDisplayField.getHeight());
-//    	displayAnchor.setMaxHeight(infoDisplayField.getHeight());
-//    	
-//    	System.out.println(FindAGameApp.index);
+    	HostsDA.searchGame(adminORname, date, time, sportsType);
+    	
+    	if (HostsDA.getSearchResults().size() > 0) {
+    		infoDisplayField.getChildren().clear();
+    		FindAGameApp.index = 0;
+    	}
+    	
+    	i = -1;
+    	
+    	for (int a = 0; a < HostsDA.getSearchResults().size(); a++) {
+    		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_space.fxml")),  1, ++i);
+    		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")),  1, ++i);
+    	}
+    	
+    	if (HostsDA.getSearchResults().size() == 0) {
+    		displayAnchor.setMinHeight(HostsDA.getSearchResults().size()*228);
+    	}
+    	
     }
 
     @FXML
-    public void handleSportMenu(ActionEvent event) {
-    	
+    public void handleSportMenu(ActionEvent event) throws IOException {
+    
     }
     
+    public void showError() throws IOException {
+    	final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        AnchorPane root = FXMLLoader.load(getClass().getResource("/application/FindAGame_ErrorPopUp.fxml"));
+        Scene dialogScene = new Scene(root, 400, 150);
+        dialog.setScene(dialogScene);
+        dialog.show();
+    }
+    
+    public static String getErrorMsg() {
+    	return error;
+    }
     public void setMainApp(FindAGameApp app) {
     	this.app = app;
     }
+    
     
     
 

@@ -13,7 +13,6 @@ public class HostsEntity implements Serializable {
 	private String[] userID = new String[11], userName = new String[11];
 	private int sportsType;
 	
-//	public HostsEntity(String adminNo, String name, String date, String time, String[] userID, String[] userName, int sportsType) {
 	public HostsEntity(String adminNo, String name, LocalDate date, String time, int sportsType) {
 		if (userID.length == this.userID.length) {
 			if (userName.length == this.userName.length) {
@@ -21,8 +20,6 @@ public class HostsEntity implements Serializable {
 				this.name = name;
 				this.date = date;
 				this.time = time;
-//				this.userID = userID;
-//				this.userName = userName;
 				this.sportsType = sportsType;
 			}
 //			else {
@@ -49,14 +46,6 @@ public class HostsEntity implements Serializable {
 	public String getTime() {
 		return time;
 	}
-	
-//	public String[] getUserID() {
-//		return userID;
-//	}
-//	
-//	public String[] getUserName() {
-//		return userName;
-//	}
 	
 	public int getSportsType() {
 		return sportsType;

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import java.lang.String?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -44,10 +45,29 @@
 					<children>
 						<JFXButton fx:id="hostBtn" buttonType="RAISED" maxHeight="40.0" minHeight="40.0" onAction="#handleHostAGame" prefHeight="40.0" prefWidth="143.0" styleClass="blueBtn" text="HOST A GAME" GridPane.columnIndex="11" GridPane.rowIndex="1" />
 						<JFXButton fx:id="searchBtn" buttonType="RAISED" maxHeight="38.0" maxWidth="-Infinity" onAction="#handleSearch" prefHeight="38.0" prefWidth="118.0" styleClass="greenBtn" text="SEARCH" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-						<JFXTextField fx:id="nameTF" focusColor="#43434300" maxHeight="31.0" maxWidth="141.5" minHeight="31.0" minWidth="141.5" prefHeight="31.0" prefWidth="141.5" promptText="Name/Admin no." styleClass="whitebg" unFocusColor="#4d4d4d00" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-						<JFXTextField fx:id="dateTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Date" styleClass="whitebg" unFocusColor="#4d4d4d00" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-						<JFXTextField fx:id="timeTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Time" styleClass="whitebg" unFocusColor="#4d4d4d00" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-						<JFXComboBox fx:id="sportMenu" focusColor="#405aa800" maxHeight="30.0" maxWidth="207.5" minHeight="30.5" minWidth="207.5" onAction="#handleSportMenu" prefHeight="30.0" prefWidth="207.5" promptText="Sport" styleClass="comboBox" unFocusColor="#4d4d4d00" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+						<JFXTextField fx:id="nameTF" focusColor="#43434300" maxHeight="31.0" maxWidth="141.5" minHeight="31.0" minWidth="141.5" prefHeight="31.0" prefWidth="141.5" promptText="Name/Admin no." unFocusColor="#4d4d4d00" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="whitebg" />
+                        <String fx:value="persistent-prompt" />
+                        <String fx:value="hostedGame_textField" />
+                     </styleClass></JFXTextField>
+						<JFXTextField fx:id="dateTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Date" unFocusColor="#4d4d4d00" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="whitebg" />
+                        <String fx:value="persistent-prompt" />
+                        <String fx:value="hostedGame_textField" />
+                     </styleClass></JFXTextField>
+						<JFXTextField fx:id="timeTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Time" unFocusColor="#4d4d4d00" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="whitebg" />
+                        <String fx:value="hostedGame_textField" />
+                        <String fx:value="persistent-prompt" />
+                     </styleClass></JFXTextField>
+						<JFXComboBox fx:id="sportMenu" editable="true" focusColor="#405aa800" maxHeight="30.0" maxWidth="207.5" minHeight="30.5" minWidth="207.5" onAction="#handleSportMenu" prefHeight="30.0" prefWidth="207.5" promptText="Sport" unFocusColor="#4d4d4d00" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="comboBox" />
+                        <String fx:value="hostedGame_textField" />
+                     </styleClass></JFXComboBox>
 					</children>
 				</GridPane>
 				<ScrollPane fx:id="scrollPane" prefHeight="840.0" prefWidth="1600.0" GridPane.rowIndex="1">
