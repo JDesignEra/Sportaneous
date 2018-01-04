@@ -13,7 +13,6 @@ import entity.HostsEntity;
 public class HostsDA {
 
 	private static DB db;
-	private static DB db1;
 	private static ConcurrentMap<String, HostsEntity> hosts;
 	private static HashMap<String, HostsEntity> searchResults;
 	private static ConcurrentMap<String, String> profpics;
@@ -33,22 +32,6 @@ public class HostsDA {
 		
 		db.commit();
 		
-		/**[FOR TESTING ONLY] --START-- [FOR TESTING ONLY]**/
-		
-		db1 = DBMaker
-				.newFileDB(new File("tmp/profilepictures.db"))
-				.closeOnJvmShutdown()
-				.make();
-		
-		profpics = db1.getTreeMap("hosts");
-		
-//		profpics.put("170146W", "application/assets/img/profile_pics/camila_cabello.jpg");
-//		profpics.put("170285X", "application/assets/img/profile_pics/annalise_keating.jpg");
-//		profpics.put("170374Y", "application/assets/img/profile_pics/mark_zuckerberg.jpg");
-//		profpics.put("170463Z", "application/assets/img/profile_pics/tim_cook.jpg");
-//		profpics.put("170552A", "application/assets/img/profile_pics/bill_gates.jpg");
-		
-		db1.commit();
 		
 		/**  --END--  **/
 	}
@@ -157,11 +140,6 @@ public class HostsDA {
 		}
 		
 		return list;
-	}
-	
-	public static String getProfilePictureURL(String adminNo) {
-		initDA();
-		return profpics.get(adminNo);
 	}
 	
 	public static void initializeSearchResults() {

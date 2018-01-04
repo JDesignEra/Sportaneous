@@ -131,7 +131,7 @@ public class FindAGame_hostedGameController {
 	
 	void setDP(String adminNo) {
 
-		Image img = new Image(HostsDA.getProfilePictureURL(adminNo));
+		Image img = new Image("/application/assets/uploads/" + adminNo + ".jpg");
 		ImagePattern iv = new ImagePattern(img);
 		
 		hostDP.setFill(iv);
