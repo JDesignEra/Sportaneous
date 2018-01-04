@@ -86,7 +86,7 @@ public class AccountsDA {
 		}
 
 		for (AccountsEntity accountsEntity : accounts.values()) {
-			if (accountsEntity.getEmail() == email) {
+			if (accountsEntity.getEmail().equals(email)) {
 				return 3; // Registered Email
 			}
 		}
@@ -104,10 +104,11 @@ public class AccountsDA {
 		return 0; // Success
 	}
 
-	public static int editAccount(String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
+	public static int editAccount(	String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
 									boolean heightVisibility, boolean weightVisibility) {
 		AccountsEntity accountsEntity;
-		
+		email = email.toLowerCase();
+
 		if ((accountsEntity = accounts.get(session.getAdminNo())) == null) {
 			return 1; // Does not exist
 		}

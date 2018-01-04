@@ -17,7 +17,6 @@ import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -91,11 +90,11 @@ public class EditProfileViewController implements Initializable {
 		// Force Double only for heightTxtField & weightTxtField
 		Pattern pattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
-		UnaryOperator<TextFormatter.Change> filter = c -> {
-			String txt = c.getControlNewText();
+		UnaryOperator<TextFormatter.Change> filter = uo -> {
+			String txt = uo.getControlNewText();
 
 			if (pattern.matcher(txt).matches()) {
-				return c;
+				return uo;
 			}
 			else {
 				return null;
@@ -123,7 +122,7 @@ public class EditProfileViewController implements Initializable {
 		weightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
 
 		// Force introTxtArea to 120 char limit.
-		introTxtArea.setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= 120 ? change : null));
+		introTxtArea.setTextFormatter(new TextFormatter<String>(vc -> vc.getControlNewText().length() <= 120 ? vc : null));
 
 		// Set Fields
 		nameTxtField.setText(name);
@@ -294,19 +293,17 @@ public class EditProfileViewController implements Initializable {
 
 				switch (AccountsDA.editAccount(email, pass, name, favSport, intSport.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
 					case 0: // Success
-						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 3500);
+						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
 
 						// Delay on screen with timeline instead of using Thread.sleep()
-						EventHandler<ActionEvent> timelineEV = tev -> {
+						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> {
 							try {
 								Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 							}
 							catch (Exception e) {
 								e.printStackTrace();
 							}
-						};
-
-						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), timelineEV), new KeyFrame(Duration.ZERO));
+						}));
 						timeline.play();
 						break;
 

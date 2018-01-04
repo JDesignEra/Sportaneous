@@ -16,7 +16,6 @@ import javafx.scene.control.TextField;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,7 +47,7 @@ public class LRFViewController implements Initializable {
 	@FXML private TextField fpassAdminNoTF;
 	@FXML private TextField fpassEmailTF;
 	@FXML private JFXButton fpassBtn;
-	
+
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous.gif");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL navigationViewURL = getClass().getResource("/application/NavigationView.fxml");
@@ -58,8 +57,7 @@ public class LRFViewController implements Initializable {
 		AccountsDA.initDA();
 		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
-				ae -> logoImageView.setImage(new Image(logoURL.toExternalForm()))));
+		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), ae -> logoImageView.setImage(new Image(logoURL.toExternalForm()))));
 		timeline.play();
 	}
 
