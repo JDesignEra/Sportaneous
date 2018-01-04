@@ -1,5 +1,7 @@
 package modules;
 
+import java.net.URL;
+
 import com.jfoenix.controls.JFXSnackbar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class Snackbar {
+	private final URL spinnerWhite = getClass().getResource("/application/assets/img/spinner_white.gif");
+	
 	public void info(Pane root, String msg) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("info");
@@ -20,7 +24,6 @@ public class Snackbar {
 	public void success(Pane root, String msg) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("success");
-		sb.setManaged(true);
 
 		sb.show(msg, 3000);
 	}
@@ -49,7 +52,7 @@ public class Snackbar {
 			BorderPane rootPane = (BorderPane) parent;
 			StackPane stackPane = new StackPane();
 			
-			ImageView imgView = new ImageView("/application/assets/img/spinner_white.gif");
+			ImageView imgView = new ImageView(spinnerWhite.toExternalForm());
 			imgView.setFitHeight(rootPane.getHeight() -10);
 			imgView.setFitWidth(rootPane.getHeight() -10);
 			imgView.preserveRatioProperty().set(true);
@@ -74,7 +77,7 @@ public class Snackbar {
 			BorderPane rootPane = (BorderPane) parent;
 			StackPane stackPane = new StackPane();
 			
-			ImageView imgView = new ImageView("/application/assets/img/spinner_white.gif");
+			ImageView imgView = new ImageView(spinnerWhite.toExternalForm());
 			imgView.setFitHeight(rootPane.getHeight() -10);
 			imgView.setFitWidth(rootPane.getHeight() -10);
 			imgView.preserveRatioProperty().set(true);
@@ -99,7 +102,7 @@ public class Snackbar {
 			BorderPane rootPane = (BorderPane) parent;
 			StackPane stackPane = new StackPane();
 			
-			ImageView imgView = new ImageView("/application/assets/img/spinner_white.gif");
+			ImageView imgView = new ImageView(spinnerWhite.toExternalForm());
 			imgView.setFitHeight(rootPane.getHeight() -10);
 			imgView.setFitWidth(rootPane.getHeight() -10);
 			imgView.preserveRatioProperty().set(true);
@@ -124,7 +127,7 @@ public class Snackbar {
 			BorderPane rootPane = (BorderPane) parent;
 			StackPane stackPane = new StackPane();
 			
-			ImageView imgView = new ImageView("/application/assets/img/spinner_white.gif");
+			ImageView imgView = new ImageView(spinnerWhite.toExternalForm());
 			imgView.setFitHeight(rootPane.getHeight() -10);
 			imgView.setFitWidth(rootPane.getHeight() -10);
 			imgView.preserveRatioProperty().set(true);
