@@ -1,7 +1,5 @@
 package application;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -83,11 +81,13 @@ public class EditProfileViewController implements Initializable {
 	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(100, 100, 100);
 
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
-		
+
 		// Force Double only for heightTxtField & weightTxtField
 		Pattern pattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
@@ -185,8 +185,8 @@ public class EditProfileViewController implements Initializable {
 		}
 
 		// Profile Photo
-		if (new File("/application/assets/uploads/" + adminNo + ".png").exists()) {
-			img = new Image("/application/assets/uploads/" + adminNo + ".png");
+		if (getClass().getResource("/application/assets/uploads/" + adminNo + ".png") != null) {
+			img = new Image(getClass().getResource("/application/assets/uploads/" + adminNo + ".png").toExternalForm());
 			imgView = new ImageView(img);
 
 			// Crop
@@ -215,37 +215,20 @@ public class EditProfileViewController implements Initializable {
 		imgView.setCursor(Cursor.HAND);
 
 		profileGridPane.add(imgView, 0, 0);
+
+		if (heightVisibilityToggleBtn.isSelected()) {
+			heightVisibilityToggleBtn.setText("\uf06e");
+		}
+
+		if (weightVisibilityToggleBtn.isSelected()) {
+			weightVisibilityToggleBtn.setText("\uf06e");
+		}
 	}
 
 	// Event Listener on TextArea[#introTxtArea].onKeyTyped.
 	@FXML
 	public void introTxtAreaOnKeyType(KeyEvent event) {
 		introCharCountTxt.setText(introTxtArea.getText().length() + " / 120");
-	}
-
-	// Event Listener on JFXButton[#intSportAddBtn].onAction.
-	@FXML
-	public void intSportAddBtnOnAction(ActionEvent event) {
-		String[] intSports = new String[EquipmentsDA.getAllData().length];
-		int length = intSportFlowPane.lookupAll(".sportChip").size();
-
-		for (int j = 0; j < EquipmentsDA.getAllData().length; j++) {
-			intSports[j] = EquipmentsDA.getAllData()[j][0].toString();
-		}
-
-		if (length < EquipmentsDA.getAllData().length) {
-			ComboBox<String> newComboBox = new ComboBox<>();
-			newComboBox.getStyleClass().add("sportChip");
-			newComboBox.setPromptText("Intrerested Sport");
-			newComboBox.setCursor(Cursor.HAND);
-
-			newComboBox.getItems().add("None");
-			newComboBox.getItems().addAll(intSports);
-
-			intSportFlowPane.getChildren().add(newComboBox);
-			FlowPane.setMargin(newComboBox, new Insets(2.5));
-			intSportFlowPane.setManaged(true);
-		}
 	}
 
 	// Event Listener on JFXButton[#saveBtn].onAction.
@@ -316,10 +299,9 @@ public class EditProfileViewController implements Initializable {
 						// Delay on screen with timeline instead of using Thread.sleep()
 						EventHandler<ActionEvent> timelineEV = tev -> {
 							try {
-								Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-								Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+								Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 							}
-							catch (IOException e) {
+							catch (Exception e) {
 								e.printStackTrace();
 							}
 						};
@@ -347,13 +329,14 @@ public class EditProfileViewController implements Initializable {
 			JFXButton dialogCancelBtn = new JFXButton("Cancel");
 			dialogCancelBtn.getStyleClass().addAll("danger");
 			dialogCancelBtn.setCursor(Cursor.HAND);
-			
+
 			dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
 			content.getActions().add(dialogCancelBtn);
 			dialog.show();
 		}
 	}
 
+	// Event Listener on JFXButton[#cancelBtn].onAction.
 	@FXML
 	public void cancelBtnOnAction(ActionEvent event) {
 		// Dialog
@@ -372,10 +355,9 @@ public class EditProfileViewController implements Initializable {
 			dialog.close();
 
 			try {
-				Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-				Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+				Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 			}
-			catch (IOException e) {
+			catch (Exception e) {
 				e.printStackTrace();
 			}
 		});
@@ -389,6 +371,53 @@ public class EditProfileViewController implements Initializable {
 		dialogNoBtn.setOnAction(noEV -> dialog.close());
 		content.getActions().add(dialogNoBtn);
 		dialog.show();
+	}
+
+	// Event Listener on JFXButton[#intSportAddBtn].onAction.
+	@FXML
+	public void intSportAddBtnOnAction(ActionEvent event) {
+		String[] intSports = new String[EquipmentsDA.getAllData().length];
+		int length = intSportFlowPane.lookupAll(".sportChip").size();
+
+		for (int j = 0; j < EquipmentsDA.getAllData().length; j++) {
+			intSports[j] = EquipmentsDA.getAllData()[j][0].toString();
+		}
+
+		if (length < EquipmentsDA.getAllData().length) {
+			ComboBox<String> newComboBox = new ComboBox<>();
+			newComboBox.getStyleClass().add("sportChip");
+			newComboBox.setPromptText("Intrerested Sport");
+			newComboBox.setCursor(Cursor.HAND);
+
+			newComboBox.getItems().add("None");
+			newComboBox.getItems().addAll(intSports);
+
+			intSportFlowPane.getChildren().add(newComboBox);
+			FlowPane.setMargin(newComboBox, new Insets(2.5));
+			intSportFlowPane.setManaged(true);
+		}
+	}
+
+	// Event Listener on JFXToggleButton[#heightVisibilityToggleBtn].onAction.
+	@FXML
+	public void heightVisibilityToggleBtnOnAction(ActionEvent event) {
+		if (heightVisibilityToggleBtn.isSelected()) {
+			heightVisibilityToggleBtn.setText("\uf06e");
+		}
+		else {
+			heightVisibilityToggleBtn.setText("\uf070");
+		}
+	}
+
+	// Event Listener on JFXToggleButton[#weightVisibilityToggleBtn].onAction.
+	@FXML
+	public void weightVisibilityToggleBtnOnAction(ActionEvent event) {
+		if (weightVisibilityToggleBtn.isSelected()) {
+			weightVisibilityToggleBtn.setText("\uf06e");
+		}
+		else {
+			weightVisibilityToggleBtn.setText("\uf070");
+		}
 	}
 
 	// Event Listener for dpOverlay.onMouseEnter

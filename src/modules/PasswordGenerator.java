@@ -3,19 +3,17 @@ package modules;
 import java.security.SecureRandom;
 
 public class PasswordGenerator {
+	private static final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789" + "!@#$%^&*_=+-";
+
 	public String newPassword() {
 		SecureRandom random = new SecureRandom();
-		final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-				+ "abcdefghijklmnopqrstuvwxyz"
-				+ "0123456789"
-				+ "!@#$%^&*_=+-";
-		String result = "";
-		
+		StringBuilder result = new StringBuilder();
+
 		for (int i = 0; i < 16; i++) {
 			int index = random.nextInt(CHARS.length());
-			result += CHARS.charAt(index);
+			result.append(CHARS.charAt(index));
 		}
-		
-		return result;
+
+		return result.toString();
 	}
 }

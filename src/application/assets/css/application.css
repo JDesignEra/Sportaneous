@@ -102,6 +102,23 @@
 .fontAwesome {
 	-fx-font-family: "FontAwesome";
 	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.fontAwesome.x2 {
+	-fx-font-size: 28.0px;
+}
+
+.fontAwesome.x4 {
+	-fx-font-size: 56.0px;
+}
+
+.fontAwesome.x6 {
+	-fx-font-size: 84.0px;
+}
+
+.fontAwesome.x8 {
+	-fx-font-size: 112.0px;
 }
 
 .sportChip {
@@ -522,7 +539,8 @@
 	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
 }
 
-#loginView .login .loginBtn {
+#loginView .login .content .jfx-button.loginBtn {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-background-color: #26C6DA;
 	-fx-padding: 10.0px 50.0px 10.0px 50.0px;
 }
@@ -541,7 +559,8 @@
 	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
 }
 
-#loginView .register .content .regBtn {
+#loginView .register .content .jfx-button.regBtn {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-background-color: #26A69A;
 	-fx-padding: 10.0px 40.0px 10.0px 40.0px;
 }
@@ -566,7 +585,8 @@
 	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
 }
 
-#loginView .fpass .content .fpassBtn {
+#loginView .fpass .content .jfx-button.fpassBtn {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-background-color: #EF4956;
 	-fx-padding: 10.0px 30.0px 10.0px 30.0px;
 }

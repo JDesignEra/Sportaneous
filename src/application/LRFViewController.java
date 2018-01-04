@@ -49,13 +49,17 @@ public class LRFViewController implements Initializable {
 	@FXML private TextField fpassEmailTF;
 	@FXML private JFXButton fpassBtn;
 	
+	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous.gif");
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
+	private final URL navigationViewURL = getClass().getResource("/application/NavigationView.fxml");
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		AccountsDA.initDA();
 		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000),
-				ae -> logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()))));
+				ae -> logoImageView.setImage(new Image(logoURL.toExternalForm()))));
 		timeline.play();
 	}
 
@@ -113,7 +117,7 @@ public class LRFViewController implements Initializable {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
 
-		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
+		logoImageView.setImage(new Image(logoURL.toExternalForm()));
 	}
 
 	// Event Listener on TitledPane[#regTitledPane].onMouseClicked
@@ -126,7 +130,7 @@ public class LRFViewController implements Initializable {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
 
-		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
+		logoImageView.setImage(new Image(logoURL.toExternalForm()));
 	}
 
 	// Event Listener on TitledPane[#fpassTitledPane].onMouseClicked
@@ -139,7 +143,7 @@ public class LRFViewController implements Initializable {
 			fpassTitledPane.getStyleClass().remove("inactive");
 		}
 
-		logoImageView.setImage(new Image(this.getClass().getResource("/application/assets/img/Sportaneous.gif").toExternalForm()));
+		logoImageView.setImage(new Image(logoURL.toExternalForm()));
 	}
 
 	private void login() {
@@ -150,45 +154,44 @@ public class LRFViewController implements Initializable {
 		loginPassTF.getStyleClass().removeAll("danger");
 
 		switch (AccountsDA.login(adminNo, pass)) {
-		case 0:
-			try {
-				Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-				Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
-				Main.getRoot().setBottom(FXMLLoader.load(getClass().getResource("/application/NavigationView.fxml")));
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-			break;
+			case 0:
+				try {
+					Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+					Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
 
-		case 1:
-			if (adminNo.isEmpty() && pass.isEmpty()) {
-				new Snackbar().danger(rootPane, "Admin Number & Password field is empty.");
-				loginAdminNoTF.getStyleClass().add("danger");
-				loginPassTF.getStyleClass().add("danger");
-			}
-			else if (adminNo.isEmpty()) {
-				new Snackbar().danger(rootPane, "Admin Number field is empty.");
-				loginAdminNoTF.getStyleClass().add("danger");
-				loginPassTF.getStyleClass().removeAll("danger");
-			}
-			else if (pass.isEmpty()) {
-				new Snackbar().danger(rootPane, "Password field is empty.");
-				loginPassTF.getStyleClass().add("danger");
-				loginAdminNoTF.getStyleClass().removeAll("danger");
-			}
-			break;
+			case 1:
+				if (adminNo.isEmpty() && pass.isEmpty()) {
+					new Snackbar().danger(rootPane, "Admin Number & Password field is empty.");
+					loginAdminNoTF.getStyleClass().add("danger");
+					loginPassTF.getStyleClass().add("danger");
+				}
+				else if (adminNo.isEmpty()) {
+					new Snackbar().danger(rootPane, "Admin Number field is empty.");
+					loginAdminNoTF.getStyleClass().add("danger");
+					loginPassTF.getStyleClass().removeAll("danger");
+				}
+				else if (pass.isEmpty()) {
+					new Snackbar().danger(rootPane, "Password field is empty.");
+					loginPassTF.getStyleClass().add("danger");
+					loginAdminNoTF.getStyleClass().removeAll("danger");
+				}
+				break;
 
-		case 2:
-			new Snackbar().danger(rootPane, "This account does not exist, please register an account instead.");
-			break;
+			case 2:
+				new Snackbar().danger(rootPane, "This account does not exist, please register an account instead.");
+				break;
 
-		case 3:
-			new Snackbar().danger(rootPane, "The login credential you have entered is invalid.");
-			break;
+			case 3:
+				new Snackbar().danger(rootPane, "The login credential you have entered is invalid.");
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 
@@ -204,63 +207,63 @@ public class LRFViewController implements Initializable {
 		regPassTF.getStyleClass().removeAll("danger");
 
 		switch (AccountsDA.addAccount(name, adminNo, email, pass)) {
-		case 0:
-			new Snackbar().success(rootPane, "You have registered an account with us successfully.");
-			break;
+			case 0:
+				new Snackbar().success(rootPane, "You have registered an account with us successfully.");
+				break;
 
-		case 1:
-			List<String> emptyMsg = new ArrayList<>();
-			StringBuilder msg = new StringBuilder();
+			case 1:
+				List<String> emptyMsg = new ArrayList<>();
+				StringBuilder msg = new StringBuilder();
 
-			if (name.isEmpty()) {
-				regNameTF.getStyleClass().add("danger");
-				emptyMsg.add("Name");
-			}
-
-			if (email.isEmpty()) {
-				regEmailTF.getStyleClass().add("danger");
-				emptyMsg.add("Email");
-			}
-
-			if (adminNo.isEmpty()) {
-				regAdminNoTF.getStyleClass().add("danger");
-				emptyMsg.add("Admin Number");
-			}
-
-			if (pass.isEmpty()) {
-				regPassTF.getStyleClass().add("danger");
-				emptyMsg.add("Password");
-			}
-
-			// Build empty field name message.
-			for (int i = 0; i < emptyMsg.size(); i++) {
-				msg.append(emptyMsg.get(i));
-
-				if (i < emptyMsg.size() - 1) {
-					msg.append(", ");
+				if (name.isEmpty()) {
+					regNameTF.getStyleClass().add("danger");
+					emptyMsg.add("Name");
 				}
-			}
 
-			new Snackbar().danger(rootPane, msg.toString() + " field is empty.");
-			break;
+				if (email.isEmpty()) {
+					regEmailTF.getStyleClass().add("danger");
+					emptyMsg.add("Email");
+				}
 
-		case 2:
-			regEmailTF.getStyleClass().add("danger");
-			new Snackbar().danger(rootPane, "Only NYP Email address are allowed to register an account with us.");
-			break;
+				if (adminNo.isEmpty()) {
+					regAdminNoTF.getStyleClass().add("danger");
+					emptyMsg.add("Admin Number");
+				}
 
-		case 3:
-			regEmailTF.getStyleClass().add("danger");
-			new Snackbar().danger(rootPane, "This Email is registered with us.");
-			break;
+				if (pass.isEmpty()) {
+					regPassTF.getStyleClass().add("danger");
+					emptyMsg.add("Password");
+				}
 
-		case 4:
-			regAdminNoTF.getStyleClass().add("danger");
-			new Snackbar().danger(rootPane, "This Admin Number is registered with us.");
-			break;
+				// Build empty field name message.
+				for (int i = 0; i < emptyMsg.size(); i++) {
+					msg.append(emptyMsg.get(i));
 
-		default:
-			break;
+					if (i < emptyMsg.size() - 1) {
+						msg.append(", ");
+					}
+				}
+
+				new Snackbar().danger(rootPane, msg.toString() + " field is empty.");
+				break;
+
+			case 2:
+				regEmailTF.getStyleClass().add("danger");
+				new Snackbar().danger(rootPane, "Only NYP Email address are allowed to register an account with us.");
+				break;
+
+			case 3:
+				regEmailTF.getStyleClass().add("danger");
+				new Snackbar().danger(rootPane, "This Email is registered with us.");
+				break;
+
+			case 4:
+				regAdminNoTF.getStyleClass().add("danger");
+				new Snackbar().danger(rootPane, "This Admin Number is registered with us.");
+				break;
+
+			default:
+				break;
 		}
 	}
 
@@ -275,40 +278,40 @@ public class LRFViewController implements Initializable {
 		fpassEmailTF.getStyleClass().removeAll("danger");
 
 		switch (AccountsDA.passwordReset(adminNo, email)) {
-		case 0:
-			new Snackbar().success(rootPane, "Your password had been reset succssfully, please check your email and login with your new password.");
-			break;
+			case 0:
+				new Snackbar().success(rootPane, "Your password had been reset succssfully, please check your email and login with your new password.");
+				break;
 
-		case 1:
-			if (adminNo.isEmpty() && email.isEmpty()) {
-				fpassAdminNoTF.getStyleClass().add("danger");
-				fpassEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Admin Number and Email field is empty.");
-			}
-			else if (adminNo.isEmpty()) {
-				fpassAdminNoTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Admin Number field is empty.");
-			}
-			else if (email.isEmpty()) {
-				fpassEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Email field is empty");
-			}
-			break;
+			case 1:
+				if (adminNo.isEmpty() && email.isEmpty()) {
+					fpassAdminNoTF.getStyleClass().add("danger");
+					fpassEmailTF.getStyleClass().add("danger");
+					new Snackbar().danger(rootPane, "Admin Number and Email field is empty.");
+				}
+				else if (adminNo.isEmpty()) {
+					fpassAdminNoTF.getStyleClass().add("danger");
+					new Snackbar().danger(rootPane, "Admin Number field is empty.");
+				}
+				else if (email.isEmpty()) {
+					fpassEmailTF.getStyleClass().add("danger");
+					new Snackbar().danger(rootPane, "Email field is empty");
+				}
+				break;
 
-		case 2:
-			new Snackbar().danger(rootPane, "This Admin Number is not registered with us.");
-			break;
+			case 2:
+				new Snackbar().danger(rootPane, "This Admin Number is not registered with us.");
+				break;
 
-		case 3:
-			new Snackbar().danger(rootPane, "This Email is not registered with us.");
-			break;
+			case 3:
+				new Snackbar().danger(rootPane, "This Email is not registered with us.");
+				break;
 
-		case 4:
-			new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
-			break;
+			case 4:
+				new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 	}
 }

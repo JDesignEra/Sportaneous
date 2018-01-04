@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,9 @@ public class NavigationViewController implements Initializable {
 	@FXML private JFXButton navLogoutBtn;
 	@FXML private GridPane rootPane;
 	
+	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (Main.getLoc().getPath().contains("/ProfileView.fxml")) {
@@ -34,8 +38,7 @@ public class NavigationViewController implements Initializable {
 	@FXML
 	public void navProfileBtnOnAction(ActionEvent event) {
 		try {
-			Main.setLoc(getClass().getResource("/application/ProfileView.fxml"));
-			Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -73,8 +76,7 @@ public class NavigationViewController implements Initializable {
 
 		if (AccountsDA.getSession() == null) {
 			try {
-				Main.setLoc(getClass().getResource("/application/LRFView.fxml"));
-				Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+				Main.getRoot().setCenter(FXMLLoader.load(lrfViewURL));
 				Main.getRoot().setBottom(null);
 			}
 			catch (Exception e) {

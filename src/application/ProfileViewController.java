@@ -2,13 +2,15 @@ package application;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
-import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
-import application.assets.modules.CommentsViewController;
+import application.modules.CommentsViewController;
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
 import javafx.event.ActionEvent;
@@ -23,7 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
-public class ProfileViewController {
+public class ProfileViewController implements Initializable {
 	@FXML private Text nameTxt;
 	@FXML private Text heightWeightTxt;
 	@FXML private Text ratingTxt;
@@ -57,8 +59,11 @@ public class ProfileViewController {
 	private Circle clip = new Circle(100, 100, 100);
 	private GridPane commContentGridPane;
 
-	@FXML
-	public void initialize() {
+	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
+	private final URL editProfileViewURL = getClass().getResource("/application/EditProfileView.fxml");
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 		CommentsDA.initDA();
 
 		if (CommentsDA.getComments(adminNo).length > 1) {
@@ -70,8 +75,8 @@ public class ProfileViewController {
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
 
 		// Profile Photo
-		if (new File("/application/assets/uploads/" + adminNo + ".png").exists()) {
-			img = new Image("/application/assets/uploads/" + adminNo + ".png");
+		if (getClass().getResource("/application/assets/uploads/" + adminNo + ".png") != null) {
+			img = new Image(getClass().getResource("/application/assets/uploads/" + adminNo + ".png").toExternalForm());
 			imgView = new ImageView(img);
 
 			// Crop
@@ -164,19 +169,20 @@ public class ProfileViewController {
 
 		// Comments
 		if (CommentsDA.getComments(adminNo) != null) {
+			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+			commContentGridPane = new GridPane();
+
 			try {
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
-				commContentGridPane = new GridPane();
-
-				commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-				commContentGridPane.getStyleClass().add("commContent");
-
-				commentGridPane.add(commContentGridPane, 0, 1);
-				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+				commContentGridPane = FXMLLoader.load(commentsViewURL);
 			}
 			catch (Exception e) {
 				e.getStackTrace();
 			}
+
+			commContentGridPane.getStyleClass().add("commContent");
+
+			commentGridPane.add(commContentGridPane, 0, 1);
+			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 		}
 	}
 
@@ -184,8 +190,7 @@ public class ProfileViewController {
 	@FXML
 	public void editBtnOnAction(ActionEvent event) {
 		try {
-			Main.setLoc(getClass().getResource("/application/EditProfileView.fxml"));
-			Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+			Main.getRoot().setCenter(FXMLLoader.load(editProfileViewURL));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -195,35 +200,33 @@ public class ProfileViewController {
 	// Event Listener on JFXButton[#prevComBtn].onAction
 	@FXML
 	public void prevComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null) {
-			if (CommentsViewController.getIndex() > 0) {
-				try {
-					CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
+		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() > 0) {
+			CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
+			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+			commContentGridPane = new GridPane();
 
-					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
-					commContentGridPane = new GridPane();
+			try {
+				commContentGridPane = FXMLLoader.load(commentsViewURL);
+			}
+			catch (Exception e) {
+				e.getStackTrace();
+			}
 
-					commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-					commContentGridPane.getStyleClass().add("commContent");
+			commContentGridPane.getStyleClass().add("commContent");
 
-					commentGridPane.add(commContentGridPane, 0, 1);
-					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+			commentGridPane.add(commContentGridPane, 0, 1);
+			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
-					nxtComBtn.getStyleClass().remove("inactive");
-					nxtComBtn.getStyleClass().add("danger");
+			nxtComBtn.getStyleClass().remove("inactive");
+			nxtComBtn.getStyleClass().add("danger");
 
-					if (CommentsViewController.getIndex() <= 0) {
-						prevComBtn.getStyleClass().remove("danger");
-						prevComBtn.getStyleClass().add("inactive");
-					}
-					else {
-						prevComBtn.getStyleClass().remove("inactive");
-						prevComBtn.getStyleClass().add("danger");
-					}
-				}
-				catch (Exception e) {
-					e.getStackTrace();
-				}
+			if (CommentsViewController.getIndex() <= 0) {
+				prevComBtn.getStyleClass().remove("danger");
+				prevComBtn.getStyleClass().add("inactive");
+			}
+			else {
+				prevComBtn.getStyleClass().remove("inactive");
+				prevComBtn.getStyleClass().add("danger");
 			}
 		}
 	}
@@ -231,35 +234,33 @@ public class ProfileViewController {
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
 	public void nxtComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null) {
-			if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
-				try {
-					CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
+		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
+			CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
+			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+			commContentGridPane = new GridPane();
 
-					commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
-					commContentGridPane = new GridPane();
+			try {
+				commContentGridPane = FXMLLoader.load(commentsViewURL);
+			}
+			catch (Exception e) {
+				e.getStackTrace();
+			}
 
-					commContentGridPane = FXMLLoader.load(getClass().getResource("/application/assets/modules/CommentsView.fxml"));
-					commContentGridPane.getStyleClass().add("commContent");
+			commContentGridPane.getStyleClass().add("commContent");
 
-					commentGridPane.add(commContentGridPane, 0, 1);
-					GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+			commentGridPane.add(commContentGridPane, 0, 1);
+			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
-					prevComBtn.getStyleClass().remove("inactive");
-					prevComBtn.getStyleClass().add("danger");
+			prevComBtn.getStyleClass().remove("inactive");
+			prevComBtn.getStyleClass().add("danger");
 
-					if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
-						nxtComBtn.getStyleClass().remove("danger");
-						nxtComBtn.getStyleClass().add("inactive");
-					}
-					else {
-						nxtComBtn.getStyleClass().remove("inactive");
-						nxtComBtn.getStyleClass().add("danger");
-					}
-				}
-				catch (Exception e) {
-					e.getStackTrace();
-				}
+			if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
+				nxtComBtn.getStyleClass().remove("danger");
+				nxtComBtn.getStyleClass().add("inactive");
+			}
+			else {
+				nxtComBtn.getStyleClass().remove("inactive");
+				nxtComBtn.getStyleClass().add("danger");
 			}
 		}
 	}
