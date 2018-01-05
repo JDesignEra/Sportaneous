@@ -20,6 +20,8 @@ public class NavigationViewController implements Initializable {
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL findGameURL = getClass().getResource("/application/FindAGame.fxml");
+	
+	public static int HostAGame_index = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
