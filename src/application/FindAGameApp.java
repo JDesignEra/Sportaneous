@@ -1,13 +1,7 @@
 package application;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.concurrent.ConcurrentMap;
 
-import dataAccess.HostsDA;
-import entity.HostsEntity;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import dataAccess.HostsDA;
 
 public class FindAGameApp extends Application {
 	

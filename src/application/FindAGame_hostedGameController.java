@@ -1,31 +1,21 @@
 package application;
 
-import javafx.fxml.FXML;
-
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentMap;
-
-import javax.imageio.ImageIO;
 
 import com.jfoenix.controls.JFXButton;
 
-import dataAccess.HostsDA;
-import entity.HostsEntity;
 import javafx.event.ActionEvent;
-
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+
+import entity.HostsEntity;
+
+import dataAccess.HostsDA;
 
 public class FindAGame_hostedGameController {
 	@FXML

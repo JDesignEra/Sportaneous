@@ -92,7 +92,7 @@ public class EditProfileViewController implements Initializable {
 				return null;
 			}
 		};
-		
+
 		StringConverter<Double> converter = new StringConverter<Double>() {
 			@Override
 			public Double fromString(String s) {

@@ -13,7 +13,7 @@ import entity.CommentsEntity;
 public class CommentsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<CommentsEntity>> comments;
-	
+
 	private CommentsDA() {
 		throw new IllegalStateException("CommentsDA class");
 	}
@@ -27,7 +27,7 @@ public class CommentsDA {
 		 * List<CommentsEntity> ceList = new ArrayList<>(); ceList.add(new
 		 * CommentsEntity("test", "test", "test", 2.5)); ceList.add(new
 		 * CommentsEntity("test2", "test2", "test2", 3.5));
-		 * 
+		 *
 		 * comments.put("admin", ceList);
 		 */
 		db.commit();

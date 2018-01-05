@@ -53,7 +53,7 @@ public class LRFViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		AccountsDA.initDA();
-		
+
 		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), ae -> logoImageView.setImage(new Image(logoURL.toExternalForm()))));

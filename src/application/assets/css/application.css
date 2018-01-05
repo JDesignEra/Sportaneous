@@ -251,6 +251,11 @@
 	-fx-font-weight: 400;
 }
 
+.hyperlink {
+	-fx-fill: #EF4956;
+	-fx-text-fill: #EF4956;
+}
+
 .jfx-text-field {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-text-fill: #434343;
@@ -647,6 +652,9 @@
 	-fx-fill: #EF4956;
 }
 
-.test {
-	-fx-background-color: #000000;
+#uploadPhoto .uploadBox {
+	-fx-border-width: 5.0px;
+	-fx-border-radius: 6.0px;
+	-fx-border-color: #AEAEAE;
+	-fx-border-style: dashed;
 }
