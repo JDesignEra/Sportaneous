@@ -28,30 +28,24 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 public class FindAGame_hostedGameController {
-	@FXML
-	private Label eventDay;
-	@FXML
-	private Label eventDate;
-	@FXML
-	private Label eventTime;
-	@FXML
-	private Label sportsType;
-	@FXML
-	private JFXButton joinBtn;
-	@FXML
-	private Circle hostDP;
-	@FXML
-	private Label hostName;
+	@FXML private Label eventDay;
+	@FXML private Label eventDate;
+	@FXML private Label eventTime;
+	@FXML private Label sportsType;
+	@FXML private JFXButton joinBtn;
+	@FXML private Circle hostDP;
+	@FXML private Label hostName;
 
-	//Database//
+	// Database//
 	private HashMap<String, HostsEntity> searchR;
-	private String[] sports = new String[] {"Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis"};
-		
+	private String[] sports = new String[] { "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis" };
+
 	public void initialize() {
-	
+
 		if (HostsDA.getSearchResults().isEmpty()) {
 			searchR = HostsDA.returnHostsList();
-		} else {
+		}
+		else {
 			searchR = HostsDA.getSearchResults();
 		}
 
@@ -80,8 +74,8 @@ public class FindAGame_hostedGameController {
 		else {
 			FindAGameApp.index++;
 		}
-			
-		}
+
+	}
 
 	// Event Listener on JFXButton[#joinBtn].onAction
 	@FXML
@@ -101,23 +95,25 @@ public class FindAGame_hostedGameController {
 	}
 
 	void setEventTime(String t) {
-		
+
 		int hr = 0;
 		String tobeSet = "";
 		if (t.length() == 4) {
 			hr = Integer.parseInt(t.substring(0, 2));
 			if (hr < 12) {
 				tobeSet = hr + ":" + t.substring(2) + " AM";
-			} else if (hr > 12){
-				hr-=12;
+			}
+			else if (hr > 12) {
+				hr -= 12;
 				tobeSet = hr + ":" + t.substring(2) + " PM";
-			} else {
+			}
+			else {
 				tobeSet = hr + ":" + t.substring(2) + " PM";
 			}
 		}
-		
+
 		eventTime.setText(tobeSet);
-		
+
 	}
 
 	void setHostName(String n) {
@@ -127,14 +123,14 @@ public class FindAGame_hostedGameController {
 	void setSportsType(String s) {
 		sportsType.setText(s.toUpperCase());
 	}
-	
+
 	void setDP(String adminNo) {
 
 		Image img = new Image("/application/assets/uploads/" + adminNo + ".jpg");
 		ImagePattern iv = new ImagePattern(img);
-		
+
 		hostDP.setFill(iv);
-		
+
 	}
-	
+
 }
