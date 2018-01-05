@@ -98,7 +98,7 @@
 .jfx-button.fontAwesome {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 14.0px;
-	-fx-font-weight: 800;
+	-fx-font-weight: 800.0;
 }
 
 .jfx-button.fontAwesome.square {
@@ -363,15 +363,15 @@
 .whitebg {
 	-fx-background-color: white,white;
 	-fx-border-color: transparent;
-	-fx-padding: 4 0 4 5;
+	-fx-padding: 4.0 0.0 4.0 5.0;
 }
 
 .comboBox {
 	-fx-background-color: white, white;
-	-fx-padding: 4 0 4 5;
-	-fx-font-size: 14px;
+	-fx-padding: 4.0 0.0 4.0 5.0;
+	-fx-font-size: 14.0px;
 	-fx-font-family: Roboto;
-	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.35) , 16, 0.0 , 3 , 3 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.35) , 16.0, 0.0 , 3.0 , 3.0 );
 	-fx-fill: #7f7f7f;
 }
 
@@ -381,18 +381,18 @@
 
 
 .ratingElement_Join {
-	-fx-font-size: 10px;
+	-fx-font-size: 10.0px;
 	-fx-font-weight: bold;
 	-fx-font-family: Roboto;
 }
 
 .hostedGame {
-	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 16, 0.0 , 3 , 3 );
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.2) , 16.0, 0.0 , 3.0 , 3.0 );
 	-fx-font-family: Roboto;
 }
 
 .persistent-prompt:focused {
-    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30%);
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30.0%);
     -fx-font-size: 13.5px;
 }
 .no-prompt {
