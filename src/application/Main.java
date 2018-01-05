@@ -5,19 +5,19 @@ import java.net.URL;
 import com.jfoenix.controls.JFXDecorator;
 
 import javafx.application.Application;
-import javafx.stage.Screen;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static BorderPane root;
 	private static URL loc;
-	
+
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous_small.png");
 	private final URL logoAltURL = getClass().getResource("/application/assets/img/Sportaneous_small_alt.png");
 	private final URL stylesheetURL = getClass().getResource("/application/assets/css/application.css");
@@ -26,7 +26,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		root = new BorderPane();
 		loc = getClass().getResource("/application/LRFView.fxml");
-		
+
 		try {
 			root.setCenter(FXMLLoader.load(loc));
 		}
@@ -41,7 +41,7 @@ public class Main extends Application {
 
 		Scene scene = new Scene(decorator, 1600, 900);
 		scene.getStylesheets().add(stylesheetURL.toExternalForm());
-		
+
 		primaryStage.getIcons().add(new Image(logoAltURL.toExternalForm()));
 		primaryStage.setTitle("Sportaneous");
 		primaryStage.setScene(scene);

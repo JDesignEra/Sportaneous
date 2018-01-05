@@ -1,9 +1,5 @@
 package application;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,23 +7,25 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
-import dataAccess.AccountsDA;
-import javafx.scene.control.TextField;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
-import javafx.scene.control.PasswordField;
-
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
+
+import dataAccess.AccountsDA;
+
 import modules.Snackbar;
 
 public class LRFViewController implements Initializable {
@@ -55,6 +53,7 @@ public class LRFViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		AccountsDA.initDA();
+		
 		// Re-animate Sportaneous.gif
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(new KeyFrame(Duration.millis(1000), ae -> logoImageView.setImage(new Image(logoURL.toExternalForm()))));

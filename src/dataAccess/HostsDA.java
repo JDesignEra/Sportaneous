@@ -17,20 +17,16 @@ public class HostsDA {
 	private static ConcurrentMap<String, HostsEntity> hosts;
 	private static HashMap<String, HostsEntity> searchResults;
 	private static HostsEntity session;
-	private static String[] sports = new String[] {"Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis"};
-	
+	private static String[] sports = new String[] { "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis" };
+
 	public static void initDA() {
-		
-		
-		db = DBMaker
-				.newFileDB(new File("tmp/hosts.db"))
-				.closeOnJvmShutdown()
-				.make();
-		
+
+		db = DBMaker.newFileDB(new File("tmp/hosts.db")).closeOnJvmShutdown().make();
+
 		hosts = db.getTreeMap("hosts");
-		
-		
+
 		db.commit();
+<<<<<<< HEAD
 		
 		
 	}
@@ -45,20 +41,47 @@ public class HostsDA {
 			return 1; 
 		}	
 		
+=======
+
+		/** --END-- **/
+	}
+
+	public static int hostGame(String adminNo, String name, LocalDate date, String time, int sportsType) {
+		if (adminNo.isEmpty() || name.isEmpty() || date == null || time.isEmpty()) {
+			return 0; // Fields required
+		}
+
+		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType)) != null) {
+			return 1;
+		}
+
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		db.commit();
 		return 2; // Success
 	}
-	
+
 	public static void searchGame(String adminORname, String date, String time, String sportsType) {
 		
 		initDA();
+<<<<<<< HEAD
 
+=======
+		// String sport = sports[sportsType];
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
-			for (String x: hosts.keySet()) {
+			for (String x : hosts.keySet()) {
 				searchResults.put(x, hosts.get(x));
 			}
 		}
+<<<<<<< HEAD
 		
+=======
+
+		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
+
+		}
+
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
 			for (HostsEntity x : hosts.values()) {
 				if (sports[x.getSportsType()].equals(sportsType)) {
@@ -85,9 +108,9 @@ public class HostsDA {
 			}
 			
 		}
-		
+
 		if (!adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
-			
+
 			for (String x : hosts.keySet()) {
 				if (x.toLowerCase().equals(adminORname.toLowerCase())) {
 					searchResults.put(x, hosts.get(x));
@@ -122,6 +145,7 @@ public class HostsDA {
 				}
 			}
 		}
+<<<<<<< HEAD
 		
 		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && !sportsType.isEmpty()) {
 			for (HostsEntity x: hosts.values()) {
@@ -215,34 +239,36 @@ public class HostsDA {
 				}
 			}
 		}
+=======
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 
 	}
-	
+
 	public static HashMap<String, HostsEntity> getSearchResults() {
 		return searchResults;
 	}
-	
+
 	public static int addFriends(String adminNo, String name, String date, String time, String[] userID, String[] userName, int sportsType) {
 		HostsEntity hostsEntity;
-		
+
 		if ((hostsEntity = hosts.get(adminNo)) == null) {
 			return 0; // Does not exist
 		}
-		
+
 		db.commit();
-		
+
 		if (session != null && session.getAdminNo().equals(adminNo)) {
 			session = (HostsEntity) hosts;
 		}
-		
+
 		return 1; // Success
 	}
-	
-	//need to create a method to remove friend
+
+	// need to create a method to remove friend
 	public static Object[][] getAllData() {
 
 		Object[][] rowData = new Object[hosts.size()][5];
-		
+
 		int i = 0;
 		for (HostsEntity hostsEntity : hosts.values()) {
 			rowData[i][0] = hostsEntity.getAdminNo();
@@ -252,27 +278,28 @@ public class HostsDA {
 			rowData[i][4] = hostsEntity.getSportsType();
 			i++;
 		}
-		
+
 		return rowData;
 	}
-	
+
 	public static HashMap<String, HostsEntity> returnHostsList() {
 		initDA();
 		HashMap<String, HostsEntity> list = new HashMap<String, HostsEntity>();
-		
+
 		for (String adminNo : hosts.keySet()) {
 			list.put(adminNo, hosts.get(adminNo));
 		}
-		
+
 		return list;
 	}
-	
+
 	public static void initializeSearchResults() {
 		searchResults = new HashMap<String, HostsEntity>();
 	}
-	
+
 	public static void main(String args[]) {
 		initDA();
+<<<<<<< HEAD
 		
 //		for (int i = 0; i < getAllData().length; i++) {
 //			for (Object j : getAllData()[i]) {
@@ -284,9 +311,14 @@ public class HostsDA {
 		
 		for (HostsEntity x: searchResults.values()) {
 			System.out.println(x.getName());
+=======
+
+		for (int i = 0; i < getAllData().length; i++) {
+			for (Object j : getAllData()[i]) {
+				System.out.println(j.toString());
+			}
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		}
 	}
-	
+
 }
-
-

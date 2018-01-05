@@ -11,8 +11,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import dataAccess.AccountsDA;
-import dataAccess.EquipmentsDA;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -39,29 +38,23 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
+
+import dataAccess.AccountsDA;
+import dataAccess.EquipmentsDA;
+
 import modules.Snackbar;
 
 public class EditProfileViewController implements Initializable {
-	@FXML JFXTextField nameTxtField;
-	@FXML JFXTextField heightTxtField;
-	@FXML JFXTextField weightTxtField;
-	@FXML JFXTextField emailTxtField;
-	@FXML JFXPasswordField cPassTxtField;
-	@FXML JFXPasswordField cfmPassTxtField;
+	@FXML JFXTextField nameTxtField, heightTxtField, weightTxtField, emailTxtField;
+	@FXML JFXPasswordField cPassTxtField, cfmPassTxtField;
 	@FXML TextArea introTxtArea;
 	@FXML Text introCharCountTxt;
-	@FXML ComboBox<String> favSportComboBox;
-	@FXML ComboBox<String> intSportComboBox;
-	@FXML JFXButton saveBtn;
-	@FXML JFXButton cancelBtn;
-	@FXML JFXButton intSportAddBtn;
-	@FXML JFXToggleButton heightVisibilityToggleBtn;
-	@FXML JFXToggleButton weightVisibilityToggleBtn;
+	@FXML ComboBox<String> favSportComboBox, intSportComboBox;
+	@FXML JFXButton saveBtn, cancelBtn, intSportAddBtn;
+	@FXML JFXToggleButton heightVisibilityToggleBtn, weightVisibilityToggleBtn;
 	@FXML Circle dpCircle;
 	@FXML FlowPane intSportFlowPane;
-	@FXML GridPane profileGridPane;
-	@FXML GridPane dpOverlayGridPane;
-	@FXML GridPane rootGridPane;
+	@FXML GridPane profileGridPane, dpOverlayGridPane, rootGridPane;
 	@FXML StackPane rootStackPane;
 
 	private String adminNo = AccountsDA.getAdminNo();
@@ -82,7 +75,6 @@ public class EditProfileViewController implements Initializable {
 
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
@@ -100,7 +92,7 @@ public class EditProfileViewController implements Initializable {
 				return null;
 			}
 		};
-
+		
 		StringConverter<Double> converter = new StringConverter<Double>() {
 			@Override
 			public Double fromString(String s) {
@@ -166,13 +158,15 @@ public class EditProfileViewController implements Initializable {
 			favSportComboBox.getItems().add("None");
 			favSportComboBox.getItems().addAll(intSports);
 
-			for (Node node : intSportFlowPane.lookupAll(".sportChip")) {
-				if (node instanceof ComboBox<?>) {
-					((ComboBox<String>) node).getItems().add("None");
-					((ComboBox<String>) node).getItems().addAll(intSports);
+			for (Node n : intSportFlowPane.lookupAll(".sportChip")) {
+				if (n instanceof ComboBox<?>) {
+					@SuppressWarnings("unchecked") ComboBox<String> node = (ComboBox<String>) n;
+
+					node.getItems().add("None");
+					node.getItems().addAll(intSports);
 
 					if (!intSport.isEmpty()) {
-						((ComboBox<String>) node).getSelectionModel().select(intSport.split(",")[i]);
+						node.getSelectionModel().select(intSport.split(",")[i]);
 						i++;
 					}
 				}
@@ -255,7 +249,7 @@ public class EditProfileViewController implements Initializable {
 			weight = !weightTxtField.getText().isEmpty() ? Double.parseDouble(weightTxtField.getText()) : 0.0;
 			heightVisibility = heightVisibilityToggleBtn.isSelected();
 			weightVisibility = weightVisibilityToggleBtn.isSelected();
-			StringBuilder intSport = new StringBuilder();
+			StringBuilder sports = new StringBuilder();
 
 			// Build intSport
 			for (Node node : intSportFlowPane.lookupAll(".sportChip")) {
@@ -263,13 +257,13 @@ public class EditProfileViewController implements Initializable {
 					String selectedItem = ((ComboBox<String>) node).getSelectionModel().getSelectedItem();
 
 					if (selectedItem != null && !selectedItem.isEmpty() && !selectedItem.equals("None")) {
-						intSport.append(((ComboBox<String>) node).getSelectionModel().getSelectedItem() + ",");
+						sports.append(((ComboBox<String>) node).getSelectionModel().getSelectedItem() + ",");
 					}
 				}
 			}
 
-			if (!intSport.toString().isEmpty()) {
-				intSport.substring(0, intSport.length() - 1);
+			if (!sports.toString().isEmpty()) {
+				sports.substring(0, sports.length() - 1);
 			}
 
 			// String favSport assignment
@@ -291,7 +285,7 @@ public class EditProfileViewController implements Initializable {
 			dialogSaveBtn.setOnAction(saveEV -> {
 				dialog.close();
 
-				switch (AccountsDA.editAccount(email, pass, name, favSport, intSport.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
+				switch (AccountsDA.editAccount(email, pass, name, favSport, sports.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
 					case 0: // Success
 						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
 

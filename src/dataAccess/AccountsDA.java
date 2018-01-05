@@ -7,6 +7,7 @@ import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
 import entity.AccountsEntity;
+
 import modules.PasswordGenerator;
 import modules.SendMail;
 
@@ -16,6 +17,10 @@ public class AccountsDA {
 	private static ConcurrentMap<String, AccountsEntity> accounts;
 	private static AccountsEntity session;
 	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
+
+	private AccountsDA() {
+		throw new IllegalStateException("AccountsDA class");
+	}
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
