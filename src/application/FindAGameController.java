@@ -1,8 +1,6 @@
 package application;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,14 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -58,12 +53,13 @@ public class FindAGameController {
     @FXML
     private GridPane infoDisplayField;
     
-    private FindAGameApp app;
-    
+    @FXML
     private static String error = "";
     
+    @FXML
     private int i = -1;
     
+    @FXML
     public void initialize() throws IOException {
     	
     	HostsDA.initializeSearchResults();
@@ -76,8 +72,6 @@ public class FindAGameController {
     	sportMenu.setPromptText("Select a sport");
     	scrollPane.setFitToWidth(true);
     	
-//    	infoDisplayField.setGridLinesVisible(true);
-    	
     	for (int a = 0; a < HostsDA.returnHostsList().size(); a++) {
     		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_space.fxml")),  1, ++i);
     		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")),  1, ++i);
@@ -89,8 +83,11 @@ public class FindAGameController {
     
     @FXML
     public void handleHostAGame(ActionEvent event) throws IOException {
-    	error = "I am tired!";
-    	showError();
+    	Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText("Are you ok with this?");
+        
+        alert.show();
     }
 
     @FXML
@@ -102,12 +99,22 @@ public class FindAGameController {
     	String date = dateTF.getText();
     	String time = timeTF.getText();
     	String sportsType = sportMenu.getValue();
-    	System.out.println(sportsType);
     	
-//    	System.out.println(nameTF.getText().isEmpty());
-//    	System.out.println(dateTF.getText().isEmpty());
-//    	System.out.println(timeTF.getText().isEmpty());
-//    	System.out.println(sportMenu.getValue()==null);
+    	if (nameTF.getText().isEmpty()) {
+    		adminORname="";
+    	}
+    	
+    	if (dateTF.getText().isEmpty()) {
+    		date="";
+    	}
+    	
+    	if (timeTF.getText().isEmpty()) {
+    		time="";
+    	}
+    	
+    	if (sportMenu.getValue()==null) {
+    		sportsType="";
+    	}
     	
     	HostsDA.searchGame(adminORname, date, time, sportsType);
     	
@@ -123,8 +130,12 @@ public class FindAGameController {
     		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")),  1, ++i);
     	}
     	
-    	if (HostsDA.getSearchResults().size() == 0) {
+    	if (HostsDA.getSearchResults().size() > 0) {
     		displayAnchor.setMinHeight(HostsDA.getSearchResults().size()*228);
+    		displayAnchor.setMaxHeight(HostsDA.getSearchResults().size()*228);
+    	} else {
+    		displayAnchor.setMinHeight(1043);
+    		displayAnchor.setMaxHeight(1043);
     	}
     	
     }
@@ -134,6 +145,7 @@ public class FindAGameController {
     
     }
     
+    @FXML
     public void showError() throws IOException {
     	final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -143,14 +155,10 @@ public class FindAGameController {
         dialog.show();
     }
     
+    @FXML
     public static String getErrorMsg() {
     	return error;
     }
-    public void setMainApp(FindAGameApp app) {
-    	this.app = app;
-    }
     
     
-    
-
 }

@@ -2,6 +2,7 @@ package dataAccess;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -15,7 +16,6 @@ public class HostsDA {
 	private static DB db;
 	private static ConcurrentMap<String, HostsEntity> hosts;
 	private static HashMap<String, HostsEntity> searchResults;
-	private static ConcurrentMap<String, String> profpics;
 	private static HostsEntity session;
 	private static String[] sports = new String[] {"Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis"};
 	
@@ -33,16 +33,15 @@ public class HostsDA {
 		db.commit();
 		
 		
-		/**  --END--  **/
 	}
 
-	public static int hostGame(String adminNo, String name, LocalDate date, String time, int sportsType) {		
+	public static int hostGame(String adminNo, String name, LocalDate date, String time, int sportsType, ArrayList<String> playersRecruited) {		
 		if (adminNo.isEmpty() || name.isEmpty() || date==null || time.isEmpty()) {
 			return 0; // Fields required
 		}
 		
 		
-		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType)) != null) {
+		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType, playersRecruited)) != null) {
 			return 1; 
 		}	
 		
@@ -51,45 +50,171 @@ public class HostsDA {
 	}
 	
 	public static void searchGame(String adminORname, String date, String time, String sportsType) {
+		
 		initDA();
-//		String sport = sports[sportsType];
+
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
 			for (String x: hosts.keySet()) {
 				searchResults.put(x, hosts.get(x));
 			}
 		}
 		
-		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
-			
-		}
-		
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
 			for (HostsEntity x : hosts.values()) {
 				if (sports[x.getSportsType()].equals(sportsType)) {
-					searchResults.put(x.getAdminNo(), hosts.get(x.getAdminNo()));
+					searchResults.put(x.getAdminNo(), x);
 				}
 			}
+		}
+		
+		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
+			System.out.println(searchResults.size());
+			for (HostsEntity x : hosts.values()) {
+				if (time.equals(x.getTime())) {
+					searchResults.put(x.getAdminNo(), x);
+				} 
+			}
+		}
+		
+		if (adminORname.isEmpty() && !date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			for (HostsEntity x: hosts.values()) {
+				if (x.getDate().equals(ld)) {
+					searchResults.put(x.getAdminNo(), x);
+				}
+			}
+			
 		}
 		
 		if (!adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
 			
 			for (String x : hosts.keySet()) {
 				if (x.toLowerCase().equals(adminORname.toLowerCase())) {
-					System.out.println("Admin no!");
 					searchResults.put(x, hosts.get(x));
 				}
 			}
 
 			for (HostsEntity x : hosts.values()) {
-				if (x.getName().toLowerCase().equals(adminORname.toLowerCase())) {
-					System.out.println("FOUND NAME");
+				if (x.getName().toLowerCase().contains(adminORname.toLowerCase())) {
 					searchResults.put(x.getAdminNo(), x);
 				}
 			}
 		}
 		
+		if (!adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
+			for (String x : hosts.keySet()) {
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname.toLowerCase()) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+			}
+		}
 		
-
+		if (adminORname.isEmpty() && !date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			for (HostsEntity x: hosts.values()) {
+				if (x.getDate().equals(ld) && sports[x.getSportsType()].equals(sportsType)) {
+					searchResults.put(x.getAdminNo(), x);
+				}
+			}
+		}
+		
+		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && !sportsType.isEmpty()) {
+			for (HostsEntity x: hosts.values()) {
+				if (x.getTime().equals(time) && sports[x.getSportsType()].equals(sportsType)) {
+					searchResults.put(x.getAdminNo(), x);
+				}
+			}
+		}
+		
+		if (!adminORname.isEmpty() && !date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
+			
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			
+			for (String x : hosts.keySet()) {
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && hosts.get(x).getDate().equals(ld)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname.toLowerCase()) && hosts.get(x).getDate().equals(ld)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+			}
+		}
+		
+		if (!adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
+			for (String x : hosts.keySet()) {
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && hosts.get(x).getTime().equals(time)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname.toLowerCase()) && hosts.get(x).getTime().equals(time)) {
+					searchResults.put(x, hosts.get(x));
+				}
+			}
+		}
+		
+		if (adminORname.isEmpty() && !date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			for (HostsEntity x: hosts.values()) {
+				if (x.getDate().equals(ld) && x.getTime().equals(time)) {
+					searchResults.put(x.getAdminNo(), x);
+				}
+			}
+		}
+		
+		if (!adminORname.isEmpty() && !date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			
+			for (String x : hosts.keySet()) {
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && hosts.get(x).getDate().equals(ld) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				}
+				
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname) && hosts.get(x).getDate().equals(ld) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				}
+			}
+		}
+		
+		if (!adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && !sportsType.isEmpty()) {
+			for (String x : hosts.keySet()) {
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && hosts.get(x).getTime().equals(time) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				} 
+				
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname) && hosts.get(x).getTime().equals(time) && sports[hosts.get(x).getSportsType()].equals(sportsType)) {
+					searchResults.put(x, hosts.get(x));
+				}
+			}
+		}
+		
+		if (adminORname.isEmpty() && !date.isEmpty() && !time.isEmpty() && !sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			for (HostsEntity x : hosts.values()) {
+				if (x.getDate().equals(ld) && x.getTime().equals(time) && sports[x.getSportsType()].equals(sportsType)) {
+					searchResults.put(x.getAdminNo(),x);
+				}
+			}
+		}
+		
+		if (!adminORname.isEmpty() && !date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
+			LocalDate ld = LocalDate.of(Integer.parseInt(date.substring(4)), Integer.parseInt(date.substring(2, 4)), Integer.parseInt(date.substring(0,2)));
+			for (String x : hosts.keySet()) {
+				System.out.println("HELLO");
+				if (x.toLowerCase().equals(adminORname.toLowerCase()) && hosts.get(x).getDate().equals(ld) && hosts.get(x).getTime().equals(time)) {
+					searchResults.put(x,hosts.get(x));
+				}
+				if (hosts.get(x).getName().toLowerCase().contains(adminORname.toLowerCase()) && hosts.get(x).getDate().equals(ld) && hosts.get(x).getTime().equals(time)) {
+					searchResults.put(x,hosts.get(x));
+				}
+			}
+		}
 
 	}
 	
@@ -149,10 +274,16 @@ public class HostsDA {
 	public static void main(String args[]) {
 		initDA();
 		
-		for (int i = 0; i < getAllData().length; i++) {
-			for (Object j : getAllData()[i]) {
-				System.out.println(j.toString());
-			}
+//		for (int i = 0; i < getAllData().length; i++) {
+//			for (Object j : getAllData()[i]) {
+//				System.out.println(j.toString());
+//			}
+//		}
+		initializeSearchResults();
+		searchGame("", "02012018", "", "");
+		
+		for (HostsEntity x: searchResults.values()) {
+			System.out.println(x.getName());
 		}
 	}
 	

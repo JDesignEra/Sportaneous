@@ -54,7 +54,6 @@ public class FindAGame_hostedGameController {
 		} else {
 			searchR = HostsDA.getSearchResults();
 		}
-		
 
 		ArrayList<String> list = new ArrayList<String>();
 

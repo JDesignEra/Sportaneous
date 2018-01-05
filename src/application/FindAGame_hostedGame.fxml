@@ -16,11 +16,11 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="8.0" minWidth="8.0" prefWidth="8.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="36.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="907.0" minWidth="10.0" prefWidth="165.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="51.66667175292969" minWidth="0.0" prefWidth="47.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="907.0" minWidth="10.0" prefWidth="152.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="61.0" minWidth="0.0" prefWidth="11.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="309.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="907.0" minWidth="0.0" prefWidth="9.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="68.0" minWidth="0.0" prefWidth="47.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="907.0" minWidth="10.0" prefWidth="149.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="205.0" minWidth="0.0" prefWidth="3.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="288.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="907.0" minWidth="0.0" prefWidth="39.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="160.0" prefWidth="160.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="32.3333740234375" minWidth="8.0" prefWidth="31.33331298828125" />
   </columnConstraints>
@@ -35,13 +35,13 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="152.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="36.0" minHeight="0.0" prefHeight="9.666671752929688" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="41.999996185302734" minHeight="0.0" prefHeight="1.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="19.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="45.33332824707031" minHeight="0.0" prefHeight="10.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="84.0" minHeight="9.333328247070312" prefHeight="26.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="45.0" minHeight="45.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="54.0" minHeight="46.0" prefHeight="51.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="36.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="41.999996185302734" minHeight="0.0" prefHeight="2.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="21.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="45.33332824707031" minHeight="0.0" prefHeight="9.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="84.0" minHeight="9.333328247070312" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label fx:id="eventDay" style="-fx-font-size: 11; -fx-font-weight: regular;" text="Wednesday" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE" />
@@ -71,7 +71,7 @@
       </GridPane>
       <Circle fill="WHITE" radius="76.0" strokeType="INSIDE" strokeWidth="3.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <stroke>
-            <LinearGradient endY="1.0">
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
                <stops>
                   <Stop color="#d32727" />
                   <Stop color="#d32727" offset="0.007662835249042145" />
@@ -104,8 +104,8 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="162.66666412353516" minHeight="10.0" prefHeight="144.6666717529297" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="82.66667175292969" minHeight="9.333335876464844" prefHeight="13.333328247070312" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="162.66666412353516" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="82.66667175292969" minHeight="6.0" prefHeight="14.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Circle fx:id="hostDP" centerX="20.0" fill="WHITE" radius="67.0" stroke="#ef4956" strokeType="OUTSIDE" strokeWidth="4.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />

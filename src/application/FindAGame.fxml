@@ -10,75 +10,75 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="900.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGameController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="900.0" minWidth="1600.0" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGameController">
 	<children>
-		<GridPane layoutX="-1.0" layoutY="-1.0" prefHeight="900.0" prefWidth="1600.0">
+		<GridPane layoutX="-1.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="900.0" minWidth="1600.0" prefHeight="1080.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<columnConstraints>
-				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1600.0" minWidth="10.0" prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="100.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints maxHeight="60.66666793823242" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
-				<RowConstraints maxHeight="840.0" minHeight="840.0" prefHeight="840.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="64.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="1.7976931348623157E308" minHeight="840.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<GridPane fx:id="topPanel" maxWidth="1600.0" minWidth="1600.0" prefHeight="60.0" prefWidth="1600.0" styleClass="topPanel">
+				<GridPane fx:id="topPanel" maxHeight="64.0" maxWidth="1.7976931348623157E308" minWidth="1600.0" prefHeight="60.0" prefWidth="1600.0" styleClass="topPanel">
 					<columnConstraints>
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="346.1" minWidth="346.1" prefWidth="346.1" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="207.5" minWidth="207.5" prefWidth="207.5" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="11.6" minWidth="11.6" prefWidth="11.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="141.5" minWidth="141.5" prefWidth="141.5" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="11.6" minWidth="11.6" prefWidth="11.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="11.6" minWidth="11.6" prefWidth="11.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="11.6" minWidth="11.6" prefWidth="11.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="116.6" minWidth="116.6" prefWidth="116.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="11.6" minWidth="11.6" prefWidth="11.6" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="134.2" minWidth="134.2" prefWidth="134.2" />
-						<ColumnConstraints hgrow="SOMETIMES" maxWidth="346.1" minWidth="346.1" prefWidth="346.1" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="346.1" prefWidth="346.1" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="207.5" prefWidth="207.5" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="11.6" prefWidth="11.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="141.5" prefWidth="141.5" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="11.6" prefWidth="11.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="125.0" prefWidth="125.0" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="11.6" prefWidth="11.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="125.0" prefWidth="125.0" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="11.6" prefWidth="11.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="116.6" prefWidth="116.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="13.0" minWidth="11.6" prefWidth="11.6" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="134.2" prefWidth="134.2" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="346.1" prefWidth="346.1" />
 					</columnConstraints>
 					<rowConstraints>
-						<RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-						<RowConstraints maxHeight="30.0" minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
-						<RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
-						<JFXButton fx:id="hostBtn" buttonType="RAISED" maxHeight="40.0" minHeight="40.0" onAction="#handleHostAGame" prefHeight="40.0" prefWidth="143.0" styleClass="blueBtn" text="HOST A GAME" GridPane.columnIndex="11" GridPane.rowIndex="1" />
-						<JFXButton fx:id="searchBtn" buttonType="RAISED" maxHeight="38.0" maxWidth="-Infinity" onAction="#handleSearch" prefHeight="38.0" prefWidth="118.0" styleClass="greenBtn" text="SEARCH" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-						<JFXTextField fx:id="nameTF" focusColor="#43434300" maxHeight="31.0" maxWidth="141.5" minHeight="31.0" minWidth="141.5" prefHeight="31.0" prefWidth="141.5" promptText="Name/Admin no." unFocusColor="#4d4d4d00" GridPane.columnIndex="3" GridPane.rowIndex="1">
+						<JFXButton fx:id="hostBtn" buttonType="RAISED" maxHeight="40.0" maxWidth="1.7976931348623157E308" minHeight="40.0" onAction="#handleHostAGame" prefHeight="38.0" prefWidth="143.0" styleClass="blueBtn" text="HOST A GAME" GridPane.columnIndex="11" GridPane.rowIndex="1" />
+						<JFXButton fx:id="searchBtn" buttonType="RAISED" maxHeight="40.0" maxWidth="1.7976931348623157E308" onAction="#handleSearch" prefHeight="38.0" prefWidth="118.0" styleClass="greenBtn" text="SEARCH" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+						<JFXTextField fx:id="nameTF" focusColor="#43434300" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="31.0" minWidth="141.5" prefHeight="31.0" prefWidth="141.5" promptText="Name/Admin no." unFocusColor="#4d4d4d00" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="whitebg" />
                         <String fx:value="persistent-prompt" />
                         <String fx:value="hostedGame_textField" />
                      </styleClass></JFXTextField>
-						<JFXTextField fx:id="dateTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Date" unFocusColor="#4d4d4d00" GridPane.columnIndex="5" GridPane.rowIndex="1">
+						<JFXTextField fx:id="dateTF" focusColor="#ffffff00" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="31.0" prefHeight="31.0" promptText="Date" unFocusColor="#4d4d4d00" GridPane.columnIndex="5" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="whitebg" />
                         <String fx:value="persistent-prompt" />
                         <String fx:value="hostedGame_textField" />
                      </styleClass></JFXTextField>
-						<JFXTextField fx:id="timeTF" focusColor="#ffffff00" maxHeight="31.0" minHeight="31.0" prefHeight="31.0" promptText="Time" unFocusColor="#4d4d4d00" GridPane.columnIndex="7" GridPane.rowIndex="1">
+						<JFXTextField fx:id="timeTF" focusColor="#ffffff00" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="31.0" prefHeight="31.0" promptText="Time" unFocusColor="#4d4d4d00" GridPane.columnIndex="7" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="whitebg" />
                         <String fx:value="hostedGame_textField" />
                         <String fx:value="persistent-prompt" />
                      </styleClass></JFXTextField>
-						<JFXComboBox fx:id="sportMenu" editable="true" focusColor="#405aa800" maxHeight="30.0" maxWidth="207.5" minHeight="30.5" minWidth="207.5" onAction="#handleSportMenu" prefHeight="30.0" prefWidth="207.5" promptText="Sport" unFocusColor="#4d4d4d00" GridPane.columnIndex="1" GridPane.rowIndex="1">
+						<JFXComboBox fx:id="sportMenu" editable="true" focusColor="#405aa800" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="30.5" minWidth="207.5" onAction="#handleSportMenu" prefHeight="30.0" prefWidth="207.5" promptText="Sport" unFocusColor="#4d4d4d00" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <styleClass>
                         <String fx:value="comboBox" />
                         <String fx:value="hostedGame_textField" />
                      </styleClass></JFXComboBox>
 					</children>
 				</GridPane>
-				<ScrollPane fx:id="scrollPane" prefHeight="840.0" prefWidth="1600.0" GridPane.rowIndex="1">
+				<ScrollPane fx:id="scrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="1600.0" prefHeight="840.0" prefWidth="1600.0" GridPane.rowIndex="1">
 					<content>
-						<AnchorPane fx:id="displayAnchor" minHeight="0.0" minWidth="0.0" prefHeight="1043.0" prefWidth="1600.0">
+						<AnchorPane fx:id="displayAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1016.0" prefWidth="1920.0">
 							<children>
-								<GridPane fx:id="infoDisplayField" prefHeight="210.0" prefWidth="1585.0">
+								<GridPane fx:id="infoDisplayField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="1920.0" AnchorPane.bottomAnchor="815.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 									<columnConstraints>
-										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+										<ColumnConstraints hgrow="SOMETIMES" minWidth="337.5" prefWidth="337.5" />
 										<ColumnConstraints hgrow="SOMETIMES" maxWidth="925.0" minWidth="925.0" prefWidth="925.0" />
-										<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+										<ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="337.5" prefWidth="337.5" />
 									</columnConstraints>
 									<rowConstraints>
 										<RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />

@@ -401,3 +401,7 @@
 .hostedGame_textField {
 	-fx-prompt-text-fill: #7f7f7f;
 }
+
+.scrollPane > .viewport {
+   -fx-background-color: #afafaf;
+}
