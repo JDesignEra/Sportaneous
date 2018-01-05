@@ -11,6 +11,7 @@ import entity.NotificationsEntity;
 public class NotificationsDA {
 	private static DB db;
 	private static ConcurrentMap<String, NotificationsEntity> notifications;
+	private static NotificationsEntity session;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/notifications.db")).closeOnJvmShutdown().make();

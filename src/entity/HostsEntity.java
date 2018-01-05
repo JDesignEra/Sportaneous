@@ -2,27 +2,49 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+<<<<<<< HEAD
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+=======
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 
 public class HostsEntity implements Serializable {
-
-	private static final long serialVersionUID = -821229972284685153L;
+	/**
+		 * 
+		 */
+	private static final long serialVersionUID = -2370583154360160705L;
+	// private static final long serialVersionUID = -821229972284685153L;
+	// private Logger logMsg = Logger.getGlobal();
 	private String adminNo, name, time;
 	private LocalDate date;
 	private String[] userID = new String[11], userName = new String[11];
 	private int sportsType;
+<<<<<<< HEAD
 	private ArrayList<String> playersRecruited;
-
+	
 	public HostsEntity(String adminNo, String name, LocalDate date, String time, int sportsType, ArrayList<String> playersRecruited) {
+=======
+
+	public HostsEntity(String adminNo, String name, LocalDate date, String time, int sportsType) {
+>>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		if (userID.length == this.userID.length) {
 			if (userName.length == this.userName.length) {
 				this.adminNo = adminNo;
 				this.name = name;
 				this.date = date;
 				this.time = time;
-				this.sportsType = sportsType;
+				this.sportsType = sportsType; 
 				this.playersRecruited = playersRecruited;
 			}
+			// else {
+			// logMsg.log(Level.SEVERE, "String[] userName pointer length doesn't match.",
+			// new Exception("Please change the size to " + this.userName.length + "."));
+			// }
+			// }
+			// else {
+			// logMsg.log(Level.SEVERE, "String[] userID pointer length doesn't match.", new
+			// Exception("Please change the size to " + this.userID.length + "."));
 		}
 	}
 
