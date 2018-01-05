@@ -93,7 +93,7 @@ public class EquipmentsDA {
 
 	/*
 	 * public static void main(String[] args) { initDA();
-	 * 
+	 *
 	 * for (int i = 0; i < getAllData().length; i++) { for (Object j :
 	 * getAllData()[i]) { System.out.println(j); } } }
 	 */

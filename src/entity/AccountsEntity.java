@@ -92,11 +92,11 @@ public class AccountsEntity implements Serializable {
 	public int getTotalMatch() {
 		return totalMatch;
 	}
-	
+
 	public void setAdminNo(String adminNo) {
 		this.adminNo = adminNo;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}

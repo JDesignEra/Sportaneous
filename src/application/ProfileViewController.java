@@ -1,21 +1,14 @@
 package application;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.text.Text;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
-import application.modules.CommentsViewController;
-import dataAccess.AccountsDA;
-import dataAccess.CommentsDA;
 import javafx.event.ActionEvent;
-
-import javafx.scene.text.TextFlow;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,24 +17,22 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+
+import dataAccess.AccountsDA;
+import dataAccess.CommentsDA;
+
+import application.modules.CommentsViewController;
 
 public class ProfileViewController implements Initializable {
-	@FXML private Text nameTxt;
-	@FXML private Text heightWeightTxt;
-	@FXML private Text ratingTxt;
-	@FXML private Text matchNoTxt;
-	@FXML private Text introTxt;
-	@FXML private Label favSportChip;
-	@FXML private Label intSportChip;
+	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt, introTxt;
+	@FXML private Label favSportChip, intSportChip;
 	@FXML private Circle dpCircle;
-	@FXML private TextFlow favSportTxtFlow;
-	@FXML private TextFlow intSportsTxtFlow;
-	@FXML private JFXButton editBtn;
-	@FXML private JFXButton prevComBtn;
-	@FXML private JFXButton nxtComBtn;
-	@FXML private GridPane profileGridPane;
+	@FXML private TextFlow favSportTxtFlow, intSportsTxtFlow;
+	@FXML private JFXButton editBtn, prevComBtn, nxtComBtn;
+	@FXML private GridPane profileGridPane, commentGridPane;
 	@FXML private VBox commContentVBox;
-	@FXML private GridPane commentGridPane;
 
 	private String adminNo = AccountsDA.getAdminNo();
 	private String name = AccountsDA.getName();

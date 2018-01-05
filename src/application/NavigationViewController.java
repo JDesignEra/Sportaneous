@@ -1,29 +1,25 @@
 package application;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.jfoenix.controls.JFXButton;
 import dataAccess.AccountsDA;
-import javafx.event.ActionEvent;
 
 public class NavigationViewController implements Initializable {
-	@FXML private JFXButton navProfileBtn;
-	@FXML private JFXButton navPlayBtn;
-	@FXML private JFXButton navFriendsBtn;
-	@FXML private JFXButton navRatingsBtn;
-	@FXML private JFXButton navNotiBtn;
-	@FXML private JFXButton navLogoutBtn;
+	@FXML private JFXButton navProfileBtn, navPlayBtn, navFriendsBtn, navRatingsBtn, navNotiBtn, navLogoutBtn;
 	@FXML private GridPane rootPane;
-	
+
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (Main.getLoc().getPath().contains("/ProfileView.fxml")) {
