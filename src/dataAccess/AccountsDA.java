@@ -11,6 +11,8 @@ import entity.AccountsEntity;
 import modules.PasswordGenerator;
 import modules.SendMail;
 
+import application.Main;
+
 public class AccountsDA {
 
 	private static DB db;
@@ -75,6 +77,12 @@ public class AccountsDA {
 		}
 
 		session = accountsEntity;
+		
+		//-for testing only-//
+		Main.currentUserAdminNo = session.getAdminNo();
+		System.out.println(Main.currentUserAdminNo);
+		//-------end-------//
+		
 		return 0; // Success
 	}
 

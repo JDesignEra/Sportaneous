@@ -16,6 +16,7 @@ import dataAccess.AccountsDA;
 public class NavigationViewController implements Initializable {
 	@FXML private JFXButton navProfileBtn, navPlayBtn, navFriendsBtn, navRatingsBtn, navNotiBtn, navLogoutBtn;
 	@FXML private GridPane rootPane;
+	static int HostAGame_index = 0;
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
@@ -45,8 +46,7 @@ public class NavigationViewController implements Initializable {
 	@FXML
 	public void navPlayBtnOnAction(ActionEvent event) {
 		try {
-			Main.setLoc(getClass().getResource("/application/FindAGame.fxml"));
-			Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+			Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource("/application/FindAGame.fxml")));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

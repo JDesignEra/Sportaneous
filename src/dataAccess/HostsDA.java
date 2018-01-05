@@ -11,6 +11,8 @@ import org.mapdb.DBMaker;
 
 import entity.HostsEntity;
 
+import application.Main;
+
 public class HostsDA {
 
 	private static DB db;
@@ -26,7 +28,6 @@ public class HostsDA {
 		hosts = db.getTreeMap("hosts");
 
 		db.commit();
-<<<<<<< HEAD
 		
 		
 	}
@@ -40,9 +41,8 @@ public class HostsDA {
 		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType, playersRecruited)) != null) {
 			return 1; 
 		}	
-		
-=======
 
+		return 2;
 		/** --END-- **/
 	}
 
@@ -51,11 +51,10 @@ public class HostsDA {
 			return 0; // Fields required
 		}
 
-		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType)) != null) {
+		if (hosts.putIfAbsent(adminNo, new HostsEntity(adminNo, name, date, time, sportsType, new ArrayList<String>())) != null) {
 			return 1;
 		}
-
->>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
+		
 		db.commit();
 		return 2; // Success
 	}
@@ -63,25 +62,19 @@ public class HostsDA {
 	public static void searchGame(String adminORname, String date, String time, String sportsType) {
 		
 		initDA();
-<<<<<<< HEAD
 
-=======
-		// String sport = sports[sportsType];
->>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && sportsType.isEmpty()) {
 			for (String x : hosts.keySet()) {
 				searchResults.put(x, hosts.get(x));
 			}
 		}
-<<<<<<< HEAD
-		
-=======
+
 
 		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && sportsType.isEmpty()) {
 
 		}
 
->>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
+
 		if (adminORname.isEmpty() && date.isEmpty() && time.isEmpty() && !sportsType.isEmpty()) {
 			for (HostsEntity x : hosts.values()) {
 				if (sports[x.getSportsType()].equals(sportsType)) {
@@ -145,7 +138,7 @@ public class HostsDA {
 				}
 			}
 		}
-<<<<<<< HEAD
+
 		
 		if (adminORname.isEmpty() && date.isEmpty() && !time.isEmpty() && !sportsType.isEmpty()) {
 			for (HostsEntity x: hosts.values()) {
@@ -239,8 +232,12 @@ public class HostsDA {
 				}
 			}
 		}
-=======
->>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
+		
+		for (String x: searchResults.keySet()) {
+			if (x.toLowerCase().equals(Main.currentUserAdminNo)) {
+				searchResults.remove(x);
+			}
+		}
 
 	}
 
@@ -248,20 +245,25 @@ public class HostsDA {
 		return searchResults;
 	}
 
-	public static int addFriends(String adminNo, String name, String date, String time, String[] userID, String[] userName, int sportsType) {
-		HostsEntity hostsEntity;
-
-		if ((hostsEntity = hosts.get(adminNo)) == null) {
-			return 0; // Does not exist
+	public static void addFriends(String hostAd, String tobeaddedAd) {
+		ArrayList<String> list = null;
+		if (hosts.get(hostAd).getPlayersRecruited()==null) {
+			list = new ArrayList<String>();
+			list.add(tobeaddedAd.toUpperCase());
+			HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(hostAd).getName(), hosts.get(hostAd).getDate(), hosts.get(hostAd).getTime(), hosts.get(hostAd).getSportsType(), list);
+			hosts.replace(hostAd, tobereplaced);
+			db.commit();
+		} else {
+			list = hosts.get(hostAd).getPlayersRecruited();
 		}
-
-		db.commit();
-
-		if (session != null && session.getAdminNo().equals(adminNo)) {
-			session = (HostsEntity) hosts;
+		
+		if (!hosts.get(hostAd).getPlayersRecruited().contains(tobeaddedAd.toUpperCase())) {
+			list.add(tobeaddedAd.toUpperCase());
+			HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(hostAd).getName(), hosts.get(hostAd).getDate(), hosts.get(hostAd).getTime(), hosts.get(hostAd).getSportsType(), list);
+			hosts.replace(hostAd, tobereplaced);
+			db.commit();
 		}
-
-		return 1; // Success
+		
 	}
 
 	// need to create a method to remove friend
@@ -292,6 +294,10 @@ public class HostsDA {
 
 		return list;
 	}
+	
+	public static ConcurrentMap<String, HostsEntity> getHostDB() {
+		return hosts;
+	}
 
 	public static void initializeSearchResults() {
 		searchResults = new HashMap<String, HostsEntity>();
@@ -299,7 +305,7 @@ public class HostsDA {
 
 	public static void main(String args[]) {
 		initDA();
-<<<<<<< HEAD
+
 		
 //		for (int i = 0; i < getAllData().length; i++) {
 //			for (Object j : getAllData()[i]) {
@@ -311,14 +317,14 @@ public class HostsDA {
 		
 		for (HostsEntity x: searchResults.values()) {
 			System.out.println(x.getName());
-=======
+		}
 
 		for (int i = 0; i < getAllData().length; i++) {
 			for (Object j : getAllData()[i]) {
 				System.out.println(j.toString());
 			}
->>>>>>> d2a895f846d895bb786007d08afe28cdf7f086f2
 		}
-	}
+		
 
-}
+		}
+	}	
