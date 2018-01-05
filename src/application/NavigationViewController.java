@@ -19,6 +19,7 @@ public class NavigationViewController implements Initializable {
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
+	private final URL findGameURL = getClass().getResource("/application/FindAGame.fxml");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -45,8 +46,7 @@ public class NavigationViewController implements Initializable {
 	@FXML
 	public void navPlayBtnOnAction(ActionEvent event) {
 		try {
-			Main.setLoc(getClass().getResource("/application/FindAGame.fxml"));
-			Main.getRoot().setCenter(FXMLLoader.load(Main.getLoc()));
+			Main.getRoot().setCenter(FXMLLoader.load(findGameURL));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
