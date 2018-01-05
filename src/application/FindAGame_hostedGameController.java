@@ -39,8 +39,6 @@ public class FindAGame_hostedGameController {
 	@FXML
 	private JFXButton joinBtn;
 	@FXML
-    private Label noOfplayers;
-	@FXML
 	private Circle hostDP;
 	@FXML
 	private Label hostName;
@@ -48,7 +46,6 @@ public class FindAGame_hostedGameController {
 	//Database//
 	private HashMap<String, HostsEntity> searchR;
 	private String[] sports = new String[] {"Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis"};
-	private String adminNo = "";
 		
 	public void initialize() {
 	
@@ -63,8 +60,8 @@ public class FindAGame_hostedGameController {
 		for (String x : searchR.keySet()) {
 			list.add(x);
 		}
-		
-		adminNo = list.get(NavigationViewController.HostAGame_index);
+
+		String adminNo = list.get(FindAGameApp.index);
 		String name = searchR.get(adminNo).getName();
 		String sportsType = sports[searchR.get(adminNo).getSportsType()];
 		LocalDate ld = searchR.get(adminNo).getDate();
@@ -76,19 +73,12 @@ public class FindAGame_hostedGameController {
 		setSportsType(sportsType);
 		setEventTime(time);
 		setDP(adminNo);
-		setNoOfPlayersLabel(adminNo);
-		
-		if (searchR.get(adminNo).getPlayersRecruited().contains(Main.currentUserAdminNo.toUpperCase())) {
-			joinBtn.setDisable(true);
-			joinBtn.setStyle("-fx-background-color: grey;");
-			System.out.println("ALREADY INSIDE");
-		}
 
-		if (NavigationViewController.HostAGame_index == searchR.size()-1) {
-			NavigationViewController.HostAGame_index = 0;
+		if (FindAGameApp.index == searchR.size()) {
+			FindAGameApp.index = 0;
 		}
 		else {
-			NavigationViewController.HostAGame_index++;
+			FindAGameApp.index++;
 		}
 			
 		}
@@ -96,13 +86,7 @@ public class FindAGame_hostedGameController {
 	// Event Listener on JFXButton[#joinBtn].onAction
 	@FXML
 	void handleJoin(ActionEvent event) {
-		System.out.println(Main.currentUserAdminNo.toUpperCase());
-		System.out.println(adminNo.toUpperCase());
-		
-		HostsDA.addFriends(adminNo.toUpperCase(), Main.currentUserAdminNo.toUpperCase());
-		
-		setNoOfPlayersLabel(adminNo);
-		
+
 	}
 
 	void setEventDay(LocalDate ld) {
@@ -151,40 +135,6 @@ public class FindAGame_hostedGameController {
 		
 		hostDP.setFill(iv);
 		
-	}
-	
-	void setNoOfPlayersLabel(String adminNo) {
-		int total = checkNoOfPlayersNeeded(searchR.get(adminNo).getSportsType());
-		int current;
-		if (HostsDA.getHostDB().get(adminNo).getPlayersRecruited() == null) {
-			current = 0;
-		} else {
-			current = HostsDA.getHostDB().get(adminNo).getPlayersRecruited().size();
-		}
-		noOfplayers.setText(current + " / " + total);
-	}
-	
-	int checkNoOfPlayersNeeded(int a) {
-		if (sports[a].equals("Basketball")) {
-			return 10;
-		}
-		if (sports[a].equals("Badminton")) {
-			return 4;
-		}
-		if (sports[a].equals("Frisbee")) {
-			return 7;
-		}
-		if (sports[a].equals("Soccer")) {
-			return 22;
-		}
-		if (sports[a].equals("Tennis")) {
-			return 4;
-		}
-		if (sports[a].equals("Squash")) {
-			return 4;
-		}
-		
-		return 0;
 	}
 	
 }

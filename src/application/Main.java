@@ -21,10 +21,6 @@ public class Main extends Application {
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous_small.png");
 	private final URL logoAltURL = getClass().getResource("/application/assets/img/Sportaneous_small_alt.png");
 	private final URL stylesheetURL = getClass().getResource("/application/assets/css/application.css");
-	
-	//-for testing only-//
-	public static String currentUserAdminNo = "";
-	//-------end-------//
 
 	@Override
 	public void start(Stage primaryStage) {
