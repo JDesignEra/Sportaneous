@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
@@ -54,7 +55,8 @@ public class EditProfileViewController implements Initializable {
 	@FXML JFXToggleButton heightVisibilityToggleBtn, weightVisibilityToggleBtn;
 	@FXML Circle dpCircle;
 	@FXML FlowPane intSportFlowPane;
-	@FXML GridPane profileGridPane, dpOverlayGridPane, rootGridPane;
+	@FXML GridPane profileGridPane;
+	@FXML GridPane dpOverlayGridPane, rootGridPane;
 	@FXML StackPane rootStackPane;
 
 	private String adminNo = AccountsDA.getAdminNo();
@@ -208,6 +210,7 @@ public class EditProfileViewController implements Initializable {
 		imgView.setCursor(Cursor.HAND);
 
 		profileGridPane.add(imgView, 0, 0);
+		dpOverlayGridPane.toFront();
 
 		if (heightVisibilityToggleBtn.isSelected()) {
 			heightVisibilityToggleBtn.setText("\uf06e");
@@ -275,6 +278,7 @@ public class EditProfileViewController implements Initializable {
 			JFXDialogLayout content = new JFXDialogLayout();
 			content.setHeading(new Text("Save Profile Changes"));
 			content.setBody(new Text("Are you sure you want to save your current profile settings?\n" + "You will be redirected to your Profile page if you select SAVE."));
+
 			JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
 
 			// Dialog Save Button
@@ -335,6 +339,7 @@ public class EditProfileViewController implements Initializable {
 		content.setHeading(new Text("Cancel Profile Changes"));
 		content.setBody(
 				new Text("Are you sure you want to cancel your current profile settings without saving?\n" + "You will be redirected to your Profile page if you select YES."));
+
 		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
 
 		// Dialog Save Button
@@ -435,5 +440,25 @@ public class EditProfileViewController implements Initializable {
 			fadeTransition.setToValue(0);
 			fadeTransition.play();
 		}
+	}
+
+	// Event Listener for dpOverlay.onMouseClick
+	@FXML
+	public void dpOverlayOnMouseClick(MouseEvent event) throws IOException {
+		// Dialog
+		JFXDialogLayout content = new JFXDialogLayout();
+		content.setHeading(new Text("Change Profile Photo"));
+		content.setBody((GridPane) FXMLLoader.load(getClass().getResource("/application/modules/UploadBodyView.fxml")));
+
+		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+		// Dialog Cancel Button
+		JFXButton dialogCancelBtn = new JFXButton("Cancel");
+		dialogCancelBtn.getStyleClass().addAll("danger");
+		dialogCancelBtn.setCursor(Cursor.HAND);
+
+		dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
+		content.getActions().add(dialogCancelBtn);
+		dialog.show();
 	}
 }

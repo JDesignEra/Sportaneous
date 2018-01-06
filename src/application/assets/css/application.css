@@ -86,11 +86,21 @@
 	-fx-fill: #434343;
 }
 
+.small.danger {
+	-fx-text-fill: #EF4956;
+	-fx-fill: #EF4956;
+}
+
 .para {
 	-fx-font-family: "Roboto", "Verdana";
 	-fx-font-size: 14.0px;
 	-fx-text-fill: #434343;
 	-fx-fill: #434343;
+}
+
+.para.danger {
+	-fx-fill: #EF4956;
+	-fx-text-fill: #EF4956;
 }
 
 .card {
@@ -254,6 +264,18 @@
 .hyperlink {
 	-fx-fill: #EF4956;
 	-fx-text-fill: #EF4956;
+	-fx-border-width: 0.0;
+	-fx-underline: false;
+}
+
+.hyperlink:hover {
+	-fx-underline: true;
+}
+
+.jfx-progress-bar > .bar,
+.jfx-progress-bar:indeterminate > .bar {
+	-fx-background-color: #EF4956;
+    -fx-padding: 3.0px;
 }
 
 .jfx-text-field {
@@ -417,7 +439,7 @@
 }
 
 .success .jfx-snackbar-content {
-	-fx-background-color: #26A69Acd;
+	-fx-background-color: #26A69Ae7;
 }
 
 .success .jfx-snackbar-toast {
@@ -425,7 +447,7 @@
 }
 
 .warning .jfx-snackbar-content {
-	-fx-background-color: #FFC107cd;
+	-fx-background-color: #FFC107e7;
 	-fx-text-fill: #FFFFFF;
 }
 
@@ -434,7 +456,7 @@
 }
 
 .danger .jfx-snackbar-content {
-	-fx-background-color: #EF4956cd;
+	-fx-background-color: #EF4956e7;
 }
 
 .danger .jfx-snackbar-toast {

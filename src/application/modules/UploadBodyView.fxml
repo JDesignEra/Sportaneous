@@ -9,43 +9,63 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane id="uploadPhoto" fx:id="rootGridPane" alignment="CENTER" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <GridPane fx:id="uploadGridPane" alignment="CENTER" onDragDropped="#uploadGridPaneDragDrop" onDragOver="#uploadGridPaneDragOver" styleClass="uploadBox">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
-               <styleClass>
-                  <String fx:value="fontAwesome" />
-                  <String fx:value="x8" />
-               </styleClass>
-            </Text>
-            <TextFlow GridPane.rowIndex="1">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Drag a file here or" />
-                  <Hyperlink onAction="#browseOnAction" styleClass="h1" text="browse" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="to upload an image" />
-               </children>
-            </TextFlow>
-         </children>
-         <padding>
-            <Insets bottom="100.0" left="25.0" right="25.0" top="100.0" />
-         </padding>
-      </GridPane>
-   </children>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
+<GridPane id="uploadPhoto" fx:id="rootGridPane" alignment="CENTER"
+	stylesheets="@../assets/css/application.css" vgap="15.0"
+	xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="application.modules.UploadBodyViewController">
+	<children>
+		<GridPane alignment="CENTER" onDragDropped="#uploadGridPaneDragDrop"
+			onDragOver="#uploadGridPaneDragOver" styleClass="uploadBox"
+			GridPane.rowIndex="1">
+			<columnConstraints>
+				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
+					minWidth="10.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" valignment="BOTTOM"
+					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" valignment="TOP"
+					vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
+					<styleClass>
+						<String fx:value="fontAwesome" />
+						<String fx:value="x8" />
+					</styleClass>
+				</Text>
+				<TextFlow textAlignment="CENTER" GridPane.halignment="CENTER"
+					GridPane.rowIndex="1">
+					<children>
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
+							text="Drag a file here or" />
+						<Hyperlink onAction="#browseOnAction" styleClass="h1"
+							text="browse" />
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
+							text="to upload an image" />
+					</children>
+				</TextFlow>
+			</children>
+			<padding>
+				<Insets bottom="100.0" left="25.0" right="25.0" top="100.0" />
+			</padding>
+		</GridPane>
+		<Text fx:id="recText" strokeType="OUTSIDE" strokeWidth="0.0"
+			text="* It is recommend to upload a square image">
+			<styleClass>
+				<String fx:value="small" />
+				<String fx:value="danger" />
+			</styleClass>
+		</Text>
+	</children>
+	<columnConstraints>
+		<ColumnConstraints halignment="CENTER" />
+	</columnConstraints>
+	<padding>
+		<Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+	</padding>
+	<rowConstraints>
+		<RowConstraints minHeight="10.0" />
+		<RowConstraints />
+	</rowConstraints>
 </GridPane>
