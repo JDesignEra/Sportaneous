@@ -46,10 +46,6 @@ public class Main extends Application {
 		Scene scene = new Scene(decorator, 1600, 900);
 		scene.getStylesheets().add(stylesheetURL.toExternalForm());
 
-		primaryStage.getIcons().add(new Image(logoAltURL.toExternalForm()));
-		primaryStage.setTitle("Sportaneous");
-		primaryStage.setScene(scene);
-		primaryStage.show();
 
 		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
 		double stageHeight = primaryStage.getHeight();
@@ -59,6 +55,11 @@ public class Main extends Application {
 		primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 0);
 		primaryStage.setMinWidth(1600);
 		primaryStage.setMinHeight(900);
+		
+		primaryStage.getIcons().add(new Image(logoAltURL.toExternalForm()));
+		primaryStage.setTitle("Sportaneous");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	public static void main(String[] args) {

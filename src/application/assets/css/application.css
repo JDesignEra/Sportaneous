@@ -29,7 +29,7 @@
 .jfx-decorator {
 	-fx-font-family: "Roboto Medium", "Verdana";
 	-fx-text-fill: #FFFFFF;
-	-fx-decorator-color: #EF4956;
+	-fx-decorator-color: #F05964;
 }
 
 .jfx-decorator .jfx-decorator-buttons-container {
@@ -76,6 +76,13 @@
 .h4 {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-font-size: 14.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.txt-title {
+	-fx-font-family: "Roboto Bold", "Roboto", "Verdana";
+	-fx-font-size: 30.0px;
 	-fx-text-fill: #434343;
 	-fx-fill: #434343;
 }
@@ -151,8 +158,8 @@
 }
 
 .text-field.info {
-	-fx-prompt-text-fill: #26C6DAcc;
-	-fx-border-color: #26C6DAcc;
+	-fx-prompt-text-fill: #00BCD4cc;
+	-fx-border-color: #00BCD4cc;
 	-fx-border-style: solid;
 	-fx-border-width: 1.5px;
 	-fx-border-radius: 3.0px;
@@ -207,6 +214,10 @@
 .text-area:focused .content {
     -fx-background-color: transparent, #F9F9F9, transparent, #F9F9F9;
     -fx-background-radius: 4.0px;
+}
+
+.scroll-pane {
+	-fx-background-color: transparent;
 }
 
 .combo-box-base.sportChip {
@@ -284,7 +295,7 @@
 	-fx-font-size: 14.0px;
 	-fx-prompt-text-fill: #AEAEAE;
 	-fx-highlight-fill: #EF4956;
-	-jfx-focus-color: #26C6DA;
+	-jfx-focus-color: #00BCD4;
 	-jfx-unfocus-color: #434343;
 	-jfx-label-float: true;
 }
@@ -295,14 +306,14 @@
 	-fx-font-size: 14.0px;
 	-fx-prompt-text-fill: #AEAEAE;
 	-fx-highlight-fill: #EF4956;
-	-jfx-focus-color: #26C6DA;
+	-jfx-focus-color: #00BCD4;
 	-jfx-unfocus-color: #434343;
 	-jfx-label-float: true;
 }
 
 .jfx-text-field.info,
 .jfx-password-field.info {
-	-jfx-unfocus-color: #26C6DA;
+	-jfx-unfocus-color: #00BCD4;
 	-fx-border-width: 0;
 }
 
@@ -333,7 +344,7 @@
 }
 
 .jfx-button .jfx-rippler {
-	-jfx-rippler-fill: #FFFFFF4d;
+	-jfx-rippler-fill: #FFFFFF4b;
 }
 
 .jfx-toggle-button {
@@ -385,7 +396,7 @@
 }
 
 .jfx-button.info {
-	-fx-background-color: #26C6DA;
+	-fx-background-color: #00BCD4;
 }
 
 .jfx-button.inactive {
@@ -431,7 +442,7 @@
 }
 
 .info .jfx-snackbar-content {
-	-fx-background-color: #26C6DAcd;
+	-fx-background-color: #00BCD4cd;
 }
 
 .info .jfx-snackbar-toast {
@@ -482,7 +493,7 @@
 }
 
 .info .jfx-dialog-layout {
-	-fx-background-color: #26C6DAcd;
+	-fx-background-color: #00BCD4cd;
 }
 
 .warning .jfx-dialog-layout {
@@ -532,6 +543,63 @@
 	-fx-background-insets: 5.0px 10.0px 0.0 0.0;
 }
 
+.topBar {
+	-fx-background-color: #F05964;
+	-fx-effect: dropshadow(three-pass-box, #00000054, 10.0, 0.0, 0.0, 6.0);
+}
+
+.topBar .searchBtn {
+	-fx-font-size: 14.0px;
+	-fx-background-color: #26A69A;
+	-fx-padding: 5.0px 20.0px 5.0px 20.0px;
+}
+
+.topBar .jfx-text-field {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 14.0px;
+	-fx-prompt-text-fill: #CECECE;
+	-fx-highlight-fill: #EF4956;
+	-jfx-focus-color: #FFFFFF;
+	-jfx-unfocus-color: #CECECE;
+	-jfx-label-float: true;
+}
+
+.topBar .jfx-combo-box {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-text-fill: #FFFFFF;
+	-fx-font-size: 14.0px;
+	-fx-prompt-text-fill: #CECECE;
+	-fx-highlight-fill: #EF4956;
+	-jfx-focus-color: #FFFFFF;
+	-jfx-unfocus-color: #CECECE;
+	-jfx-label-float: true;
+}
+
+.topBar .jfx-combo-box .arrow {
+	-fx-background-color: #FFFFFF;
+}
+
+.topBar .jfx-date-picker,
+#findGame .topBar .jfx-time-picker {
+	-jfx-default-color: #EF4956;
+}
+
+.topBar .jfx-date-picker > .arrow-button > .jfx-svg-glyph,
+.topBar .jfx-time-picker > .arrow-button > .jfx-svg-glyph{
+    -fx-background-color: #EBEBEB;
+}
+
+.topBar .jfx-toggle-button {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #FFFFFF;
+	-jfx-toggle-color: #26C6DA;
+	-jfx-untoggle-color: #FFFFFF;
+	-jfx-toggle-line-color: #26C6DA80;
+	-jfx-untoggle-line-color: #FFFFFF80;
+}
+
 #loginView {
 	-fx-background-image: url(../img/Background_1.png);
 	-fx-background-repeat: no-repeat;
@@ -568,7 +636,7 @@
 
 #loginView .login .content .jfx-button.loginBtn {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
-	-fx-background-color: #26C6DA;
+	-fx-background-color: #00BCD4;
 	-fx-padding: 10.0px 50.0px 10.0px 50.0px;
 }
 
@@ -657,7 +725,8 @@
 	-fx-fill: #FFFFFF;
 }
 
-#comments .dp {
+#comments .dp,
+.hostCard .dp {
 	-fx-fill: #FFFFFF;
 	-fx-stroke: #EF4956;
 	-fx-stroke-width: 5.0;
@@ -679,4 +748,15 @@
 	-fx-border-radius: 6.0px;
 	-fx-border-color: #AEAEAE;
 	-fx-border-style: dashed;
+}
+
+.hostCard .playerCountCircle {
+	-fx-fill: transparent;
+	-fx-stroke: linear-gradient(to bottom right, #EF4956 0%, #EF4956 0%, #26A69A 100%);
+	-fx-stroke-width: 5.0px;
+	-fx-stroke-type: outside;
+	-fx-stroke-line-cap: round;
+	-fx-stroke-line-join: round;
+	-fx-stroke-miter-limit: 10.0;
+	-fx-stroke-dash-offset: 0;
 }

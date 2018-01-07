@@ -5,11 +5,13 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 import dataAccess.AccountsDA;
 
@@ -25,6 +27,11 @@ public class NavigationViewController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		TranslateTransition translateTransition= new TranslateTransition(Duration.millis(500), rootPane);
+		translateTransition.setFromY(rootPane.getPrefHeight());
+		translateTransition.setToY(0);
+		translateTransition.play();
+		
 		if (Main.getLoc().getPath().contains("/ProfileView.fxml")) {
 			navProfileBtn.getStyleClass().add("active");
 		}

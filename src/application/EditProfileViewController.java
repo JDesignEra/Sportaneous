@@ -81,13 +81,13 @@ public class EditProfileViewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
 
-		// Force Double only for heightTxtField & weightTxtField
-		Pattern pattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
+		// Force Double for heightTxtField & weightTxtField
+		Pattern dblPattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
 		UnaryOperator<TextFormatter.Change> filter = uo -> {
 			String txt = uo.getControlNewText();
 
-			if (pattern.matcher(txt).matches()) {
+			if (dblPattern.matcher(txt).matches()) {
 				return uo;
 			}
 			else {
