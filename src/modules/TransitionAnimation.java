@@ -7,10 +7,20 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 public class TransitionAnimation {
+	public void fadeIn(double duration, Node node, double fromValue) {
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), node);
+		fadeTransition.setFromValue(fromValue);
+		fadeTransition.setToValue(1.0);
+		
+		fadeTransition.play();
+	}
+	
 	public void fadeOut(double duration, Node node, double fromValue) {
-		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration));
+		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), node);
 		fadeTransition.setFromValue(fromValue);
 		fadeTransition.setToValue(0);
+		
+		fadeTransition.play();
 	}
 	
 	public void fromLeftFadeIn(double duration, Node node, double translateFromX) {

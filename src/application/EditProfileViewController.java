@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -44,6 +43,7 @@ import dataAccess.AccountsDA;
 import dataAccess.EquipmentsDA;
 
 import modules.Snackbar;
+import modules.TransitionAnimation;
 
 public class EditProfileViewController implements Initializable {
 	@FXML JFXTextField nameTxtField, heightTxtField, weightTxtField, emailTxtField;
@@ -422,10 +422,7 @@ public class EditProfileViewController implements Initializable {
 		if (dpOverlayGridPane.getOpacity() != 1.0) {
 			dpOverlayGridPane.toFront();
 
-			FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), dpOverlayGridPane);
-			fadeTransition.setFromValue(0);
-			fadeTransition.setToValue(1.0);
-			fadeTransition.play();
+			new TransitionAnimation().fadeIn(250, dpOverlayGridPane, 0);
 		}
 	}
 
@@ -435,10 +432,7 @@ public class EditProfileViewController implements Initializable {
 		if (dpOverlayGridPane.getOpacity() != 0) {
 			dpOverlayGridPane.toFront();
 
-			FadeTransition fadeTransition = new FadeTransition(Duration.millis(250), dpOverlayGridPane);
-			fadeTransition.setFromValue(1.0);
-			fadeTransition.setToValue(0);
-			fadeTransition.play();
+			new TransitionAnimation().fadeOut(250, dpOverlayGridPane, 1.0);
 		}
 	}
 

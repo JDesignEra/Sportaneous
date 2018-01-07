@@ -5,12 +5,8 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
-import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -202,8 +198,8 @@ public class ProfileViewController implements Initializable {
 	public void prevComBtnOnAction(ActionEvent event) {
 		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() > 0) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
-				new TransitionAnimation().fadeOut(300, commContentGridPane, 0);
-			}), new KeyFrame(Duration.millis(600), actionEv -> {
+				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
+			}), new KeyFrame(Duration.millis(300), actionEv -> {
 				CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
 				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commContentGridPane = new GridPane();
@@ -242,8 +238,8 @@ public class ProfileViewController implements Initializable {
 	public void nxtComBtnOnAction(ActionEvent event) {
 		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
-				new TransitionAnimation().fadeOut(300, commContentGridPane, 0);
-			}), new KeyFrame(Duration.millis(600), actionEv -> {
+				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
+			}), new KeyFrame(Duration.millis(300), actionEv -> {
 				CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
 				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commContentGridPane = new GridPane();
