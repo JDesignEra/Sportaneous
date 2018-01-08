@@ -1,0 +1,407 @@
+@font-face {
+	src: url("../fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Medium.ttf");
+}
+
+@font-face {
+	src: url("../fonts/Roboto-Bold.ttf");
+}
+
+@font-face {
+	src: url("../fonts/fontawesome-webfont.ttf");
+}
+
+.root{
+    -fx-background: #EDEDED;
+}
+
+.h0 {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 24.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.h1 {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 20.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.h2 {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 18.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.h3 {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 16.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.h4 {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.small {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 12.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.para {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #434343;
+	-fx-fill: #434343;
+}
+
+.fontAwesome {
+	-fx-font-family: "FontAwesome", "Roboto";
+	-fx-text-fill: #434343;
+}
+
+.text-field {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #434343;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+	-fx-background-radius: 3.0px;
+}
+
+.text-field.danger {
+	-fx-prompt-text-fill: #EF4956cc;
+	-fx-border-color: #EF4956cc;
+	-fx-border-style: solid;
+	-fx-border-width: 1.5px;
+	-fx-border-radius: 3.0px;
+}
+
+.jfx-button {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
+}
+
+.jfx-button.fontAwesome {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 14.0px;
+	-fx-font-weight: 800.0;
+}
+
+.jfx-button.fontAwesome.square {
+	-fx-pref-width: 35.0px;
+	-fx-pref-height: 35.0px;
+	-fx-padding: 0.0;
+}
+
+.jfx-button.right {
+	-fx-background-radius: 0.0 3.0px 3.0px 0.0;
+}
+
+.jfx-button.left {
+	-fx-background-radius: 3.0px 0.0 0.0 3.0px;
+}
+
+.jfx-button.success {
+	-fx-background-color: #26A69A;
+}
+
+.jfx-button.danger {
+	-fx-background-color: #EF4956;
+}
+
+.jfx-button.info {
+	-fx-background-color: #26C6DA;
+}
+
+.jfx-button.inactive {
+	-fx-background-color: #AEAEAE;
+}
+
+.jfx-snackbar-content {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 4.0px 4.0px 0.0 0.0;
+    -fx-alignment: center;
+}
+
+.jfx-snackbar-toast {
+	-fx-font-family: "Roboto Medium", "Verdana";
+	-fx-text-fill: #434343;
+    -fx-font-size: 14.0px;
+    -fx-alignment: center;
+}
+
+.info .jfx-snackbar-content {
+	-fx-background-color: #26C6DA99;
+}
+
+.info .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.success .jfx-snackbar-content {
+	-fx-background-color: #26A69A99;
+}
+
+.success .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.warning .jfx-snackbar-content {
+	-fx-background-color: #FFC10799;
+	-fx-text-fill: #ffffff;
+}
+
+.warning .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+.danger .jfx-snackbar-content {
+	-fx-background-color: #EF495699;
+}
+
+.danger .jfx-snackbar-toast {
+	-fx-text-fill: #ffffff;
+}
+
+#nav {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 8.0px 8.0px 0.0 0.0;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 0.0, -2.0);
+	-fx-background-insets: 5.0px 10.0px 0.0 10.0px;
+}
+
+#nav .fontAwesome {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 45.0px;
+	-fx-text-fill: #AEAEAE;
+	-fx-max-width: infinity;
+	-fx-background-radius: 0.0;
+	-fx-background-insets: 5.0px 0.0 0.0 0.0;
+	-fx-padding: 10.0px 5.0px 5.0px 5.0px;
+}
+
+#nav .fontAwesome.active {
+	-fx-text-fill: #EF4956;
+}
+
+#nav .fontAwesome.profileBtn {
+	-fx-background-radius: 8.0px 0.0 0.0 0.0;
+	-fx-background-insets: 5.0px 0.0 0.0 10.0px;
+}
+
+#nav .fontAwesome.logoutBtn {
+	-fx-background-radius: 0.0 8.0px 0.0 0.0;
+	-fx-background-insets: 5.0px 10.0px 0.0 0.0;
+}
+
+#loginView {
+	-fx-background-image: url(../img/Background_1.png);
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center;
+	-fx-background-size: cover;
+}
+
+.lrfAccordion > .titled-pane > .title > .arrow-button .arrow { 
+	-fx-background-color: transparent;
+}
+
+#loginView .login.titled-pane,
+#loginView .register.titled-pane,
+#loginView .fpass.titled-pane {
+	-fx-text-fill: #ffffff;
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 18.0px;
+}
+
+#loginView .login.titled-pane > .title {
+	-fx-background-color: rgba(38.0, 198.0, 218.0, 0.6);
+	-fx-background-radius: 6.0px 6.0px 0.0 0.0;
+}
+
+#loginView .login.titled-pane > .content {
+	-fx-background-color: rgba(38.0, 198.0, 218.0, 0.6);
+	-fx-box-border: transparent;
+}
+
+#loginView .login.titled-pane > .content .gridPane {
+	-fx-vgap: 15.0px;
+	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
+}
+
+#loginView .login .loginBtn {
+	-fx-background-color: #26C6DA;
+	-fx-padding: 10.0px 50.0px 10.0px 50.0px;
+}
+
+#loginView .register.titled-pane > .title {
+	-fx-background-color: rgba(38.0, 166.0, 154.0,0.6);
+}
+
+#loginView .register.titled-pane > .content {
+	-fx-background-color: rgba(38.0, 166.0, 154.0,0.6);
+	-fx-box-border: transparent;
+}
+
+#loginView .register.titled-pane > .content .gridPane {
+	-fx-vgap: 15.0px;
+	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
+}
+
+#loginView .register .content .regBtn {
+	-fx-background-color: #26A69A;
+	-fx-padding: 10.0px 40.0px 10.0px 40.0px;
+}
+
+#loginView .fpass.titled-pane > .title {
+	-fx-background-color:  rgba(239.0, 73.0, 86.0, 0.6);
+	-fx-background-radius: 0.0 0.0 6.0px 6.0px;
+}
+
+#loginView .fpass.titled-pane.inactive > .title {
+	-fx-background-radius: 0.0;
+}
+
+#loginView .fpass.titled-pane > .content {
+	-fx-background-color:  rgba(239.0, 73.0, 86.0, 0.6);
+	-fx-background-radius: 0.0 0.0 6.0px 6.0px;
+	-fx-box-border: transparent;
+}
+
+#loginView .fpass.titled-pane > .content .gridPane {
+	-fx-vgap: 15.0px;
+	-fx-padding: 15.0px 100.0px 15.0px 100.0px;
+}
+
+#loginView .fpass .content .fpassBtn {
+	-fx-background-color: #EF4956;
+	-fx-padding: 10.0px 30.0px 10.0px 30.0px;
+}
+
+#profile .card {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 4.0px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
+#profile .dp {
+	-fx-fill: #ffffff;
+	-fx-stroke: #EF4956;
+	-fx-stroke-width: 5.0;
+	-fx-stroke-type: outside;
+	-fx-stroke-line-cap: round;
+	-fx-background-color: #ffffff;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
+#profile .ratingStars {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 22.0px;
+	-fx-text-fill: #EF4956;
+	-fx-fill: #EF4956;
+}
+
+#profile .sportChip {
+	-fx-font-family: "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
+	-fx-background-color: #EF4956;
+	-fx-background-radius: 24.0px;
+	-fx-background-insets: 5.0px;
+}
+
+#profile .comBtnFlowPane {
+	-fx-background-radius: 3.0px;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 8.0, 0.0, 1.0, 3.0);
+}
+
+#comments .dp {
+	-fx-fill: #ffffff;
+	-fx-stroke: #EF4956;
+	-fx-stroke-width: 5.0;
+	-fx-stroke-type: outside;
+	-fx-stroke-line-cap: round;
+	-fx-background-color: #ffffff;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
+
+#comments .ratingStars {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 18.0px;
+	-fx-text-fill: #EF4956;
+	-fx-fill: #EF4956;
+}
+
+.greenBtn {
+	-fx-background-color: #26A69A;
+}
+
+.blueBtn {
+	-fx-background-color: #26C6DA;
+}
+
+.topPanel {
+   -fx-background-color: #AEAEAE;
+   -fx-opacity:0.9;
+}
+
+.whitebg {
+	-fx-background-color: white,white;
+	-fx-border-color: transparent;
+	-fx-padding: 4.0 0.0 4.0 5.0;
+}
+
+.comboBox {
+	-fx-background-color: white, white;
+	-fx-padding: 4.0 0.0 4.0 5.0;
+	-fx-font-size: 14.0px;
+	-fx-font-family: Roboto;
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.35) , 16.0, 0.0 , 3.0 , 3.0 );
+	-fx-fill: #7f7f7f;
+}
+
+.ratingElement_Sport {
+	-fx-alignment: center;
+}
+
+
+.ratingElement_Join {
+	-fx-font-size: 10.0px;
+	-fx-font-weight: bold;
+	-fx-font-family: Roboto;
+}
+
+.hostedGame {
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.2) , 16.0, 0.0 , 3.0 , 3.0 );
+	-fx-font-family: Roboto;
+}
+
+.persistent-prompt:focused {
+    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30.0%);
+    -fx-font-size: 13.5px;
+}
+.no-prompt {
+    -fx-prompt-text-fill: transparent !important;
+}
+.hostedGame_textField {
+	-fx-prompt-text-fill: #7f7f7f;
+}
+
+.scrollPane > .viewport {
+   -fx-background-color: #afafaf;
+}
