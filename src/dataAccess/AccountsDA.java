@@ -153,7 +153,7 @@ public class AccountsDA {
 		if (session != null && session.getAdminNo().equals(session.getAdminNo())) {
 			session = accountsEntity;
 		}
-
+		
 		db.commit();
 		return 0; // Success
 	}
@@ -237,7 +237,7 @@ public class AccountsDA {
 	}
 
 	public static double getWeight() {
-		return session.getHeight();
+		return session.getWeight();
 	}
 
 	public static boolean getHeightVisibility() {
