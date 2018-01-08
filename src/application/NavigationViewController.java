@@ -23,21 +23,16 @@ public class NavigationViewController implements Initializable {
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-<<<<<<< HEAD
-	private final URL findGameURL = getClass().getResource("/application/FindAGame.fxml");
-	private final URL RateProfileURL = getClass().getResource("/application/Ratings.fxml");
-	
-=======
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame.fxml");
 	private final URL friendsViewURL = getClass().getResource("/application/FriendsView.fxml");
->>>>>>> 145e4552e8185ef5ec1ff803a3533b51d1b5f8e6
-	
+	private final URL rateProfileURL = getClass().getResource("/application/Ratings.fxml");
+
 	public static int HostAGame_index = 0;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		Platform.runLater(() -> {
-			TranslateTransition translateTransition= new TranslateTransition(Duration.millis(500), rootPane);
+			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), rootPane);
 			translateTransition.setFromY(rootPane.getHeight());
 			translateTransition.setToY(0);
 			translateTransition.play();
@@ -53,11 +48,11 @@ public class NavigationViewController implements Initializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		for (Node node : rootPane.getChildren()) {
 			node.getStyleClass().remove("active");
 		}
-		
+
 		navProfileBtn.getStyleClass().add("active");
 	}
 
@@ -70,11 +65,11 @@ public class NavigationViewController implements Initializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		for (Node node : rootPane.getChildren()) {
 			node.getStyleClass().remove("active");
 		}
-		
+
 		navPlayBtn.getStyleClass().add("active");
 	}
 
@@ -87,11 +82,11 @@ public class NavigationViewController implements Initializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		for (Node node : rootPane.getChildren()) {
 			node.getStyleClass().remove("active");
 		}
-		
+
 		navFriendsBtn.getStyleClass().add("active");
 	}
 
@@ -99,7 +94,7 @@ public class NavigationViewController implements Initializable {
 	@FXML
 	public void navRatingsBtnOnAction(ActionEvent event) {
 		try {
-			Main.getRoot().setCenter(FXMLLoader.load(RateProfileURL));
+			Main.getRoot().setCenter(FXMLLoader.load(rateProfileURL));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
