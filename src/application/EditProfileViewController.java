@@ -76,7 +76,7 @@ public class EditProfileViewController implements Initializable {
 	private Circle clip = new Circle(100, 100, 100);
 
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
@@ -111,10 +111,10 @@ public class EditProfileViewController implements Initializable {
 				return d.toString();
 			}
 		};
-
+		
 		heightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
 		weightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
-
+		
 		// Force introTxtArea to 120 char limit.
 		introTxtArea.setTextFormatter(new TextFormatter<String>(vc -> vc.getControlNewText().length() <= 120 ? vc : null));
 

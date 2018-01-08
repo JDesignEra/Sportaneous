@@ -152,8 +152,6 @@ public class LRFViewController implements Initializable {
 
 		switch (AccountsDA.login(adminNo, pass)) {
 			case 0:
-				
-				
 				try {
 					Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 					Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
