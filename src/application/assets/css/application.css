@@ -45,6 +45,10 @@
     -fx-background: #EDEDED;
 }
 
+.dropshadow {
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
+}
+
 .h0 {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
 	-fx-font-size: 24.0px;
@@ -136,6 +140,11 @@
 
 .fontAwesome.x8 {
 	-fx-font-size: 112.0px;
+}
+
+.fontAwesome.danger.x8 {
+	-fx-text-fill: #EF4956;
+	-fx-fill: #EF4956;
 }
 
 .sportChip {
@@ -520,9 +529,7 @@
 	-fx-font-size: 45.0px;
 	-fx-text-fill: #AEAEAE;
 	-fx-max-width: infinity;
-	-fx-background-radius: 0.0;
-	-fx-background-insets: 5.0px 0.0 0.0 0.0;
-	-fx-padding: 5.0px 5.0px 5.0px 5.0px;
+	-fx-padding: 5.0px;
 }
 
 #nav .fontAwesome.active {
@@ -533,14 +540,22 @@
 	-jfx-button-type: FLAT;
 }
 
+#nav .jfx-button .jfx-rippler {
+	-jfx-rippler-fill: #EF49564b;
+}
+
+#nav .jfx-button.active .jfx-rippler {
+	-jfx-rippler-fill: #AEAEAE4b;
+}
+
 #nav .fontAwesome.profileBtn {
 	-fx-background-radius: 8.0px 0.0 0.0 0.0;
-	-fx-background-insets: 5.0px 0.0 0.0 10.0px;
+	-fx-background-insets: 0 0.0 0.0 10.0px;
 }
 
 #nav .fontAwesome.logoutBtn {
 	-fx-background-radius: 0.0 8.0px 0.0 0.0;
-	-fx-background-insets: 5.0px 10.0px 0.0 0.0;
+	-fx-background-insets: 0 10.0px 0.0 0.0;
 }
 
 .topBar {

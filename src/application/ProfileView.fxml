@@ -18,14 +18,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<GridPane id="profile" alignment="CENTER" hgap="25.0"
-	maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0"
-	stylesheets="@assets/css/application.css" vgap="25.0"
-	xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="application.ProfileViewController">
+<GridPane id="profile" alignment="CENTER" hgap="25.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ProfileViewController">
 	<children>
-		<Pane styleClass="card" GridPane.halignment="CENTER"
-			GridPane.valignment="BOTTOM">
+		<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
 			<GridPane.margin>
 				<Insets top="140.0" />
 			</GridPane.margin>
@@ -38,18 +33,14 @@
 		</Pane>
 		<GridPane fx:id="profileGridPane" alignment="CENTER" vgap="15.0">
 			<columnConstraints>
-				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES"
-					minWidth="10.0" />
+				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints fillHeight="false" minHeight="10.0"
-					valignment="CENTER" vgrow="ALWAYS" />
-				<RowConstraints minHeight="10.0" valignment="CENTER"
-					vgrow="NEVER" />
+				<RowConstraints fillHeight="false" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+				<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="NEVER" />
 			</rowConstraints>
 			<children>
-				<Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0"
-					stroke="BLACK" strokeType="INSIDE" styleClass="dp">
+				<Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp">
 					<GridPane.margin>
 						<Insets />
 					</GridPane.margin>
@@ -59,41 +50,31 @@
 						<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
 					</padding>
 					<children>
-						<GridPane fx:id="basicGridPane" alignment="CENTER" vgap="5.0"
-							VBox.vgrow="NEVER">
+						<GridPane fx:id="basicGridPane" alignment="CENTER" vgap="5.0" VBox.vgrow="NEVER">
 							<columnConstraints>
 								<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 							</columnConstraints>
 							<rowConstraints>
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
-								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity"
-									prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
-								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity"
-									prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
+								<RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 								<RowConstraints valignment="CENTER" vgrow="NEVER" />
 							</rowConstraints>
 							<children>
-								<Text fx:id="nameTxt" fill="#434343" strokeType="OUTSIDE"
-									strokeWidth="0.0" styleClass="h1" text="Name" textAlignment="CENTER" />
-								<Text fx:id="heightWeightTxt" fill="#434343" strokeType="OUTSIDE"
-									strokeWidth="0.0" styleClass="small" text="Height | Weight"
-									GridPane.rowIndex="1">
+								<Text fx:id="nameTxt" fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Name" textAlignment="CENTER" />
+								<Text fx:id="heightWeightTxt" fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="small" text="Height | Weight" GridPane.rowIndex="1">
 									<font>
 										<Font name="Roboto" size="12.0" />
 									</font>
 								</Text>
-								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
-									text="Player Rating" textAlignment="CENTER" GridPane.rowIndex="3" />
-								<Text fx:id="ratingTxt" strokeType="OUTSIDE" strokeWidth="0.0"
-									styleClass="ratingStars" text="" GridPane.rowIndex="4" />
-								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
-									text="Match Attendance" GridPane.rowIndex="6" />
-								<Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0"
-									styleClass="para" text="0 / 0" GridPane.rowIndex="7" />
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Player Rating" textAlignment="CENTER" GridPane.rowIndex="3" />
+								<Text fx:id="ratingTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ratingStars" text="" GridPane.rowIndex="4" />
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Match Attendance" GridPane.rowIndex="6" />
+								<Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="0 / 0" GridPane.rowIndex="7" />
 							</children>
 						</GridPane>
 					</children>
@@ -108,14 +89,11 @@
 				<ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
 			</columnConstraints>
 			<rowConstraints>
-				<RowConstraints fillHeight="false" prefHeight="115.0"
-					valignment="BOTTOM" vgrow="NEVER" />
+				<RowConstraints fillHeight="false" prefHeight="115.0" valignment="BOTTOM" vgrow="NEVER" />
 				<RowConstraints valignment="CENTER" vgrow="ALWAYS" />
 			</rowConstraints>
 			<children>
-				<JFXButton fx:id="editBtn" buttonType="RAISED" onAction="#editBtnOnAction"
-					ripplerFill="#ffffff4d" styleClass="success" text="EDIT PROFILE"
-					GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+				<JFXButton fx:id="editBtn" buttonType="RAISED" onAction="#editBtnOnAction" ripplerFill="#ffffff4d" styleClass="success" text="EDIT PROFILE" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
 					<cursor>
 						<Cursor fx:constant="HAND" />
 					</cursor>
@@ -132,8 +110,7 @@
 					</columnConstraints>
 					<rowConstraints>
 						<RowConstraints minHeight="10.0" vgrow="NEVER" />
-						<RowConstraints minHeight="10.0" valignment="TOP"
-							vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
 					</rowConstraints>
 					<children>
 						<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
@@ -142,13 +119,10 @@
 								<String fx:value="h0" />
 							</styleClass>
 						</Text>
-						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0"
-							text="INTRODUCTION" GridPane.columnIndex="1" />
-						<TextFlow GridPane.columnSpan="2147483647"
-							GridPane.rowIndex="1">
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="INTRODUCTION" GridPane.columnIndex="1" />
+						<TextFlow GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
 							<children>
-								<Text fx:id="introTxt" strokeType="OUTSIDE" strokeWidth="0.0"
-									styleClass="para" text="Introduce yourself to the world..." />
+								<Text fx:id="introTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="Introduce yourself to the world..." />
 							</children>
 						</TextFlow>
 					</children>
@@ -158,34 +132,27 @@
 				</GridPane>
 			</children>
 		</GridPane>
-		<Pane styleClass="card" GridPane.halignment="CENTER"
-			GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER"
-			GridPane.vgrow="ALWAYS" />
+		<Pane styleClass="card" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
 		<GridPane alignment="CENTER" vgap="15.0" GridPane.rowIndex="1">
 			<columnConstraints>
 				<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints vgrow="NEVER" />
-				<RowConstraints minHeight="15.0" valignment="TOP"
-					vgrow="NEVER" />
+				<RowConstraints minHeight="15.0" valignment="TOP" vgrow="NEVER" />
 				<RowConstraints vgrow="SOMETIMES" />
 				<RowConstraints minHeight="10.0" vgrow="NEVER" />
 				<RowConstraints minHeight="15.0" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
-					text="Favourite Sport" textAlignment="CENTER" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
-					text="Interested Sports" GridPane.rowIndex="3" />
-				<TextFlow fx:id="favSportTxtFlow" textAlignment="CENTER"
-					GridPane.halignment="CENTER" GridPane.rowIndex="1">
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Favourite Sport" textAlignment="CENTER" />
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Interested Sports" GridPane.rowIndex="3" />
+				<TextFlow fx:id="favSportTxtFlow" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1">
 					<children>
 						<Label fx:id="favSportChip" styleClass="sportChip" text="None" />
 					</children>
 				</TextFlow>
-				<TextFlow fx:id="intSportsTxtFlow" textAlignment="CENTER"
-					GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+				<TextFlow fx:id="intSportsTxtFlow" textAlignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
 					<children>
 						<Label fx:id="intSportChip" styleClass="sportChip" text="None" />
 					</children>
@@ -195,20 +162,16 @@
 				<Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
 			</padding>
 		</GridPane>
-		<Pane styleClass="card" GridPane.columnIndex="1"
-			GridPane.rowIndex="1" />
-		<GridPane fx:id="commentGridPane" hgap="5.0" vgap="15.0"
-			GridPane.columnIndex="1" GridPane.rowIndex="1">
+		<Pane styleClass="card" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+		<GridPane fx:id="commentGridPane" hgap="5.0" vgap="15.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
 			<columnConstraints>
 				<ColumnConstraints hgrow="NEVER" minWidth="10.0" />
 				<ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-				<ColumnConstraints halignment="LEFT" hgrow="NEVER"
-					minWidth="10.0" />
+				<ColumnConstraints halignment="LEFT" hgrow="NEVER" minWidth="10.0" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints minHeight="10.0" vgrow="NEVER" />
-				<RowConstraints minHeight="10.0" valignment="CENTER"
-					vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
 				<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
@@ -217,13 +180,10 @@
 						<String fx:value="h0" />
 					</styleClass>
 				</Text>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0"
-					text="COMMENTS" GridPane.columnIndex="1" />
-				<FlowPane alignment="CENTER_RIGHT" prefWrapLength="70.0"
-					styleClass="comBtnFlowPane" GridPane.columnIndex="2">
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="COMMENTS" GridPane.columnIndex="1" />
+				<FlowPane alignment="CENTER_RIGHT" prefWrapLength="70.0" styleClass="comBtnFlowPane" GridPane.columnIndex="2">
 					<children>
-						<JFXButton fx:id="prevComBtn" onAction="#prevComBtnOnAction"
-							ripplerFill="#ffffff4d" text="">
+						<JFXButton fx:id="prevComBtn" onAction="#prevComBtnOnAction" ripplerFill="#ffffff4d" text="">
 							<styleClass>
 								<String fx:value="fontAwesome" />
 								<String fx:value="inactive" />
@@ -234,8 +194,7 @@
 								<Cursor fx:constant="HAND" />
 							</cursor>
 						</JFXButton>
-						<JFXButton fx:id="nxtComBtn" onAction="#nxtComBtnOnAction"
-							ripplerFill="#ffffff4d" text="">
+						<JFXButton fx:id="nxtComBtn" onAction="#nxtComBtnOnAction" ripplerFill="#ffffff4d" text="">
 							<styleClass>
 								<String fx:value="fontAwesome" />
 								<String fx:value="inactive" />
@@ -248,17 +207,14 @@
 						</JFXButton>
 					</children>
 				</FlowPane>
-				<VBox fx:id="commContentVBox" alignment="CENTER" styleClass="commContent"
-					GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+				<VBox fx:id="commContentVBox" alignment="CENTER" styleClass="commContent" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
 					<children>
-						<ImageView fitHeight="150.0" fitWidth="150.0"
-							pickOnBounds="true" preserveRatio="true">
+						<ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
 							<image>
 								<Image url="@assets/img/empty_comments.png" />
 							</image>
 						</ImageView>
-						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
-							text="Whoops! You do not have any comments..." />
+						<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Whoops! You do not have any comments..." />
 					</children>
 				</VBox>
 			</children>
@@ -271,8 +227,7 @@
 		</GridPane>
 	</children>
 	<columnConstraints>
-		<ColumnConstraints halignment="CENTER" hgrow="NEVER"
-			prefWidth="150.0" />
+		<ColumnConstraints halignment="CENTER" hgrow="NEVER" prefWidth="150.0" />
 		<ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
 	</columnConstraints>
 	<rowConstraints>
