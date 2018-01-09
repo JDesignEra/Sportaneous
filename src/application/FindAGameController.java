@@ -47,10 +47,14 @@ public class FindAGameController {
 	@FXML private static String error = "";
 
 	@FXML private int i = -1;
+	
+	public static int HostAGame_index = 0;
 
+	static String whosegameisclicked;
 	@FXML
 	public void initialize() throws IOException {
-
+		
+		whosegameisclicked = Main.currentUserAdminNo;
 		HostsDA.initializeSearchResults();
 		displayAnchor.setMaxHeight(1043);
 		ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");

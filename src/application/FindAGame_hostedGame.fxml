@@ -62,14 +62,14 @@
         </rowConstraints>
          <children>
             <Label fx:id="sportsType" prefHeight="26.0" prefWidth="163.0" style="-fx-font-weight: bold; -fx-font-size: 25;" styleClass="ratingElement_Sport" text="BASKETBALL" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-            <JFXButton fx:id="joinBtn" buttonType="RAISED" minHeight="20.0" onAction="#handleJoin" prefHeight="31.0" prefWidth="104.0" text="JOIN" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <JFXButton fx:id="joinBtn" buttonType="RAISED" minHeight="20.0" onAction="#handleJoin" prefHeight="31.0" prefWidth="104.0" style="-fx-cursor: hand;" text="JOIN" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <styleClass>
                   <String fx:value="greenBtn" />
                   <String fx:value="ratingElement_Join" />
                </styleClass></JFXButton>
          </children>
       </GridPane>
-      <Circle fill="WHITE" radius="76.0" strokeType="INSIDE" strokeWidth="3.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Circle fx:id="circularMeter" fill="WHITE" radius="76.0" strokeType="INSIDE" strokeWidth="3.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <stroke>
             <LinearGradient endX="1.0" endY="1.0" startX="1.0">
                <stops>
@@ -95,7 +95,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="noOfplayers" style="-fx-font-size: 10;" text="5 / 10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <Label fx:id="noOfplayers" onMouseClicked="#handleNoOfPlayersRecruited" style="-fx-font-size: 10; -fx-cursor: hand;" text="5 / 10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
             <Label style="-fx-font-weight: bold;" text="PLAYERS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
       </GridPane>

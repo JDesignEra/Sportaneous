@@ -1,6 +1,9 @@
 package application;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,29 +14,28 @@ import com.jfoenix.controls.JFXButton;
 import dataAccess.HostsDA;
 import entity.HostsEntity;
 import javafx.event.ActionEvent;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.Modality;
+import javafx.stage.Popup;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class FindAGame_hostedGameController {
-	@FXML
-	private Label eventDay;
-	@FXML
-	private Label eventDate;
-	@FXML
-	private Label eventTime;
-	@FXML
-	private Label sportsType;
-	@FXML
-	private JFXButton joinBtn;
-	@FXML
-    private Label noOfplayers;
-	@FXML
-	private Circle hostDP;
-	@FXML
-	private Label hostName;
+	@FXML private Label eventDay;
+	@FXML private Label eventDate;
+	@FXML private Label eventTime;
+	@FXML private Label sportsType;
+	@FXML private JFXButton joinBtn;
+	@FXML private Label noOfplayers;
+	@FXML private Circle hostDP;
+	@FXML private Label hostName;
+	@FXML private Circle circularMeter;
 
 	//Database//
 	private HashMap<String, HostsEntity> searchR;
@@ -41,7 +43,7 @@ public class FindAGame_hostedGameController {
 	private String adminNo = "";
 		
 	public void initialize() {
-	
+		
 		if (HostsDA.getSearchResults().isEmpty()) {
 			searchR = HostsDA.returnHostsList();
 		} else {
@@ -54,7 +56,7 @@ public class FindAGame_hostedGameController {
 			list.add(x);
 		}
 		
-		adminNo = list.get(NavigationViewController.HostAGame_index);
+		adminNo = list.get(FindAGameController.HostAGame_index);
 		String name = searchR.get(adminNo).getName();
 		String sportsType = sports[searchR.get(adminNo).getSportsType()];
 		LocalDate ld = searchR.get(adminNo).getDate();
@@ -68,21 +70,20 @@ public class FindAGame_hostedGameController {
 		setDP(adminNo);
 		setNoOfPlayersLabel(adminNo);
 		
-//		if (searchR.get(adminNo).getPlayersRecruited().contains(Main.currentUserAdminNo.toUpperCase())) {
-//			joinBtn.setDisable(true);
-//			joinBtn.setStyle("-fx-background-color: grey;");
-//			System.out.println("ALREADY INSIDE");
-//		}
-
-		if (NavigationViewController.HostAGame_index == searchR.size()-1) {
-			NavigationViewController.HostAGame_index = 0;
+		if (searchR.get(adminNo).getPlayersRecruited() != null && searchR.get(adminNo).getPlayersRecruited().contains(Main.currentUserAdminNo.toUpperCase())) {
+			joinBtn.setDisable(true);
+			joinBtn.setStyle("-fx-background-color: grey;");
+			System.out.println(adminNo + " ALREADY INSIDE");
 		}
-		else {
-			NavigationViewController.HostAGame_index++;
+
+		if (FindAGameController.HostAGame_index == searchR.size()-1) {
+			FindAGameController.HostAGame_index = 0;
+		} else {
+			FindAGameController.HostAGame_index++;
 		}
 			
-		}
-
+	}
+	
 	// Event Listener on JFXButton[#joinBtn].onAction
 	@FXML
 	void handleJoin(ActionEvent event) {
@@ -95,6 +96,18 @@ public class FindAGame_hostedGameController {
 		
 		joinBtn.setStyle("-fx-background-color: grey;");
 	}
+	
+	@FXML
+    void handleNoOfPlayersRecruited(MouseEvent event) throws IOException {
+	    FindAGameController.whosegameisclicked = adminNo;
+//	    System.out.println(FindAGameController.whosegameisclicked);
+//	    System.out.println(HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
+		try {
+			Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
+	    } catch (Exception e) {
+	    	e.printStackTrace();
+	    }
+    }
 
 	void setEventDay(LocalDate ld) {
 
