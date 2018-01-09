@@ -30,5 +30,5 @@ Notes
 * If you need additional methods in [Snackbar.java](src/modules/Snackbar.java) or [Misc.java](src/modules/Misc.java) feel free to disucss it with me.
 * Import application.css into your CSS file on the first line with the following code:
 ```CSS
-@import("application.css");
+@import url("application.css");
 ```
