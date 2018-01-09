@@ -26,11 +26,11 @@ Notes
 ------
 ##### Feel free to call methods from:
 * [Snackbar.java](src/modules/Snackbar.java)
-* For displaying message (Info, Success, Warning, Danger message).
+  * For displaying message (Info, Success, Warning, Danger message).
 * [Misc.java](src/modules/Misc.java)
-* Contains some useful methods. (e.g. Display rating stars, crop & clip profile photo, e.t.c).
+  * Contains some useful methods. (e.g. Display rating stars, crop & clip profile photo, e.t.c).
 * [TransitionAnimation.java](src/modules/TransitionAnimation.java)
-* Pre-made animation.
+  * Pre-made animation.
 
 <sup>* If you need additional methods in [Snackbar.java](src/modules/Snackbar.java), [Misc.java](src/modules/Misc.java) or [TransitionAnimation.java](src/modules/TransitionAnimation.java) it's open for discussion.</sup>
 
