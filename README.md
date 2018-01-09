@@ -4,22 +4,22 @@ A sports matchmaking software...
 
 Guidelines
 ------
-* <a href="https://unoq8a.axshare.com/home.html" target="_blank">Sportaneous's Wireframe</a>
-* <a href="https://y698fv.axshare.com/#g=1&p=index" target="_blank">Sportaneous's Guidelines</a>
-* <a href="https://material.io/guidelines/" target="_blank">Google Material Design's Guidelines</a>
+* [Sportaneous's Wireframe](https://unoq8a.axshare.com/home.html)
+* [Sportaneous's Guidelines](https://y698fv.axshare.com/#g=1&p=index)
+* [Google Material Design's Guidelines](https://material.io/guidelines/)
   
 Documentation
 ------
-* <a href="http://www.jfoenix.com/documentation.html" target="_blank">JFoenix's Documentation</a>
-* <a href="https://docs.oracle.com/javase/8/javafx/api/toc.htm" target="_blank">JavaFX 8's JavaDoc</a>
-* <a href="http://fontawesome.io/cheatsheet/" target="_blank">Font Awesome's Cheatsheet</a>
+* [JFoenix's Documentation](http://www.jfoenix.com/documentation.html)
+* [JavaFX 8's JavaDoc](https://docs.oracle.com/javase/8/javafx/api/toc.htm)
+* [Font Awesome's Cheatsheet](http://fontawesome.io/cheatsheet/)
 
 Framework / API / Library
 ------
-* <a href="http://central.maven.org/maven2/org/mapdb/mapdb/1.0.9/mapdb-1.0.9.jar.asc" target="_blank">MapDB 1.0.9</a>
-* <a href="https://github.com/jfoenixadmin/JFoenix" target="_blank">JFoenix's GitHub</a>
-* <a href="https://github.com/javaee/javamail/releases" target="_blank">JavaMail's API</a>
-* <a href="https://developers.google.com/api-client-library/java/google-api-java-client/download" target="_blank">Google's API Library for Java</a>
+* [MapDB 1.0.9](http://central.maven.org/maven2/org/mapdb/mapdb/1.0.9/mapdb-1.0.9.jar.asc)
+* [JFoenix's GitHub](https://github.com/jfoenixadmin/JFoenix)
+* [JavaMail's API](https://github.com/javaee/javamail/releases)
+* [Google's API Library for Java](https://developers.google.com/api-client-library/java/google-api-java-client/download)
 
 Notes
 ------
