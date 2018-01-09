@@ -110,29 +110,38 @@
             </GridPane>
             <GridPane>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="0.0" prefWidth="27.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="360.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="0.0" prefWidth="29.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="314.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="53.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints />
+                <RowConstraints />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text fill="#434343" strokeType="INSIDE" strokeWidth="0.0" text="" wrappingWidth="19.986328125" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+                  <Text fill="#434343" strokeType="INSIDE" strokeWidth="0.0" text="" wrappingWidth="19.986328125" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="FontAwesome" size="21.0" />
                      </font>
                   </Text>
-                  <Text fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" text="Rate Player Skill" wrappingWidth="167.912109375" GridPane.columnIndex="1">
+                  <Text fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" text="Rate Player Skill" wrappingWidth="167.912109375" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font name="Roboto Medium" size="20.0" />
                      </font>
                   </Text>
-                  <Text fx:id="ratingTxt1" fill="#ef4956" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ratingStars" text="    " GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Text fx:id="ratingTxt1" fill="#ef4956" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ratingStars" text="    " GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="FontAwesome" size="22.0" />
                      </font>
                   </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="fa-ban" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
