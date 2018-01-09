@@ -4,47 +4,36 @@ import java.io.Serializable;
 
 public class FriendsEntity implements Serializable {
 	private static final long serialVersionUID = 3790262896588918586L;
-	private String userID1, userID2, userName1, userName2;
+	private String userAdminNo, friendAdminNo;
 	private int status;
 
-	public FriendsEntity(String userID1, String userID2, String userName1, String userName2, int status) {
-		this.userID1 = userID1;
-		this.userID2 = userID2;
-		this.userName1 = userName1;
-		this.userName2 = userName2;
+	public FriendsEntity(String userAdminNo, String friendAdminNo, int status) {
+		this.setUserAdminNo(userAdminNo);
+		this.setFriendAdminNo(friendAdminNo);
 		this.status = status;
 	}
 
-	public String getUserID1() {
-		return userID1;
+	public String getUserAdminNo() {
+		return userAdminNo;
 	}
 
-	public String getUserID2() {
-		return userID2;
-	}
-
-	public String getUserName1() {
-		return userName1;
-	}
-
-	public String getUserName2() {
-		return userName2;
+	public String getFriendAdminNo() {
+		return friendAdminNo;
 	}
 
 	public int getStatus() {
 		return status;
 	}
 
-	public void setUserName1(String userName1) {
-		this.userName1 = userName1;
+	public void setUserAdminNo(String userAdminNo) {
+		this.userAdminNo = userAdminNo;
 	}
 
-	public void setUserName2(String userName2) {
-		this.userName2 = userName2;
+	public void setFriendAdminNo(String friendAdminNo) {
+		this.friendAdminNo = friendAdminNo;
 	}
 
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
 }

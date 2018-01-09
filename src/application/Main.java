@@ -16,8 +16,8 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	private static BorderPane root;
-
-	private final URL lrfView = getClass().getResource("/application/LRFView.fxml");
+	
+	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous_small.png");
 	private final URL logoAltURL = getClass().getResource("/application/assets/img/Sportaneous_small_alt.png");
 	private final URL stylesheetURL = getClass().getResource("/application/assets/css/application.css");
@@ -31,7 +31,7 @@ public class Main extends Application {
 		root = new BorderPane();
 
 		try {
-			root.setCenter(FXMLLoader.load(lrfView));
+			root.setCenter(FXMLLoader.load(lrfViewURL));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

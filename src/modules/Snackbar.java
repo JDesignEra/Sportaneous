@@ -4,6 +4,8 @@ import java.net.URL;
 
 import com.jfoenix.controls.JFXSnackbar;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -16,31 +18,71 @@ public class Snackbar {
 	private final URL spinnerWhite = getClass().getResource("/application/assets/img/spinner_white.gif");
 
 	public void info(Pane root, String msg) {
-		JFXSnackbar sb = new JFXSnackbar(root);
-		sb.getStyleClass().add("info");
-
-		sb.show(msg, 3000);
+		this.info(root, msg, null, null);
 	}
 
 	public void success(Pane root, String msg) {
-		JFXSnackbar sb = new JFXSnackbar(root);
-		sb.getStyleClass().add("success");
-
-		sb.show(msg, 3000);
+		this.success(root, msg, null, null);
 	}
 
 	public void warning(Pane root, String msg) {
-		JFXSnackbar sb = new JFXSnackbar(root);
-		sb.getStyleClass().add("warning");
-
-		sb.show(msg, 3000);
+		this.warning(root, msg, null, null);
 	}
 
 	public void danger(Pane root, String msg) {
-		JFXSnackbar sb = new JFXSnackbar(root);
-		sb.getStyleClass().add("danger");
+		this.danger(root, msg, null, null);
+	}
 
-		sb.show(msg, 3000);
+	public void info(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+		JFXSnackbar sb = new JFXSnackbar(root);
+	
+		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
+			sb.getStyleClass().addAll("action", "info");
+			sb.show(msg, actionText, 3000, actionHandler);
+		}
+		else {
+			sb.getStyleClass().add("info");
+			sb.show(msg, 3000);
+		}
+	}
+
+	public void success(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+		JFXSnackbar sb = new JFXSnackbar(root);
+		
+		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
+			sb.getStyleClass().addAll("action", "success");
+			sb.show(msg, actionText, 3000, actionHandler);
+		}
+		else {
+			sb.getStyleClass().add("success");
+			sb.show(msg, 3000);
+		}
+	}
+
+	public void warning(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+		JFXSnackbar sb = new JFXSnackbar(root);
+		
+		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
+			sb.getStyleClass().addAll("action", "warning");
+			sb.show(msg, actionText, 3000, actionHandler);
+		}
+		else {
+			sb.getStyleClass().add("warning");
+			sb.show(msg, 3000);
+		}
+	}
+
+	public void danger(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+		JFXSnackbar sb = new JFXSnackbar(root);
+		
+		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
+			sb.getStyleClass().addAll("action", "danger");
+			sb.show(msg, actionText, 3000, actionHandler);
+		}
+		else {
+			sb.getStyleClass().add("danger");
+			sb.show(msg, 3000);
+		}
 	}
 
 	public void infoSpinner(Pane root, String msg, long timeOut) {

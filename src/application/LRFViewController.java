@@ -42,7 +42,6 @@ public class LRFViewController implements Initializable {
 	@FXML private PasswordField regPassTF;
 	@FXML private JFXButton regBtn;
 	@FXML private TitledPane fpassTitledPane;
-	@FXML private TextField fpassAdminNoTF;
 	@FXML private TextField fpassEmailTF;
 	@FXML private JFXButton fpassBtn;
 
@@ -147,48 +146,40 @@ public class LRFViewController implements Initializable {
 		String adminNo = loginAdminNoTF.getText();
 		String pass = loginPassTF.getText();
 
-		loginAdminNoTF.getStyleClass().removeAll("danger");
-		loginPassTF.getStyleClass().removeAll("danger");
+		resetFieldStyle();
 
 		switch (AccountsDA.login(adminNo, pass)) {
-			case 0:
-				try {
-					Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
-					Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-				break;
+		case 0:
+			try {
+				Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+				Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 
-			case 1:
-				if (adminNo.isEmpty() && pass.isEmpty()) {
-					new Snackbar().danger(rootPane, "Admin Number & Password field is empty.");
-					loginAdminNoTF.getStyleClass().add("danger");
-					loginPassTF.getStyleClass().add("danger");
-				}
-				else if (adminNo.isEmpty()) {
-					new Snackbar().danger(rootPane, "Admin Number field is empty.");
-					loginAdminNoTF.getStyleClass().add("danger");
-					loginPassTF.getStyleClass().removeAll("danger");
-				}
-				else if (pass.isEmpty()) {
-					new Snackbar().danger(rootPane, "Password field is empty.");
-					loginPassTF.getStyleClass().add("danger");
-					loginAdminNoTF.getStyleClass().removeAll("danger");
-				}
-				break;
+		case 1:
+			if (adminNo.isEmpty() && pass.isEmpty()) {
+				new Snackbar().danger(rootPane, "Admin Number & Password is required.");
+				loginAdminNoTF.getStyleClass().add("danger");
+				loginPassTF.getStyleClass().add("danger");
+			}
+			else if (adminNo.isEmpty()) {
+				new Snackbar().danger(rootPane, "Admin Number is required.");
+				loginAdminNoTF.getStyleClass().add("danger");
+				loginPassTF.getStyleClass().removeAll("danger");
+			}
+			else if (pass.isEmpty()) {
+				new Snackbar().danger(rootPane, "Password is required.");
+				loginPassTF.getStyleClass().add("danger");
+				loginAdminNoTF.getStyleClass().removeAll("danger");
+			}
+			break;
 
-			case 2:
-				new Snackbar().danger(rootPane, "This account does not exist, please register an account instead.");
-				break;
-
-			case 3:
-				new Snackbar().danger(rootPane, "The login credential you have entered is invalid.");
-				break;
-
-			default:
-				break;
+		case 2:
+			new Snackbar().danger(rootPane, "Admin Number or Password is wrong.");
+			break;
 		}
 	}
 
@@ -198,117 +189,100 @@ public class LRFViewController implements Initializable {
 		String email = regEmailTF.getText();
 		String pass = regPassTF.getText();
 
-		regNameTF.getStyleClass().removeAll("danger");
-		regAdminNoTF.getStyleClass().removeAll("danger");
-		regEmailTF.getStyleClass().removeAll("danger");
-		regPassTF.getStyleClass().removeAll("danger");
+		resetFieldStyle();
 
 		switch (AccountsDA.addAccount(name, adminNo, email, pass)) {
-			case 0:
-				new Snackbar().success(rootPane, "You have registered an account with us successfully.");
-				break;
+		case 0:
+			new Snackbar().success(rootPane, "Successfully registered an account.");
+			break;
 
-			case 1:
-				List<String> emptyMsg = new ArrayList<>();
-				StringBuilder msg = new StringBuilder();
+		case 1:
+			List<String> emptyMsg = new ArrayList<>();
+			StringBuilder msg = new StringBuilder();
 
-				if (name.isEmpty()) {
-					regNameTF.getStyleClass().add("danger");
-					emptyMsg.add("Name");
-				}
+			if (name.isEmpty()) {
+				regNameTF.getStyleClass().add("danger");
+				emptyMsg.add("Name");
+			}
 
-				if (email.isEmpty()) {
-					regEmailTF.getStyleClass().add("danger");
-					emptyMsg.add("Email");
-				}
-
-				if (adminNo.isEmpty()) {
-					regAdminNoTF.getStyleClass().add("danger");
-					emptyMsg.add("Admin Number");
-				}
-
-				if (pass.isEmpty()) {
-					regPassTF.getStyleClass().add("danger");
-					emptyMsg.add("Password");
-				}
-
-				// Build empty field name message.
-				for (int i = 0; i < emptyMsg.size(); i++) {
-					msg.append(emptyMsg.get(i));
-
-					if (i < emptyMsg.size() - 1) {
-						msg.append(", ");
-					}
-				}
-
-				new Snackbar().danger(rootPane, msg.toString() + " field is empty.");
-				break;
-
-			case 2:
+			if (email.isEmpty()) {
 				regEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Only NYP Email address are allowed to register an account with us.");
-				break;
+				emptyMsg.add("Email");
+			}
 
-			case 3:
-				regEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "This Email is registered with us.");
-				break;
-
-			case 4:
+			if (adminNo.isEmpty()) {
 				regAdminNoTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "This Admin Number is registered with us.");
-				break;
+				emptyMsg.add("Admin Number");
+			}
 
-			default:
-				break;
+			if (pass.isEmpty()) {
+				regPassTF.getStyleClass().add("danger");
+				emptyMsg.add("Password");
+			}
+
+			// Build empty field name message.
+			for (int i = 0; i < emptyMsg.size(); i++) {
+				msg.append(emptyMsg.get(i));
+
+				if (i < emptyMsg.size() - 1) {
+					msg.append(", ");
+				}
+			}
+
+			new Snackbar().danger(rootPane, msg.toString() + " is required.");
+			break;
+
+		case 2:
+			regEmailTF.getStyleClass().add("danger");
+			new Snackbar().danger(rootPane, "Only NYP Email address are allowed.");
+			break;
+
+		case 3:
+		case 4:
+			regEmailTF.getStyleClass().add("danger");
+
+			new Snackbar().danger(rootPane, "This Email or Admin Number is registered with us.", "Forgot Password?", ev -> {
+				fpassTitledPane.setExpanded(true);
+			});
+			break;
+
+		default:
+			break;
 		}
 	}
 
 	private void resetPass() {
-		String adminNo = fpassAdminNoTF.getText();
 		String email = fpassEmailTF.getText();
 
-		loginAdminNoTF.getStyleClass().removeAll("danger");
-		loginPassTF.getStyleClass().removeAll("danger");
+		resetFieldStyle();
 
-		fpassAdminNoTF.getStyleClass().removeAll("danger");
-		fpassEmailTF.getStyleClass().removeAll("danger");
+		switch (AccountsDA.passwordReset(email)) {
+		case 0:
+			new Snackbar().success(rootPane, "Successfully reseted password, please check your email.");
+			break;
 
-		switch (AccountsDA.passwordReset(adminNo, email)) {
-			case 0:
-				new Snackbar().success(rootPane, "Your password had been reset succssfully, please check your email and login with your new password.");
-				break;
+		case 1:
+			fpassEmailTF.getStyleClass().add("danger");
+			new Snackbar().danger(rootPane, "Email is required");
+			break;
 
-			case 1:
-				if (adminNo.isEmpty() && email.isEmpty()) {
-					fpassAdminNoTF.getStyleClass().add("danger");
-					fpassEmailTF.getStyleClass().add("danger");
-					new Snackbar().danger(rootPane, "Admin Number and Email field is empty.");
-				}
-				else if (adminNo.isEmpty()) {
-					fpassAdminNoTF.getStyleClass().add("danger");
-					new Snackbar().danger(rootPane, "Admin Number field is empty.");
-				}
-				else if (email.isEmpty()) {
-					fpassEmailTF.getStyleClass().add("danger");
-					new Snackbar().danger(rootPane, "Email field is empty");
-				}
-				break;
+		case 2:
+			new Snackbar().danger(rootPane, "Email is not registered with us.", "Register?", ev -> regTitledPane.setExpanded(true));
+			break;
 
-			case 2:
-				new Snackbar().danger(rootPane, "This Admin Number is not registered with us.");
-				break;
-
-			case 3:
-				new Snackbar().danger(rootPane, "This Email is not registered with us.");
-				break;
-
-			case 4:
-				new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
-				break;
-
-			default:
-				break;
+		case 3:
+			new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
+			break;
 		}
+	}
+
+	private void resetFieldStyle() {
+		loginAdminNoTF.getStyleClass().remove("danger");
+		loginPassTF.getStyleClass().remove("danger");
+		regNameTF.getStyleClass().remove("danger");
+		regEmailTF.getStyleClass().remove("danger");
+		regAdminNoTF.getStyleClass().remove("danger");
+		regPassTF.getStyleClass().remove("danger");
+		fpassEmailTF.getStyleClass().remove("danger");
 	}
 }

@@ -60,6 +60,39 @@ public class AccountsDA {
 		return data;
 	}
 
+	/**
+	 * [0] = AdminNo, [1] = Email, [2] = Password, [3] = Name<br>
+	 * [4] = Favorite Sport, [5] = Interested Sport, [6] = Intro<br>
+	 * [7] = Height, [8] = Weight, [9] = Height Visibility<br>
+	 * [10] = Weight Visibility, [11] = Rating, [12] = Number Of Players Rated<br>
+	 * [13] = Total Matched Joined, [14] = Total Matched Attended
+	 * 
+	 * @param adminNo
+	 * @return Object[]
+	 */
+	public static Object[] getAccData(String adminNo) {
+		AccountsEntity accountsEntity = accounts.get(adminNo);
+		Object[] data = new Object[15];
+
+		data[0] = accountsEntity.getAdminNo();
+		data[1] = accountsEntity.getEmail();
+		data[2] = accountsEntity.getPassword();
+		data[3] = accountsEntity.getName();
+		data[4] = accountsEntity.getFavSport();
+		data[5] = accountsEntity.getInterestedSports();
+		data[6] = accountsEntity.getIntro();
+		data[7] = accountsEntity.getHeight();
+		data[8] = accountsEntity.getWeight();
+		data[9] = accountsEntity.getHeightVisibility();
+		data[10] = accountsEntity.getWeightVisibility();
+		data[11] = accountsEntity.getRating();
+		data[12] = accountsEntity.getNoRate();
+		data[13] = accountsEntity.getMatchPlayed();
+		data[14] = accountsEntity.getTotalMatch();
+
+		return data;
+	}
+
 	public static int login(String adminNo, String password) {
 		AccountsEntity accountsEntity = null;
 		adminNo = adminNo.toLowerCase();
@@ -68,12 +101,8 @@ public class AccountsDA {
 			return 1; // Required field
 		}
 
-		if ((accountsEntity = accounts.get(adminNo)) == null) {
-			return 2; // User does not exist
-		}
-
-		if (!accountsEntity.getPassword().equals(password)) {
-			return 3; // Invalid password
+		if ((accountsEntity = accounts.get(adminNo)) == null || !accountsEntity.getPassword().equals(password)) {
+			return 2; // Invalid Credentials
 		}
 
 		session = accountsEntity;
@@ -158,29 +187,30 @@ public class AccountsDA {
 		return 0; // Success
 	}
 
-	public static int passwordReset(String adminNo, String email) {
-		AccountsEntity accountsEntity;
-		adminNo = adminNo.toLowerCase();
+	public static int passwordReset(String email) {
+		AccountsEntity accountsEntity = null;
 		email = email.toLowerCase();
 		String newPass = new PasswordGenerator().newPassword();
 
-		if (adminNo.isEmpty() || email.isEmpty()) {
+		if (email.isEmpty()) {
 			return 1; // Required fields
 		}
 
-		if (accounts.get(adminNo) == null) {
-			return 2; // Invalid adminNo
+		for (AccountsEntity entity : accounts.values()) {
+			if (email.equals(entity.getEmail())) {
+				accountsEntity = entity;
+				break;
+			}
 		}
 
-		if (!accounts.get(adminNo).getEmail().equals(email)) {
-			return 3; // Invalid email
+		if (accountsEntity == null) {
+			return 2; // Invalid email
 		}
 
-		accountsEntity = accounts.get(adminNo);
 		accountsEntity.setPassword(newPass);
 
-		if (accounts.replace(adminNo, accountsEntity) == null) {
-			return 4; // fail
+		if (accounts.replace(accountsEntity.getAdminNo(), accountsEntity) == null) {
+			return 3; // fail
 		}
 
 		String body = "You have recently reset you account's password.<br /><br />" + "Your account's new password details are as follow:<br />"

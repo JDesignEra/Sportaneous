@@ -16,7 +16,7 @@
 		<ColumnConstraints halignment="CENTER" />
 	</columnConstraints>
 	<children>
-		<Pane styleClass="card">
+		<Pane fx:id="cardPane" styleClass="card">
 			<GridPane.margin>
 				<Insets top="125.0" />
 			</GridPane.margin>

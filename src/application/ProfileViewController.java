@@ -12,10 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelReader;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
@@ -26,6 +22,7 @@ import javafx.util.Duration;
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
 
+import modules.Misc;
 import modules.TransitionAnimation;
 
 import application.modules.CommentsViewController;
@@ -50,9 +47,6 @@ public class ProfileViewController implements Initializable {
 	private double weight = AccountsDA.getWeight();
 	private double rating = AccountsDA.getRating();
 
-	private Image img = new Image("/application/assets/uploads/default.png");
-	private ImageView imgView = new ImageView(img);
-	private Circle clip = new Circle(100, 100, 100);
 	private GridPane commContentGridPane;
 
 	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
@@ -67,39 +61,10 @@ public class ProfileViewController implements Initializable {
 			nxtComBtn.getStyleClass().add("danger");
 		}
 
+		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
-
-		// Profile Photo
-		if (getClass().getResource("/application/assets/uploads/" + adminNo + ".png") != null) {
-			img = new Image(getClass().getResource("/application/assets/uploads/" + adminNo + ".png").toExternalForm());
-			imgView = new ImageView(img);
-
-			// Crop
-			if (img.getHeight() >= 200 || img.getWidth() >= 200) {
-				int w = (int) img.getWidth();
-				int h = (int) img.getHeight();
-
-				if (img.getHeight() > img.getWidth()) {
-					PixelReader pr = img.getPixelReader();
-					WritableImage newImage = new WritableImage(pr, 0, (h - w) / 2, w, w);
-
-					imgView.setImage(newImage);
-				}
-				else {
-					PixelReader pr = img.getPixelReader();
-					WritableImage newImage = new WritableImage(pr, (w - h) / 2, 0, h, h);
-
-					imgView.setImage(newImage);
-				}
-			}
-		}
-
-		imgView.setFitWidth(200);
-		imgView.setFitHeight(200);
-		imgView.setClip(clip);
-
-		profileGridPane.add(imgView, 0, 0);
+		ratingTxt.setText(new Misc().getRatingShapes(rating));
 
 		// Height & Weight
 		if (AccountsDA.getHeightVisibility() || AccountsDA.getWeightVisibility()) {
@@ -116,25 +81,6 @@ public class ProfileViewController implements Initializable {
 		else {
 			heightWeightTxt.setVisible(false);
 			heightWeightTxt.setManaged(false);
-		}
-
-		// Ratings
-		if (rating > 0) {
-			StringBuilder ratingStars = new StringBuilder();
-
-			for (int i = 0; i < 5; i++) {
-				if (i < (int) rating) {
-					ratingStars.append("\uf005 ");
-				}
-				else if ((rating - i) >= 0.5) {
-					ratingStars.append("\uf123 ");
-				}
-				else {
-					ratingStars.append((i < 4 ? "\uf006 " : "\uf006"));
-				}
-			}
-
-			ratingTxt.setText(ratingStars.toString());
 		}
 
 		// Introduction

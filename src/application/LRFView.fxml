@@ -23,8 +23,7 @@
 				<Image url="@assets/img/Sportaneous.gif" />
 			</image>
 		</ImageView>
-		<Accordion styleClass="lrfAccordion" GridPane.rowIndex="1"
-			expandedPane="$loginTitledPane">
+		<Accordion styleClass="lrfAccordion" GridPane.rowIndex="1" expandedPane="$loginTitledPane">
 			<panes>
 				<TitledPane fx:id="loginTitledPane" alignment="CENTER"
 					contentDisplay="CENTER" onMouseClicked="#loginTitledPaneOnClick"
@@ -106,16 +105,13 @@
 							<rowConstraints>
 								<RowConstraints minHeight="10.0" vgrow="NEVER" />
 								<RowConstraints minHeight="10.0" vgrow="NEVER" />
-								<RowConstraints minHeight="10.0" vgrow="NEVER" />
 							</rowConstraints>
 							<children>
-								<TextField fx:id="fpassAdminNoTF" onKeyPressed="#fpassOnKeyPress"
-									promptText="Admin Number *" />
 								<TextField fx:id="fpassEmailTF" onKeyPressed="#fpassOnKeyPress"
-									promptText="NYP Email *" GridPane.rowIndex="1" />
+									promptText="Email *" />
 								<JFXButton fx:id="fpassBtn" buttonType="RAISED"
 									onAction="#fpassBtnOnAction" ripplerFill="#ffffff4d"
-									styleClass="fpassBtn" text="RESET PASSWORD" GridPane.rowIndex="2">
+									styleClass="fpassBtn" text="RESET PASSWORD" GridPane.rowIndex="1">
 									<cursor>
 										<Cursor fx:constant="HAND" />
 									</cursor>
