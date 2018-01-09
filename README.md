@@ -26,13 +26,13 @@ Notes
 ------
 ##### Feel free to call methods from:
 * [Snackbar.java](src/modules/Snackbar.java)
-	* For displaying message (Info, Success, Warning, Danger message).
-* [Misc.java](src/modules/Misc.java).
-	* Contains some useful methods. (e.g. Display rating stars, crop & clip profile photo, e.t.c).
-* [TransitionAnimation.java](src/modules/TransitionAnimation.java).
-	* For Animation.
+* For displaying message (Info, Success, Warning, Danger message).
+* [Misc.java](src/modules/Misc.java)
+* Contains some useful methods. (e.g. Display rating stars, crop & clip profile photo, e.t.c).
+* [TransitionAnimation.java](src/modules/TransitionAnimation.java)
+* Pre-made animation.
 
-<sup>* If you need additional methods in [Snackbar.java](src/modules/Snackbar.java), [Misc.java](src/modules/Misc.java) or [TransitionAnimation.java](src/modules/TransitionAnimation.java) is open for discussion.</sup>
+<sup>* If you need additional methods in [Snackbar.java](src/modules/Snackbar.java), [Misc.java](src/modules/Misc.java) or [TransitionAnimation.java](src/modules/TransitionAnimation.java) it's open for discussion.</sup>
 
 ------
 ##### Feel free to import application.css into your CSS with the following code:
