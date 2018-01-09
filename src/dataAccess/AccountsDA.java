@@ -20,15 +20,17 @@ public class AccountsDA {
 	private static AccountsEntity session;
 	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
 
+	private AccountsDA() {
+		throw new IllegalStateException("AccountsDA class");
+	}
+
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
+
 		accounts = db.getTreeMap("accounts");
 
-		/*
-		 * accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg",
-		 * "password", "Administrator", "Basketball", "Basketball,Squash,Tennis", "",
-		 * "", 0, 0, false, false, 3.5, 0, 0, 0));
-		 */
+		accounts.put("admin",
+				new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
 		db.commit();
 	}
 
@@ -54,29 +56,6 @@ public class AccountsDA {
 			data[i][15] = accountsEntity.getTotalMatch();
 			i++;
 		}
-
-		return data;
-	}
-
-	public static Object[] getAccData(String adminNo) {
-		AccountsEntity accountsEntity = accounts.get(adminNo);
-		Object[] data = new Object[16];
-
-		data[0] = accountsEntity.getAdminNo();
-		data[1] = accountsEntity.getEmail();
-		data[2] = accountsEntity.getPassword();
-		data[3] = accountsEntity.getName();
-		data[5] = accountsEntity.getFavSport();
-		data[6] = accountsEntity.getInterestedSports();
-		data[7] = accountsEntity.getIntro();
-		data[8] = accountsEntity.getHeight();
-		data[9] = accountsEntity.getWeight();
-		data[10] = accountsEntity.getHeightVisibility();
-		data[11] = accountsEntity.getWeightVisibility();
-		data[12] = accountsEntity.getRating();
-		data[13] = accountsEntity.getNoRate();
-		data[14] = accountsEntity.getMatchPlayed();
-		data[15] = accountsEntity.getTotalMatch();
 
 		return data;
 	}
@@ -174,7 +153,7 @@ public class AccountsDA {
 		if (session != null && session.getAdminNo().equals(session.getAdminNo())) {
 			session = accountsEntity;
 		}
-
+		
 		db.commit();
 		return 0; // Success
 	}

@@ -18,6 +18,10 @@ public class NotificationsDA {
 
 		notifications = db.getTreeMap("notifications");
 
+		/*
+		 * notifications.put("175150r", new NotificationsEntity("175150r", "Wilson",
+		 * "basketball", "basketball Court", "10/1/18", "15:00", 1));
+		 */
 		db.commit();
 	}
 
@@ -44,5 +48,47 @@ public class NotificationsDA {
 		}
 		db.commit();
 		return 1; // success
+	}
+
+	public static NotificationsEntity getSession() {
+		return session;
+	}
+
+	public static String getAdminNo() {
+		return session.getAdminNo();
+	}
+
+	public static String getName() {
+		return session.getName();
+	}
+
+	public static String getSports() {
+		return session.getSports();
+	}
+
+	public static String getLocation() {
+		return session.getLocation();
+	}
+
+	public static String getDate() {
+		return session.getDate();
+	}
+
+	public static String getTime() {
+		return session.getTime();
+	}
+
+	public static int getStatus() {
+		return session.getStatus();
+	}
+
+	public static void main(String[] args) {
+		initDA();
+
+		for (int i = 0; i < getAllData().length; i++) {
+			for (Object j : getAllData()[i]) {
+				System.out.println(j);
+			}
+		}
 	}
 }

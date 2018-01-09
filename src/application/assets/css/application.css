@@ -702,8 +702,7 @@
 }
 
 #profile .dp,
-#editProfile .dp,
-#friendCard .dp {
+#editProfile .dp {
 	-fx-fill: #FFFFFF;
 	-fx-stroke: #EF4956;
 	-fx-stroke-width: 5.0;
@@ -714,8 +713,7 @@
 }
 
 #profile .ratingStars,
-#editProfile .ratingStars,
-#friendCard .ratingStars {
+#editProfile .ratingStars {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 22.0px;
 	-fx-text-fill: #EF4956;
