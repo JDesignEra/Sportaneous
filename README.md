@@ -1,9 +1,7 @@
-<h1 align="center">
+<h1>
 	<img src="src/application/assets/img/Sportaneous_small_alt.png" /> Sportaneous
 </h1>
-<p align="center">
-	<sup><strong>A sports matchmaking software...</strong></sup>
-</p>
+A sports matchmaking software...
 
 Guidelines
 ------
