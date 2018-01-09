@@ -12,6 +12,7 @@ Documentation
 ------
 * [JFoenix's Documentation](http://www.jfoenix.com/documentation.html)
 * [JavaFX 8's JavaDoc](https://docs.oracle.com/javase/8/javafx/api/toc.htm)
+* [Font Awesome's Cheatsheet](fontawesome.io/cheatsheet/)
 
 Framework / API / Library
 ------
