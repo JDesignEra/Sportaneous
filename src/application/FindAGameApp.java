@@ -19,16 +19,16 @@ public class FindAGameApp extends Application {
 
 		try {
 
-//			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(getClass().getResource("/application/FindAGame.fxml"));
-//			Parent root = loader.load();
-//			FindAGameController controller = loader.getController();
-//
-//			// AnchorPane root =
-//			// FXMLLoader.load(getClass().getResource("/application/FindAGame.fxml"));
-//			Scene scene = new Scene(root, 1600, 900);
-//			stage.setScene(scene);
-//			stage.show();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/FindAGame.fxml"));
+			Parent root = loader.load();
+			FindAGameController controller = loader.getController();
+
+			// AnchorPane root =
+			// FXMLLoader.load(getClass().getResource("/application/FindAGame.fxml"));
+			Scene scene = new Scene(root, 1600, 900);
+			stage.setScene(scene);
+			stage.show();
 
 			HostsDA.initDA();
 			LocalDate ld = LocalDate.of(2018, 1, 2);
