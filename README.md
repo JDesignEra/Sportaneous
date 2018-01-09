@@ -1,6 +1,9 @@
-Sportaneous
-======
-A sports matchmaking software...
+<h1 align="center">
+	<img src="src/application/assets/img/Sportaneous_small_alt.png" /> Sportaneous
+</h1>
+<p align="center">
+	<sup><strong>A sports matchmaking software...</strong></sup>
+</p>
 
 Guidelines
 ------
