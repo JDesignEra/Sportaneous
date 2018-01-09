@@ -1,6 +1,7 @@
 package dataAccess;
 
 import java.io.File;
+import java.security.SecureRandom;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
@@ -8,7 +9,6 @@ import org.mapdb.DBMaker;
 
 import entity.AccountsEntity;
 
-import modules.PasswordGenerator;
 import modules.SendMail;
 
 import application.Main;
@@ -182,7 +182,7 @@ public class AccountsDA {
 		if (session != null && session.getAdminNo().equals(session.getAdminNo())) {
 			session = accountsEntity;
 		}
-		
+
 		db.commit();
 		return 0; // Success
 	}
@@ -190,7 +190,7 @@ public class AccountsDA {
 	public static int passwordReset(String email) {
 		AccountsEntity accountsEntity = null;
 		email = email.toLowerCase();
-		String newPass = new PasswordGenerator().newPassword();
+		String newPass = randomPassword();
 
 		if (email.isEmpty()) {
 			return 1; // Required fields
@@ -224,6 +224,19 @@ public class AccountsDA {
 
 	public static void logout() {
 		session = null;
+	}
+
+	private static String randomPassword() {
+		final String CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "abcdefghijklmnopqrstuvwxyz" + "0123456789" + "!@#$%^&*_=+-";
+		SecureRandom random = new SecureRandom();
+		StringBuilder result = new StringBuilder();
+
+		for (int i = 0; i < 16; i++) {
+			int index = random.nextInt(CHARS.length());
+			result.append(CHARS.charAt(index));
+		}
+
+		return result.toString();
 	}
 
 	public static AccountsEntity getSession() {
