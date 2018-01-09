@@ -141,7 +141,7 @@
                         <Font name="FontAwesome" size="22.0" />
                      </font>
                   </Text>
-                  <Text fill="#514949" strokeType="OUTSIDE" strokeWidth="0.0" text="" wrappingWidth="18.571428298950195" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Text fx:id="attendanceId" fill="#514949" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="fontAwesome" text="" wrappingWidth="18.571428298950195" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="FontAwesome" size="24.0" />
                      </font></Text>
