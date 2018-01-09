@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
-import org.mapdb.Atomic;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
