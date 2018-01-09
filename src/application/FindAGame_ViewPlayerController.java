@@ -48,6 +48,8 @@ public class FindAGame_ViewPlayerController {
 		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/modules/FindAGame_ViewPlayerDetails_SPACING.fxml")), 1, 4);
 		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 1, 5);
 		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/modules/FindAGame_ViewPlayerDetails_SPACING.fxml")), 1, 6);
+		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 1, 7);
+		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/modules/FindAGame_ViewPlayerDetails_SPACING.fxml")), 1, 8);
 
     }
     

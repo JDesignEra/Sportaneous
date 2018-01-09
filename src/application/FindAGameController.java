@@ -76,11 +76,7 @@ public class FindAGameController {
 
 	@FXML
 	public void handleHostAGame(ActionEvent event) throws IOException {
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle("Error");
-		alert.setContentText("Are you ok with this?");
-
-		alert.show();
+		
 	}
 
 	@FXML
@@ -137,21 +133,6 @@ public class FindAGameController {
 	@FXML
 	public void handleSportMenu(ActionEvent event) throws IOException {
 
-	}
-
-	@FXML
-	public void showError() throws IOException {
-		final Stage dialog = new Stage();
-		dialog.initModality(Modality.APPLICATION_MODAL);
-		AnchorPane root = FXMLLoader.load(getClass().getResource("/application/FindAGame_ErrorPopUp.fxml"));
-		Scene dialogScene = new Scene(root, 400, 150);
-		dialog.setScene(dialogScene);
-		dialog.show();
-	}
-
-	@FXML
-	public static String getErrorMsg() {
-		return error;
 	}
 
 }
