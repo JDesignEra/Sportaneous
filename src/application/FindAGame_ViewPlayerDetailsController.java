@@ -45,34 +45,38 @@ public class FindAGame_ViewPlayerDetailsController {
 		System.out.println("target: " + target + " /Players recruited: " + peopleToDisplay.size());
 		//display details of the people who joined the game the target hosted
 		if (FindAGameController.VPD_index < this.peopleToDisplay.size()) {
-			adminNo = this.peopleToDisplay.get(FindAGameController.VPD_index);
-			FindAGameController.VPD_index++;
+			adminNo = this.peopleToDisplay.get(FindAGameController.VPD_index++);
 			System.out.println(adminNo.toLowerCase());
 		}
 		
 		setName();
 		setDP();
+		setHeightWeight();
+		
+		if (FindAGameController.VPD_index == this.peopleToDisplay.size()) {
+			FindAGameController.VPD_index = 0;
+		} 
 	}
 	
-	void setName() {
+	private void setName() {
 		Object name = AccountsDA.getAccData(adminNo.toLowerCase())[3];
 		lbName.setText(name.toString());
 	}
 	
-	void setDP() {
+	private void setDP() {
 		System.out.println(adminNo.toLowerCase());
 		Image img;
 		try {
 			img = new Image("/application/assets/uploads/" + adminNo.toLowerCase() + ".png");
 		} catch (Exception e) {
-			System.out.println(adminNo + "'s profile picture not found; default.png is used instead-");
+			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO FIND " + adminNo + "'s PROFILE PICTURE. default.png IS USED INSTEAD.");
 			img = new Image("/application/assets/uploads/default.png");
 		}
 		ImagePattern ip = new ImagePattern(img);
 		playerDP.setFill(ip);
 	}
 	
-	void setRating(int no) {
+	private void setRating(int no) {
 		String stars = "";
 		if (no <= 5) {
 			for (int i = 0; i < no; i++) {
@@ -80,5 +84,25 @@ public class FindAGame_ViewPlayerDetailsController {
 			}
 		}
 		lbPlayerRating.setText("");
+	}
+	
+	private void setHeightWeight() {
+		String height = "";
+		String weight = "";
+		lbStats.setText("");
+		try {
+			if ((boolean) AccountsDA.getAccData(adminNo)[9]) {
+				height = AccountsDA.getAccData(adminNo)[7].toString() + "m";
+			}
+
+			if ((boolean) AccountsDA.getAccData(adminNo)[10]) {
+				weight = AccountsDA.getAccData(adminNo)[8].toString() + "kg";
+			}
+		
+		} catch (Exception e) {
+			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO READ HEIGHT & WEIGHT");
+		}
+		
+		lbStats.setText(height + " | " + weight);
 	}
 }

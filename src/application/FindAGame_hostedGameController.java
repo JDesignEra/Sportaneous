@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import dataAccess.HostsDA;
 import entity.HostsEntity;
 import javafx.event.ActionEvent;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -56,7 +57,7 @@ public class FindAGame_hostedGameController {
 			list.add(x);
 		}
 		
-		adminNo = list.get(FindAGameController.HostAGame_index);
+		adminNo = list.get(FindAGameController.HostAGame_index++);
 		String name = searchR.get(adminNo).getName();
 		String sportsType = sports[searchR.get(adminNo).getSportsType()];
 		LocalDate ld = searchR.get(adminNo).getDate();
@@ -82,12 +83,9 @@ public class FindAGame_hostedGameController {
 			System.out.println(adminNo + "'s game is full-");
 		}
 
-		if (FindAGameController.HostAGame_index == searchR.size()-1) {
+		if (FindAGameController.HostAGame_index == searchR.size()) {
 			FindAGameController.HostAGame_index = 0;
-		} else {
-			FindAGameController.HostAGame_index++;
-		}
-			
+		} 
 	}
 	
 	// Event Listener on JFXButton[#joinBtn].onAction
@@ -107,7 +105,9 @@ public class FindAGame_hostedGameController {
     void handleNoOfPlayersRecruited(MouseEvent event) throws IOException {
 	    FindAGameController.whosegameisclicked = adminNo;
 		try {
-			Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
+			if (HostsDA.getFriends(adminNo)!=null) {
+				Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
+			} 
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
