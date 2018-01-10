@@ -27,7 +27,7 @@ public class RatingsEntity implements Serializable {
 		return status;
 	}
 
-	public String getUserID() {
+	public String getAdminNo() {
 		return adminNo;
 	}
 
