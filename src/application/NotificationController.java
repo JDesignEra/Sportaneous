@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-
+import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
 import javafx.scene.control.Label;
@@ -13,12 +13,12 @@ import javafx.scene.shape.Circle;
 
 import dataAccess.NotificationsDA;
 
-public class NotificationController {
+public class NotificationController implements Initializable{
 	@FXML private Text lblNotification;
 	@FXML private Circle circlePicture;
 	@FXML private Label lblName;
 	@FXML private Label lblStatus;
-	
+
 	private String adminNo = NotificationsDA.getAdminNo();
 	private String name = NotificationsDA.getName();
 	private String sports = NotificationsDA.getSports();
@@ -27,8 +27,12 @@ public class NotificationController {
 	private String time = NotificationsDA.getTime();
 	private int status = NotificationsDA.getStatus();
 
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		NotificationsDA.initDA();
-		
+
+		if (NotificationsDA.getAllData().length == 0) {
+			
+		}
 	}
 }
