@@ -13,7 +13,7 @@ import entity.FriendsEntity;
 public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
-	private static String sessionID = AccountsDA.getAdminNo();
+	private static String sessionID = AccountsDA.getSession().getAdminNo();
 	private static List<FriendsEntity> sessionFriendsList;
 
 	public static void initDA() {
@@ -46,7 +46,7 @@ public class FriendsDA {
 			Object[] accData = AccountsDA.getAccData(friendsEntity.getFriendAdminNo());
 			Object[] data = new Object[9];
 
-			if (friendsEntity.getStatus() == 1) {
+			if (accData != null && friendsEntity.getStatus() == 1) {
 				data[0] = accData[0]; // AdminNo
 				data[1] = accData[3]; // Name
 				data[2] = accData[7]; // Height

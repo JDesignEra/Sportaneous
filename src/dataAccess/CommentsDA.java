@@ -12,7 +12,13 @@ import entity.CommentsEntity;
 
 public class CommentsDA {
 	private static DB db;
-	private static ConcurrentMap<String, List<CommentsEntity>> comments=-=/]\+	public static void initDA() {
+	private static ConcurrentMap<String, List<CommentsEntity>> comments;
+
+	private CommentsDA() {
+		throw new IllegalStateException("CommentsDA class");
+	}
+
+	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/comments.db")).closeOnJvmShutdown().make();
 
 		comments = db.getTreeMap("comments");

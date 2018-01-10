@@ -30,13 +30,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		root = new BorderPane();
 
-		try {
-			root.setCenter(FXMLLoader.load(lrfViewURL));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		JFXDecorator decorator = new JFXDecorator(primaryStage, root);
 		decorator.setCustomMaximize(true);
 		decorator.setGraphic(new ImageView(new Image(logoURL.toExternalForm())));
@@ -44,21 +37,27 @@ public class Main extends Application {
 
 		Scene scene = new Scene(decorator, 1600, 900);
 		scene.getStylesheets().add(stylesheetURL.toExternalForm());
-
-
-		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-		double stageHeight = primaryStage.getHeight();
-		double stageWidth = primaryStage.getWidth();
-
-		primaryStage.setX(screenBounds.getMaxX() > stageWidth ? (screenBounds.getMaxX() - stageWidth) / 2 : 0);
-		primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 0);
-		primaryStage.setMinWidth(1600);
-		primaryStage.setMinHeight(900);
 		
 		primaryStage.getIcons().add(new Image(logoAltURL.toExternalForm()));
 		primaryStage.setTitle("Sportaneous");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+
+		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		double stageHeight = primaryStage.getHeight();
+		double stageWidth = primaryStage.getWidth();
+		
+		primaryStage.setX(screenBounds.getMaxX() > stageWidth ? (screenBounds.getMaxX() - stageWidth) / 2 : 25);
+		primaryStage.setY(screenBounds.getMaxY() > stageHeight ? (screenBounds.getMaxY() - stageHeight) / 2 : 25);
+		primaryStage.setMinWidth(1600);
+		primaryStage.setMinHeight(900);
+		
+		try {
+			root.setCenter(FXMLLoader.load(lrfViewURL));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {
