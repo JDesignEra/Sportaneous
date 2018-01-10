@@ -7,98 +7,62 @@ import java.util.logging.Logger;
 
 public class RatingsEntity implements Serializable {
 	private static final long serialVersionUID = -280347867690637374L;
-	private final Logger logMsg = Logger.getGlobal();
-	private String status;
-	private String[] userID = new String[12], userName = new String[12];
-	private int[] noRate = new int[12];
-	private BigDecimal[] userRating = new BigDecimal[12];
+	private String status, adminNo, userName;
+	private int noRate, uid;
+	private double userRating;
 
-	public RatingsEntity(String status, String[] userID, String[] userName, int[] noRate, BigDecimal[] userRating) {
-		if (userID.length == this.userID.length) {
-			if (userName.length == this.userName.length) {
-				if (noRate.length == this.noRate.length) {
-					if (userRating.length == this.userRating.length) {
-						this.status = status;
-						this.userID = userID;
-						this.userName = userName;
-						this.noRate = noRate;
-						this.userRating = userRating;
-					}
-					else {
-						logMsg.log(Level.SEVERE, "BigDecimal[] userRating pointer length doesn't match.",
-								new Exception("Please change the size to " + this.userRating.length + "."));
-					}
-				}
-				else {
-					logMsg.log(Level.SEVERE, "int[] noRate pointer length doesn't match.", new Exception("Please change the size to " + this.noRate.length + "."));
-				}
-			}
-			else {
-				logMsg.log(Level.SEVERE, "String[] userName pointer length doesn't match.", new Exception("Please change the size to " + this.userName.length + "."));
-			}
-		}
-		else {
-			logMsg.log(Level.SEVERE, "String[] userID pointer length doesn't match.", new Exception("Please change the size to " + this.userID.length + "."));
-		}
+	public RatingsEntity(int uid, String status, String adminNo, String userName, int noRate, double userRating) {
+       this.uid = uid;                            // to identify the sets of group
+       this.status = status;                      // to know if they completed the rating 
+       this.adminNo = adminNo;
+       this.userName = userName;
+       this.noRate = noRate;  
+       this.userRating = userRating ;
 	}
 
+	public int getUid(){
+		return uid;
+	}
 	public String getStatus() {
 		return status;
 	}
 
-	public String[] getUserID() {
-		return userID;
+	public String getUserID() {
+		return adminNo;
 	}
 
-	public String[] getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 
-	public int[] getNoRate() {
+	public int getNoRate() {
 		return noRate;
 	}
 
-	public BigDecimal[] getUserRating() {
+	public double getUserRating() {
 		return userRating;
 	}
-
+    public void setUid(int uid){
+    	this.uid = uid;   	
+    }
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public void setUserID(String[] userID) {
-		if (userID.length == this.userID.length) {
-			this.userID = userID;
-		}
-		else {
-			logMsg.log(Level.SEVERE, "String[] userID pointer length doesn't match.", new Exception("Please change the size to " + this.userID.length + "."));
-		}
+	public void setadminNo(String adminNo) {
+		 this.adminNo = adminNo;
 	}
 
-	public void setUserName(String[] userName) {
-		if (userName.length == this.userName.length) {
-			this.userName = userName;
-		}
-		else {
-			logMsg.log(Level.SEVERE, "String[] userName pointer length doesn't match.", new Exception("Please change the size to " + this.userName.length + "."));
-		}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public void setNoRate(int[] noRate) {
-		if (noRate.length == this.noRate.length) {
-			this.noRate = noRate;
-		}
-		else {
-			logMsg.log(Level.SEVERE, "int[] noRate pointer length doesn't match.", new Exception("Please change the size to " + this.noRate.length + "."));
-		}
+	public void setNoRate(int noRate) {
+		this.noRate = noRate;
 	}
 
-	public void setUserRating(BigDecimal[] userRating) {
-		if (userRating.length == this.userRating.length) {
-			this.userRating = userRating;
-		}
-		else {
-			logMsg.log(Level.SEVERE, "BigDecimal[] userRating pointer length doesn't match.", new Exception("Please change the size to " + this.userRating.length + "."));
-		}
+	public void setUserRating(double userRating) {
+		this.userRating = userRating;
 	}
+	
 }
