@@ -73,7 +73,7 @@ public class FindAGame_hostedGameController {
 		if (searchR.get(adminNo).getPlayersRecruited() != null && searchR.get(adminNo).getPlayersRecruited().contains(Main.currentUserAdminNo.toUpperCase())) {
 			joinBtn.setDisable(true);
 			joinBtn.setStyle("-fx-background-color: grey;");
-			System.out.println(adminNo + " ALREADY INSIDE");
+			System.out.println("User has joined " + adminNo + "'s game");
 		}
 
 		if (FindAGameController.HostAGame_index == searchR.size()-1) {
@@ -100,8 +100,6 @@ public class FindAGame_hostedGameController {
 	@FXML
     void handleNoOfPlayersRecruited(MouseEvent event) throws IOException {
 	    FindAGameController.whosegameisclicked = adminNo;
-//	    System.out.println(FindAGameController.whosegameisclicked);
-//	    System.out.println(HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
 		try {
 			Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
 	    } catch (Exception e) {
@@ -149,12 +147,15 @@ public class FindAGame_hostedGameController {
 	}
 	
 	void setDP(String adminNo) {
-
-		Image img = new Image("/application/assets/uploads/" + adminNo + ".jpg");
-		ImagePattern iv = new ImagePattern(img);
-		
-		hostDP.setFill(iv);
-		
+		Image img;
+		try {
+			img = new Image("/application/assets/uploads/" + adminNo.toLowerCase() + ".png");
+		} catch (Exception e) {
+			System.out.println(adminNo + "'s profile picture not found; default.png is used instead-");
+			img = new Image("/application/assets/uploads/default.png");
+		}
+		ImagePattern ip = new ImagePattern(img);
+		hostDP.setFill(ip);
 	}
 	
 	void setNoOfPlayersLabel(String adminNo) {
@@ -170,6 +171,7 @@ public class FindAGame_hostedGameController {
 	}
 	
 	int checkNoOfPlayersNeeded(int a) {
+		
 		if (sports[a].equals("Basketball")) {
 			return 10;
 		}
