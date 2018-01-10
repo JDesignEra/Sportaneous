@@ -10,6 +10,8 @@ import dataAccess.CommentsDA;
 
 import modules.Misc;
 
+import application.ProfileViewController;
+
 public class CommentsViewController {
 	@FXML private Circle dpCricle;
 	@FXML private Text nameTxt;
@@ -17,8 +19,7 @@ public class CommentsViewController {
 	@FXML private Text ratingTxt;
 	@FXML private GridPane commContentGridPane;
 
-	private static int index = 0;
-
+	private int index = ProfileViewController.getCommentIndex();
 	private Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
 	private String adminNo = comments[index][0].toString();
 	private String name = comments[index][1].toString();
@@ -31,33 +32,7 @@ public class CommentsViewController {
 			commContentGridPane.add(new Misc().cropCirclePhoto(adminNo, 75), 0, 0);
 			nameTxt.setText(name);
 			commentTxt.setText(comment);
-
-			// Ratings
-			if (rating > 0) {
-				StringBuilder ratingStars = new StringBuilder();
-
-				for (int i = 0; i < 5; i++) {
-					if (i < (int) rating) {
-						ratingStars.append("\uf005 ");
-					}
-					else if ((rating - i) >= 0.5) {
-						ratingStars.append("\uf123 ");
-					}
-					else {
-						ratingStars.append((i < 4 ? "\uf006 " : "\uf006"));
-					}
-				}
-
-				ratingTxt.setText(ratingStars.toString());
-			}
+			ratingTxt.setText(new Misc().getRatingShapes(rating));
 		}
-	}
-
-	public static void setIndex(int index) {
-		CommentsViewController.index = index;
-	}
-
-	public static int getIndex() {
-		return index;
 	}
 }

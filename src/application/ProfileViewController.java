@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -24,8 +25,6 @@ import dataAccess.CommentsDA;
 
 import modules.Misc;
 import modules.TransitionAnimation;
-
-import application.modules.CommentsViewController;
 
 public class ProfileViewController implements Initializable {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt, introTxt;
@@ -47,6 +46,9 @@ public class ProfileViewController implements Initializable {
 	private double weight = AccountsDA.getWeight();
 	private double rating = AccountsDA.getRating();
 
+	private static int commentIndex = 0;
+	private Object[][] comments;
+
 	private GridPane commContentGridPane;
 
 	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
@@ -55,10 +57,12 @@ public class ProfileViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		CommentsDA.initDA();
+		comments = CommentsDA.getComments(adminNo);
 
-		if (CommentsDA.getComments(adminNo).length > 1) {
+		if (comments != null && comments.length > 1) {
 			nxtComBtn.getStyleClass().remove("inactive");
 			nxtComBtn.getStyleClass().add("danger");
+			nxtComBtn.setCursor(Cursor.HAND);
 		}
 
 		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
@@ -110,7 +114,7 @@ public class ProfileViewController implements Initializable {
 		}
 
 		// Comments
-		if (CommentsDA.getComments(adminNo) != null) {
+		if (comments != null) {
 			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 			commContentGridPane = new GridPane();
 
@@ -139,54 +143,23 @@ public class ProfileViewController implements Initializable {
 		}
 	}
 
-	// Event Listener on JFXButton[#prevComBtn].onAction
-	@FXML
-	public void prevComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() > 0) {
-			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
-				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
-			}), new KeyFrame(Duration.millis(300), actionEv -> {
-				CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
-				commContentGridPane = new GridPane();
-
-				try {
-					commContentGridPane = FXMLLoader.load(commentsViewURL);
-				}
-				catch (Exception e) {
-					e.getStackTrace();
-				}
-
-				commContentGridPane.getStyleClass().add("commContent");
-
-				commentGridPane.add(commContentGridPane, 0, 1);
-				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
-
-				nxtComBtn.getStyleClass().remove("inactive");
-				nxtComBtn.getStyleClass().add("danger");
-
-				if (CommentsViewController.getIndex() <= 0) {
-					prevComBtn.getStyleClass().remove("danger");
-					prevComBtn.getStyleClass().add("inactive");
-				}
-				else {
-					prevComBtn.getStyleClass().remove("inactive");
-					prevComBtn.getStyleClass().add("danger");
-				}
-
-				new TransitionAnimation().fromRightFadeIn(500, commContentGridPane, commentGridPane.getPadding().getLeft() * 2);
-			})).play();
-		}
-	}
-
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
 	public void nxtComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
+		if (comments != null && commentIndex < comments.length - 1) {
+			prevComBtn.setCursor(Cursor.HAND);
+
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
 				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
 			}), new KeyFrame(Duration.millis(300), actionEv -> {
-				CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
+
+				if (++commentIndex < comments.length - 1) {
+					nxtComBtn.setCursor(Cursor.HAND);
+				}
+				else {
+					nxtComBtn.setCursor(Cursor.DEFAULT);
+				}
+
 				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commContentGridPane = new GridPane();
 
@@ -205,7 +178,7 @@ public class ProfileViewController implements Initializable {
 				prevComBtn.getStyleClass().remove("inactive");
 				prevComBtn.getStyleClass().add("danger");
 
-				if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
+				if (commentIndex == comments.length - 1) {
 					nxtComBtn.getStyleClass().remove("danger");
 					nxtComBtn.getStyleClass().add("inactive");
 				}
@@ -219,4 +192,50 @@ public class ProfileViewController implements Initializable {
 		}
 	}
 
+	// Event Listener on JFXButton[#prevComBtn].onAction
+	@FXML
+	public void prevComBtnOnAction(ActionEvent event) {
+		if (comments != null && commentIndex > 0) {
+			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
+				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
+			}), new KeyFrame(Duration.millis(300), actionEv -> {
+				if (--commentIndex < 1) {
+					prevComBtn.setCursor(Cursor.DEFAULT);
+				}
+
+				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+				commContentGridPane = new GridPane();
+
+				try {
+					commContentGridPane = FXMLLoader.load(commentsViewURL);
+				}
+				catch (Exception e) {
+					e.getStackTrace();
+				}
+
+				commContentGridPane.getStyleClass().add("commContent");
+
+				commentGridPane.add(commContentGridPane, 0, 1);
+				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+
+				nxtComBtn.getStyleClass().remove("inactive");
+				nxtComBtn.getStyleClass().add("danger");
+
+				if (commentIndex <= 0) {
+					prevComBtn.getStyleClass().remove("danger");
+					prevComBtn.getStyleClass().add("inactive");
+				}
+				else {
+					prevComBtn.getStyleClass().remove("inactive");
+					prevComBtn.getStyleClass().add("danger");
+				}
+
+				new TransitionAnimation().fromRightFadeIn(500, commContentGridPane, commentGridPane.getPadding().getLeft() * 2);
+			})).play();
+		}
+	}
+
+	public static int getCommentIndex() {
+		return commentIndex;
+	}
 }

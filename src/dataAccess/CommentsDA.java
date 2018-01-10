@@ -23,18 +23,16 @@ public class CommentsDA {
 
 		comments = db.getTreeMap("comments");
 
-		/*
-		 * List<CommentsEntity> ceList = new ArrayList<>(); ceList.add(new
-		 * CommentsEntity("test", "test", "test", 2.5)); ceList.add(new
-		 * CommentsEntity("test2", "test2", "test2", 3.5));
-		 *
-		 * comments.put("admin", ceList);
-		 */
+		// List<CommentsEntity> ceList = new ArrayList<>();
+		// ceList.add(new CommentsEntity("test", "test", "test", 2.5));
+		// ceList.add(new CommentsEntity("test2", "test2", "test2", 3.5));
+		// comments.put("admin", ceList);
+
 		db.commit();
 	}
 
 	public static Object[][] getComments(String adminNo) {
-		Object[][] data = new Object[0][0];
+		Object[][] data = null;
 
 		if (comments.get(adminNo) != null) {
 			data = new Object[comments.get(adminNo).size()][4];
