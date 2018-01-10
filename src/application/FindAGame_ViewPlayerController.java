@@ -31,16 +31,21 @@ public class FindAGame_ViewPlayerController {
     	
     	scrollPane.setFitToWidth(true);
     	
-    	if (HostsDA.getFriends(FindAGameController.whosegameisclicked).size() > 5) {
-    		anchorDisplay.setMaxHeight(20+(250+20)*HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
-    		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
-    	} else {
-    		anchorDisplay.setMinHeight(1000);    	
+    	try {
+    		if (HostsDA.getFriends(FindAGameController.whosegameisclicked).size() > 5) {
+    			anchorDisplay.setMaxHeight(20+(250+20)*HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
+    			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
+    		} else {
+    			anchorDisplay.setMinHeight(1000);    	
+    		}
+    		for (int i = 1; i <= HostsDA.getFriends(FindAGameController.whosegameisclicked).size(); i++) {
+    			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
+    		}
+    	} catch (Exception e) {
+    		System.out.println("Recruited players list is not created.");
     	}
     	
-    	for (int i = 1; i <= HostsDA.getFriends(FindAGameController.whosegameisclicked).size(); i++) {
-    		infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
-    	}
+    	
     }
     
     @FXML void handleCloseBtn(ActionEvent event) {

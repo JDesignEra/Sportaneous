@@ -75,6 +75,12 @@ public class FindAGame_hostedGameController {
 			joinBtn.setStyle("-fx-background-color: grey;");
 			System.out.println("User has joined " + adminNo + "'s game");
 		}
+		
+		if (searchR.get(adminNo).getPlayersRecruited() != null && searchR.get(adminNo).getPlayersRecruited().size() == HostsDA.getGameSize(searchR.get(adminNo).getSportsType())) {
+			joinBtn.setDisable(true);
+			joinBtn.setStyle("-fx-background-color: grey;");
+			System.out.println(adminNo + "'s game is full-");
+		}
 
 		if (FindAGameController.HostAGame_index == searchR.size()-1) {
 			FindAGameController.HostAGame_index = 0;
@@ -159,7 +165,7 @@ public class FindAGame_hostedGameController {
 	}
 	
 	void setNoOfPlayersLabel(String adminNo) {
-		int total = checkNoOfPlayersNeeded(searchR.get(adminNo).getSportsType());
+		int total = HostsDA.getGameSize(searchR.get(adminNo).getSportsType());
 		int current;
 		if (HostsDA.getHostDB().get(adminNo).getPlayersRecruited() == null) {
 			current = 0;
@@ -170,28 +176,6 @@ public class FindAGame_hostedGameController {
 		noOfplayers.setText(current + " / " + total);
 	}
 	
-	int checkNoOfPlayersNeeded(int a) {
-		
-		if (sports[a].equals("Basketball")) {
-			return 10;
-		}
-		if (sports[a].equals("Badminton")) {
-			return 4;
-		}
-		if (sports[a].equals("Frisbee")) {
-			return 7;
-		}
-		if (sports[a].equals("Soccer")) {
-			return 22;
-		}
-		if (sports[a].equals("Tennis")) {
-			return 4;
-		}
-		if (sports[a].equals("Squash")) {
-			return 4;
-		}
-		
-		return 0;
-	}
+
 	
 }

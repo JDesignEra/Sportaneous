@@ -54,6 +54,7 @@ public class FindAGameApp extends Application {
 //			AccountsDA.addAccount("Simon Cowell", "170152Z", "sc@mymail.nyp.edu.sg", "a");
 			AccountsDA.addAccount("Jon Snow", "170866B", "js@mymail.nyp.edu.sg", "a");
 			HostsDA.addFriends("170552A", "170866B");
+			AccountsDA.addAccount("Admin", "a", "a@mymail.nyp.edu.sg", "a");
 			
 
 		}

@@ -17,12 +17,11 @@ public class HostsDA {
 	private static ConcurrentMap<String, HostsEntity> hosts;
 	private static HashMap<String, HostsEntity> searchResults;
 	private static String[] sports = new String[] { "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis" };
+	public static HashMap<String, Integer> gameSize = new HashMap<String, Integer>();
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/hosts.db")).closeOnJvmShutdown().make();
-
 		hosts = db.getTreeMap("hosts");
-
 		db.commit();
 	}
 
@@ -281,6 +280,17 @@ public class HostsDA {
 
 	public static void initializeSearchResults() {
 		searchResults = new HashMap<String, HostsEntity>();
+	}
+	
+	public static int getGameSize(int sportType) {
+		gameSize.put(sports[0], 4);
+		gameSize.put(sports[1], 10);
+		gameSize.put(sports[2], 7);
+		gameSize.put(sports[3], 22);
+		gameSize.put(sports[4], 4);
+		gameSize.put(sports[5], 4);
+		
+		return gameSize.get(sports[sportType]);
 	}
 
 	public static void main(String args[]) {

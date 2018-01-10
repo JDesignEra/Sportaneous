@@ -54,7 +54,6 @@ public class FindAGameController {
 	static String whosegameisclicked;
 	@FXML
 	public void initialize() throws IOException {
-		
 		whosegameisclicked = Main.currentUserAdminNo;
 		HostsDA.initializeSearchResults();
 		displayAnchor.setMaxHeight(1043);
