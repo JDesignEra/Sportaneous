@@ -27,7 +27,7 @@ public class RatingsDA {
 	}
 
 	public static Object[][] getAllData() {
-		Object[][] rowData = new Object[ratings.size()][7];
+		Object[][] rowData = new Object[ratings.size()][5];
 
 		int i = 0;
 		for (List<RatingsEntity> ratingsEntity : ratings.values()) {
@@ -44,8 +44,8 @@ public class RatingsDA {
 	public static void add(){
 
 	}
-
-	public static void edit(String comment, double rating){
+	
+	public static void edit(String comment, int rating){
 		CommentsDA.addComment(sessionID, comment, rating);
 	}
 
