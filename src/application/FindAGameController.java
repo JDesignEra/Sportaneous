@@ -54,6 +54,8 @@ public class FindAGameController {
 	static String whosegameisclicked;
 	@FXML
 	public void initialize() throws IOException {
+		System.out.println("(FindAGameController) USER THAT IS USING THE APP NOW: " + Main.currentUserAdminNo);
+		
 		whosegameisclicked = Main.currentUserAdminNo;
 		HostsDA.initializeSearchResults();
 		displayAnchor.setMaxHeight(1043);
@@ -64,13 +66,17 @@ public class FindAGameController {
 		sportMenu.setItems(options);
 		sportMenu.setPromptText("Select a sport");
 		scrollPane.setFitToWidth(true);
+		
+		if (HostsDA.returnHostsList().size() <= 3) {
+			scrollPane.setFitToHeight(true);
+		}
 
 		for (int a = 0; a < HostsDA.returnHostsList().size(); a++) {
+			System.out.println("GridPane infoDisplayField (1, " + i + ")");
 			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")), 1, i++);
 		}
 
 		displayAnchor.setMinHeight(HostsDA.returnHostsList().size() * 228);
-
 	}
 
 	@FXML
@@ -108,14 +114,16 @@ public class FindAGameController {
 
 		if (HostsDA.getSearchResults().size() > 0) {
 			infoDisplayField.getChildren().clear();
-			FindAGameApp.index = 0;
+		}
+		
+		if (HostsDA.getSearchResults().size() <= 3) {
+			scrollPane.setFitToHeight(true);
 		}
 
-		i = -1;
+		i = 0;
 
 		for (int a = 0; a < HostsDA.getSearchResults().size(); a++) {
-			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_space.fxml")), 1, ++i);
-			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")), 1, ++i);
+			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")), 1, i++);
 		}
 
 		if (HostsDA.getSearchResults().size() > 0) {

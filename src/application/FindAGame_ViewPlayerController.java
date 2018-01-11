@@ -45,9 +45,6 @@ public class FindAGame_ViewPlayerController {
     		System.out.println("Recruited players list is not created.");
     	}
     	
-    	System.out.println(a);
-    	
-    	
     }
     
     @FXML void handleCloseBtn(ActionEvent event) {
