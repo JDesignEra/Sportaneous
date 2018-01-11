@@ -47,20 +47,22 @@ public class RatingsDA {
 		int noRated = 0;
 		int i = 0;
 
-		// Updated Session Account
+		// Update Session Account
 		for (RatingsEntity ratingsEntity : ratingList) {
 			if (ratingsEntity.getMatchID().equals(matchID)) {
-				adminGrp = ratingsEntity.getAdminNums();
+				adminGrp = ratingsEntity.getAdminNums();	// Store adminNumber there's not current sessionID
+				noRated = ratingsEntity.incrementAndGetNoRate();	// Store No. of players rated
 
 				ratingsEntity.setComments(comments);
 				ratingsEntity.setRatings(rating);
-				noRated = ratingsEntity.incrementAndGetNoRate();
 
-				if (noRated == adminGrp.length) {
+				if (noRated == adminGrp.length) {	// If is last player to submit ratings, remove it.
 					ratingList.remove(i);
 					ratings.put(sessionID, ratingList);
+					
+					// TODO update comment's database and account's database
 				}
-				else {
+				else {	// Else just replace it.
 					ratingList.set(i, ratingsEntity);
 					ratings.put(sessionID, ratingList);
 					break;
@@ -70,20 +72,20 @@ public class RatingsDA {
 			i++;
 		}
 
-		// Updated Other Accounts
+		// Update Other Accounts
 		for (String adminNo : adminGrp) {
 			ratingList = (ratings.get(adminNo) != null ? ratings.get(adminNo) : new ArrayList<>());
 			i = 0;
 
 			for (RatingsEntity ratingsEntity : ratingList) {
 				if (ratingsEntity.getMatchID().equals(matchID)) {
-					if (ratingsEntity.getNoRated() == noRated) {
+					if (ratingsEntity.getNoRated() == noRated) {	// If is last player to submit ratings, remove it.
 						ratingsEntity.incrementAndGetNoRate();
 						
 						ratingList.set(i, ratingsEntity);
 						ratings.put(adminNo, ratingList);
 					}
-					else {
+					else {	// Else just update No. of players rated
 						ratingList.remove(i);
 						ratings.put(adminNo, ratingList);
 					}
