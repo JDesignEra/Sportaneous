@@ -28,20 +28,20 @@ public class AccountsDA {
 		accounts = db.getTreeMap("accounts");
 
 		// accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg",
-		// "password", "Administrator", "", "", "", "", 0, 0, false, false,
-		// new double[] { 0, 0, 0, 0, 5 }, 0, 0));
+		// "password", "Administrator", "", "", "", "", 0, 0, false, false, new int[] {
+		// 0, 0, 0, 0, 5 }, 0, 0));
 		// accounts.put("1", new AccountsEntity("1", "admin@nyp.edu.sg", "password",
 		// "1", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new double[] { 1, 0, 3, 0, 0 }, 0, 0));
+		// new int[] { 1, 0, 3, 0, 0 }, 0, 0));
 		// accounts.put("2", new AccountsEntity("2", "admin@nyp.edu.sg", "password",
 		// "2", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new double[] { 1, 0, 0, 0, 1 }, 0, 0));
+		// new int[] { 1, 0, 0, 0, 1 }, 0, 0));
 		// accounts.put("3", new AccountsEntity("3", "admin@nyp.edu.sg", "password",
 		// "3", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new double[] { 1, 0, 0, 2, 0 }, 0, 0));
+		// new int[] { 1, 0, 0, 2, 0 }, 0, 0));
 		// accounts.put("4", new AccountsEntity("4", "admin@nyp.edu.sg", "password",
 		// "4", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new double[] { 1, 0, 1, 0, 0 }, 0, 0));
+		// new int[] { 1, 0, 1, 0, 0 }, 0, 0));
 		db.commit();
 	}
 
@@ -136,7 +136,7 @@ public class AccountsDA {
 			}
 		}
 
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new double[] { 0, 0, 0, 0, 0 }, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 0 }, 0, 0)) != null) {
 			return 4; // Registered Admin Number
 		}
 
@@ -310,17 +310,16 @@ public class AccountsDA {
 		return session.getTotalMatch();
 	}
 
-	private static double calRating(double[] rating) {
+	private static double calRating(int[] rating) {
 		if (rating.length != 5) {
 			throw new IllegalArgumentException("rating must be the length of 5");
 		}
 
-		double total = 0;
-
-		for (double d : rating) {
+		int total = 0;
+		for (int d : rating) {
 			total += d;
 		}
 
-		return total / (rating[0] + (rating[1] / 2) + (rating[2] / 3) + (rating[3] / 4) + (rating[4] / 5));
+		return total / (rating[0] + ((double) rating[1] / 2) + ((double) rating[2] / 3) + ((double) rating[3] / 4) + ((double) rating[4] / 5));
 	}
 }

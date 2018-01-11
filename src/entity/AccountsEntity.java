@@ -6,16 +6,16 @@ public class AccountsEntity implements Serializable {
 	private static final long serialVersionUID = 3819033989766829058L;
 	private String adminNo, email, password, name, favSport, interestedSports, intro, matchID;
 	private double height, weight;
-	private double[] rating;
+	private int[] rating;
 	private int matchPlayed, totalMatch;
 	private boolean heightVisibility, weightVisibility;
 
 	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, String matchID, double height,
-							double weight, boolean heightVisibility, boolean weightVisibility, double[] rating,int matchPlayed, int totalMatched) {
+							double weight, boolean heightVisibility, boolean weightVisibility, int[] rating, int matchPlayed, int totalMatched) {
 		if (rating.length != 5) {
 			throw new IllegalArgumentException("rating argument has to be the length of 5.");
 		}
-		
+
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
@@ -81,7 +81,7 @@ public class AccountsEntity implements Serializable {
 		return weightVisibility;
 	}
 
-	public double[] getRating() {
+	public int[] getRating() {
 		return rating;
 	}
 
@@ -141,11 +141,11 @@ public class AccountsEntity implements Serializable {
 		this.weightVisibility = weightVisibility;
 	}
 
-	public void setRating(double[] rating) {
+	public void setRating(int[] rating) {
 		if (rating.length != 5) {
 			throw new IllegalArgumentException("rating argument has to be the length of 5");
 		}
-		
+
 		this.rating = rating;
 	}
 
