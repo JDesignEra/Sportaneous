@@ -24,7 +24,6 @@ public class AccountsDA {
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
-
 		accounts = db.getTreeMap("accounts");
 
 		// accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg",

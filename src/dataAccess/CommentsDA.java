@@ -20,7 +20,6 @@ public class CommentsDA {
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/comments.db")).closeOnJvmShutdown().make();
-
 		comments = db.getTreeMap("comments");
 
 		// List<CommentsEntity> ceList = new ArrayList<>();
