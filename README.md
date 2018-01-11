@@ -5,8 +5,8 @@ A sports matchmaking software...
 
 Guidelines
 ------
-* [Sportaneous's Wireframe](https://unoq8a.axshare.com/home.html)
-* [Sportaneous's Guidelines](https://y698fv.axshare.com/#g=1&p=index)
+* [Sportaneous's Wireframe](https://y698fv.axshare.com/#g=1&p=index)
+* [Sportaneous's Guidelines](https://unoq8a.axshare.com/home.html)
 * [Google Material Design's Guidelines](https://material.io/guidelines/)
 
 Documentation
