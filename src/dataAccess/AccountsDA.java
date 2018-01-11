@@ -27,16 +27,21 @@ public class AccountsDA {
 
 		accounts = db.getTreeMap("accounts");
 
-		accounts.put("admin",
-				new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
-		accounts.put("1",
-				new AccountsEntity("1", "admin@nyp.edu.sg", "password", "1", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
-		accounts.put("2",
-				new AccountsEntity("2", "admin@nyp.edu.sg", "password", "2", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
-		accounts.put("3",
-				new AccountsEntity("3", "admin@nyp.edu.sg", "password", "3", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
-		accounts.put("4",
-				new AccountsEntity("4", "admin@nyp.edu.sg", "password", "4", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		// accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg",
+		// "password", "Administrator", "", "", "", "", 0, 0, false, false,
+		// new double[] { 0, 0, 0, 0, 5 }, 0, 0));
+		// accounts.put("1", new AccountsEntity("1", "admin@nyp.edu.sg", "password",
+		// "1", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
+		// new double[] { 1, 0, 3, 0, 0 }, 0, 0));
+		// accounts.put("2", new AccountsEntity("2", "admin@nyp.edu.sg", "password",
+		// "2", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
+		// new double[] { 1, 0, 0, 0, 1 }, 0, 0));
+		// accounts.put("3", new AccountsEntity("3", "admin@nyp.edu.sg", "password",
+		// "3", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
+		// new double[] { 1, 0, 0, 2, 0 }, 0, 0));
+		// accounts.put("4", new AccountsEntity("4", "admin@nyp.edu.sg", "password",
+		// "4", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
+		// new double[] { 1, 0, 1, 0, 0 }, 0, 0));
 		db.commit();
 	}
 
@@ -56,8 +61,7 @@ public class AccountsDA {
 			data[i][9] = accountsEntity.getWeight();
 			data[i][10] = accountsEntity.getHeightVisibility();
 			data[i][11] = accountsEntity.getWeightVisibility();
-			data[i][12] = accountsEntity.getRating();
-			data[i][13] = accountsEntity.getNoRate();
+			data[i][12] = calRating(accountsEntity.getRating());
 			data[i][14] = accountsEntity.getMatchPlayed();
 			data[i][15] = accountsEntity.getTotalMatch();
 			i++;
@@ -77,7 +81,7 @@ public class AccountsDA {
 	 * @return Object[]
 	 */
 	public static Object[] getAccData(String adminNo) {
-		AccountsEntity accountsEntity = accounts.get(adminNo);
+		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
 		Object[] data = new Object[15];
 
 		data[0] = accountsEntity.getAdminNo();
@@ -91,8 +95,7 @@ public class AccountsDA {
 		data[8] = accountsEntity.getWeight();
 		data[9] = accountsEntity.getHeightVisibility();
 		data[10] = accountsEntity.getWeightVisibility();
-		data[11] = accountsEntity.getRating();
-		data[12] = accountsEntity.getNoRate();
+		data[11] = calRating(accountsEntity.getRating());
 		data[13] = accountsEntity.getMatchPlayed();
 		data[14] = accountsEntity.getTotalMatch();
 
@@ -133,7 +136,7 @@ public class AccountsDA {
 			}
 		}
 
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, 0, 0, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new double[] { 0, 0, 0, 0, 0 }, 0, 0)) != null) {
 			return 4; // Registered Admin Number
 		}
 
@@ -178,7 +181,6 @@ public class AccountsDA {
 		accountsEntity.setHeightVisibility(heightVisibility);
 		accountsEntity.setWeightVisibility(weightVisibility);
 		accountsEntity.setRating(session.getRating());
-		accountsEntity.setNoRate(session.getNoRate());
 		accountsEntity.setMatchPlayed(session.getMatchPlayed());
 		accountsEntity.setTotalMatch(session.getTotalMatch());
 
@@ -245,8 +247,7 @@ public class AccountsDA {
 	}
 
 	public static AccountsEntity getSession() {
-		AccountsEntity accountsEntity = session;
-		return accountsEntity;
+		return session;
 	}
 
 	public static String getAdminNo() {
@@ -298,11 +299,7 @@ public class AccountsDA {
 	}
 
 	public static double getRating() {
-		return session.getRating();
-	}
-
-	public static int getNoRate() {
-		return session.getNoRate();
+		return calRating(session.getRating());
 	}
 
 	public static int getMatchPlayed() {
@@ -311,5 +308,19 @@ public class AccountsDA {
 
 	public static int getTotalMatch() {
 		return session.getTotalMatch();
+	}
+
+	private static double calRating(double[] rating) {
+		if (rating.length != 5) {
+			throw new IllegalArgumentException("rating must be the length of 5");
+		}
+
+		double total = 0;
+
+		for (double d : rating) {
+			total += d;
+		}
+
+		return total / (rating[0] + (rating[1] / 2) + (rating[2] / 3) + (rating[3] / 4) + (rating[4] / 5));
 	}
 }

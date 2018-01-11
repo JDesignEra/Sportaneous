@@ -5,12 +5,17 @@ import java.io.Serializable;
 public class AccountsEntity implements Serializable {
 	private static final long serialVersionUID = 3819033989766829058L;
 	private String adminNo, email, password, name, favSport, interestedSports, intro, matchID;
-	private double height, weight, rating;
-	private int noRate, matchPlayed, totalMatch;
+	private double height, weight;
+	private double[] rating;
+	private int matchPlayed, totalMatch;
 	private boolean heightVisibility, weightVisibility;
 
 	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, String matchID, double height,
-							double weight, boolean heightVisibility, boolean weightVisibility, double rating, int noRating, int matchPlayed, int totalMatched) {
+							double weight, boolean heightVisibility, boolean weightVisibility, double[] rating,int matchPlayed, int totalMatched) {
+		if (rating.length != 5) {
+			throw new IllegalArgumentException("rating argument has to be the length of 5.");
+		}
+		
 		this.adminNo = adminNo;
 		this.email = email;
 		this.password = password;
@@ -24,7 +29,6 @@ public class AccountsEntity implements Serializable {
 		this.heightVisibility = heightVisibility;
 		this.weightVisibility = weightVisibility;
 		this.rating = rating;
-		this.noRate = noRating;
 		this.matchPlayed = matchPlayed;
 		this.totalMatch = totalMatched;
 	}
@@ -77,12 +81,8 @@ public class AccountsEntity implements Serializable {
 		return weightVisibility;
 	}
 
-	public double getRating() {
+	public double[] getRating() {
 		return rating;
-	}
-
-	public int getNoRate() {
-		return noRate;
 	}
 
 	public int getMatchPlayed() {
@@ -141,12 +141,12 @@ public class AccountsEntity implements Serializable {
 		this.weightVisibility = weightVisibility;
 	}
 
-	public void setRating(double rating) {
+	public void setRating(double[] rating) {
+		if (rating.length != 5) {
+			throw new IllegalArgumentException("rating argument has to be the length of 5");
+		}
+		
 		this.rating = rating;
-	}
-
-	public void setNoRate(int noRate) {
-		this.noRate = noRate;
 	}
 
 	public void setMatchPlayed(int matchPlayed) {

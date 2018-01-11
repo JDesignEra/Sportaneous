@@ -23,7 +23,7 @@ public class CommentsViewController {
 	private String adminNo = comments[index][0].toString();
 	private String name = comments[index][1].toString();
 	private String comment = comments[index][2].toString();
-	private double rating = (double) comments[index][3];
+	private int rating = (int) comments[index][3];
 
 	@FXML
 	public void initialize() {
@@ -31,25 +31,7 @@ public class CommentsViewController {
 			commContentGridPane.add(new Misc().cropCirclePhoto(adminNo, 75), 0, 0);
 			nameTxt.setText(name);
 			commentTxt.setText(comment);
-
-			// Ratings
-			if (rating > 0) {
-				StringBuilder ratingStars = new StringBuilder();
-
-				for (int i = 0; i < 5; i++) {
-					if (i < (int) rating) {
-						ratingStars.append("\uf005 ");
-					}
-					else if ((rating - i) >= 0.5) {
-						ratingStars.append("\uf123 ");
-					}
-					else {
-						ratingStars.append((i < 4 ? "\uf006 " : "\uf006"));
-					}
-				}
-
-				ratingTxt.setText(ratingStars.toString());
-			}
+			ratingTxt.setText(new Misc().getRatingShapes(rating));
 		}
 	}
 

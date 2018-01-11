@@ -270,7 +270,10 @@ public class EditProfileViewController implements Initializable {
 			}
 
 			// String favSport assignment
-			if (!favSportComboBox.getSelectionModel().getSelectedItem().isEmpty() && !favSportComboBox.getSelectionModel().getSelectedItem().equals("None")) {
+			if (favSportComboBox.getSelectionModel().getSelectedItem() == null || favSportComboBox.getSelectionModel().getSelectedItem().equals("None")) {
+				favSport = "";
+			}
+			else {
 				favSport = favSportComboBox.getSelectionModel().getSelectedItem();
 			}
 
