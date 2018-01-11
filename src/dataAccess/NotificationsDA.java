@@ -1,6 +1,7 @@
 package dataAccess;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
@@ -10,7 +11,7 @@ import entity.NotificationsEntity;
 
 public class NotificationsDA {
 	private static DB db;
-	private static ConcurrentMap<String, NotificationsEntity> notifications;
+	private static ConcurrentMap<String, List<NotificationsEntity>> notifications;
 	private static NotificationsEntity session;
 
 	public static void initDA() {
@@ -25,7 +26,7 @@ public class NotificationsDA {
 		db.commit();
 	}
 
-	public static Object[][] getAllData() {
+	/*public static Object[][] getAllData() {
 		Object[][] rowData = new Object[notifications.size()][7];
 
 		int i = 0;
@@ -40,6 +41,10 @@ public class NotificationsDA {
 			i++;
 		}
 		return rowData;
+	}*/
+
+	public static Object[][] getAccountNotifications(String adminNo) {
+		return notifications.get(adminNo).toArray(new Object[notifications.get(adminNo).size()][]);
 	}
 
 	public static int deleteNotificaions(int id) {
@@ -82,7 +87,7 @@ public class NotificationsDA {
 		return session.getStatus();
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		initDA();
 
 		for (int i = 0; i < getAllData().length; i++) {
@@ -90,5 +95,5 @@ public class NotificationsDA {
 				System.out.println(j);
 			}
 		}
-	}
+	}*/
 }
