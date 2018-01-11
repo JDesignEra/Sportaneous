@@ -22,7 +22,7 @@ public class RatingsDA {
 		db.commit();
 	}
 
-	public static void addRating(String matchID, String[] adminNums) {
+	public static void addRatings(String matchID, String[] adminNums) {
 		for (String adminNo : adminNums) {
 			List<RatingsEntity> ratingList = (ratings.get(adminNo) != null ? ratings.get(adminNo) : new ArrayList<>());
 			String[] adminGrp = new String[adminNums.length - 1];
@@ -41,7 +41,7 @@ public class RatingsDA {
 		}
 	}
 
-	public static void updateRating(String matchID, String[] comments, int[] rating, boolean[] attendances) {
+	public static void updateRatings(String matchID, String[] comments, int[] rating, boolean[] attendances) {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		String[] adminGrp = null;
 		int noRated = 0;
