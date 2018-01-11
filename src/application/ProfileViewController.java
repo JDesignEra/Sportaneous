@@ -54,8 +54,6 @@ public class ProfileViewController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		CommentsDA.initDA();
-
 		if (CommentsDA.getComments(adminNo).length > 1) {
 			nxtComBtn.getStyleClass().remove("inactive");
 			nxtComBtn.getStyleClass().add("danger");

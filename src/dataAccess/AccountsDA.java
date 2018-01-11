@@ -101,6 +101,13 @@ public class AccountsDA {
 		return data;
 	}
 
+	public static void updateAccRating(String adminNo, int... ratings) {
+		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
+		accountsEntity.setRating(ratings);
+
+		accounts.replace(adminNo, accountsEntity);
+	}
+
 	public static int login(String adminNo, String password) {
 		AccountsEntity accountsEntity = null;
 		adminNo = adminNo.toLowerCase();

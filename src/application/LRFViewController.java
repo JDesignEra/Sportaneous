@@ -25,6 +25,13 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import dataAccess.AccountsDA;
+import dataAccess.CommentsDA;
+import dataAccess.EquipmentsDA;
+import dataAccess.FacilitiesDA;
+import dataAccess.FriendsDA;
+import dataAccess.HostsDA;
+import dataAccess.NotificationsDA;
+import dataAccess.RatingsDA;
 
 import modules.Snackbar;
 
@@ -142,6 +149,16 @@ public class LRFViewController implements Initializable {
 		logoImageView.setImage(new Image(logoURL.toExternalForm()));
 	}
 
+	private void initDA() {
+		CommentsDA.initDA();
+		EquipmentsDA.initDA();
+		FacilitiesDA.initDA();
+		FriendsDA.initDA();
+		HostsDA.initDA();
+		NotificationsDA.initDA();
+		RatingsDA.initDA();
+	}
+
 	private void login() {
 		String adminNo = loginAdminNoTF.getText();
 		String pass = loginPassTF.getText();
@@ -150,6 +167,8 @@ public class LRFViewController implements Initializable {
 
 		switch (AccountsDA.login(adminNo, pass)) {
 		case 0:
+			initDA();
+
 			try {
 				Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 				Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
