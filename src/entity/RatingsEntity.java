@@ -4,45 +4,86 @@ import java.io.Serializable;
 
 public class RatingsEntity implements Serializable {
 	private static final long serialVersionUID = -280347867690637374L;
-	private String adminNo;
-	private boolean status;
-	private int[] rating;
+	private String matchID;
+	private String[] adminNums, comments;
+	private int[] ratings;
+	private boolean[] attendances;
+	private int noRated; // Check if all players rated
 
-	public RatingsEntity(String adminNo, int[] rating, boolean status) {
-		if (rating.length != 5) {
-			throw new IllegalArgumentException("rating argument must be a size of 5.");
+	public RatingsEntity(String matchID, String[] adminNums, String[] comments, int[] ratings, boolean[] attendances, int noRated) {
+		if (comments.length != adminNums.length && ratings.length != adminNums.length && attendances.length != adminNums.length) {
+			throw new IllegalArgumentException("comments, adminNums, ratings and attendances argument size must be the same size of adminNums");
 		}
 
-		this.status = status; // to know if they completed the rating
-		this.adminNo = adminNo;
-		this.rating = rating;
+		this.setMatchID(matchID);
+		this.adminNums = adminNums;
+		this.setComments(comments);
+		this.ratings = ratings;
+		this.attendances = attendances;
+		this.noRated = noRated;
 	}
 
-	public boolean getStatus() {
-		return status;
+	public String getMatchID() {
+		return matchID;
 	}
 
-	public String getAdminNo() {
-		return adminNo;
+	public String[] getAdminNums() {
+		return adminNums;
 	}
 
-	public int[] getRating() {
-		return rating;
+	public String[] getComments() {
+		return comments;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public int[] getRatings() {
+		return ratings;
 	}
 
-	public void setAdminNo(String adminNo) {
-		this.adminNo = adminNo;
+	public boolean[] getAttendances() {
+		return attendances;
 	}
 
-	public void setRating(int[] rating) {
-		if (rating.length != 5) {
-			throw new IllegalArgumentException("rating argument must be the length of 5.");
+	public int getNoRated() {
+		return noRated;
+	}
+
+	public void setMatchID(String matchID) {
+		this.matchID = matchID;
+	}
+
+	public void setAdminNums(String[] adminNums) {
+		this.adminNums = adminNums;
+	}
+
+	public void setComments(String[] comments) {
+		if (comments.length != adminNums.length) {
+			throw new IllegalArgumentException("comments argument size must be the same size of adminNums");
 		}
 
-		this.rating = rating;
+		this.comments = comments;
+	}
+
+	public void setRatings(int[] ratings) {
+		if (ratings.length != adminNums.length) {
+			throw new IllegalArgumentException("adminNums argument size must be the same size of adminNums");
+		}
+
+		this.ratings = ratings;
+	}
+
+	public void setAttendances(boolean[] attendances) {
+		if (attendances.length != adminNums.length) {
+			throw new IllegalArgumentException("attendances argument size must be the same size of adminNums");
+		}
+
+		this.attendances = attendances;
+	}
+
+	public void setStatus(int noRated) {
+		this.noRated = noRated;
+	}
+
+	public int incrementAndGetNoRate() {
+		return ++this.noRated;
 	}
 }
