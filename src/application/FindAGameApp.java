@@ -32,7 +32,7 @@ public class FindAGameApp extends Application {
 //			stage.show();
 
 			HostsDA.initDA();
-//			LocalDate ld = LocalDate.of(2018, 1, 2);
+			LocalDate ld = LocalDate.of(2018, 1, 2);
 //			System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", ld, "1700", 1, null));
 //			ld = LocalDate.of(2018, 1, 4);
 //			System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", ld, "1900", 2, null));
@@ -42,17 +42,18 @@ public class FindAGameApp extends Application {
 //			System.out.println(HostsDA.hostGame("170463Z", "Tim Cook", ld, "1400", 3, null));
 //			ld = LocalDate.of(2018, 2, 1);
 //			System.out.println(HostsDA.hostGame("170552A", "Bill Gates", ld, "1900", 5, null));
-//			ld = LocalDate.of(2018, 2, 1);
-//			System.out.println(HostsDA.hostGame("170152A", "Simon Cowell", ld, "1700", 0, null));
+			ld = LocalDate.of(2018, 2, 1);
+			System.out.println(HostsDA.hostGame("170957E", "Sheldon Cooper", ld, "1700", 0, null));
 //			
 			AccountsDA.initDA();
 //			
-//			AccountsDA.addAccount("Annalise Keating", "170285X", "ak@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Mark Zuckerberg", "170374Y", "mz@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Tim Cook", "170463Z", "tc@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Bill Gates", "170552Z", "bg@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Simon Cowell", "170152Z", "sc@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Annalise Keating", "170285X", "ak@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Mark Zuckerberg", "170374Y", "mz@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Tim Cook", "170463Z", "tc@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Bill Gates", "170552Z", "bg@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Simon Cowell", "170152Z", "sc@mymail.nyp.edu.sg", "a");
 			AccountsDA.addAccount("Jon Snow", "170866B", "js@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Lim Wilson", "175150R", "175150R@mymail.nyp.edu.sg", "a");
 			HostsDA.addFriends("170552A", "170866B");
 			AccountsDA.addAccount("Admin", "a", "a@mymail.nyp.edu.sg", "a");
 			

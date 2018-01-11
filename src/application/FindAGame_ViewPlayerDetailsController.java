@@ -55,7 +55,8 @@ public class FindAGame_ViewPlayerDetailsController {
 		
 		if (FindAGameController.VPD_index == this.peopleToDisplay.size()) {
 			FindAGameController.VPD_index = 0;
-		} 
+		}
+		
 	}
 	
 	private void setName() {
@@ -81,23 +82,45 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	private void setHeightWeight() {
-		String height = "";
-		String weight = "";
+		String height = "0";
+		String weight = "0";
 		lbStats.setText("");
 
 		try {
 			if ((boolean) AccountsDA.getAccData(adminNo.toLowerCase())[9]) {
-				height = AccountsDA.getAccData(adminNo.toLowerCase())[7].toString() + "m";
+				height = AccountsDA.getAccData(adminNo.toLowerCase())[7].toString();
 			}
 
 			if ((boolean) AccountsDA.getAccData(adminNo.toLowerCase())[10]) {
-				weight = AccountsDA.getAccData(adminNo.toLowerCase())[8].toString() + "kg";
+				weight = AccountsDA.getAccData(adminNo.toLowerCase())[8].toString();
 			}
-		
 		} catch (Exception e) {
 			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO READ HEIGHT & WEIGHT");
 		}
 		
-		lbStats.setText(height + " | " + weight);
+		if (Double.parseDouble(height) == 0.0 && Double.parseDouble(weight) != 0.0) {
+			lbStats.setText(weight + " kg");
+		} 
+		
+		if (Double.parseDouble(height) != 0.0 && Double.parseDouble(weight) == 0.0) {
+			lbStats.setText(height + " m");
+		}
+		
+		if (Double.parseDouble(height) != 0.0 && Double.parseDouble(weight) != 0.0) {
+			lbStats.setText(weight + " kg" + " | " + height + " m");
+		}
+		
+		if (Double.parseDouble(height) == 0.0 && Double.parseDouble(weight) == 0.0) {
+			String line = "";
+			try {
+				for (int i = 0; i < AccountsDA.getAccData(adminNo.toLowerCase())[3].toString().length(); i++) {
+					line += "-";
+				}
+				lbStats.setText(line);
+			} catch (Exception e) {
+				System.out.println("(FindAGame_ViewPlayerDetailsController): " + adminNo + "'s name not found");
+			}
+			
+		}
 	}
 }
