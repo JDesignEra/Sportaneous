@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXButton;
 import dataAccess.HostsDA;
 import entity.HostsEntity;
 import javafx.event.ActionEvent;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -56,7 +57,7 @@ public class FindAGame_hostedGameController {
 			list.add(x);
 		}
 		
-		adminNo = list.get(FindAGameController.HostAGame_index);
+		adminNo = list.get(FindAGameController.HostAGame_index++);
 		String name = searchR.get(adminNo).getName();
 		String sportsType = sports[searchR.get(adminNo).getSportsType()];
 		LocalDate ld = searchR.get(adminNo).getDate();
@@ -73,15 +74,18 @@ public class FindAGame_hostedGameController {
 		if (searchR.get(adminNo).getPlayersRecruited() != null && searchR.get(adminNo).getPlayersRecruited().contains(Main.currentUserAdminNo.toUpperCase())) {
 			joinBtn.setDisable(true);
 			joinBtn.setStyle("-fx-background-color: grey;");
-			System.out.println(adminNo + " ALREADY INSIDE");
+			System.out.println("User has joined " + adminNo + "'s game");
+		}
+		
+		if (searchR.get(adminNo).getPlayersRecruited() != null && searchR.get(adminNo).getPlayersRecruited().size() == HostsDA.getGameSize(searchR.get(adminNo).getSportsType())) {
+			joinBtn.setDisable(true);
+			joinBtn.setStyle("-fx-background-color: grey;");
+			System.out.println(adminNo + "'s game is full-");
 		}
 
-		if (FindAGameController.HostAGame_index == searchR.size()-1) {
+		if (FindAGameController.HostAGame_index == searchR.size()) {
 			FindAGameController.HostAGame_index = 0;
-		} else {
-			FindAGameController.HostAGame_index++;
-		}
-			
+		} 
 	}
 	
 	// Event Listener on JFXButton[#joinBtn].onAction
@@ -100,10 +104,10 @@ public class FindAGame_hostedGameController {
 	@FXML
     void handleNoOfPlayersRecruited(MouseEvent event) throws IOException {
 	    FindAGameController.whosegameisclicked = adminNo;
-//	    System.out.println(FindAGameController.whosegameisclicked);
-//	    System.out.println(HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
 		try {
-			Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
+			if (HostsDA.getFriends(adminNo)!=null) {
+				Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
+			} 
 	    } catch (Exception e) {
 	    	e.printStackTrace();
 	    }
@@ -149,16 +153,19 @@ public class FindAGame_hostedGameController {
 	}
 	
 	void setDP(String adminNo) {
-
-		Image img = new Image("/application/assets/uploads/" + adminNo + ".jpg");
-		ImagePattern iv = new ImagePattern(img);
-		
-		hostDP.setFill(iv);
-		
+		Image img;
+		try {
+			img = new Image("/application/assets/uploads/" + adminNo.toLowerCase() + ".png");
+		} catch (Exception e) {
+			System.out.println(adminNo + "'s profile picture not found; default.png is used instead-");
+			img = new Image("/application/assets/uploads/default.png");
+		}
+		ImagePattern ip = new ImagePattern(img);
+		hostDP.setFill(ip);
 	}
 	
 	void setNoOfPlayersLabel(String adminNo) {
-		int total = checkNoOfPlayersNeeded(searchR.get(adminNo).getSportsType());
+		int total = HostsDA.getGameSize(searchR.get(adminNo).getSportsType());
 		int current;
 		if (HostsDA.getHostDB().get(adminNo).getPlayersRecruited() == null) {
 			current = 0;
@@ -169,27 +176,6 @@ public class FindAGame_hostedGameController {
 		noOfplayers.setText(current + " / " + total);
 	}
 	
-	int checkNoOfPlayersNeeded(int a) {
-		if (sports[a].equals("Basketball")) {
-			return 10;
-		}
-		if (sports[a].equals("Badminton")) {
-			return 4;
-		}
-		if (sports[a].equals("Frisbee")) {
-			return 7;
-		}
-		if (sports[a].equals("Soccer")) {
-			return 22;
-		}
-		if (sports[a].equals("Tennis")) {
-			return 4;
-		}
-		if (sports[a].equals("Squash")) {
-			return 4;
-		}
-		
-		return 0;
-	}
+
 	
 }

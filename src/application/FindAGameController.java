@@ -46,14 +46,14 @@ public class FindAGameController {
 
 	@FXML private static String error = "";
 
-	@FXML private int i = -1;
+	@FXML private int i = 0;
 	
 	public static int HostAGame_index = 0;
+	public static int VPD_index = 0;
 
 	static String whosegameisclicked;
 	@FXML
 	public void initialize() throws IOException {
-		
 		whosegameisclicked = Main.currentUserAdminNo;
 		HostsDA.initializeSearchResults();
 		displayAnchor.setMaxHeight(1043);
@@ -66,8 +66,7 @@ public class FindAGameController {
 		scrollPane.setFitToWidth(true);
 
 		for (int a = 0; a < HostsDA.returnHostsList().size(); a++) {
-			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_space.fxml")), 1, ++i);
-			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")), 1, ++i);
+			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_hostedGame.fxml")), 1, i++);
 		}
 
 		displayAnchor.setMinHeight(HostsDA.returnHostsList().size() * 228);

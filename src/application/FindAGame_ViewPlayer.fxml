@@ -34,7 +34,7 @@
       </GridPane>
       <ScrollPane fx:id="scrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1032.0" prefWidth="614.0" stylesheets="@assets/css/kh.css">
          <content>
-            <AnchorPane fx:id="anchorDisplay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1080.0" prefWidth="614.0" style="-fx-background-color: #d1d1d1;">
+            <AnchorPane fx:id="anchorDisplay" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="1033.0" prefWidth="614.0" style="-fx-background-color: #d1d1d1;">
                <children>
                   <GridPane fx:id="infoDisplayField" layoutX="9.0" layoutY="10.0" prefWidth="599.0" vgap="20.0">
                     <columnConstraints>
