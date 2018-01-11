@@ -75,13 +75,8 @@ public class FindAGame_ViewPlayerDetailsController {
 		playerDP.setFill(ip);
 	}
 	
-	private void setRating(int no) {
-		String stars = "";
-		if (no <= 5) {
-			for (int i = 0; i < no; i++) {
-				stars += "";
-			}
-		}
+	private void setRating() {
+		
 		lbPlayerRating.setText("");
 	}
 	
