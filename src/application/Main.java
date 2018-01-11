@@ -14,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+import dataAccess.AccountsDA;
+
 public class Main extends Application {
 	private static BorderPane root;
 	
@@ -23,7 +25,7 @@ public class Main extends Application {
 	private final URL stylesheetURL = getClass().getResource("/application/assets/css/application.css");
 
 	// -for testing only-//
-	public static String currentUserAdminNo = "";
+	public static String currentUserAdminNo;
 	// -------end-------//
 
 	@Override

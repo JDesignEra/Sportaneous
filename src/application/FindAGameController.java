@@ -20,6 +20,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import dataAccess.AccountsDA;
 import dataAccess.HostsDA;
 
 public class FindAGameController {
@@ -54,6 +55,7 @@ public class FindAGameController {
 	static String whosegameisclicked;
 	@FXML
 	public void initialize() throws IOException {
+		Main.currentUserAdminNo = AccountsDA.getAdminNo();
 		System.out.println("(FindAGameController) USER THAT IS USING THE APP NOW: " + Main.currentUserAdminNo);
 		
 		whosegameisclicked = Main.currentUserAdminNo;
