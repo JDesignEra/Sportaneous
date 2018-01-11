@@ -305,4 +305,8 @@ public class HostsDA {
 		}
 
 	}
+
+	public static ArrayList<String> getFriends(String whosegameisclicked) {
+		return hosts.get(whosegameisclicked).getPlayersRecruited();
+	}
 }

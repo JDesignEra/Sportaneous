@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 import dataAccess.FriendsDA;
@@ -17,9 +18,10 @@ import dataAccess.FriendsDA;
 public class FriendsViewController implements Initializable {
 	@FXML JFXTextField nameAdminNo, emailTxtField;
 	@FXML JFXToggleButton srcTypeToggleBtn;
-	@FXML GridPane rootGridPane, friendsGridPane, emptyFriendsGridPane;
+	@FXML GridPane friendsGridPane;
 	
 	private static int friendIndex;
+	private static Object[][] friends;
 
 	private final URL FriendCardURL = getClass().getResource("/application/modules/FriendCardView.fxml");
 
@@ -28,20 +30,22 @@ public class FriendsViewController implements Initializable {
 		FriendsDA.initDA();
 
 		if (FriendsDA.getFriends().length > 0) {
-			Object[][] friends = FriendsDA.getFriends();
+			friends = FriendsDA.getFriends();
 			int colCount = 0;
 			int rowCount = 0;
 
-			rootGridPane.getChildren().remove(emptyFriendsGridPane);
+			friendsGridPane.getChildren().remove(0);
+			friendsGridPane.alignmentProperty().set(Pos.TOP_CENTER);
+			friendsGridPane.setManaged(true);
 
 			for (friendIndex = 0; friendIndex < friends.length; friendIndex++) {
 				try {
 					if (colCount < 4) {
-						rootGridPane.add(FXMLLoader.load(FriendCardURL), colCount++, rowCount);
+						friendsGridPane.add(FXMLLoader.load(FriendCardURL), colCount++, rowCount);
 					}
 					else {
 						colCount = 0;
-						rootGridPane.add(FXMLLoader.load(FriendCardURL), colCount++, ++rowCount);
+						friendsGridPane.add(FXMLLoader.load(FriendCardURL), colCount++, ++rowCount);
 					}
 				}
 				catch (Exception e) {
@@ -65,5 +69,9 @@ public class FriendsViewController implements Initializable {
 	
 	public static int getFriendIndex() {
 		return friendIndex;
+	}
+	
+	public static Object[][] getFriends() {
+		return friends;
 	}
 }

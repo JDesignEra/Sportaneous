@@ -11,8 +11,6 @@ import entity.AccountsEntity;
 
 import modules.SendMail;
 
-import application.Main;
-
 public class AccountsDA {
 
 	private static DB db;
@@ -31,6 +29,14 @@ public class AccountsDA {
 
 		accounts.put("admin",
 				new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		accounts.put("1",
+				new AccountsEntity("1", "admin@nyp.edu.sg", "password", "1", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		accounts.put("2",
+				new AccountsEntity("2", "admin@nyp.edu.sg", "password", "2", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		accounts.put("3",
+				new AccountsEntity("3", "admin@nyp.edu.sg", "password", "3", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
+		accounts.put("4",
+				new AccountsEntity("4", "admin@nyp.edu.sg", "password", "4", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false, 3.5, 0, 0, 0));
 		db.commit();
 	}
 
@@ -106,7 +112,6 @@ public class AccountsDA {
 		}
 
 		session = accountsEntity;
-		Main.currentUserAdminNo = session.getAdminNo();
 		return 0; // Success
 	}
 
@@ -240,7 +245,8 @@ public class AccountsDA {
 	}
 
 	public static AccountsEntity getSession() {
-		return session;
+		AccountsEntity accountsEntity = session;
+		return accountsEntity;
 	}
 
 	public static String getAdminNo() {
