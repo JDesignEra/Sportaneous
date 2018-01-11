@@ -23,13 +23,10 @@ public class CommentsDA {
 
 		comments = db.getTreeMap("comments");
 
-		/*
-		 * List<CommentsEntity> ceList = new ArrayList<>(); ceList.add(new
-		 * CommentsEntity("test", "test", "test", 2.5)); ceList.add(new
-		 * CommentsEntity("test2", "test2", "test2", 3.5));
-		 *
-		 * comments.put("admin", ceList);
-		 */
+		// List<CommentsEntity> ceList = new ArrayList<>();
+		// ceList.add(new CommentsEntity("test", "test", "test", 1));
+		// ceList.add(new CommentsEntity("test2", "test2", "test2", 4));
+		// comments.put("admin", ceList);
 		db.commit();
 	}
 
@@ -52,7 +49,7 @@ public class CommentsDA {
 		return data;
 	}
 
-	public static void addComment(String adminNo, String comment, double rating) {
+	public static void addComment(String adminNo, String comment, int rating) {
 		String sessionAdminNo = AccountsDA.getAdminNo();
 		String sessionName = AccountsDA.getName();
 		List<CommentsEntity> commentsList;

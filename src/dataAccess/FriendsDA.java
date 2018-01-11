@@ -21,13 +21,12 @@ public class FriendsDA {
 
 		friends = db.getTreeMap("friends");
 
-		List<FriendsEntity> temp = new ArrayList<>();
-		temp.add(new FriendsEntity("admin", "1", 1));
-		temp.add(new FriendsEntity("admin", "2", 1));
-		temp.add(new FriendsEntity("admin", "3", 1));
-		temp.add(new FriendsEntity("admin", "4", 0));
-		friends.put("admin", temp);
-
+		// List<FriendsEntity> temp = new ArrayList<>();
+		// temp.add(new FriendsEntity("admin", "1", 1));
+		// temp.add(new FriendsEntity("admin", "2", 1));
+		// temp.add(new FriendsEntity("admin", "3", 1));
+		// temp.add(new FriendsEntity("admin", "4", 0));
+		// friends.put("admin", temp);
 		db.commit();
 	}
 
