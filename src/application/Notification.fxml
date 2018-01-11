@@ -14,7 +14,7 @@
 	<children>
 		<Label fx:id="lblStatus" layoutX="35.0" layoutY="33.0" style="-fx-font-family: Font;" styleClass="h0" text="Status" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT">
 			<font>
-				<Font name="Roboto Medium" size="18.0" />
+				<Font size="18.0" />
 			</font>
 		</Label>
 		<Text fx:id="lblNotification" layoutX="218.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="1">
@@ -25,6 +25,9 @@
             <Insets left="20.0" />
          </GridPane.margin></Text>
       <GridPane fx:id="profileGridPane" GridPane.columnSpan="2" GridPane.rowIndex="1">
+		<Text fx:id="lblNotification" layoutX="218.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Testing" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+		</GridPane>
+      <GridPane GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
@@ -36,7 +39,7 @@
       		<Circle fx:id="circlePicture" fill="WHITE" radius="100.0" stroke="#eb0f0f" strokeType="INSIDE" strokeWidth="5.0" GridPane.columnSpan="2147483647" />
       		<Label fx:id="lblName" text="Name" GridPane.halignment="CENTER" GridPane.rowIndex="1">
       			<font>
-      				<Font name="Roboto Medium" size="18.0" />
+      				<Font size="14.0" />
       			</font>
       		</Label>
          </children>
