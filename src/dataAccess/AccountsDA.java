@@ -400,8 +400,8 @@ public class AccountsDA {
 		}
 
 		int total = 0;
-		for (int d : rating) {
-			total += d;
+		for (int i : rating) {
+			total += i;
 		}
 
 		return total / (rating[0] + ((double) rating[1] / 2) + ((double) rating[2] / 3) + ((double) rating[3] / 4) + ((double) rating[4] / 5));
