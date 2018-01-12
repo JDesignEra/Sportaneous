@@ -107,6 +107,14 @@ public class AccountsDA {
 
 		accounts.replace(adminNo, accountsEntity);
 	}
+	
+	public static void updateAccMatch(String adminNo, int matchPlayed, int totalMatch) {
+		AccountsEntity accountEntity = accounts.get(adminNo.toLowerCase());
+		accountEntity.setMatchPlayed(matchPlayed);
+		accountEntity.setTotalMatch(totalMatch);
+		
+		accounts.remove(adminNo, accountEntity);
+	}
 
 	public static int login(String adminNo, String password) {
 		AccountsEntity accountsEntity = null;
