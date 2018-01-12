@@ -53,8 +53,8 @@ public class FriendsDA {
 				data[4] = accData[9]; // Height Visibility
 				data[5] = accData[10]; // Weight Visibility
 				data[6] = accData[11]; // Rating
-				data[7] = accData[13]; // Match Played
-				data[8] = accData[14]; // Total Match
+				data[7] = accData[12]; // Match Attended
+				data[8] = accData[13]; // Total Match Joined
 
 				dataList.add(data);
 			}

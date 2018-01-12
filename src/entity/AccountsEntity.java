@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 public class AccountsEntity implements Serializable {
 	private static final long serialVersionUID = 3819033989766829058L;
-	private String adminNo, email, password, name, favSport, interestedSports, intro, matchID;
+
+	private String adminNo, email, password, name, favSport, interestedSports, intro;
 	private double height, weight;
 	private int[] rating;
-	private int matchPlayed, totalMatch;
+	private int matchPlayed, totalMatch, matchID;
 	private boolean heightVisibility, weightVisibility;
 
-	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, String matchID, double height,
-							double weight, boolean heightVisibility, boolean weightVisibility, int[] rating, int matchPlayed, int totalMatched) {
+	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height,
+							double weight, boolean heightVisibility, boolean weightVisibility, int[] rating, int matchPlayed, int totalMatched, int matchID) {
 		if (rating.length != 5) {
 			throw new IllegalArgumentException("rating argument has to be the length of 5.");
 		}
@@ -23,7 +24,6 @@ public class AccountsEntity implements Serializable {
 		this.favSport = favSport;
 		this.interestedSports = interestedSports;
 		this.intro = intro;
-		this.matchID = matchID;
 		this.height = height;
 		this.weight = weight;
 		this.heightVisibility = heightVisibility;
@@ -31,6 +31,7 @@ public class AccountsEntity implements Serializable {
 		this.rating = rating;
 		this.matchPlayed = matchPlayed;
 		this.totalMatch = totalMatched;
+		this.matchID = matchID;
 	}
 
 	public String getAdminNo() {
@@ -61,10 +62,6 @@ public class AccountsEntity implements Serializable {
 		return intro;
 	}
 
-	public String getMatchID() {
-		return matchID;
-	}
-
 	public double getHeight() {
 		return height;
 	}
@@ -93,6 +90,10 @@ public class AccountsEntity implements Serializable {
 		return totalMatch;
 	}
 
+	public int getMatchID() {
+		return matchID;
+	}
+
 	public void setAdminNo(String adminNo) {
 		this.adminNo = adminNo;
 	}
@@ -119,10 +120,6 @@ public class AccountsEntity implements Serializable {
 
 	public void setIntro(String intro) {
 		this.intro = intro;
-	}
-
-	public void setMatchID(String matchID) {
-		this.matchID = matchID;
 	}
 
 	public void setHeight(double height) {
@@ -157,4 +154,7 @@ public class AccountsEntity implements Serializable {
 		this.totalMatch = totalMatch;
 	}
 
+	public void setMatchID(int matchID) {
+		this.matchID = matchID;
+	}
 }
