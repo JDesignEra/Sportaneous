@@ -11,11 +11,16 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import entity.HostsEntity;
+
 import dataAccess.AccountsDA;
 import dataAccess.HostsDA;
+
+import modules.Misc;
 
 public class FindAGame_ViewPlayerDetailsController {
 	@FXML
@@ -28,34 +33,47 @@ public class FindAGame_ViewPlayerDetailsController {
 	private Label lbName;
 	@FXML
 	private Circle playerDP;
+	@FXML
+	private GridPane basePane;
 	
 	private String target;
+	
+	private HostsEntity gameClicked;
 	
 	private ArrayList<String> peopleToDisplay;
 	
 	private String adminNo = "";
 	
+	private Misc m;
+	
 	public void initialize() {
 		
 		AccountsDA.initDA();
 		HostsDA.initDA();
-		target = FindAGameController.whosegameisclicked;
-		peopleToDisplay = HostsDA.getHostDB().get(target).getPlayersRecruited();
+		
+		m = new Misc();
+		gameClicked = FindAGame_ViewController.clickedgame;
+		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
+		peopleToDisplay = gameClicked.getPlayersRecruited();
 		
 		System.out.println("(FindAGame_ViewPlayerDetailsController) Whose game has been clicked: " + target + " / Players recruited: " + peopleToDisplay.size());
 		//display details of the people who joined the game the target hosted
-		if (FindAGameController.VPD_index < this.peopleToDisplay.size()) {
-			adminNo = this.peopleToDisplay.get(FindAGameController.VPD_index++);
+		if (FindAGame_ViewController.VPD_index < this.peopleToDisplay.size()) {
+			adminNo = this.peopleToDisplay.get(FindAGame_ViewController.VPD_index++);
 			System.out.println("(FindAGame_ViewPlayerDetailsController) Recruited player being displayed now: " + adminNo);
 		}
 		
 		setName();
 		setDP();
 		setHeightWeight();
+		setRating();
+		setMatchesPlayed();
 		
-		if (FindAGameController.VPD_index == this.peopleToDisplay.size()) {
-			FindAGameController.VPD_index = 0;
+		if (FindAGame_ViewController.VPD_index == this.peopleToDisplay.size()) {
+			FindAGame_ViewController.VPD_index = 0;
 		}
+		
+		System.out.println("VPD index: " + FindAGame_ViewController.VPD_index);
 		
 	}
 	
@@ -65,22 +83,18 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	private void setDP() {
-		Image img;
-		try {
-			img = new Image("/application/assets/uploads/" + adminNo.toLowerCase() + ".png");
-		} catch (Exception e) {
-			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO FIND " + adminNo + "'s PROFILE PICTURE. default.png IS USED INSTEAD.");
-			img = new Image("/application/assets/uploads/default.png");
-		}
-		ImagePattern ip = new ImagePattern(img);
-		playerDP.setFill(ip);
-	}
-	
-	private void setRating() {
 		
-		lbPlayerRating.setText("");
+		try {
+			ImagePattern ip = new ImagePattern(new Misc().cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
+			playerDP.setFill(ip);
+		}
+		catch (Exception e2) {
+			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO FIND " + adminNo + "'s PROFILE PICTURE. default.png IS USED INSTEAD.");
+			playerDP.setFill(new ImagePattern(new Image("/application/assets/uploads/default.png")));
+		}
+		
 	}
-	
+
 	private void setHeightWeight() {
 		String height = "0";
 		String weight = "0";
@@ -122,5 +136,17 @@ public class FindAGame_ViewPlayerDetailsController {
 			}
 			
 		}
+	}
+	
+	public void setRating() {
+		String rating = AccountsDA.getAccData(adminNo.toLowerCase())[11].toString();
+		lbPlayerRating.setText(m.getRatingShapes(Double.valueOf(rating).doubleValue()));
+	}
+	
+	public void setMatchesPlayed() {
+		String total = AccountsDA.getAccData(adminNo.toLowerCase())[14].toString();
+		String played = AccountsDA.getAccData(adminNo.toLowerCase())[13].toString();
+		
+		lbMatchesPlayed.setText(played + " / " + total);
 	}
 }

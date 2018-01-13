@@ -405,7 +405,7 @@
 /* The main scrollbar **track** CSS class  */
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-	-fx-background-color: #d1d1d1;
+	-fx-background-color: transparent;
 	-fx-border-color: transparent;
 	-fx-background-radius: 0em;
 	-fx-border-radius: 0em;

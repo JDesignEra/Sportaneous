@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -11,6 +12,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.GridPane;
+
+import entity.HostsEntity;
 
 import dataAccess.HostsDA;
 
@@ -25,24 +28,29 @@ public class FindAGame_ViewPlayerController {
     @FXML private GridPane infoDisplayField;
     
     private int a = 0;
-    private String whoseFriends = "";
+    
+    private HostsEntity clickedGame; 
     
     public void initialize() throws IOException {
     	
+    	clickedGame = FindAGame_ViewController.clickedgame;
     	scrollPane.setFitToWidth(true);
     	
     	try {
-    		if (HostsDA.getFriends(FindAGameController.whosegameisclicked).size() > 3) {
-    			anchorDisplay.setMinHeight(20+(250+20)*HostsDA.getFriends(FindAGameController.whosegameisclicked).size());
+    		ArrayList<String> listOfRecruitedPlayers = HostsDA.getFriends(clickedGame.getAdminNo(), clickedGame.getDate(), clickedGame.getTime());
+    		System.out.println("Error check: " + listOfRecruitedPlayers);
+    		if (listOfRecruitedPlayers.size() > 3) {
+    			anchorDisplay.setMinHeight(20+(250+20)*listOfRecruitedPlayers.size());
     			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
     		} else {
     			scrollPane.setFitToHeight(true);	
     		}
-    		for (int i = 1; i <= HostsDA.getFriends(FindAGameController.whosegameisclicked).size(); i++) {
+    		for (int i = 0; i < listOfRecruitedPlayers.size(); i++) {
     			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
     		}
+    		
     	} catch (Exception e) {
-    		System.out.println("Recruited players list is not created.");
+    		System.out.println("Error! Please check ViewPlayerDetails. Either that or listOfRecruitedPlayers is not found.");
     	}
     	
     }

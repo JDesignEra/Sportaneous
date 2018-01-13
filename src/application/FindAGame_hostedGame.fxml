@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<GridPane maxHeight="208.0" maxWidth="925.0" minHeight="208.0" minWidth="925.0" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" styleClass="hostedGame" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="208.0" minWidth="-Infinity" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" styleClass="hostedGame" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="8.0" minWidth="8.0" prefWidth="8.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="36.0" />
@@ -69,7 +70,7 @@
                </styleClass></JFXButton>
          </children>
       </GridPane>
-      <Circle fx:id="circularMeter" fill="WHITE" radius="76.0" strokeType="INSIDE" strokeWidth="3.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+      <Circle fx:id="circularMeter" fill="WHITE" onMouseClicked="#handleNoOfPlayersRecruited" radius="76.0" strokeType="INSIDE" strokeWidth="3.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <stroke>
             <LinearGradient endX="1.0" endY="1.0" startX="1.0">
                <stops>
@@ -79,6 +80,9 @@
                </stops>
             </LinearGradient>
          </stroke>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Circle>
       <GridPane GridPane.columnIndex="8" GridPane.rowIndex="1">
         <columnConstraints>
@@ -95,8 +99,14 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="noOfplayers" onMouseClicked="#handleNoOfPlayersRecruited" style="-fx-font-size: 10; -fx-cursor: hand;" text="5 / 10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-            <Label style="-fx-font-weight: bold;" text="PLAYERS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Label fx:id="noOfplayers" onMouseClicked="#handleNoOfPlayersRecruited" style="-fx-font-size: 10;" text="5 / 10" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+            <Label style="-fx-font-weight: bold;" text="PLAYERS" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
          </children>
       </GridPane>
       <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">

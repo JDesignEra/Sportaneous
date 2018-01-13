@@ -23,7 +23,7 @@ public class NavigationViewController implements Initializable {
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-	private final URL findGameViewURL = getClass().getResource("/application/FindAGame.fxml");
+	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private final URL friendsViewURL = getClass().getResource("/application/FriendsView.fxml");
 	private final URL notificationViewURL = getClass().getResource("/application/NotificationsView.fxml");
 
