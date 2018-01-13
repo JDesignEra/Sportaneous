@@ -49,8 +49,6 @@ public class CommentsDA {
 	}
 
 	/**
-	 * Method for adding comment's to a specific account.
-	 * 
 	 * @param adminNo - Account's administrator number
 	 * @param comment - Comments to be added to the associated administrator number
 	 * @param rating - Rating given to be added to the associated administrator number

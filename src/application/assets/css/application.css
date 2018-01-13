@@ -571,6 +571,35 @@
 	-fx-background-color: #FFFFFF;
 }
 
+.topBar .jfx-combo-box .list-view .text {
+	-fx-fill: #434343;
+}
+
+.topBar .jfx-combo-box .list-view {
+	-fx-background-color: #FFFFFF, #FFFFFF;
+	-fx-background-insets: 0.0, 1.0;
+	-fx-effect: dropshadow(three-pass-box, #0000003b, 8.0, 0.0, 1.0, 2.0);
+}
+
+.topBar .jfx-combo-box .list-view .list-cell:hover .text {
+	-fx-fill: #FFFFFF;
+}
+
+.topBar .jfx-combo-box .list-view .list-cell:filled:hover {
+    -fx-background-color: #EF4956;
+}
+
+.topBar .jfx-combo-box .list-view .list-cell:filled:selected .text,
+ .topBar .jfx-combo-box .combo-box-popup .list-view .list-cell:filled:selected:hover .text {
+	-fx-fill: #FFFFFF;
+}
+
+.topBar .jfx-combo-box .combo-box-popup .list-view .list-cell:filled:selected,
+.topBar .jfx-combo-box .combo-box-popup .list-view .list-cell:filled:selected:hover {
+	-fx-background: #EF4956;
+	-fx-background-color: #EF4956;
+}
+
 .topBar .jfx-date-picker,
 #findGame .topBar .jfx-time-picker {
 	-jfx-default-color: #EF4956;
