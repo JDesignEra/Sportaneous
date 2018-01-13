@@ -69,12 +69,11 @@ public class HostsDA {
 		
 		if (!adminORname.isEmpty()) {
 			for (HostsEntity x : hosts.values()) {
-				if (x.getAdminNo().toLowerCase().equals(adminORname.toLowerCase()) || x.getName().toLowerCase().equals(adminORname.toLowerCase())) {
+				if (x.getAdminNo().toLowerCase().equals(adminORname.toLowerCase()) || x.getName().toLowerCase().contains(adminORname.toLowerCase())) {
 					System.out.println("Found name");
 					s1.add(x);
 				}
 			}
-			System.out.println("S1: " + s1.size());
 			
 		} else {
 			for (HostsEntity x : hosts.values()) {
@@ -102,12 +101,12 @@ public class HostsDA {
 					s3.add(x);
 				}
 			}
-			System.out.println("S3: " + s3.size());
+
 		} else {
 			for (HostsEntity x : s2) {
 				s3.add(x);
 			}
-			System.out.println("S3: " + s3.size());
+
 		}
 		
 		if (!sportsType.isEmpty()) {
