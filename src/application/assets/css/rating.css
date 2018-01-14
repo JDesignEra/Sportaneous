@@ -1,1 +1,15 @@
 @import url("application.css");
+
+.greenBtn {
+	-fx-background-color: #26A69A;
+}
+
+.hostedGame {
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.2) , 16.0, 0.0 , 3.0 , 3.0 );
+	-fx-font-family: Roboto;
+}
+.ratingElement_Join {
+	-fx-font-size: 10.0px;
+	-fx-font-weight: bold;
+	-fx-font-family: Roboto;
+}

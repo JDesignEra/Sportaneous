@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.lang.String?>
-<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<GridPane maxHeight="208.0" maxWidth="925.0" minHeight="208.0" minWidth="925.0" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" styleClass="fontAwesome" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
+<GridPane maxHeight="208.0" maxWidth="925.0" minHeight="208.0" minWidth="925.0" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" styleClass="fontAwesome" stylesheets="@assets/css/rating.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="8.0" minWidth="8.0" prefWidth="8.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="36.0" />
@@ -141,8 +140,4 @@
    <effect>
       <DropShadow />
    </effect>
-   <stylesheets>
-      <URL value="@assets/css/rating.css" />
-      <URL value="@assets/css/kh.css" />
-   </stylesheets>
 </GridPane>

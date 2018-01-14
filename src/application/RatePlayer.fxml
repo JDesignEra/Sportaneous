@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -105,14 +106,14 @@
                         <Font name="Roboto Medium" size="18.0" />
                      </font>
                   </Text>
-                  <TextArea prefHeight="115.0" prefWidth="272.0" promptText="comment something about this player ?" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextArea fx:id="commentId" prefHeight="115.0" prefWidth="272.0" promptText="comment something about this player ?" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="0.0" prefWidth="29.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="334.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="27.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="330.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.0" minWidth="10.0" prefWidth="29.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints />
@@ -141,10 +142,11 @@
                         <Font name="FontAwesome" size="22.0" />
                      </font>
                   </Text>
-                  <Text fx:id="attendanceId" fill="#514949" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="fontAwesome" text="" wrappingWidth="18.571428298950195" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <Text fx:id="attendanceId" fill="#514949" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="fontAwesome" text="" wrappingWidth="10.571428298950195" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <font>
                         <Font name="FontAwesome" size="24.0" />
                      </font></Text>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
