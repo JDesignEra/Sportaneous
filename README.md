@@ -39,3 +39,7 @@ Notes
 ```CSS
 @import url("application.css");
 ```
+
+------
+##### Software License:
+[Sportaneous - Terms and conditions](LICENSE.md)
