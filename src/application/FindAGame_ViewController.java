@@ -1,75 +1,82 @@
 package application;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTimePicker;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+
+import entity.HostsEntity;
 
 import dataAccess.AccountsDA;
 import dataAccess.HostsDA;
 
-public class FindAGameController {
+public class FindAGame_ViewController {
 
-	@FXML private GridPane topPanel;
+    @FXML
+    private JFXTimePicker timePicker;
 
-	@FXML private JFXButton hostBtn;
+    @FXML
+    private JFXDatePicker datePicker;
 
-	@FXML private JFXButton searchBtn;
+    @FXML
+    private JFXTextField nameTF;
 
-	@FXML private JFXTextField nameTF;
+    @FXML
+    private JFXComboBox<String> sportCombo;
 
-	@FXML private JFXTextField dateTF;
+    @FXML
+    private JFXButton searchBtn;
 
-	@FXML private JFXTextField timeTF;
+    @FXML
+    private JFXButton hostBtn;
 
-	@FXML private JFXComboBox<String> sportMenu;
+    @FXML
+    private ScrollPane scrollPane;
 
-	@FXML private ScrollPane scrollPane;
+    @FXML
+    private AnchorPane displayAnchor;
+    
+    @FXML
+    private GridPane infoDisplayField;
 
-	@FXML private AnchorPane displayAnchor;
+    @FXML
+    private AnchorPane whoopsPane;
 
-	@FXML private GridPane infoDisplayField;
-
-	@FXML private static String error = "";
-
-	@FXML private int i = 0;
-	
+	private int i = 0;
+	private ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
 	public static int HostAGame_index = 0;
 	public static int VPD_index = 0;
-
 	static String whosegameisclicked;
+	static HostsEntity clickedgame;
+	
 	@FXML
 	public void initialize() throws IOException {
+		
 		Main.currentUserAdminNo = AccountsDA.getAdminNo();
 		System.out.println("(FindAGameController) USER THAT IS USING THE APP NOW: " + Main.currentUserAdminNo);
 		
-		whosegameisclicked = Main.currentUserAdminNo;
 		HostsDA.initializeSearchResults();
-		displayAnchor.setMaxHeight(1043);
-		ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
-		sportMenu.setEditable(true);
-		sportMenu.getEditor().setEditable(false);
-
-		sportMenu.setItems(options);
-		sportMenu.setPromptText("Select a sport");
+		sportCombo.setEditable(true);
+		sportCombo.getEditor().setEditable(false);
+		sportCombo.setItems(options);
+		sportCombo.setPromptText("Select a sport");
 		scrollPane.setFitToWidth(true);
 		
-		if (HostsDA.returnHostsList().size() <= 3) {
+		if (0 < HostsDA.returnHostsList().size() && HostsDA.returnHostsList().size() <= 3) {
 			scrollPane.setFitToHeight(true);
 		}
 
@@ -80,35 +87,36 @@ public class FindAGameController {
 
 		displayAnchor.setMinHeight(HostsDA.returnHostsList().size() * 228);
 	}
+	
+    @FXML
+    void handleHostBtn(ActionEvent event) {
 
-	@FXML
-	public void handleHostAGame(ActionEvent event) throws IOException {
-		
-	}
+    }
 
-	@FXML
-	public void handleSearch(ActionEvent event) throws IOException {
-
-		HostsDA.getSearchResults().clear();
+    @FXML
+    void handleSearch(ActionEvent event) throws IOException {
+    	System.out.println(datePicker.getValue());
+    	
+    	HostsDA.getSearchResults().clear();
 
 		String adminORname = nameTF.getText();
-		String date = dateTF.getText();
-		String time = timeTF.getText();
-		String sportsType = sportMenu.getValue();
+		LocalDate date = datePicker.getValue();
+		LocalTime time = timePicker.getValue();
+		String sportsType = sportCombo.getValue();
 
 		if (nameTF.getText().isEmpty()) {
 			adminORname = "";
 		}
 
-		if (dateTF.getText().isEmpty()) {
-			date = "";
+		if (date == null) {
+			date = null;
 		}
 
-		if (timeTF.getText().isEmpty()) {
-			time = "";
+		if (time == null) {
+			time = null;
 		}
 
-		if (sportMenu.getValue() == null) {
+		if (sportCombo.getValue() == null) {
 			sportsType = "";
 		}
 
@@ -118,7 +126,7 @@ public class FindAGameController {
 			infoDisplayField.getChildren().clear();
 		}
 		
-		if (HostsDA.getSearchResults().size() <= 3) {
+		if (HostsDA.getSearchResults().size() > 0 && HostsDA.getSearchResults().size() <= 3) {
 			scrollPane.setFitToHeight(true);
 		}
 
@@ -131,17 +139,17 @@ public class FindAGameController {
 		if (HostsDA.getSearchResults().size() > 0) {
 			displayAnchor.setMinHeight(HostsDA.getSearchResults().size() * 228);
 			displayAnchor.setMaxHeight(HostsDA.getSearchResults().size() * 228);
+		} else {
+//			displayAnchor.setMinHeight(1043);
+//			displayAnchor.setMaxHeight(1043);
 		}
-		else {
-			displayAnchor.setMinHeight(1043);
-			displayAnchor.setMaxHeight(1043);
-		}
-
-	}
-
-	@FXML
-	public void handleSportMenu(ActionEvent event) throws IOException {
-
-	}
-
+		
+		timePicker.setValue(null);
+		datePicker.setValue(null);
+		nameTF.clear();
+		sportCombo.setValue(null);
+		
+    }
+    
 }
+

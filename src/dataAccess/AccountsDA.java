@@ -16,7 +16,8 @@ public class AccountsDA {
 	private static DB db;
 	private static ConcurrentMap<String, AccountsEntity> accounts;
 	private static AccountsEntity session;
-	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
+	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|"
+			+ "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
 
 	private AccountsDA() {
 		throw new IllegalStateException("AccountsDA class");
@@ -27,25 +28,25 @@ public class AccountsDA {
 		accounts = db.getTreeMap("accounts");
 
 		// accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg",
-		// "password", "Administrator", "", "", "", "", 0, 0, false, false, new int[] {
-		// 0, 0, 0, 0, 5 }, 0, 0));
+		// "password", "Administrator", "", "", "", 0, 0, false, false, new int[] { 0,
+		// 0, 0, 0, 5 }, 0, 0, 0));
 		// accounts.put("1", new AccountsEntity("1", "admin@nyp.edu.sg", "password",
-		// "1", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new int[] { 1, 0, 3, 0, 0 }, 0, 0));
+		// "1", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+		// new int[] { 1, 0, 3, 0, 0 }, 0, 0, 0));
 		// accounts.put("2", new AccountsEntity("2", "admin@nyp.edu.sg", "password",
-		// "2", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new int[] { 1, 0, 0, 0, 1 }, 0, 0));
+		// "2", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+		// new int[] { 1, 0, 0, 0, 1 }, 0, 0, 0));
 		// accounts.put("3", new AccountsEntity("3", "admin@nyp.edu.sg", "password",
-		// "3", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new int[] { 1, 0, 0, 2, 0 }, 0, 0));
+		// "3", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+		// new int[] { 1, 0, 0, 2, 0 }, 0, 0, 0));
 		// accounts.put("4", new AccountsEntity("4", "admin@nyp.edu.sg", "password",
-		// "4", "Basketball", "Basketball,Squash,Tennis", "", "", 0, 0, false, false,
-		// new int[] { 1, 0, 1, 0, 0 }, 0, 0));
+		// "4", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+		// new int[] { 1, 0, 1, 0, 0 }, 0, 0, 0));
 		db.commit();
 	}
 
 	public static Object[][] getAllData() {
-		Object[][] data = new Object[accounts.size()][16];
+		Object[][] data = new Object[accounts.size()][15];
 		int i = 0;
 
 		for (AccountsEntity accountsEntity : accounts.values()) {
@@ -53,16 +54,17 @@ public class AccountsDA {
 			data[i][1] = accountsEntity.getEmail();
 			data[i][2] = accountsEntity.getPassword();
 			data[i][3] = accountsEntity.getName();
-			data[i][5] = accountsEntity.getFavSport();
-			data[i][6] = accountsEntity.getInterestedSports();
-			data[i][7] = accountsEntity.getIntro();
-			data[i][8] = accountsEntity.getHeight();
-			data[i][9] = accountsEntity.getWeight();
-			data[i][10] = accountsEntity.getHeightVisibility();
-			data[i][11] = accountsEntity.getWeightVisibility();
-			data[i][12] = calRating(accountsEntity.getRating());
-			data[i][14] = accountsEntity.getMatchPlayed();
-			data[i][15] = accountsEntity.getTotalMatch();
+			data[i][4] = accountsEntity.getFavSport();
+			data[i][5] = accountsEntity.getInterestedSports();
+			data[i][6] = accountsEntity.getIntro();
+			data[i][7] = accountsEntity.getHeight();
+			data[i][8] = accountsEntity.getWeight();
+			data[i][9] = accountsEntity.getHeightVisibility();
+			data[i][10] = accountsEntity.getWeightVisibility();
+			data[i][11] = calRating(accountsEntity.getRating());
+			data[i][12] = accountsEntity.getMatchPlayed();
+			data[i][13] = accountsEntity.getTotalMatch();
+			data[i][14] = accountsEntity.getMatchID();
 			i++;
 		}
 
@@ -70,14 +72,17 @@ public class AccountsDA {
 	}
 
 	/**
-	 * [0] = AdminNo, [1] = Email, [2] = Password, [3] = Name<br>
-	 * [4] = Favorite Sport, [5] = Interested Sport, [6] = Intro<br>
-	 * [7] = Height, [8] = Weight, [9] = Height Visibility<br>
-	 * [10] = Weight Visibility, [11] = Rating, [12] = Number Of Players Rated<br>
-	 * [13] = Total Matched Joined, [14] = Total Matched Attended
+	 * Account's information index are as follow:<br>
+	 * [0] - Administrato's Number, [1] - Email, [2] - Password,<br>
+	 * [3] - Name, [4] - Favorite Sport, [5] - Interested Sports,<br>
+	 * [6] - Introduction, [7] - Height, [8] - Weight,<br>
+	 * [9] - Height Visibility, [10] - Weight Visibility, [11] - Rating<br>
+	 * [12] - Match's Attended, [13] - Match Joined,<br>
+	 * [14] - Current joined Match ID.
 	 * 
 	 * @param adminNo
-	 * @return Object[]
+	 *            - Account's administrator number
+	 * @return an Object[] of account's information
 	 */
 	public static Object[] getAccData(String adminNo) {
 		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
@@ -95,24 +100,41 @@ public class AccountsDA {
 		data[9] = accountsEntity.getHeightVisibility();
 		data[10] = accountsEntity.getWeightVisibility();
 		data[11] = calRating(accountsEntity.getRating());
-		data[13] = accountsEntity.getMatchPlayed();
-		data[14] = accountsEntity.getTotalMatch();
+		data[12] = accountsEntity.getMatchPlayed();
+		data[13] = accountsEntity.getTotalMatch();
+		data[14] = accountsEntity.getMatchID();
 
 		return data;
 	}
 
+	/**
+	 * @param adminNo
+	 *            - Account's administrator number
+	 * @param ratings
+	 *            - Account's ratings to be updated. Must be the length of int[5]
+	 * @throws IlegalArgumentException
+	 *             if ratings is not an int[5]
+	 */
 	public static void updateAccRating(String adminNo, int... ratings) {
 		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
 		accountsEntity.setRating(ratings);
 
 		accounts.replace(adminNo, accountsEntity);
 	}
-	
+
+	/**
+	 * @param adminNo
+	 *            - Account's administrator number
+	 * @param matchPlayed
+	 *            - Account's match played to be updated to
+	 * @param totalMatch
+	 *            - Account's total match joined
+	 */
 	public static void updateAccMatch(String adminNo, int matchPlayed, int totalMatch) {
 		AccountsEntity accountEntity = accounts.get(adminNo.toLowerCase());
 		accountEntity.setMatchPlayed(matchPlayed);
 		accountEntity.setTotalMatch(totalMatch);
-		
+
 		accounts.remove(adminNo, accountEntity);
 	}
 
@@ -150,7 +172,7 @@ public class AccountsDA {
 			}
 		}
 
-		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 0 }, 0, 0)) != null) {
+		if (accounts.putIfAbsent(adminNo, new AccountsEntity(adminNo, email, password, name, "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 0 }, 0, 0, 0)) != null) {
 			return 4; // Registered Admin Number
 		}
 
@@ -189,7 +211,6 @@ public class AccountsDA {
 		accountsEntity.setFavSport(favSport);
 		accountsEntity.setInterestedSports(interestedSports);
 		accountsEntity.setIntro(intro);
-		accountsEntity.setMatchID(session.getMatchID());
 		accountsEntity.setHeight(height);
 		accountsEntity.setWeight(weight);
 		accountsEntity.setHeightVisibility(heightVisibility);
@@ -197,6 +218,7 @@ public class AccountsDA {
 		accountsEntity.setRating(session.getRating());
 		accountsEntity.setMatchPlayed(session.getMatchPlayed());
 		accountsEntity.setTotalMatch(session.getTotalMatch());
+		accountsEntity.setMatchID(session.getMatchID());
 
 		accounts.replace(session.getAdminNo(), accountsEntity);
 
@@ -260,66 +282,114 @@ public class AccountsDA {
 		return result.toString();
 	}
 
+	/**
+	 * @return current session account's information.
+	 */
 	public static AccountsEntity getSession() {
 		return session;
 	}
 
+	/**
+	 * @return current session account's administrator number
+	 */
 	public static String getAdminNo() {
 		return session.getAdminNo();
 	}
 
+	/**
+	 * @return current session account's email
+	 */
 	public static String getEmail() {
 		return session.getEmail();
 	}
 
+	/**
+	 * @return current session account's password
+	 */
 	public static String getPassword() {
 		return session.getPassword();
 	}
 
+	/**
+	 * @return current session account's name
+	 */
 	public static String getName() {
 		return session.getName();
 	}
 
+	/**
+	 * @return current session account's favorite sport
+	 */
 	public static String getFavSport() {
 		return session.getFavSport();
 	}
 
+	/**
+	 * @return current session account's interested sports
+	 */
 	public static String getInterestedSports() {
 		return session.getInterestedSports();
 	}
 
+	/**
+	 * @return current session account's introduction
+	 */
 	public static String getIntro() {
 		return session.getIntro();
 	}
 
-	public static String getMatchID() {
+	/**
+	 * @return current session account's match ID
+	 */
+	public static int getMatchID() {
 		return session.getMatchID();
 	}
 
+	/**
+	 * @return current session account's height
+	 */
 	public static double getHeight() {
 		return session.getHeight();
 	}
 
+	/**
+	 * @return current session account's weight
+	 */
 	public static double getWeight() {
 		return session.getWeight();
 	}
 
+	/**
+	 * @return current session account's height visibility
+	 */
 	public static boolean getHeightVisibility() {
 		return session.getHeightVisibility();
 	}
 
+	/**
+	 * @return current session account's weight visibility
+	 */
 	public static boolean getWeightVisibility() {
 		return session.getWeightVisibility();
 	}
 
+	/**
+	 * @return current session account's rating
+	 */
 	public static double getRating() {
 		return calRating(session.getRating());
 	}
 
+	/**
+	 * @return current session account's match attendance
+	 */
 	public static int getMatchPlayed() {
 		return session.getMatchPlayed();
 	}
 
+	/**
+	 * @return current session account's total match joined
+	 */
 	public static int getTotalMatch() {
 		return session.getTotalMatch();
 	}
@@ -330,8 +400,8 @@ public class AccountsDA {
 		}
 
 		int total = 0;
-		for (int d : rating) {
-			total += d;
+		for (int i : rating) {
+			total += i;
 		}
 
 		return total / (rating[0] + ((double) rating[1] / 2) + ((double) rating[2] / 3) + ((double) rating[3] / 4) + ((double) rating[4] / 5));

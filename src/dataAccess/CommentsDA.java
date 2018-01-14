@@ -48,6 +48,11 @@ public class CommentsDA {
 		return data;
 	}
 
+	/**
+	 * @param adminNo - Account's administrator number
+	 * @param comment - Comments to be added to the associated administrator number
+	 * @param rating - Rating given to be added to the associated administrator number
+	 */
 	public static void addComment(String adminNo, String comment, int rating) {
 		String sessionAdminNo = AccountsDA.getAdminNo();
 		String sessionName = AccountsDA.getName();
