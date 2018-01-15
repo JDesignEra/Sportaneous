@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
+import entity.AccountsEntity;
 import entity.RatingsEntity;
 
 public class RatingsDA {
@@ -20,6 +21,24 @@ public class RatingsDA {
 		ratings = db.getTreeMap("ratings");
 
 		db.commit();
+	}
+	
+	public static Object[][] getAllData() {
+		Object[][] data = new Object[ratings.size()][15];
+		int i = 0;
+
+		for (List<RatingsEntity> ratingsEntity : ratings.values()) {
+			data[i][0] = ((RatingsEntity) ratingsEntity).getMatchID();
+			data[i][1] = ((RatingsEntity) ratingsEntity).getAdminNums();
+			data[i][2] = ((RatingsEntity) ratingsEntity).getComments();
+			data[i][3] = ((RatingsEntity) ratingsEntity).getRatings();
+			data[i][4] = ((RatingsEntity) ratingsEntity).getAttendances();
+			data[i][5] = ((RatingsEntity) ratingsEntity).getNoRated();
+		
+			i++;
+		}
+
+		return data;
 	}
 
 	public static void addRatings(String matchID, String[] adminNums) {
@@ -60,6 +79,7 @@ public class RatingsDA {
 					ratingList.remove(i);
 					ratings.put(sessionID, ratingList);
 					
+					db.commit();
 					// TODO update comment's database and account's database
 				}
 				else {	// Else just replace it.
@@ -84,6 +104,7 @@ public class RatingsDA {
 						
 						ratingList.set(i, ratingsEntity);
 						ratings.put(adminNo, ratingList);
+						db.commit();
 					}
 					else {	// Else just update No. of players rated
 						ratingList.remove(i);
