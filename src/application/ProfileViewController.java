@@ -36,16 +36,18 @@ public class ProfileViewController implements Initializable {
 	@FXML private GridPane profileGridPane, commentGridPane;
 	@FXML private VBox commContentVBox;
 
-	private String adminNo = AccountsDA.getAdminNo();
-	private String name = AccountsDA.getName();
-	private String favSport = AccountsDA.getFavSport();
-	private String intSports = AccountsDA.getInterestedSports();
-	private String intro = AccountsDA.getIntro();
-	private int matchPlayed = AccountsDA.getMatchPlayed();
-	private int totalMatch = AccountsDA.getTotalMatch();
-	private double height = AccountsDA.getHeight();
-	private double weight = AccountsDA.getWeight();
-	private double rating = AccountsDA.getRating();
+	private static String adminNo = AccountsDA.getAdminNo();
+	private static String name = AccountsDA.getName();
+	private static String favSport = AccountsDA.getFavSport();
+	private static String intSports = AccountsDA.getInterestedSports();
+	private static String intro = AccountsDA.getIntro();
+	private static int matchPlayed = AccountsDA.getMatchPlayed();
+	private static int totalMatch = AccountsDA.getTotalMatch();
+	private static double height = AccountsDA.getHeight();
+	private static double weight = AccountsDA.getWeight();
+	private static double rating = AccountsDA.getRating();
+	private static boolean heightVisibility = AccountsDA.getHeightVisibility();
+	private static boolean weightVisbility = AccountsDA.getWeightVisibility();
 
 	private GridPane commContentGridPane;
 
@@ -65,14 +67,14 @@ public class ProfileViewController implements Initializable {
 		ratingTxt.setText(new Misc().getRatingShapes(rating));
 
 		// Height & Weight
-		if (AccountsDA.getHeightVisibility() || AccountsDA.getWeightVisibility()) {
-			if (AccountsDA.getHeightVisibility() && AccountsDA.getWeightVisibility()) {
+		if (heightVisibility || weightVisbility) {
+			if (heightVisibility && weightVisbility) {
 				heightWeightTxt.setText(Double.toString(height) + " m | " + Double.toString(weight) + " kg");
 			}
-			else if (AccountsDA.getHeightVisibility()) {
+			else if (heightVisibility) {
 				heightWeightTxt.setText(Double.toString(height) + " m");
 			}
-			else if (AccountsDA.getWeightVisibility()) {
+			else if (weightVisbility) {
 				heightWeightTxt.setText(Double.toString(weight) + " kg");
 			}
 		}
@@ -217,4 +219,20 @@ public class ProfileViewController implements Initializable {
 		}
 	}
 
+	public static void viewProfile(String adminNo) {
+		Object[] account = AccountsDA.getAccData(adminNo);
+		
+		ProfileViewController.adminNo = (String) account[0];
+		name = (String) account[1];
+		favSport = (String) account[4];
+		intSports = (String) account[5];
+		intro = (String) account[6];
+		matchPlayed = (int) account[12];
+		totalMatch = (int) account[13];
+		height = (double) account[7];
+		weight = (double) account[8];
+		rating = (double) account[11];
+		heightVisibility = (boolean) account[9];
+		weightVisbility = (boolean) account[10];
+	}
 }
