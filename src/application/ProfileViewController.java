@@ -223,7 +223,7 @@ public class ProfileViewController implements Initializable {
 		Object[] account = AccountsDA.getAccData(adminNo);
 		
 		ProfileViewController.adminNo = (String) account[0];
-		name = (String) account[1];
+		name = (String) account[3];
 		favSport = (String) account[4];
 		intSports = (String) account[5];
 		intro = (String) account[6];

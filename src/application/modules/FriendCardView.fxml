@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
@@ -21,7 +22,7 @@
 				<Insets top="125.0" />
 			</GridPane.margin>
 		</Pane>
-		<GridPane fx:id="cardContent" vgap="5.0">
+		<GridPane fx:id="cardContent" onMouseClicked="#cardContentOnMouseClick" vgap="5.0">
 			<columnConstraints>
 				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
 			</columnConstraints>
@@ -61,6 +62,9 @@
 			<GridPane.margin>
 				<Insets />
 			</GridPane.margin>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
 		</GridPane>
 	</children>
 </GridPane>

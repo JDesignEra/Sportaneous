@@ -4,7 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -12,6 +14,8 @@ import javafx.scene.text.Text;
 import modules.Misc;
 
 import application.FriendsViewController;
+import application.Main;
+import application.ProfileViewController;
 
 public class FriendCardViewController implements Initializable {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt;
@@ -20,6 +24,8 @@ public class FriendCardViewController implements Initializable {
 
 	private int i = FriendsViewController.getFriendIndex();
 	private Object[][] friends = FriendsViewController.getFriends();
+	
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -56,5 +62,17 @@ public class FriendCardViewController implements Initializable {
 		}
 		
 		cardContent.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
+	}
+	
+	@FXML
+	public void cardContentOnMouseClick(MouseEvent event) {
+		ProfileViewController.viewProfile(cardPane.getId());
+		
+		try {
+			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
