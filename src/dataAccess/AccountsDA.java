@@ -19,10 +19,6 @@ public class AccountsDA {
 	private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@nyp.edu.sg$|"
 			+ "^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[_A-Za-z0-9-\\\\+]+\\.nyp.edu.sg$";
 
-	private AccountsDA() {
-		throw new IllegalStateException("AccountsDA class");
-	}
-
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
 		accounts = db.getTreeMap("accounts");

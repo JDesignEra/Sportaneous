@@ -35,7 +35,7 @@ public class Snackbar {
 
 	public void info(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
-	
+
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
 			sb.getStyleClass().addAll("action", "info");
 			sb.show(msg, actionText, 3000, actionHandler);
@@ -48,7 +48,7 @@ public class Snackbar {
 
 	public void success(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
-		
+
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
 			sb.getStyleClass().addAll("action", "success");
 			sb.show(msg, actionText, 3000, actionHandler);
@@ -61,7 +61,7 @@ public class Snackbar {
 
 	public void warning(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
-		
+
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
 			sb.getStyleClass().addAll("action", "warning");
 			sb.show(msg, actionText, 3000, actionHandler);
@@ -74,7 +74,7 @@ public class Snackbar {
 
 	public void danger(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
-		
+
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
 			sb.getStyleClass().addAll("action", "danger");
 			sb.show(msg, actionText, 3000, actionHandler);

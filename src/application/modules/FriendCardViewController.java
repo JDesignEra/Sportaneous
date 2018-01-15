@@ -66,7 +66,7 @@ public class FriendCardViewController implements Initializable {
 	
 	@FXML
 	public void cardContentOnMouseClick(MouseEvent event) {
-		ProfileViewController.viewProfile(cardPane.getId());
+		ProfileViewController.viewProfile(cardPane.getId(), "/application/FriendsView.fxml");
 		
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));

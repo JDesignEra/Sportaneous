@@ -14,11 +14,10 @@ public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
 	private static String sessionID = AccountsDA.getAdminNo();
-	private static List<FriendsEntity> sessionFriendsList;
+	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/friends.db")).closeOnJvmShutdown().make();
-
 		friends = db.getTreeMap("friends");
 
 		// List<FriendsEntity> temp = new ArrayList<>();
@@ -38,10 +37,10 @@ public class FriendsDA {
 	 * @return Object[][]
 	 */
 	public static Object[][] getFriends() {
-		sessionFriendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		List<Object[]> dataList = new ArrayList<>();
 
-		for (FriendsEntity friendsEntity : sessionFriendsList) {
+		for (FriendsEntity friendsEntity : friendsList) {
 			Object[] accData = AccountsDA.getAccData(friendsEntity.getFriendAdminNo());
 			Object[] data = new Object[9];
 
@@ -63,13 +62,96 @@ public class FriendsDA {
 		return dataList.toArray(new Object[dataList.size()][]);
 	}
 
-	public static int checkStatus(String friendsID) {
-		for (FriendsEntity friendsEntity : sessionFriendsList) {
-			if (friendsEntity.getFriendAdminNo().equals(friendsID)) {
+	public static void addFriend(String friendAdminNo) {
+		// Session's Friend's Friend List
+		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		friendsList.add(new FriendsEntity(friendAdminNo, sessionID, 0));
+		friends.put(friendAdminNo, friendsList);
+
+		// Session's Friend List
+		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+		friendsList.add(new FriendsEntity(sessionID, friendAdminNo, 0));
+		friends.put(sessionID, friendsList);
+
+		db.commit();
+	}
+
+	public static void removeFriend(String friendAdminNo) {
+		int i = 0;
+
+		// Session's Friend's Friend List
+		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		for (FriendsEntity friendsEntity : friendsList) {
+			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
+				i = 0;
+				friendsList.remove(i);
+				friends.put(friendAdminNo, friendsList);
+
+				break;
+			}
+
+			i++;
+		}
+
+		// Session's Friend List
+		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+		for (FriendsEntity friendsEntity : friendsList) {
+			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
+				friendsList.remove(i);
+				friends.put(sessionID, friendsList);
+
+				break;
+			}
+
+			i++;
+		}
+
+		db.commit();
+	}
+
+	public static void acceptRequest(String friendAdminNo) {
+		int i = 0;
+
+		// Session's Friend's Friend List
+		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		for (FriendsEntity friendsEntity : friendsList) {
+			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
+				i = 0;
+
+				friendsEntity.setStatus(1);
+				friendsList.set(i, friendsEntity);
+				friends.put(friendAdminNo, friendsList);
+
+				break;
+			}
+
+			i++;
+		}
+
+		// Session's Friend List
+		friendsList = (friends.get(sessionID) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		for (FriendsEntity friendsEntity : friendsList) {
+			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
+				friendsEntity.setStatus(1);
+				friendsList.set(i, friendsEntity);
+				friends.put(sessionID, friendsList);
+
+				break;
+			}
+
+			i++;
+		}
+
+		db.commit();
+	}
+
+	public static int checkStatus(String friendAdminNo) {
+		for (FriendsEntity friendsEntity : friendsList) {
+			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				return friendsEntity.getStatus(); // 0 = Pending, 1 = Friend
 			}
 		}
 
-		return 3; // Not Friends
+		return 2; // Not Friends
 	}
 }

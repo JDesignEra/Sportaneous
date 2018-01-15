@@ -76,7 +76,7 @@ public class EditProfileViewController implements Initializable {
 	private Circle clip = new Circle(100, 100, 100);
 
 	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
@@ -111,10 +111,10 @@ public class EditProfileViewController implements Initializable {
 				return d.toString();
 			}
 		};
-		
+
 		heightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
 		weightTxtField.setTextFormatter(new TextFormatter<Double>(converter, 0.0, filter));
-		
+
 		// Force introTxtArea to 120 char limit.
 		introTxtArea.setTextFormatter(new TextFormatter<String>(vc -> vc.getControlNewText().length() <= 120 ? vc : null));
 
@@ -279,13 +279,13 @@ public class EditProfileViewController implements Initializable {
 
 			// Dialog
 			JFXDialogLayout content = new JFXDialogLayout();
+			JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
 			content.setHeading(new Text("Save Profile Changes"));
 			content.setBody(new Text("Are you sure you want to save your current profile settings?\n" + "You will be redirected to your Profile page if you select SAVE."));
 
-			JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
 			// Dialog Save Button
-			JFXButton dialogSaveBtn = new JFXButton("Save");
+			JFXButton dialogSaveBtn = new JFXButton("SAVE");
 			dialogSaveBtn.getStyleClass().add("success");
 			dialogSaveBtn.setCursor(Cursor.HAND);
 
@@ -324,12 +324,12 @@ public class EditProfileViewController implements Initializable {
 			content.setActions(dialogSaveBtn);
 
 			// Dialog Cancel Button
-			JFXButton dialogCancelBtn = new JFXButton("Cancel");
+			JFXButton dialogCancelBtn = new JFXButton("CANCEL");
 			dialogCancelBtn.getStyleClass().addAll("danger");
 			dialogCancelBtn.setCursor(Cursor.HAND);
-
 			dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
 			content.getActions().add(dialogCancelBtn);
+
 			dialog.show();
 		}
 	}
@@ -339,14 +339,14 @@ public class EditProfileViewController implements Initializable {
 	public void cancelBtnOnAction(ActionEvent event) {
 		// Dialog
 		JFXDialogLayout content = new JFXDialogLayout();
+		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
 		content.setHeading(new Text("Cancel Profile Changes"));
 		content.setBody(
 				new Text("Are you sure you want to cancel your current profile settings without saving?\n" + "You will be redirected to your Profile page if you select YES."));
 
-		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
-		// Dialog Save Button
-		JFXButton dialogYesBtn = new JFXButton("Yes");
+		// Dialog Yes Button
+		JFXButton dialogYesBtn = new JFXButton("YES");
 		dialogYesBtn.getStyleClass().add("success");
 		dialogYesBtn.setCursor(Cursor.HAND);
 
@@ -362,8 +362,8 @@ public class EditProfileViewController implements Initializable {
 		});
 		content.setActions(dialogYesBtn);
 
-		// Dialog Cancel Button
-		JFXButton dialogNoBtn = new JFXButton("No");
+		// Dialog No Button
+		JFXButton dialogNoBtn = new JFXButton("NO");
 		dialogNoBtn.getStyleClass().addAll("danger");
 		dialogNoBtn.setCursor(Cursor.HAND);
 
@@ -444,13 +444,13 @@ public class EditProfileViewController implements Initializable {
 	public void dpOverlayOnMouseClick(MouseEvent event) throws IOException {
 		// Dialog
 		JFXDialogLayout content = new JFXDialogLayout();
+		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
 		content.setHeading(new Text("Change Profile Photo"));
 		content.setBody((GridPane) FXMLLoader.load(getClass().getResource("/application/modules/UploadBodyView.fxml")));
 
-		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
 		// Dialog Cancel Button
-		JFXButton dialogCancelBtn = new JFXButton("Cancel");
+		JFXButton dialogCancelBtn = new JFXButton("CANCEL");
 		dialogCancelBtn.getStyleClass().addAll("danger");
 		dialogCancelBtn.setCursor(Cursor.HAND);
 

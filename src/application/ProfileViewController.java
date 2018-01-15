@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -11,8 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -21,6 +26,7 @@ import javafx.util.Duration;
 
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
+import dataAccess.FriendsDA;
 
 import modules.Misc;
 import modules.TransitionAnimation;
@@ -32,9 +38,11 @@ public class ProfileViewController implements Initializable {
 	@FXML private Label favSportChip, intSportChip;
 	@FXML private Circle dpCircle;
 	@FXML private TextFlow favSportTxtFlow, intSportsTxtFlow;
-	@FXML private JFXButton editBtn, prevComBtn, nxtComBtn;
+	@FXML private JFXButton actionBtn, prevComBtn, nxtComBtn, bckBtn;
 	@FXML private GridPane profileGridPane, commentGridPane;
+	@FXML private StackPane stackPaneRoot;
 	@FXML private VBox commContentVBox;
+	@FXML private FlowPane buttonsFlowPane;
 
 	private static String adminNo = AccountsDA.getAdminNo();
 	private static String name = AccountsDA.getName();
@@ -48,6 +56,9 @@ public class ProfileViewController implements Initializable {
 	private static double rating = AccountsDA.getRating();
 	private static boolean heightVisibility = AccountsDA.getHeightVisibility();
 	private static boolean weightVisbility = AccountsDA.getWeightVisibility();
+
+	private static int friendStatus = 3;
+	private static String backURL;
 
 	private GridPane commContentGridPane;
 
@@ -126,13 +137,100 @@ public class ProfileViewController implements Initializable {
 			commentGridPane.add(commContentGridPane, 0, 1);
 			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 		}
+
+		// Top button
+		switch (friendStatus) {
+			case 0:
+				actionBtn.getStyleClass().remove("success");
+				actionBtn.getStyleClass().add("danger");
+				actionBtn.setText("Cancel Friend Request");
+				bckBtn.setVisible(true);
+				break;
+
+			case 1:
+				actionBtn.getStyleClass().remove("success");
+				actionBtn.getStyleClass().add("danger");
+				actionBtn.setText("Remove Friend");
+				bckBtn.setVisible(true);
+				break;
+
+			case 2:
+				actionBtn.setText("Add Friend");
+				bckBtn.setVisible(true);
+				break;
+		}
 	}
 
-	// Event Listener on JFXButton[#editBtn].onAction
+	// Event Listener on JFXButton[#actionBtn].onAction
 	@FXML
-	public void editBtnOnAction(ActionEvent event) {
+	public void actionBtnOnAction(ActionEvent event) {
+		switch (friendStatus) {
+			case 0:
+			case 1:
+				JFXDialogLayout content = new JFXDialogLayout();
+				JFXDialog dialog = new JFXDialog(stackPaneRoot, content, JFXDialog.DialogTransition.CENTER);
+
+				if (friendStatus == 0) {
+					content.setHeading(new Text("Cancel Friend Request"));
+					content.setBody(new Text("Are you sure you want to cancel your friend request?\n" + "You will be redirected to your previous page if you select YES."));
+				}
+				else {
+					content.setHeading(new Text("Remove Friend"));
+					content.setBody(new Text("Are you sure you want to remove this person as your friend?\n" + "You will be redirected to your previous page if you select YES."));
+				}
+
+				// Dialog Yes Button
+				JFXButton dialogYesBtn = new JFXButton("YES");
+				dialogYesBtn.getStyleClass().add("success");
+				dialogYesBtn.setCursor(Cursor.HAND);
+				dialogYesBtn.setOnAction(yesEV -> {
+					dialog.close();
+
+					FriendsDA.removeFriend(adminNo);
+
+					try {
+						Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				});
+				content.setActions(dialogYesBtn);
+
+				// Dialog No Button
+				JFXButton dialogNoBtn = new JFXButton("NO");
+				dialogNoBtn.getStyleClass().add("danger");
+				dialogNoBtn.setCursor(Cursor.HAND);
+				dialogNoBtn.setOnAction(yesEV -> dialog.close());
+				content.getActions().add(dialogNoBtn);
+
+				dialog.show();
+				break;
+
+			case 2:
+				actionBtn.getStyleClass().remove("success");
+				actionBtn.getStyleClass().add("danger");
+				actionBtn.setText("Cancel Friend Request");
+
+				FriendsDA.addFriend(adminNo);
+				break;
+
+			default:
+				try {
+					Main.getRoot().setCenter(FXMLLoader.load(editProfileViewURL));
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+				break;
+		}
+	}
+
+	// Event Listener on JFXButton[#bckBtn].onAction
+	@FXML
+	public void bckBtnOnAction(ActionEvent event) {
 		try {
-			Main.getRoot().setCenter(FXMLLoader.load(editProfileViewURL));
+			Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -183,56 +281,65 @@ public class ProfileViewController implements Initializable {
 	@FXML
 	public void nxtComBtnOnAction(ActionEvent event) {
 		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
-			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
-				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
-			}), new KeyFrame(Duration.millis(300), actionEv -> {
-				CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
-				commContentGridPane = new GridPane();
+			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
+					new KeyFrame(Duration.millis(300), actionEv -> {
+						CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
+						commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+						commContentGridPane = new GridPane();
 
-				try {
-					commContentGridPane = FXMLLoader.load(commentsViewURL);
-				}
-				catch (Exception e) {
-					e.getStackTrace();
-				}
+						try {
+							commContentGridPane = FXMLLoader.load(commentsViewURL);
+						}
+						catch (Exception e) {
+							e.getStackTrace();
+						}
 
-				commContentGridPane.getStyleClass().add("commContent");
+						commContentGridPane.getStyleClass().add("commContent");
 
-				commentGridPane.add(commContentGridPane, 0, 1);
-				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+						commentGridPane.add(commContentGridPane, 0, 1);
+						GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
-				prevComBtn.getStyleClass().remove("inactive");
-				prevComBtn.getStyleClass().add("danger");
+						prevComBtn.getStyleClass().remove("inactive");
+						prevComBtn.getStyleClass().add("danger");
 
-				if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
-					nxtComBtn.getStyleClass().remove("danger");
-					nxtComBtn.getStyleClass().add("inactive");
-				}
-				else {
-					nxtComBtn.getStyleClass().remove("inactive");
-					nxtComBtn.getStyleClass().add("danger");
-				}
+						if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
+							nxtComBtn.getStyleClass().remove("danger");
+							nxtComBtn.getStyleClass().add("inactive");
+						}
+						else {
+							nxtComBtn.getStyleClass().remove("inactive");
+							nxtComBtn.getStyleClass().add("danger");
+						}
 
-				new TransitionAnimation().fromLeftFadeIn(500, commContentGridPane, commentGridPane.getPadding().getRight() * 2);
-			})).play();
+						new TransitionAnimation().fromLeftFadeIn(500, commContentGridPane, commentGridPane.getPadding().getRight() * 2);
+					})).play();
 		}
 	}
 
-	public static void viewProfile(String adminNo) {
+	/**
+	 * Method for view other account's profile
+	 * 
+	 * @param adminNo
+	 *            - Accounts' admin number
+	 * @param returnLocation
+	 *            - URL to return to
+	 */
+	public static void viewProfile(String adminNo, String returnLocation) {
+		backURL = returnLocation;
+		friendStatus = FriendsDA.checkStatus(adminNo);
 		Object[] account = AccountsDA.getAccData(adminNo);
-		
+
 		ProfileViewController.adminNo = (String) account[0];
 		name = (String) account[3];
 		favSport = (String) account[4];
 		intSports = (String) account[5];
 		intro = (String) account[6];
-		matchPlayed = (int) account[12];
-		totalMatch = (int) account[13];
 		height = (double) account[7];
 		weight = (double) account[8];
-		rating = (double) account[11];
 		heightVisibility = (boolean) account[9];
 		weightVisbility = (boolean) account[10];
+		rating = (double) account[11];
+		matchPlayed = (int) account[12];
+		totalMatch = (int) account[13];
 	}
 }

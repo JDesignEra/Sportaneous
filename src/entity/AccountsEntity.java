@@ -11,8 +11,8 @@ public class AccountsEntity implements Serializable {
 	private int matchPlayed, totalMatch, matchID;
 	private boolean heightVisibility, weightVisibility;
 
-	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height,
-							double weight, boolean heightVisibility, boolean weightVisibility, int[] rating, int matchPlayed, int totalMatched, int matchID) {
+	public AccountsEntity(	String adminNo, String email, String password, String name, String favSport, String interestedSports, String intro, double height, double weight,
+							boolean heightVisibility, boolean weightVisibility, int[] rating, int matchPlayed, int totalMatched, int matchID) {
 		if (rating.length != 5) {
 			throw new IllegalArgumentException("rating argument has to be the length of 5.");
 		}

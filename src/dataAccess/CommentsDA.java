@@ -14,10 +14,6 @@ public class CommentsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<CommentsEntity>> comments;
 
-	private CommentsDA() {
-		throw new IllegalStateException("CommentsDA class");
-	}
-
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/comments.db")).closeOnJvmShutdown().make();
 		comments = db.getTreeMap("comments");
@@ -49,9 +45,12 @@ public class CommentsDA {
 	}
 
 	/**
-	 * @param adminNo - Account's administrator number
-	 * @param comment - Comments to be added to the associated administrator number
-	 * @param rating - Rating given to be added to the associated administrator number
+	 * @param adminNo
+	 *            - Account's administrator number
+	 * @param comment
+	 *            - Comments to be added to the associated administrator number
+	 * @param rating
+	 *            - Rating given to be added to the associated administrator number
 	 */
 	public static void addComment(String adminNo, String comment, int rating) {
 		String sessionAdminNo = AccountsDA.getAdminNo();
