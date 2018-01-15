@@ -24,10 +24,11 @@ public class RatingsDA {
 	}
 	
 	public static Object[][] getAllData() {
+		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		Object[][] data = new Object[ratings.size()][15];
 		int i = 0;
 
-		for (List<RatingsEntity> ratingsEntity : ratings.values()) {
+		for (RatingsEntity ratingsEntity : ratingList) {
 			data[i][0] = ((RatingsEntity) ratingsEntity).getMatchID();
 			data[i][1] = ((RatingsEntity) ratingsEntity).getAdminNums();
 			data[i][2] = ((RatingsEntity) ratingsEntity).getComments();

@@ -13,3 +13,9 @@
 	-fx-font-weight: bold;
 	-fx-font-family: Roboto;
 }
+
+.closeButton{
+	-fx-font-size: 18.0px;
+	-fx-font-weight: bold;
+	
+}
