@@ -316,13 +316,28 @@ public class ProfileViewController implements Initializable {
 		}
 	}
 
+	public static void viewSessionProfile() {
+		adminNo = AccountsDA.getAdminNo();
+		name = AccountsDA.getName();
+		favSport = AccountsDA.getFavSport();
+		intSports = AccountsDA.getInterestedSports();
+		intro = AccountsDA.getIntro();
+		matchPlayed = AccountsDA.getMatchPlayed();
+		totalMatch = AccountsDA.getTotalMatch();
+		height = AccountsDA.getHeight();
+		weight = AccountsDA.getWeight();
+		rating = AccountsDA.getRating();
+		heightVisibility = AccountsDA.getHeightVisibility();
+		weightVisbility = AccountsDA.getWeightVisibility();
+	}
+
 	/**
-	 * Method for view other account's profile
+	 * Method for view friend's / other's profile
 	 * 
 	 * @param adminNo
-	 *            - Accounts' admin number
+	 *            - Account's administrator number
 	 * @param returnLocation
-	 *            - URL to return to
+	 *            - URL location to return to
 	 */
 	public static void viewProfile(String adminNo, String returnLocation) {
 		backURL = returnLocation;

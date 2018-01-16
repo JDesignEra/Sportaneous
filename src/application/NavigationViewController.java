@@ -40,6 +40,8 @@ public class NavigationViewController implements Initializable {
 	// Event Listener on JFXButton[#navProfileBtn].onAction
 	@FXML
 	public void navProfileBtnOnAction(ActionEvent event) {
+		ProfileViewController.viewSessionProfile();
+
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
 		}
