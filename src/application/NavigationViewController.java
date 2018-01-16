@@ -22,7 +22,6 @@ public class NavigationViewController implements Initializable {
 	@FXML private GridPane rootPane;
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
-	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private final URL friendsViewURL = getClass().getResource("/application/FriendsView.fxml");
 	private final URL notificationViewURL = getClass().getResource("/application/NotificationsView.fxml");
@@ -41,13 +40,6 @@ public class NavigationViewController implements Initializable {
 	@FXML
 	public void navProfileBtnOnAction(ActionEvent event) {
 		ProfileViewController.viewSessionProfile();
-
-		try {
-			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		for (Node node : rootPane.getChildren()) {
 			node.getStyleClass().remove("active");

@@ -9,7 +9,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="friendCard" alignment="CENTER" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.FriendCardViewController">
+<GridPane id="friendCard" alignment="CENTER"
+	stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.FriendCardViewController">
 	<rowConstraints>
 		<RowConstraints />
 	</rowConstraints>
@@ -22,7 +24,8 @@
 				<Insets top="125.0" />
 			</GridPane.margin>
 		</Pane>
-		<GridPane fx:id="cardContent" onMouseClicked="#cardContentOnMouseClick" vgap="5.0">
+		<GridPane fx:id="cardContent" onMouseClicked="#cardContentOnMouseClick"
+			vgap="5.0">
 			<columnConstraints>
 				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
 			</columnConstraints>
@@ -36,25 +39,32 @@
 				<RowConstraints vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp" />
-				<Text fx:id="nameTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="Name" GridPane.rowIndex="1">
+				<Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK"
+					strokeType="INSIDE" styleClass="dp" />
+				<Text fx:id="nameTxt" strokeType="OUTSIDE" strokeWidth="0.0"
+					styleClass="h0" text="Name" GridPane.rowIndex="1">
 					<GridPane.margin>
 						<Insets top="20.0" />
 					</GridPane.margin>
 				</Text>
-				<Text fx:id="heightWeightTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="small" text="0.0 m | 0.0 kg" GridPane.rowIndex="2" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Player Rating" GridPane.rowIndex="3">
+				<Text fx:id="heightWeightTxt" strokeType="OUTSIDE" strokeWidth="0.0"
+					styleClass="small" text="0.0 m | 0.0 kg" GridPane.rowIndex="2" />
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
+					text="Player Rating" GridPane.rowIndex="3">
 					<GridPane.margin>
 						<Insets top="20.0" />
 					</GridPane.margin>
 				</Text>
-				<Text fx:id="ratingTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ratingStars" text="    " GridPane.rowIndex="4" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Match Attendance" GridPane.rowIndex="5">
+				<Text fx:id="ratingTxt" strokeType="OUTSIDE" strokeWidth="0.0"
+					styleClass="ratingStars" text="    " GridPane.rowIndex="4" />
+				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2"
+					text="Match Attendance" GridPane.rowIndex="5">
 					<GridPane.margin>
 						<Insets top="20.0" />
 					</GridPane.margin>
 				</Text>
-				<Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="0 / 0" GridPane.rowIndex="6" />
+				<Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0"
+					styleClass="para" text="0 / 0" GridPane.rowIndex="6" />
 			</children>
 			<padding>
 				<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -62,9 +72,9 @@
 			<GridPane.margin>
 				<Insets />
 			</GridPane.margin>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
 		</GridPane>
 	</children>
 </GridPane>

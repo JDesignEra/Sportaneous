@@ -252,6 +252,7 @@
 	-fx-font-size: 14.0px;
 	-fx-text-fill: #FFFFFF;
 	-fx-padding: 10.0px 20.0px 10.0px 20.0px;
+	-fx-cursor: hand;
 	-jfx-button-type: RAISED;
 }
 
@@ -455,6 +456,14 @@
 
 .jfx-button.inactive {
 	-fx-background-color: #AEAEAE;
+}
+
+.jfx-button.success:disabled,
+.jfx-button.danger:disabled,
+.jfx-button.info:disabled {
+	-fx-background-color: #AEAEAE;
+	-fx-opacity: 1.0;
+	-fx-cursor: default;
 }
 
 .info .jfx-snackbar-content {

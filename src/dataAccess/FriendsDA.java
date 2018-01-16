@@ -21,10 +21,9 @@ public class FriendsDA {
 		friends = db.getTreeMap("friends");
 
 		// List<FriendsEntity> temp = new ArrayList<>();
-		// temp.add(new FriendsEntity("admin", "1", 1));
-		// temp.add(new FriendsEntity("admin", "2", 1));
-		// temp.add(new FriendsEntity("admin", "3", 1));
-		// temp.add(new FriendsEntity("admin", "4", 0));
+		// temp.add(new FriendsEntity("admin", "1234a", 1));
+		// temp.add(new FriendsEntity("admin", "4321a", 1));
+		// temp.add(new FriendsEntity("admin", "1234b", 0));
 		// friends.put("admin", temp);
 		db.commit();
 	}
@@ -129,7 +128,7 @@ public class FriendsDA {
 		}
 
 		// Session's Friend List
-		friendsList = (friends.get(sessionID) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				friendsEntity.setStatus(1);
@@ -146,6 +145,8 @@ public class FriendsDA {
 	}
 
 	public static int checkStatus(String friendAdminNo) {
+		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				return friendsEntity.getStatus(); // 0 = Pending, 1 = Friend

@@ -240,28 +240,28 @@
 					<FlowPane alignment="CENTER_RIGHT" prefWrapLength="70.0"
 						styleClass="comBtnFlowPane" GridPane.columnIndex="2">
 						<children>
-							<JFXButton fx:id="prevComBtn" onAction="#prevComBtnOnAction"
-								ripplerFill="#ffffff4d" text="">
+							<JFXButton fx:id="prevComBtn" disable="true"
+								onAction="#prevComBtnOnAction" ripplerFill="#ffffff4d" text="">
 								<styleClass>
 									<String fx:value="fontAwesome" />
-									<String fx:value="inactive" />
+									<String fx:value="danger" />
 									<String fx:value="square" />
 									<String fx:value="left" />
 								</styleClass>
 								<cursor>
-									<Cursor fx:constant="HAND" />
+									<Cursor fx:constant="DEFAULT" />
 								</cursor>
 							</JFXButton>
-							<JFXButton fx:id="nxtComBtn" onAction="#nxtComBtnOnAction"
-								ripplerFill="#ffffff4d" text="">
+							<JFXButton fx:id="nxtComBtn" disable="true"
+								onAction="#nxtComBtnOnAction" ripplerFill="#ffffff4d" text="">
 								<styleClass>
 									<String fx:value="fontAwesome" />
-									<String fx:value="inactive" />
+									<String fx:value="success" />
 									<String fx:value="square" />
 									<String fx:value="right" />
 								</styleClass>
 								<cursor>
-									<Cursor fx:constant="HAND" />
+									<Cursor fx:constant="DEFAULT" />
 								</cursor>
 							</JFXButton>
 						</children>
@@ -276,7 +276,7 @@
 								</image>
 							</ImageView>
 							<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1"
-								text="Whoops! You do not have any comments..." />
+								text="Whoops! No comments to display..." />
 						</children>
 					</VBox>
 				</children>

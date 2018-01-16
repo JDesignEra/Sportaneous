@@ -39,7 +39,7 @@ public class ProfileViewController implements Initializable {
 	@FXML private Circle dpCircle;
 	@FXML private TextFlow favSportTxtFlow, intSportsTxtFlow;
 	@FXML private JFXButton actionBtn, prevComBtn, nxtComBtn, bckBtn;
-	@FXML private GridPane profileGridPane, commentGridPane;
+	@FXML private GridPane profileGridPane, commentGridPane, commContentGridPane;
 	@FXML private StackPane stackPaneRoot;
 	@FXML private VBox commContentVBox;
 	@FXML private FlowPane buttonsFlowPane;
@@ -60,18 +60,12 @@ public class ProfileViewController implements Initializable {
 	private static int friendStatus = 3;
 	private static String backURL;
 
-	private GridPane commContentGridPane;
-
+	private static final URL profileViewURL = ProfileViewController.class.getResource("/application/ProfileView.fxml");
 	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
 	private final URL editProfileViewURL = getClass().getResource("/application/EditProfileView.fxml");
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (CommentsDA.getComments(adminNo).length > 1) {
-			nxtComBtn.getStyleClass().remove("inactive");
-			nxtComBtn.getStyleClass().add("danger");
-		}
-
 		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
@@ -121,7 +115,12 @@ public class ProfileViewController implements Initializable {
 		}
 
 		// Comments
-		if (CommentsDA.getComments(adminNo) != null) {
+		if (CommentsDA.getComments(adminNo).length > 1) {
+			nxtComBtn.setDisable(false);
+		}
+
+		if (CommentsDA.getComments(adminNo).length > 0) {
+			CommentsViewController.setIndex(0);
 			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 			commContentGridPane = new GridPane();
 
@@ -133,7 +132,6 @@ public class ProfileViewController implements Initializable {
 			}
 
 			commContentGridPane.getStyleClass().add("commContent");
-
 			commentGridPane.add(commContentGridPane, 0, 1);
 			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 		}
@@ -229,24 +227,30 @@ public class ProfileViewController implements Initializable {
 	// Event Listener on JFXButton[#bckBtn].onAction
 	@FXML
 	public void bckBtnOnAction(ActionEvent event) {
-		try {
-			Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
+		if (backURL.contains("ProfileView.fxml")) {
+			viewSessionProfile();
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+		else {
+			try {
+				Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	// Event Listener on JFXButton[#prevComBtn].onAction
 	@FXML
 	public void prevComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() > 0) {
+		if (CommentsViewController.getIndex() > 0) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
 				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
 			}), new KeyFrame(Duration.millis(300), actionEv -> {
 				CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+
 				commContentGridPane = new GridPane();
+				commContentGridPane.getStyleClass().add("commContent");
 
 				try {
 					commContentGridPane = FXMLLoader.load(commentsViewURL);
@@ -255,21 +259,17 @@ public class ProfileViewController implements Initializable {
 					e.getStackTrace();
 				}
 
-				commContentGridPane.getStyleClass().add("commContent");
-
+				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commentGridPane.add(commContentGridPane, 0, 1);
 				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
-				nxtComBtn.getStyleClass().remove("inactive");
-				nxtComBtn.getStyleClass().add("danger");
+				nxtComBtn.setDisable(false);
 
 				if (CommentsViewController.getIndex() <= 0) {
-					prevComBtn.getStyleClass().remove("danger");
-					prevComBtn.getStyleClass().add("inactive");
+					prevComBtn.setDisable(true);
 				}
 				else {
-					prevComBtn.getStyleClass().remove("inactive");
-					prevComBtn.getStyleClass().add("danger");
+					prevComBtn.setDisable(false);
 				}
 
 				new TransitionAnimation().fromRightFadeIn(500, commContentGridPane, commentGridPane.getPadding().getLeft() * 2);
@@ -280,12 +280,13 @@ public class ProfileViewController implements Initializable {
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
 	public void nxtComBtnOnAction(ActionEvent event) {
-		if (CommentsDA.getComments(adminNo) != null && CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
+		if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
 					new KeyFrame(Duration.millis(300), actionEv -> {
 						CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
-						commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+
 						commContentGridPane = new GridPane();
+						commContentGridPane.getStyleClass().add("commContent");
 
 						try {
 							commContentGridPane = FXMLLoader.load(commentsViewURL);
@@ -294,21 +295,17 @@ public class ProfileViewController implements Initializable {
 							e.getStackTrace();
 						}
 
-						commContentGridPane.getStyleClass().add("commContent");
-
+						commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 						commentGridPane.add(commContentGridPane, 0, 1);
 						GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
-						prevComBtn.getStyleClass().remove("inactive");
-						prevComBtn.getStyleClass().add("danger");
+						prevComBtn.setDisable(false);
 
 						if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
-							nxtComBtn.getStyleClass().remove("danger");
-							nxtComBtn.getStyleClass().add("inactive");
+							nxtComBtn.setDisable(true);
 						}
 						else {
-							nxtComBtn.getStyleClass().remove("inactive");
-							nxtComBtn.getStyleClass().add("danger");
+							nxtComBtn.setDisable(false);
 						}
 
 						new TransitionAnimation().fromLeftFadeIn(500, commContentGridPane, commentGridPane.getPadding().getRight() * 2);
@@ -317,6 +314,8 @@ public class ProfileViewController implements Initializable {
 	}
 
 	public static void viewSessionProfile() {
+		backURL = "";
+		friendStatus = 3;
 		adminNo = AccountsDA.getAdminNo();
 		name = AccountsDA.getName();
 		favSport = AccountsDA.getFavSport();
@@ -329,6 +328,13 @@ public class ProfileViewController implements Initializable {
 		rating = AccountsDA.getRating();
 		heightVisibility = AccountsDA.getHeightVisibility();
 		weightVisbility = AccountsDA.getWeightVisibility();
+
+		try {
+			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -348,7 +354,7 @@ public class ProfileViewController implements Initializable {
 		name = (String) account[3];
 		favSport = (String) account[4];
 		intSports = (String) account[5];
-		intro = (String) account[6];
+		intro = ((String) account[6]).isEmpty() ? "It appears that this user does not need any introduction..." : (String) account[6];
 		height = (double) account[7];
 		weight = (double) account[8];
 		heightVisibility = (boolean) account[9];
@@ -356,5 +362,12 @@ public class ProfileViewController implements Initializable {
 		rating = (double) account[11];
 		matchPlayed = (int) account[12];
 		totalMatch = (int) account[13];
+
+		try {
+			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
