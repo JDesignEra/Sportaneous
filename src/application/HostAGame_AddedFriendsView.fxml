@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane prefWidth="475.0" styleClass="hostAGame" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HostAGame_FriendsViewController">
+<GridPane prefWidth="475.0" styleClass="hostAGame" vgap="10.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HostAGame_AddedFriendsViewController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -18,7 +18,7 @@
     <RowConstraints minHeight="10.0" prefHeight="863.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="625.0" styleClass="hostAGame_FriendsView_Panel" stylesheets="@assets/css/kh.css" text="FRIENDS" />
+      <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="37.0" prefWidth="625.0" styleClass="hostAGame_AddedFriendsView_Panel" stylesheets="@assets/css/kh.css" text="ADDED FRIENDS" />
       <GridPane style="-fx-border-color: transparent;" GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,7 +44,7 @@
                   </AnchorPane>
                </content>
             </ScrollPane>
-            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #F05964;" styleClass="card" stylesheets="@assets/css/kh.css" GridPane.rowIndex="1">
+            <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #26A69A;" styleClass="card" stylesheets="@assets/css/kh.css" GridPane.rowIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="210.0" prefWidth="430.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" />

@@ -7,13 +7,14 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: white;" styleClass="hostAGame" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" prefHeight="900.0" prefWidth="1600.0" style="-fx-background-color: transparent;" styleClass="hostAGame" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HostAGame_CenterViewController">
    <center>
       <GridPane style="-fx-background-color: transparent;" stylesheets="@assets/css/kh.css" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -31,23 +32,35 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints prefHeight="200.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="94.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="106.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="171.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints prefHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints prefHeight="5.0" vgrow="SOMETIMES" />
-                  <RowConstraints prefHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="53.0" minHeight="52.0" prefHeight="53.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="57.0" minHeight="56.0" prefHeight="56.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="86.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXDatePicker prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                  <JFXTimePicker prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                  <JFXComboBox prefHeight="25.0" prefWidth="484.0" promptText="Sport" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                  <JFXComboBox prefHeight="25.0" prefWidth="484.0" promptText="Facility" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                  <JFXDatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXDatePicker>
+                  <JFXTimePicker fx:id="timePicker" prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXTimePicker>
+                  <JFXComboBox fx:id="sportDropD" prefHeight="25.0" prefWidth="484.0" promptText="Sport" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
+                  <JFXComboBox fx:id="FacilityDropD" prefHeight="25.0" prefWidth="484.0" promptText="Facility" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXComboBox>
                   <Label alignment="CENTER" style="-fx-font-size: 22; -fx-font-weight: bold;" styleClass="hostAGame" text="Do You Need Sports Equipment?" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-                  <JFXToggleButton prefHeight="38.0" prefWidth="92.0" styleClass="hostAGame" text="YES" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+                  <JFXToggleButton fx:id="equipmentToggle" prefHeight="72.0" prefWidth="92.0" styleClass="hostAGame" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
                   <GridPane hgap="40.0" GridPane.rowIndex="7">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -57,12 +70,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #26A69A;" text="HOST" GridPane.halignment="RIGHT">
+                        <JFXButton fx:id="hostBtn" onAction="#handleHost" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #26A69A;" text="HOST" GridPane.halignment="RIGHT">
                            <styleClass>
                               <String fx:value="hostedGame" />
                               <String fx:value="hostAGame" />
                            </styleClass></JFXButton>
-                        <JFXButton prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #EF4956;" text="CANCEL" GridPane.columnIndex="1">
+                        <JFXButton fx:id="cancelBtn" onAction="#handleCancel" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: #EF4956;" text="CANCEL" GridPane.columnIndex="1">
                            <styleClass>
                               <String fx:value="hostedGame" />
                               <String fx:value="hostAGame" />
@@ -86,7 +99,7 @@
                               <Insets bottom="20.0" />
                            </padding>
                         </Label>
-                        <Label contentDisplay="BOTTOM" prefHeight="117.0" prefWidth="154.0" style="-fx-font-size: 70; -fx-font-family: roboto; -fx-font-weight: bold;" text="34°C" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                        <Label fx:id="lbTemp" contentDisplay="BOTTOM" prefHeight="117.0" prefWidth="154.0" style="-fx-font-size: 70; -fx-font-family: roboto; -fx-font-weight: bold;" text="34°C" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                            <padding>
                               <Insets bottom="55.0" />
                            </padding>

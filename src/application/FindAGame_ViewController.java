@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -62,6 +63,7 @@ public class FindAGame_ViewController {
 	public static int VPD_index = 0;
 	static String whosegameisclicked;
 	static HostsEntity clickedgame;
+	private final URL HostAGameURL = getClass().getResource("/application/HostAGame_CenterView.fxml");
 	
 	@FXML
 	public void initialize() throws IOException {
@@ -90,7 +92,11 @@ public class FindAGame_ViewController {
 	
     @FXML
     void handleHostBtn(ActionEvent event) {
-
+    	try {
+    		Main.getRoot().setCenter(FXMLLoader.load(HostAGameURL));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
     }
 
     @FXML
