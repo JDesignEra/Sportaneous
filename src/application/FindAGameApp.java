@@ -21,11 +21,11 @@ public class FindAGameApp extends Application {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/application/FindAGame2.fxml"));
+			loader.setLocation(getClass().getResource("/application/HostAGame_FriendsView.fxml"));
 			Parent root = loader.load();
-			FindAGame_ViewController controller = loader.getController();
+			HostAGame_FriendsViewController controller = loader.getController();
 
-			Scene scene = new Scene(root, 1600, 900);
+			Scene scene = new Scene(root, 475, 1000);
 			stage.setScene(scene);
 			stage.show();
 

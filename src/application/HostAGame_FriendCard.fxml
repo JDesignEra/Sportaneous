@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="450.0" styleClass="card" stylesheets="@assets/css/kh.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="411.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="63.0" minWidth="10.0" prefWidth="39.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="278.0" prefWidth="585.0" style="-fx-background-color: white;" styleClass="hostCard">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="1.0" prefWidth="29.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="153.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="255.0" minWidth="10.0" prefWidth="231.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <GridPane stylesheets="@assets/css/kh.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="399.0" minWidth="10.0" prefWidth="375.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="0.0" prefWidth="24.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="32.0" minHeight="7.5" prefHeight="22.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="42.0" minHeight="6.5" prefHeight="33.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="31.0" minHeight="5.5" prefHeight="17.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="33.0" minHeight="5.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="28.0" minHeight="4.5" prefHeight="17.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="39.5" minHeight="3.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="55.0" minHeight="1.5" prefHeight="19.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label fx:id="lbMatchesPlayed" style="-fx-font-size: 13; -fx-font-family: Roboto;" text="10 / 12" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                  <Label style="-fx-font-size: 17; -fx-font-weight: bold; -fx-font-family: Roboto;" text="Matches Played" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lbPlayerRating" alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="400.0" style="-fx-font-family: FontAwesome; -fx-text-alignment: center; -fx-font-size: 24; -fx-text-fill: #EF4956;" text="        " GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
+                  <Label style="-fx-font-size: 17; -fx-font-weight: bold; -fx-font-family: Arial;" text="Player Rating" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                  <Label fx:id="lbStats" style="-fx-font-size: 12.5; -fx-font-family: Roboto;" text="2.01 m  |  107 kg" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <Label fx:id="lbName" style="-fx-font-weight: bold; -fx-font-size: 20.5; -fx-font-family: Roboto;" text="Roger Federer" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+            <Circle fx:id="playerDP" fill="#ffffff00" radius="74.0" stroke="#ef4956" strokeType="INSIDE" strokeWidth="4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <JFXButton fx:id="addBtn" onAction="#handleAdd" prefHeight="240.0" prefWidth="43.0" style="-fx-background-color: #26A69A; -fx-font-family: fontawesome; -fx-font-size: 10;" styleClass="hostAGame_jfx-button" stylesheets="@assets/css/kh.css" text="" textFill="WHITE" GridPane.columnIndex="1" />
+   </children>
+</GridPane>

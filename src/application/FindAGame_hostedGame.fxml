@@ -12,7 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="208.0" minWidth="-Infinity" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" styleClass="hostedGame" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="208.0" minWidth="-Infinity" prefHeight="208.0" prefWidth="925.0" style="-fx-background-color: white;" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FindAGame_hostedGameController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="8.0" minWidth="8.0" prefWidth="8.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="321.0" minWidth="10.0" prefWidth="36.0" />
@@ -149,4 +149,8 @@
    <effect>
       <DropShadow />
    </effect>
+   <styleClass>
+      <String fx:value="hostedGame" />
+      <String fx:value="card" />
+   </styleClass>
 </GridPane>

@@ -360,12 +360,6 @@
    -fx-opacity:0.9;
 }
 
-.whitebg {
-	-fx-background-color: white,white;
-	-fx-border-color: transparent;
-	-fx-padding: 4.0 0.0 4.0 5.0;
-}
-
 .ratingElement_Sport {
 	-fx-alignment: center;
 }
@@ -388,6 +382,25 @@
 
 .hostAGame {
 	-fx-font-family: Roboto;
+	-fx-background-radius: 4.0px;
+	-fx-background-color: transparent;
+}
+
+.hostAGame_jfx-button {
+	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
+	-fx-font-size: 14.0px;
+	-fx-text-fill: #ffffff;
+	-fx-padding: 0.0px 0.0px 0.0px 0.0px;
+}
+
+.hostAGame_FriendsView_Panel {
+	-fx-font-family: "Roboto";
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-text-fill: white;
+	-fx-background-color: #EF4956;
+	-fx-background-radius: 4.0px;
+	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.6) , 10.0, 0.0 , 3.0 , 3.0 );
 }
 
 /* The main scrollbar **track** CSS class  */
@@ -437,5 +450,9 @@
     -fx-background-color: #AEAEAE;
 	-fx-background-insets: 2, 0, 0;
 	-fx-background-radius: 2em;
-
 }
+
+.scroll-pane {
+	-fx-border-color: transparent !important;
+}
+
