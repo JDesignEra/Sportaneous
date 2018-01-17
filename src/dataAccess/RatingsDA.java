@@ -14,33 +14,49 @@ import entity.RatingsEntity;
 public class RatingsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<RatingsEntity>> ratings;
-	private static String sessionID = AccountsDA.getAdminNo();
+//	private static String sessionID = AccountsDA.getAdminNo();
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/ratings.db")).closeOnJvmShutdown().make();
 		ratings = db.getTreeMap("ratings");
 
+		List<RatingsEntity> temp = new ArrayList<>();
+		temp.add(new RatingsEntity("1", new String[] { "1", "2" }, new String[] { "1",  "2" }, new int[]{3, 0}, new boolean[] { true, true}, 1));
+		temp.add(new RatingsEntity("2", new String[] { "3", "4" }, new String[] { "1",  "2" }, new int[]{3, 0}, new boolean[] { true, true}, 1));
+		ratings.put("admin", temp);
 		db.commit();
 	}
 	
-	public static Object[][] getAllData() {
+	public static List<Object[][]> getSesssionRatingData() {
+		List<RatingsEntity> ratingList = (ratings.get("admin") != null ? ratings.get("admin") : new ArrayList<>());
+		List<Object[][]> data = new ArrayList<>();
+		
+		for (RatingsEntity ratingsEntity : ratingList) {
+		}
+		
+		return data;
+	}
+	
+	/*
+	public static Object[][] getAllAccData() {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		Object[][] data = new Object[ratings.size()][15];
 		int i = 0;
 
 		for (RatingsEntity ratingsEntity : ratingList) {
-			data[i][0] = ((RatingsEntity) ratingsEntity).getMatchID();
-			data[i][1] = ((RatingsEntity) ratingsEntity).getAdminNums();
-			data[i][2] = ((RatingsEntity) ratingsEntity).getComments();
-			data[i][3] = ((RatingsEntity) ratingsEntity).getRatings();
-			data[i][4] = ((RatingsEntity) ratingsEntity).getAttendances();
-			data[i][5] = ((RatingsEntity) ratingsEntity).getNoRated();
+			data[i][0] = (ratingsEntity).getMatchID();
+			data[i][1] = (ratingsEntity).getAdminNums();
+			data[i][2] = (ratingsEntity).getComments();
+			data[i][3] = (ratingsEntity).getRatings();
+			data[i][4] = (ratingsEntity).getAttendances();
+			data[i][5] = (ratingsEntity).getNoRated();
 		
 			i++;
 		}
 
 		return data;
 	}
+	*/
 
 	public static void addRatings(String matchID, String[] adminNums) {
 		for (String adminNo : adminNums) {
@@ -61,6 +77,7 @@ public class RatingsDA {
 		}
 	}
 
+	/*
 	public static void updateRatings(String matchID, String[] comments, int[] rating, boolean[] attendances) {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		String[] adminGrp = null;
@@ -114,6 +131,17 @@ public class RatingsDA {
 				}
 				
 				i++;
+			}
+		}
+	}
+	*/
+	
+	public static void main(String[] args) {
+		initDA();
+		
+		for (int i = 0; i < getSesssionRatingData().length; i++) {
+			for (Object s : getSesssionRatingData()[i]) {
+				System.out.println(s.toString());
 			}
 		}
 	}
