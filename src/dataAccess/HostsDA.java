@@ -157,9 +157,9 @@ public class HostsDA {
 		if (key != 0) {
 			System.out.println("Found at: " + key);
 			if (hosts.get(key).getPlayersRecruited() == null) {
+				System.out.println(hostAd + " is the first player to be added.");
 				list = new ArrayList<String>();
 				list.add(tobeaddedAd.toLowerCase());
-				System.out.println("Halfway through");
 				HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(),
 						hosts.get(key).getSportsType(), list);
 				hosts.replace(key, tobereplaced);
@@ -170,7 +170,7 @@ public class HostsDA {
 				
 				if (!list.contains(tobeaddedAd.toLowerCase())) {
 
-					System.out.println("Condition 2 fulfilled.");
+					System.out.println(tobeaddedAd + " not found in the list; allowed to be added");
 					list.add(tobeaddedAd);
 					HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(), hosts.get(key).getSportsType(),
 							list);

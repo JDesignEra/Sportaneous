@@ -95,7 +95,6 @@ public class FindAGame_ViewController {
 
     @FXML
     void handleSearch(ActionEvent event) throws IOException {
-    	System.out.println(datePicker.getValue());
     	
     	HostsDA.getSearchResults().clear();
 

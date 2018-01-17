@@ -21,28 +21,25 @@ public class FindAGameApp extends Application {
 		try {
 
 			FXMLLoader loader = new FXMLLoader();
-//			loader.setLocation(getClass().getResource("/application/FindAGame_ViewPlayer.fxml"));
 			loader.setLocation(getClass().getResource("/application/FindAGame2.fxml"));
 			Parent root = loader.load();
 			FindAGame_ViewController controller = loader.getController();
 
-			// AnchorPane root =
-			// FXMLLoader.load(getClass().getResource("/application/FindAGame.fxml"));
 			Scene scene = new Scene(root, 1600, 900);
 			stage.setScene(scene);
 			stage.show();
 
-//			HostsDA.initDA();
-//
-//			AccountsDA.initDA();			
-//			AccountsDA.addAccount("Annalise Keating", "170285X", "ak@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Mark Zuckerberg", "170374Y", "mz@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Tim Cook", "170463Z", "tc@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Bill Gates", "170552Z", "bg@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Simon Cowell", "170152Z", "sc@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Jon Snow", "170866B", "js@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Lim Wilson", "175150R", "175150R@mymail.nyp.edu.sg", "a");
-//			AccountsDA.addAccount("Admin", "a", "a@mymail.nyp.edu.sg", "a");
+			HostsDA.initDA();
+
+			AccountsDA.initDA();			
+			AccountsDA.addAccount("Annalise Keating", "170285X", "ak@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Mark Zuckerberg", "170374Y", "mz@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Tim Cook", "170463Z", "tc@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Bill Gates", "170552Z", "bg@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Simon Cowell", "170152Z", "sc@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Jon Snow", "170866B", "js@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Lim Wilson", "175150R", "175150R@mymail.nyp.edu.sg", "a");
+			AccountsDA.addAccount("Admin", "a", "a@mymail.nyp.edu.sg", "a");
 			
 
 		}

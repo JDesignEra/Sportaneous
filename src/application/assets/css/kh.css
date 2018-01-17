@@ -366,15 +366,6 @@
 	-fx-padding: 4.0 0.0 4.0 5.0;
 }
 
-.comboBox {
-	-fx-background-color: white, white;
-	-fx-padding: 4.0 0.0 4.0 5.0;
-	-fx-font-size: 14.0px;
-	-fx-font-family: Roboto;
-	-fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.35) , 16.0, 0.0 , 3.0 , 3.0 );
-	-fx-fill: #7f7f7f;
-}
-
 .ratingElement_Sport {
 	-fx-alignment: center;
 }
@@ -391,15 +382,12 @@
 	-fx-font-family: Roboto;
 }
 
-.persistent-prompt:focused {
-    -fx-prompt-text-fill: derive(-fx-control-inner-background,-30.0%);
-    -fx-font-size: 13.5px;
-}
-.no-prompt {
-    -fx-prompt-text-fill: transparent !important;
-}
 .hostedGame_textField {
 	-fx-prompt-text-fill: #7f7f7f;
+}
+
+.hostAGame {
+	-fx-font-family: Roboto;
 }
 
 /* The main scrollbar **track** CSS class  */

@@ -73,7 +73,7 @@ public class FindAGame_ViewPlayerDetailsController {
 			FindAGame_ViewController.VPD_index = 0;
 		}
 		
-		System.out.println("VPD index: " + FindAGame_ViewController.VPD_index);
+		System.out.println("(ViewPlayerDetails) " + gameClicked.getName() + " (" + gameClicked.getAdminNo() + ")'s recruited player ("+ "VPD index: " + FindAGame_ViewController.VPD_index + ") is being displayed now.");
 		
 	}
 	
@@ -144,8 +144,8 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	public void setMatchesPlayed() {
-		String total = AccountsDA.getAccData(adminNo.toLowerCase())[14].toString();
-		String played = AccountsDA.getAccData(adminNo.toLowerCase())[13].toString();
+		String total = AccountsDA.getAccData(adminNo.toLowerCase())[13].toString();
+		String played = AccountsDA.getAccData(adminNo.toLowerCase())[12].toString();
 		
 		lbMatchesPlayed.setText(played + " / " + total);
 	}

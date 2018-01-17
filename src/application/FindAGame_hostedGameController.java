@@ -71,7 +71,7 @@ public class FindAGame_hostedGameController {
 		if (listOfRecruitedPlayers != null && listOfRecruitedPlayers.contains(Main.currentUserAdminNo)) {
 			joinBtn.setDisable(true);
 			joinBtn.setStyle("-fx-background-color: grey;");
-			System.out.println("User has already joined the game that " + name + "(" + admin + ") hosted.");
+			System.out.println("User has already joined the game that " + name + " (" + admin + ") hosted.");
 		}
 		
 		if (listOfRecruitedPlayers != null && listOfRecruitedPlayers.size() == HostsDA.getGameSize(typeOfSportsIndex)) {
@@ -88,12 +88,15 @@ public class FindAGame_hostedGameController {
 	// Event Listener on JFXButton[#joinBtn].onAction
 	@FXML
 	void handleJoin(ActionEvent event) {
-		System.out.println(Main.currentUserAdminNo.toUpperCase());
-		System.out.println(admin);
+		System.out.println(Main.currentUserAdminNo.toUpperCase() + " is trying to join " + admin + "'s game.");
+		
 		HostsDA.addFriends(admin, date, time, Main.currentUserAdminNo.toUpperCase());
+		joinBtn.setStyle("-fx-background-color: grey;");
+		
+		
 		setNoOfPlayersLabel();
 		
-		joinBtn.setStyle("-fx-background-color: grey;");
+		
 	}
 	
 	@FXML
@@ -150,6 +153,7 @@ public class FindAGame_hostedGameController {
 	}
 	
 	void setNoOfPlayersLabel() {
+		HostsDA.initDA();
 		int total = HostsDA.getGameSize(this.toBeDisplayed_HostedGame.getSportsType());
 		int current;
 		if (this.toBeDisplayed_HostedGame.getPlayersRecruited() == null) {
@@ -158,6 +162,7 @@ public class FindAGame_hostedGameController {
 		else {
 			current = this.toBeDisplayed_HostedGame.getPlayersRecruited().size();
 		}
+
 		noOfplayers.setText(current + " / " + total);
 	}
 	
