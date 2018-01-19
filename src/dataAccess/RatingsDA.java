@@ -14,7 +14,7 @@ import entity.RatingsEntity;
 public class RatingsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<RatingsEntity>> ratings;
-//	private static String sessionID = AccountsDA.getAdminNo();
+	private static String sessionID = AccountsDA.getAdminNo();
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/ratings.db")).closeOnJvmShutdown().make();
@@ -77,7 +77,7 @@ public class RatingsDA {
 		}
 	}
 
-	/*
+	
 	public static void updateRatings(String matchID, String[] comments, int[] rating, boolean[] attendances) {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		String[] adminGrp = null;
@@ -134,15 +134,14 @@ public class RatingsDA {
 			}
 		}
 	}
-	*/
 	
 	public static void main(String[] args) {
 		initDA();
 		
-		for (int i = 0; i < getSesssionRatingData().length; i++) {
-			for (Object s : getSesssionRatingData()[i]) {
-				System.out.println(s.toString());
-			}
-		}
+//		for (int i = 0; i < getSesssionRatingData().length; i++) {
+//			for (Object s : getSesssionRatingData()[i]) {
+//				System.out.println(s.toString());
+//			}
+//		}
 	}
 }
