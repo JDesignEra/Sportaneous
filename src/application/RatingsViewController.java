@@ -10,9 +10,10 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
+import dataAccess.AccountsDA;
 import dataAccess.RatingsDA;
 
-public class RatingsBlankController implements Initializable {
+public class RatingsViewController implements Initializable {
 	@FXML
 	private RowConstraints ratingContent;
 
@@ -26,7 +27,7 @@ public class RatingsBlankController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources){
 		RatingsDA.initDA();
-        if (RatingsDA.getSesssionRatingData(AccountsDA.getAdminNo()).length > 0) {
+        if (RatingsDA.getSessionRatingData(AccountsDA.getAdminNo()).length > 0) {
 		ratings = RatingsDA.getSessionRatingData();
 		int colCount = 0;
 		int rowCount = 0;

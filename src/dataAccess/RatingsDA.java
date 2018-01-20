@@ -27,7 +27,7 @@ public class RatingsDA {
 		db.commit();
 	}
 	
-	public static List<Object[][]> getSesssionRatingData() {
+	public static List<Object[][]> getSessionRatingData() {
 		List<RatingsEntity> ratingList = (ratings.get("admin") != null ? ratings.get("admin") : new ArrayList<>());
 		List<Object[][]> data = new ArrayList<>();
 		

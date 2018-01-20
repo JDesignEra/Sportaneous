@@ -25,6 +25,8 @@ public class NavigationViewController implements Initializable {
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private final URL friendsViewURL = getClass().getResource("/application/FriendsView.fxml");
 	private final URL notificationViewURL = getClass().getResource("/application/NotificationsView.fxml");
+	private final URL ratingsViewURL = getClass().getResource("/application/RatingsView.fxml");
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
