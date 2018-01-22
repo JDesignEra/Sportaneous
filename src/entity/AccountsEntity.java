@@ -78,6 +78,15 @@ public class AccountsEntity implements Serializable {
 		return weightVisibility;
 	}
 
+	public double getCalRating() {
+		int total = 0;
+		for (int i : rating) {
+			total += i;
+		}
+
+		return total / (rating[0] + ((double) rating[1] / 2) + ((double) rating[2] / 3) + ((double) rating[3] / 4) + ((double) rating[4] / 5));
+	}
+
 	public int[] getRating() {
 		return rating;
 	}

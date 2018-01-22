@@ -13,7 +13,7 @@ import entity.FriendsEntity;
 public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
-	private static String sessionID = AccountsDA.getAdminNo();
+	private static String sessionID = AccountsDA.getSession().getAdminNo();
 	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {
@@ -28,38 +28,8 @@ public class FriendsDA {
 		db.commit();
 	}
 
-	/**
-	 * [0] = AdminNo, [1] = Name, [2] = Height<br>
-	 * [3] = Weight, [4] = Height Visibility, [5] = Weight Visibility<br>
-	 * [6] = Rating, [7] = Match Played, [8] = Total Match
-	 * 
-	 * @return Object[][]
-	 */
-	public static Object[][] getFriends() {
-		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
-		List<Object[]> dataList = new ArrayList<>();
-
-		for (FriendsEntity friendsEntity : friendsList) {
-			Object[] accData = AccountsDA.getAccData(friendsEntity.getFriendAdminNo());
-			Object[] data = new Object[10];
-
-			if (friendsEntity.getStatus() == 1) {
-				data[0] = accData[0]; // AdminNo
-				data[1] = accData[1]; // Email
-				data[2] = accData[3]; // Name
-				data[3] = accData[7]; // Height
-				data[4] = accData[8]; // Weight
-				data[5] = accData[9]; // Height Visibility
-				data[6] = accData[10]; // Weight Visibility
-				data[7] = accData[11]; // Rating
-				data[8] = accData[12]; // Match Attended
-				data[9] = accData[13]; // Total Match Joined
-
-				dataList.add(data);
-			}
-		}
-
-		return dataList.toArray(new Object[dataList.size()][]);
+	public static List<FriendsEntity> getFriends() {
+		return friends.get(sessionID);
 	}
 
 	public static void addFriend(String friendAdminNo) {

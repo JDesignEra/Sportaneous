@@ -16,11 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.util.Duration;
+
+import entity.AccountsEntity;
 
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
@@ -39,21 +40,20 @@ public class ProfileViewController {
 	@FXML private JFXButton actionBtn, prevComBtn, nxtComBtn, bckBtn;
 	@FXML private GridPane profileGridPane, commentGridPane, commContentGridPane;
 	@FXML private StackPane stackPaneRoot;
-	@FXML private VBox commContentVBox;
 	@FXML private FlowPane buttonsFlowPane;
 
-	private static String adminNo = AccountsDA.getAdminNo();
-	private static String name = AccountsDA.getName();
-	private static String favSport = AccountsDA.getFavSport();
-	private static String intSports = AccountsDA.getInterestedSports();
-	private static String intro = AccountsDA.getIntro();
-	private static int matchPlayed = AccountsDA.getMatchPlayed();
-	private static int totalMatch = AccountsDA.getTotalMatch();
-	private static double height = AccountsDA.getHeight();
-	private static double weight = AccountsDA.getWeight();
-	private static double rating = AccountsDA.getRating();
-	private static boolean heightVisibility = AccountsDA.getHeightVisibility();
-	private static boolean weightVisbility = AccountsDA.getWeightVisibility();
+	private static String adminNo = AccountsDA.getSession().getAdminNo();
+	private static String name = AccountsDA.getSession().getName();
+	private static String favSport = AccountsDA.getSession().getFavSport();
+	private static String intSports = AccountsDA.getSession().getInterestedSports();
+	private static String intro = AccountsDA.getSession().getIntro();
+	private static int matchPlayed = AccountsDA.getSession().getMatchPlayed();
+	private static int totalMatch = AccountsDA.getSession().getTotalMatch();
+	private static double height = AccountsDA.getSession().getHeight();
+	private static double weight = AccountsDA.getSession().getWeight();
+	private static double rating = AccountsDA.getSession().getCalRating();
+	private static boolean heightVisibility = AccountsDA.getSession().getHeightVisibility();
+	private static boolean weightVisbility = AccountsDA.getSession().getWeightVisibility();
 
 	private static int friendStatus = 3;
 	private static String backURL;
@@ -113,14 +113,15 @@ public class ProfileViewController {
 		}
 
 		// Comments
-		if (CommentsDA.getComments(adminNo).length > 1) {
+		if (CommentsDA.getComments(adminNo).size() > 1) {
 			nxtComBtn.setDisable(false);
 		}
 
-		if (CommentsDA.getComments(adminNo).length > 0) {
-			CommentsViewController.setIndex(0);
-			commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
+		if (!CommentsDA.getComments(adminNo).isEmpty()) {
+			commentGridPane.getChildren().remove(commContentGridPane);
+
 			commContentGridPane = new GridPane();
+			CommentsViewController.setIndex(0);
 
 			try {
 				commContentGridPane = FXMLLoader.load(commentsViewURL);
@@ -129,7 +130,6 @@ public class ProfileViewController {
 				e.getStackTrace();
 			}
 
-			commContentGridPane.getStyleClass().add("commContent");
 			commentGridPane.add(commContentGridPane, 0, 1);
 			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 		}
@@ -257,7 +257,6 @@ public class ProfileViewController {
 					e.getStackTrace();
 				}
 
-				commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 				commentGridPane.add(commContentGridPane, 0, 1);
 				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
@@ -278,7 +277,7 @@ public class ProfileViewController {
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
 	public void nxtComBtnOnAction(ActionEvent event) {
-		if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).length - 1) {
+		if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).size() - 1) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
 					new KeyFrame(Duration.millis(300), actionEv -> {
 						CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
@@ -293,13 +292,12 @@ public class ProfileViewController {
 							e.getStackTrace();
 						}
 
-						commentGridPane.getChildren().remove(commentGridPane.lookup(".commContent"));
 						commentGridPane.add(commContentGridPane, 0, 1);
 						GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
 
 						prevComBtn.setDisable(false);
 
-						if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).length - 1) {
+						if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).size() - 1) {
 							nxtComBtn.setDisable(true);
 						}
 						else {
@@ -314,18 +312,18 @@ public class ProfileViewController {
 	public static void viewSessionProfile() {
 		backURL = "";
 		friendStatus = 3;
-		adminNo = AccountsDA.getAdminNo();
-		name = AccountsDA.getName();
-		favSport = AccountsDA.getFavSport();
-		intSports = AccountsDA.getInterestedSports();
-		intro = AccountsDA.getIntro();
-		matchPlayed = AccountsDA.getMatchPlayed();
-		totalMatch = AccountsDA.getTotalMatch();
-		height = AccountsDA.getHeight();
-		weight = AccountsDA.getWeight();
-		rating = AccountsDA.getRating();
-		heightVisibility = AccountsDA.getHeightVisibility();
-		weightVisbility = AccountsDA.getWeightVisibility();
+		adminNo = AccountsDA.getSession().getAdminNo();
+		name = AccountsDA.getSession().getName();
+		favSport = AccountsDA.getSession().getFavSport();
+		intSports = AccountsDA.getSession().getInterestedSports();
+		intro = AccountsDA.getSession().getIntro();
+		matchPlayed = AccountsDA.getSession().getMatchPlayed();
+		totalMatch = AccountsDA.getSession().getTotalMatch();
+		height = AccountsDA.getSession().getHeight();
+		weight = AccountsDA.getSession().getWeight();
+		rating = AccountsDA.getSession().getCalRating();
+		heightVisibility = AccountsDA.getSession().getHeightVisibility();
+		weightVisbility = AccountsDA.getSession().getWeightVisibility();
 
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
@@ -346,20 +344,20 @@ public class ProfileViewController {
 	public static void viewProfile(String adminNo, String returnLocation) {
 		backURL = returnLocation;
 		friendStatus = FriendsDA.checkStatus(adminNo);
-		Object[] account = AccountsDA.getAccData(adminNo);
+		AccountsEntity account = AccountsDA.getAccData(adminNo);
 
-		ProfileViewController.adminNo = (String) account[0];
-		name = (String) account[3];
-		favSport = (String) account[4];
-		intSports = (String) account[5];
-		intro = ((String) account[6]).isEmpty() ? "It appears that this user does not need any introduction..." : (String) account[6];
-		height = (double) account[7];
-		weight = (double) account[8];
-		heightVisibility = (boolean) account[9];
-		weightVisbility = (boolean) account[10];
-		rating = (double) account[11];
-		matchPlayed = (int) account[12];
-		totalMatch = (int) account[13];
+		ProfileViewController.adminNo = account.getAdminNo();
+		name = account.getName();
+		favSport = account.getFavSport();
+		intSports = account.getInterestedSports();
+		intro = (account.getIntro().isEmpty() ? "It appears that this user does not need any introduction..." : account.getIntro());
+		height = account.getHeight();
+		weight = account.getWeight();
+		heightVisibility = account.getHeightVisibility();
+		weightVisbility = account.getWeightVisibility();
+		rating = account.getCalRating();
+		matchPlayed = account.getMatchPlayed();
+		totalMatch = account.getTotalMatch();
 
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));

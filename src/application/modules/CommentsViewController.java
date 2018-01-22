@@ -1,10 +1,14 @@
 package application.modules;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+
+import entity.CommentsEntity;
 
 import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
@@ -22,11 +26,11 @@ public class CommentsViewController {
 
 	private static int index = 0;
 
-	private Object[][] comments = CommentsDA.getComments(AccountsDA.getAdminNo());
-	private String adminNo = comments[index][0].toString();
-	private String name = comments[index][1].toString();
-	private String comment = comments[index][2].toString();
-	private int rating = (int) comments[index][3];
+	private List<CommentsEntity> comments = CommentsDA.getComments(AccountsDA.getSession().getAdminNo());
+	private String adminNo = comments.get(index).getAdminNo();
+	private String name = comments.get(index).getName();
+	private String comment = comments.get(index).getComment();
+	private int rating = comments.get(index).getRating();
 
 	@FXML
 	private void initialize() {

@@ -29,23 +29,8 @@ public class CommentsDA {
 		db.commit();
 	}
 
-	public static Object[][] getComments(String adminNo) {
-		Object[][] data = new Object[0][];
-
-		if (comments.get(adminNo) != null) {
-			data = new Object[comments.get(adminNo).size()][4];
-			int i = 0;
-
-			for (CommentsEntity commentsEntity : comments.get(adminNo)) {
-				data[i][0] = commentsEntity.getAdminNo();
-				data[i][1] = commentsEntity.getName();
-				data[i][2] = commentsEntity.getComment();
-				data[i][3] = commentsEntity.getRating();
-				i++;
-			}
-		}
-
-		return data;
+	public static List<CommentsEntity> getComments(String adminNo) {
+		return comments.get(adminNo) != null ? comments.get(adminNo) : new ArrayList<>();
 	}
 
 	/**

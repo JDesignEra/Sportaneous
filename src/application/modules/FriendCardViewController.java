@@ -1,6 +1,7 @@
 package application.modules;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -8,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
+import entity.AccountsEntity;
 
 import modules.Misc;
 
@@ -19,17 +22,17 @@ public class FriendCardViewController implements Initializable {
 	@FXML private GridPane cardContent;
 
 	private int i = FriendsViewController.getAccIndex();
-	private Object[][] accounts = FriendsViewController.getAccounts();
+	private List<AccountsEntity> accounts = FriendsViewController.getAccounts();
 
-	private String adminNo = (String) accounts[i][0];
-	private String name = (String) accounts[i][2];
-	private double height = (double) accounts[i][3];
-	private double weight = (double) accounts[i][4];
-	private boolean heightVisibility = (boolean) accounts[i][5];
-	private boolean weightVisbility = (boolean) accounts[i][6];
-	private double rating = (double) accounts[i][7];
-	private int matchPlayed = (int) accounts[i][8];
-	private int totalMatch = (int) accounts[i][9];
+	private String adminNo = accounts.get(i).getAdminNo();
+	private String name = accounts.get(i).getName();
+	private double height = accounts.get(i).getHeight();
+	private double weight = accounts.get(i).getWeight();
+	private boolean heightVisibility = accounts.get(i).getHeightVisibility();
+	private boolean weightVisbility = accounts.get(i).getWeightVisibility();
+	private double rating = accounts.get(i).getCalRating();
+	private int matchPlayed = accounts.get(i).getMatchPlayed();
+	private int totalMatch = accounts.get(i).getTotalMatch();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -45,7 +48,7 @@ public class FriendCardViewController implements Initializable {
 			else if (heightVisibility) {
 				heightWeightTxt.setText(height + " m");
 			}
-			else if (weightVisbility) {
+			else {
 				heightWeightTxt.setText(weight + " kg");
 			}
 		}

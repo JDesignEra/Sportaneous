@@ -2,12 +2,15 @@ package dataAccess;
 
 import java.io.File;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
 import entity.AccountsEntity;
+import entity.FriendsEntity;
 
 import modules.SendMail;
 
@@ -45,87 +48,26 @@ public class AccountsDA {
 		db.commit();
 	}
 
-	/**
-	 * Account's information index are as follow:<br>
-	 * [0] - Administrato's Number, [1] - Email, [2] - Password,<br>
-	 * [3] - Name, [4] - Favorite Sport, [5] - Interested Sports,<br>
-	 * [6] - Introduction, [7] - Height, [8] - Weight,<br>
-	 * [9] - Height Visibility, [10] - Weight Visibility, [11] - Rating<br>
-	 * [12] - Match's Attended, [13] - Match Joined,<br>
-	 * [14] - Current joined Match ID.
-	 * 
-	 * @return an Object[][] of account's information
-	 */
-	public static Object[][] getAllData() {
-		Object[][] data = new Object[accounts.size()][15];
-		int i = 0;
+	public static List<AccountsEntity> getAllData() {
+		return new ArrayList<>(accounts.values());
+	}
 
-		for (AccountsEntity accountsEntity : accounts.values()) {
-			data[i][0] = accountsEntity.getAdminNo();
-			data[i][1] = accountsEntity.getEmail();
-			data[i][2] = accountsEntity.getPassword();
-			data[i][3] = accountsEntity.getName();
-			data[i][4] = accountsEntity.getFavSport();
-			data[i][5] = accountsEntity.getInterestedSports();
-			data[i][6] = accountsEntity.getIntro();
-			data[i][7] = accountsEntity.getHeight();
-			data[i][8] = accountsEntity.getWeight();
-			data[i][9] = accountsEntity.getHeightVisibility();
-			data[i][10] = accountsEntity.getWeightVisibility();
-			data[i][11] = calRating(accountsEntity.getRating());
-			data[i][12] = accountsEntity.getMatchPlayed();
-			data[i][13] = accountsEntity.getTotalMatch();
-			data[i][14] = accountsEntity.getMatchID();
-			i++;
+	public static List<AccountsEntity> getFriendsAcc() {
+		List<AccountsEntity> accList = new ArrayList<>();
+
+		for (FriendsEntity friendsEntity : FriendsDA.getFriends()) {
+			if (friendsEntity.getStatus() == 1) {
+				accList.add(accounts.get(friendsEntity.getFriendAdminNo()));
+			}
 		}
 
-		return data;
+		return accList;
 	}
 
-	/**
-	 * Account's information index are as follow:<br>
-	 * [0] - Administrato's Number, [1] - Email, [2] - Password,<br>
-	 * [3] - Name, [4] - Favorite Sport, [5] - Interested Sports,<br>
-	 * [6] - Introduction, [7] - Height, [8] - Weight,<br>
-	 * [9] - Height Visibility, [10] - Weight Visibility, [11] - Rating<br>
-	 * [12] - Match's Attended, [13] - Match Joined,<br>
-	 * [14] - Current joined Match ID.
-	 * 
-	 * @param adminNo
-	 *            - Account's administrator number
-	 * @return an Object[] of account's information
-	 */
-	public static Object[] getAccData(String adminNo) {
-		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
-		Object[] data = new Object[15];
-
-		data[0] = accountsEntity.getAdminNo();
-		data[1] = accountsEntity.getEmail();
-		data[2] = accountsEntity.getPassword();
-		data[3] = accountsEntity.getName();
-		data[4] = accountsEntity.getFavSport();
-		data[5] = accountsEntity.getInterestedSports();
-		data[6] = accountsEntity.getIntro();
-		data[7] = accountsEntity.getHeight();
-		data[8] = accountsEntity.getWeight();
-		data[9] = accountsEntity.getHeightVisibility();
-		data[10] = accountsEntity.getWeightVisibility();
-		data[11] = calRating(accountsEntity.getRating());
-		data[12] = accountsEntity.getMatchPlayed();
-		data[13] = accountsEntity.getTotalMatch();
-		data[14] = accountsEntity.getMatchID();
-
-		return data;
+	public static AccountsEntity getAccData(String adminNo) {
+		return accounts.get(adminNo.toLowerCase());
 	}
 
-	/**
-	 * @param adminNo
-	 *            - Account's administrator number
-	 * @param ratings
-	 *            - Account's ratings to be updated. Must be the length of int[5]
-	 * @throws IlegalArgumentException
-	 *             if ratings is not an int[5]
-	 */
 	public static void updateAccRating(String adminNo, int... ratings) {
 		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
 		accountsEntity.setRating(ratings);
@@ -133,14 +75,6 @@ public class AccountsDA {
 		accounts.replace(adminNo, accountsEntity);
 	}
 
-	/**
-	 * @param adminNo
-	 *            - Account's administrator number
-	 * @param matchPlayed
-	 *            - Account's match played to be updated to
-	 * @param totalMatch
-	 *            - Account's total match joined
-	 */
 	public static void updateAccMatch(String adminNo, int matchPlayed, int totalMatch) {
 		AccountsEntity accountEntity = accounts.get(adminNo.toLowerCase());
 		accountEntity.setMatchPlayed(matchPlayed);
@@ -233,7 +167,7 @@ public class AccountsDA {
 
 		accounts.replace(session.getAdminNo(), accountsEntity);
 
-		if (session != null && session.getAdminNo().equals(session.getAdminNo())) {
+		if (session.getAdminNo().equals(session.getAdminNo())) {
 			session = accountsEntity;
 		}
 
@@ -293,128 +227,67 @@ public class AccountsDA {
 		return result.toString();
 	}
 
-	/**
-	 * @return current session account's information.
-	 */
 	public static AccountsEntity getSession() {
 		return session;
 	}
 
-	/**
-	 * @return current session account's administrator number
-	 */
 	public static String getAdminNo() {
 		return session.getAdminNo();
 	}
 
-	/**
-	 * @return current session account's email
-	 */
 	public static String getEmail() {
 		return session.getEmail();
 	}
 
-	/**
-	 * @return current session account's password
-	 */
 	public static String getPassword() {
 		return session.getPassword();
 	}
 
-	/**
-	 * @return current session account's name
-	 */
 	public static String getName() {
 		return session.getName();
 	}
 
-	/**
-	 * @return current session account's favorite sport
-	 */
 	public static String getFavSport() {
 		return session.getFavSport();
 	}
 
-	/**
-	 * @return current session account's interested sports
-	 */
 	public static String getInterestedSports() {
 		return session.getInterestedSports();
 	}
 
-	/**
-	 * @return current session account's introduction
-	 */
 	public static String getIntro() {
 		return session.getIntro();
 	}
 
-	/**
-	 * @return current session account's match ID
-	 */
 	public static int getMatchID() {
 		return session.getMatchID();
 	}
 
-	/**
-	 * @return current session account's height
-	 */
 	public static double getHeight() {
 		return session.getHeight();
 	}
 
-	/**
-	 * @return current session account's weight
-	 */
 	public static double getWeight() {
 		return session.getWeight();
 	}
 
-	/**
-	 * @return current session account's height visibility
-	 */
 	public static boolean getHeightVisibility() {
 		return session.getHeightVisibility();
 	}
 
-	/**
-	 * @return current session account's weight visibility
-	 */
 	public static boolean getWeightVisibility() {
 		return session.getWeightVisibility();
 	}
 
-	/**
-	 * @return current session account's rating
-	 */
 	public static double getRating() {
-		return calRating(session.getRating());
+		return session.getCalRating();
 	}
 
-	/**
-	 * @return current session account's match attendance
-	 */
 	public static int getMatchPlayed() {
 		return session.getMatchPlayed();
 	}
 
-	/**
-	 * @return current session account's total match joined
-	 */
 	public static int getTotalMatch() {
 		return session.getTotalMatch();
-	}
-
-	private static double calRating(int[] rating) {
-		if (rating.length != 5) {
-			throw new IllegalArgumentException("rating must be the length of 5");
-		}
-
-		int total = 0;
-		for (int i : rating) {
-			total += i;
-		}
-
-		return total / (rating[0] + ((double) rating[1] / 2) + ((double) rating[2] / 3) + ((double) rating[3] / 4) + ((double) rating[4] / 5));
 	}
 }

@@ -17,17 +17,13 @@ public class FacilitiesDA {
 
 		facilities = db.getTreeMap("facilities");
 
-		/*
-		 * facilities.put("Badminton Court", new FacilitiesEntity("Badminton Court",
-		 * 4)); facilities.put("Cage Field", new FacilitiesEntity("Cage Field", 2));
-		 * facilities.put("Indoor Basketball Court", new
-		 * FacilitiesEntity("Indoor Basketball Court", 2));
-		 * facilities.put("Outdoor Basketball Court", new
-		 * FacilitiesEntity("Outdoor Basketball Court", 4));
-		 * facilities.put("Soccer Field", new FacilitiesEntity("Soccer Field", 2));
-		 * facilities.put("Squash Court", new FacilitiesEntity("Squash Court", 4));
-		 * facilities.put("Tennis Court", new FacilitiesEntity("Tennis Court", 4));
-		 */
+		facilities.put("Badminton Court", new FacilitiesEntity("Badminton Court", 4));
+		facilities.put("Cage Field", new FacilitiesEntity("Cage Field", 2));
+		facilities.put("Indoor Basketball Court", new FacilitiesEntity("Indoor Basketball Court", 2));
+		facilities.put("Outdoor Basketball Court", new FacilitiesEntity("Outdoor Basketball Court", 4));
+		facilities.put("Soccer Field", new FacilitiesEntity("Soccer Field", 2));
+		facilities.put("Squash Court", new FacilitiesEntity("Squash Court", 4));
+		facilities.put("Tennis Court", new FacilitiesEntity("Tennis Court", 4));
 		db.commit();
 	}
 
