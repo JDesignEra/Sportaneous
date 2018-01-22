@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import modules.Misc;
@@ -17,25 +16,23 @@ import application.ProfileViewController;
 
 public class FriendCardViewController implements Initializable {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt;
-	@FXML private Pane cardPane;
 	@FXML private GridPane cardContent;
 
-	private int i = FriendsViewController.getFriendIndex();
-	private Object[][] friends = FriendsViewController.getFriends();
+	private int i = FriendsViewController.getAccIndex();
+	private Object[][] accounts = FriendsViewController.getAccounts();
+
+	private String adminNo = (String) accounts[i][0];
+	private String name = (String) accounts[i][2];
+	private double height = (double) accounts[i][3];
+	private double weight = (double) accounts[i][4];
+	private boolean heightVisibility = (boolean) accounts[i][5];
+	private boolean weightVisbility = (boolean) accounts[i][6];
+	private double rating = (double) accounts[i][7];
+	private int matchPlayed = (int) accounts[i][8];
+	private int totalMatch = (int) accounts[i][9];
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		String adminNo = (String) friends[i][0];
-		String name = (String) friends[i][1];
-		double height = (double) friends[i][2];
-		double weight = (double) friends[i][3];
-		boolean heightVisibility = (boolean) friends[i][4];
-		boolean weightVisbility = (boolean) friends[i][5];
-		double rating = (double) friends[i][6];
-		int matchPlayed = (int) friends[i][7];
-		int totalMatch = (int) friends[i][8];
-
-		cardPane.setId(adminNo); // Set AdminNumbeer to cardPane
 		nameTxt.setText(name);
 		ratingTxt.setText(new Misc().getRatingShapes(rating));
 		matchNoTxt.setText(matchPlayed + " / " + totalMatch);
@@ -62,6 +59,6 @@ public class FriendCardViewController implements Initializable {
 
 	@FXML
 	public void cardContentOnMouseClick(MouseEvent event) {
-		ProfileViewController.viewProfile(cardPane.getId(), "/application/FriendsView.fxml");
+		ProfileViewController.viewProfile(adminNo, "/application/FriendsView.fxml");
 	}
 }

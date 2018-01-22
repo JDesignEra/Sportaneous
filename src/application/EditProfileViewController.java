@@ -75,8 +75,6 @@ public class EditProfileViewController implements Initializable {
 	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(100, 100, 100);
 
-	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		EquipmentsDA.initDA();
@@ -223,14 +221,14 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener on TextArea[#introTxtArea].onKeyTyped.
 	@FXML
-	public void introTxtAreaOnKeyType(KeyEvent event) {
+	private void introTxtAreaOnKeyType(KeyEvent event) {
 		introCharCountTxt.setText(introTxtArea.getText().length() + " / 120");
 	}
 
 	// Event Listener on JFXButton[#saveBtn].onAction.
 	@SuppressWarnings("unchecked")
 	@FXML
-	public void saveBtnOnAction(ActionEvent event) {
+	private void saveBtnOnAction(ActionEvent event) {
 		// Remove CSS style class
 		emailTxtField.getStyleClass().remove("danger");
 		cPassTxtField.getStyleClass().remove("danger");
@@ -297,14 +295,7 @@ public class EditProfileViewController implements Initializable {
 						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
 
 						// Delay on screen with timeline instead of using Thread.sleep()
-						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> {
-							try {
-								Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
-							}
-							catch (Exception e) {
-								e.printStackTrace();
-							}
-						}));
+						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> ProfileViewController.viewSessionProfile()));
 						timeline.play();
 						break;
 
@@ -336,7 +327,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener on JFXButton[#cancelBtn].onAction.
 	@FXML
-	public void cancelBtnOnAction(ActionEvent event) {
+	private void cancelBtnOnAction(ActionEvent event) {
 		// Dialog
 		JFXDialogLayout content = new JFXDialogLayout();
 		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
@@ -354,7 +345,7 @@ public class EditProfileViewController implements Initializable {
 			dialog.close();
 
 			try {
-				Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+				Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource("/application/ProfileView.fxml")));
 			}
 			catch (Exception e) {
 				e.printStackTrace();
@@ -374,7 +365,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener on JFXButton[#intSportAddBtn].onAction.
 	@FXML
-	public void intSportAddBtnOnAction(ActionEvent event) {
+	private void intSportAddBtnOnAction(ActionEvent event) {
 		String[] intSports = new String[EquipmentsDA.getAllData().length];
 		int length = intSportFlowPane.lookupAll(".sportChip").size();
 
@@ -399,7 +390,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener on JFXToggleButton[#heightVisibilityToggleBtn].onAction.
 	@FXML
-	public void heightVisibilityToggleBtnOnAction(ActionEvent event) {
+	private void heightVisibilityToggleBtnOnAction(ActionEvent event) {
 		if (heightVisibilityToggleBtn.isSelected()) {
 			heightVisibilityToggleBtn.setText("\uf06e");
 		}
@@ -410,7 +401,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener on JFXToggleButton[#weightVisibilityToggleBtn].onAction.
 	@FXML
-	public void weightVisibilityToggleBtnOnAction(ActionEvent event) {
+	private void weightVisibilityToggleBtnOnAction(ActionEvent event) {
 		if (weightVisibilityToggleBtn.isSelected()) {
 			weightVisibilityToggleBtn.setText("\uf06e");
 		}
@@ -421,7 +412,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener for dpOverlay.onMouseEnter
 	@FXML
-	public void dpOverlayOnMouseEnter(MouseEvent event) {
+	private void dpOverlayOnMouseEnter(MouseEvent event) {
 		if (dpOverlayGridPane.getOpacity() != 1.0) {
 			dpOverlayGridPane.toFront();
 
@@ -431,7 +422,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener for dpOverlay.OnMouseExit
 	@FXML
-	public void dpOverlayOnMouseExit(MouseEvent event) {
+	private void dpOverlayOnMouseExit(MouseEvent event) {
 		if (dpOverlayGridPane.getOpacity() != 0) {
 			dpOverlayGridPane.toFront();
 
@@ -441,7 +432,7 @@ public class EditProfileViewController implements Initializable {
 
 	// Event Listener for dpOverlay.onMouseClick
 	@FXML
-	public void dpOverlayOnMouseClick(MouseEvent event) throws IOException {
+	private void dpOverlayOnMouseClick(MouseEvent event) throws IOException {
 		// Dialog
 		JFXDialogLayout content = new JFXDialogLayout();
 		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);

@@ -29,8 +29,7 @@ public class CommentsViewController {
 	private int rating = (int) comments[index][3];
 
 	@FXML
-	public void initialize() {
-		commContentGridPane.setId(adminNo);
+	private void initialize() {
 		commContentGridPane.add(new Misc().cropCirclePhoto(adminNo, 75), 0, 0);
 		nameTxt.setText(name);
 		commentTxt.setText(comment);
@@ -38,8 +37,8 @@ public class CommentsViewController {
 	}
 
 	@FXML
-	public void commContentGridPaneOnMouseClick(MouseEvent event) {
-		ProfileViewController.viewProfile(commContentGridPane.getId(), "/application/ProfileView.fxml");
+	private void commContentGridPaneOnMouseClick(MouseEvent event) {
+		ProfileViewController.viewProfile(adminNo, "/application/ProfileView.fxml");
 	}
 
 	public static void setIndex(int index) {

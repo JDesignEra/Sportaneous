@@ -3,7 +3,6 @@ package application;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -12,7 +11,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
@@ -35,7 +33,7 @@ import dataAccess.RatingsDA;
 
 import modules.Snackbar;
 
-public class LRFViewController implements Initializable {
+public class LRFViewController {
 	@FXML private GridPane rootPane;
 	@FXML private ImageView logoImageView;
 	@FXML private TitledPane loginTitledPane;
@@ -53,11 +51,10 @@ public class LRFViewController implements Initializable {
 	@FXML private JFXButton fpassBtn;
 
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous.gif");
-	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL navigationViewURL = getClass().getResource("/application/NavigationView.fxml");
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	private void initialize() {
 		AccountsDA.initDA();
 
 		// Re-animate Sportaneous.gif
@@ -166,7 +163,7 @@ public class LRFViewController implements Initializable {
 				RatingsDA.initDA();
 
 				try {
-					Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+					ProfileViewController.viewSessionProfile();
 					Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
 				}
 				catch (Exception e) {

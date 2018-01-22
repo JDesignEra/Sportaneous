@@ -1,7 +1,6 @@
 package application;
 
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -12,7 +11,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -33,7 +31,7 @@ import modules.TransitionAnimation;
 
 import application.modules.CommentsViewController;
 
-public class ProfileViewController implements Initializable {
+public class ProfileViewController {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt, introTxt;
 	@FXML private Label favSportChip, intSportChip;
 	@FXML private Circle dpCircle;
@@ -64,8 +62,8 @@ public class ProfileViewController implements Initializable {
 	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
 	private final URL editProfileViewURL = getClass().getResource("/application/EditProfileView.fxml");
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	private void initialize() {
 		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));

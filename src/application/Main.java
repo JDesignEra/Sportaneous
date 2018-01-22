@@ -5,6 +5,7 @@ import java.net.URL;
 import com.jfoenix.controls.JFXDecorator;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	private static BorderPane root;
+	@FXML private static BorderPane root;
 	
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous_small.png");

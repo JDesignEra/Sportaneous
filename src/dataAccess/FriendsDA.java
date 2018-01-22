@@ -41,18 +41,19 @@ public class FriendsDA {
 
 		for (FriendsEntity friendsEntity : friendsList) {
 			Object[] accData = AccountsDA.getAccData(friendsEntity.getFriendAdminNo());
-			Object[] data = new Object[9];
+			Object[] data = new Object[10];
 
 			if (friendsEntity.getStatus() == 1) {
 				data[0] = accData[0]; // AdminNo
-				data[1] = accData[3]; // Name
-				data[2] = accData[7]; // Height
-				data[3] = accData[8]; // Weight
-				data[4] = accData[9]; // Height Visibility
-				data[5] = accData[10]; // Weight Visibility
-				data[6] = accData[11]; // Rating
-				data[7] = accData[12]; // Match Attended
-				data[8] = accData[13]; // Total Match Joined
+				data[1] = accData[1]; // Email
+				data[2] = accData[3]; // Name
+				data[3] = accData[7]; // Height
+				data[4] = accData[8]; // Weight
+				data[5] = accData[9]; // Height Visibility
+				data[6] = accData[10]; // Weight Visibility
+				data[7] = accData[11]; // Rating
+				data[8] = accData[12]; // Match Attended
+				data[9] = accData[13]; // Total Match Joined
 
 				dataList.add(data);
 			}

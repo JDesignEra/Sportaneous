@@ -45,6 +45,17 @@ public class AccountsDA {
 		db.commit();
 	}
 
+	/**
+	 * Account's information index are as follow:<br>
+	 * [0] - Administrato's Number, [1] - Email, [2] - Password,<br>
+	 * [3] - Name, [4] - Favorite Sport, [5] - Interested Sports,<br>
+	 * [6] - Introduction, [7] - Height, [8] - Weight,<br>
+	 * [9] - Height Visibility, [10] - Weight Visibility, [11] - Rating<br>
+	 * [12] - Match's Attended, [13] - Match Joined,<br>
+	 * [14] - Current joined Match ID.
+	 * 
+	 * @return an Object[][] of account's information
+	 */
 	public static Object[][] getAllData() {
 		Object[][] data = new Object[accounts.size()][15];
 		int i = 0;
