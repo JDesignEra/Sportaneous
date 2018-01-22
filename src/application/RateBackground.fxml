@@ -39,8 +39,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXButton fx:id="CloseID" ripplerFill="#e8e0e0" text="" GridPane.columnIndex="1" />
-                        <Text fx:id="closeButton" fill="#b51111" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="22.285714149475098" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXButton fx:id="CloseID" onAction="#close" ripplerFill="#d01818" styleClass="fontAwesome" stylesheets="@assets/css/rating.css" text="" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>
