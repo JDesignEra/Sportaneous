@@ -8,7 +8,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import entity.AccountsEntity;
 import entity.RatingsEntity;
 
 public class RatingsDA {
@@ -27,36 +26,9 @@ public class RatingsDA {
 		db.commit();
 	}
 	
-	public static List<Object[][]> getSessionRatingData() {
-		List<RatingsEntity> ratingList = (ratings.get("admin") != null ? ratings.get("admin") : new ArrayList<>());
-		List<Object[][]> data = new ArrayList<>();
-		
-		for (RatingsEntity ratingsEntity : ratingList) {
-		}
-		
-		return data;
+	public static List<RatingsEntity> getRatings() {
+		return ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>();
 	}
-	
-	/*
-	public static Object[][] getAllAccData() {
-		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
-		Object[][] data = new Object[ratings.size()][15];
-		int i = 0;
-
-		for (RatingsEntity ratingsEntity : ratingList) {
-			data[i][0] = (ratingsEntity).getMatchID();
-			data[i][1] = (ratingsEntity).getAdminNums();
-			data[i][2] = (ratingsEntity).getComments();
-			data[i][3] = (ratingsEntity).getRatings();
-			data[i][4] = (ratingsEntity).getAttendances();
-			data[i][5] = (ratingsEntity).getNoRated();
-		
-			i++;
-		}
-
-		return data;
-	}
-	*/
 
 	public static void addRatings(String matchID, String[] adminNums) {
 		for (String adminNo : adminNums) {

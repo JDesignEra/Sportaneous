@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import java.lang.String?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RatingsViewController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: white;" styleClass="fontAwesome" stylesheets="@assets/css/rating.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
-         <content>
-            <GridPane alignment="CENTER_LEFT">
-              <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints fx:id="ratingContent" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Text fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="WHOOPS! NO RATINGS!" GridPane.halignment="CENTER" />
-               </children>
-            </GridPane>
-         </content>
-         <padding>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </padding></ScrollPane>
-   </children>
-</GridPane>
+<StackPane prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RatingsViewController">
+	<children>
+		<ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+			<content>
+				<VBox fx:id="ratingContentVBox" alignment="CENTER" fillWidth="false" spacing="25.0">
+					<children>
+						<GridPane fx:id="emptyRatingGridPane" vgap="25.0">
+							<columnConstraints>
+								<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints vgrow="SOMETIMES" />
+								<RowConstraints vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
+									<styleClass>
+										<String fx:value="fontAwesome" />
+										<String fx:value="danger" />
+										<String fx:value="x8" />
+									</styleClass>
+								</Text>
+								<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="Whoops! You have no pending ratings..." GridPane.rowIndex="1" />
+							</children>
+						</GridPane>
+					</children>
+				</VBox>
+			</content>
+		</ScrollPane>
+	</children>
+</StackPane>
