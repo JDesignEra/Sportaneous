@@ -7,25 +7,27 @@ import javafx.geometry.Pos;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.ScrollPane;
 
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-
 import dataAccess.AccountsDA;
 import dataAccess.RatingsDA;
 
-public class RateBackgroundController {
+public class RateBackgroundViewController {
 	@FXML
 	private ScrollPane backgroundID;
 	@FXML
 	private JFXButton CloseID;
+	@FXML
+	private JFXButton SubmitBtn;
 
-	@FXML GridPane ratingsGridPane;
+	@FXML JFXDialogLayout ratingsJFXDialogLayout;
 	private static Object[][] ratings;
 	private static int ratingIndex;
 
@@ -37,18 +39,18 @@ public class RateBackgroundController {
 			int colCount = 0;
 			int rowCount = 0;
 
-			ratingsGridPane.getChildren().remove(0);
-			ratingsGridPane.alignmentProperty().set(Pos.TOP_CENTER);
-			ratingsGridPane.setManaged(true);
+			ratingsJFXDialogLayout.getChildren().remove(0);
+			ratingsJFXDialogLayout.alignmentProperty().set(Pos.TOP_CENTER);
+			ratingsJFXDialogLayout.setManaged(true);
 
 			for (ratingIndex = 0; ratingIndex < ratings.length; ratingIndex++) {
 				try {
 					if (colCount < 2) {
-						ratingsGridPane.add(FXMLLoader.load(ratingsURL), colCount++, rowCount);
+						ratingsJFXDialogLayout.add(FXMLLoader.load(ratingsURL), colCount++, rowCount);
 					}
 					else {
 						colCount = 0;
-						ratingsGridPane.add(FXMLLoader.load(ratingsURL), colCount++, ++rowCount);
+						((Object) ratingsJFXDialogLayout).add(FXMLLoader.load(ratingsURL), colCount++, ++rowCount);
 					}
 				}
 				catch (Exception e) {
@@ -62,5 +64,6 @@ public class RateBackgroundController {
 	public void close(ActionEvent event) {
 		Main.getRoot().setRight(null);
 	}
-
+// dialog text box
 }
+

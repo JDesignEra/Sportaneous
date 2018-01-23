@@ -17,5 +17,10 @@
 .closeButton{
 	-fx-font-size: 20.0px;
 	-fx-font-weight: bold;
-	
 }
+#CloseID .text{
+	-fx-font-size: 24.0px;	
+	-fx-text-fill:#EF4956;
+}
+
+

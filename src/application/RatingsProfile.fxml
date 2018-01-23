@@ -57,12 +57,12 @@
             <RowConstraints minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="28.666664123535156" minHeight="3.3333282470703125" prefHeight="9.333328247070312" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="58.33332824707031" minHeight="10.0" prefHeight="36.66667175292969" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="sportsType" prefHeight="26.0" prefWidth="163.0" style="-fx-font-weight: bold; -fx-font-size: 25;" styleClass="ratingElement_Sport" text="BASKETBALL" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-            <JFXButton fx:id="rateBtn" buttonType="RAISED" minHeight="20.0" onAction="#handleRate" prefHeight="31.0" prefWidth="104.0" style="-fx-cursor: hand;" text="RATE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Label fx:id="sportsType" prefHeight="27.0" prefWidth="142.0" style="-fx-font-weight: bold; -fx-font-size: 25;" styleClass="ratingElement_Sport" text="BASKETBALL" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+            <JFXButton fx:id="rateBtn" buttonType="RAISED" minHeight="20.0" onAction="#handleRate" prefHeight="59.0" prefWidth="125.0" style="-fx-cursor: hand;" text="RATE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <styleClass>
                   <String fx:value="greenBtn" />
                   <String fx:value="ratingElement_Join" />
