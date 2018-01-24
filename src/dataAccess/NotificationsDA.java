@@ -13,7 +13,7 @@ import entity.NotificationsEntity;
 public class NotificationsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<NotificationsEntity>> notifications;
-	private static String sessionID = AccountsDA.getSession().getAdminNo();
+	 private static String sessionID = AccountsDA.getSession().getAdminNo();
 	private static List<NotificationsEntity> notificationsList;
 
 	public static void initDA() {
@@ -21,17 +21,18 @@ public class NotificationsDA {
 
 		notifications = db.getTreeMap("notifications");
 		/*
-		 * List<NotificationsEntity> temp = new ArrayList<>(); temp.add(new
-		 * NotificationsEntity("175150r", "Wilson", "basketball", "basketball Court",
-		 * "10/1/18", "15:00", 1)); notifications.put("175150r", temp);
+		List<NotificationsEntity> temp = new ArrayList<>();
+		temp.add(new NotificationsEntity("admin", "Wilson", "basketball", "Basketball Court", "10/1/18", "15:00", 0));
+		temp.add(new NotificationsEntity("admin", "wilson1", "basketball", "Basketball Court", "10/1/18", "15:01", 1));
+		notifications.put("admin", temp);
 		 */
-
 		db.commit();
 	}
 
-	public static Object[][] getAllData() {
+	/*public static Object[][] getAllData() {
+
 		Object[][] rowData = new Object[notifications.size()][7];
-		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
+		notificationsList = (notifications.get("admin") != null ? notifications.get("admin") : new ArrayList<>());
 
 		int i = 0;
 		for (NotificationsEntity notificationsEntity : notificationsList) {
@@ -45,15 +46,16 @@ public class NotificationsDA {
 			i++;
 		}
 		return rowData;
+	}*/
+
+	public static List<NotificationsEntity> getNotifications() {
+		return notifications.get(sessionID);
 	}
 
-	public static Object[][] getAccountNotifications(String adminNo) {
-		return notifications.get(adminNo).toArray(new Object[notifications.get(adminNo).size()][]);
-	}
 
 	public static int checkStatus(String notiID) {
 		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
-		
+
 		for (NotificationsEntity notificationsEntity : notificationsList) {
 			if (notificationsEntity.getAdminNo().equals(notiID)) {
 				return notificationsEntity.getStatus();// 0 = Invitation,
@@ -66,7 +68,7 @@ public class NotificationsDA {
 	}
 
 	public static void addNotifications(String sports, String location, String date, String time, int status) {
-		String sessionName = AccountsDA.getName();
+		String sessionName = AccountsDA.getSession().getName();
 
 		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
 		notificationsList.add(new NotificationsEntity(sessionID, sessionName, sports, location, date, time, status));
@@ -88,12 +90,14 @@ public class NotificationsDA {
 		}
 		db.commit();
 	}
-
 	/*
-	 * public static void main(String[] args) { initDA();
-	 * 
-	 * for (int i = 0; i < getAllData().length; i++) { for (Object j :
-	 * getAllData()[i]) { System.out.println(j); } } }
+	public static void main(String[] args) {
+		initDA();
+		for (int i = 0; i < getAllData().length; i++) {
+			for (Object j : getAllData()[i]) {
+				System.out.println(j);
+			}
+		}
+	}
 	 */
-
 }

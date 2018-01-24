@@ -4,7 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
+import entity.NotificationsEntity;
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -25,15 +28,15 @@ public class NotificationController implements Initializable {
 	@FXML private Text txtIcon;
 
 	private int i = NotificationViewController.getNotiIndex();
-	private Object[][] notifications = NotificationViewController.getNotifications();
+	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
 
-	private String adminNo = (String) notifications[i][0];
-	private String name = (String) notifications[i][1];
-	private String sports = (String) notifications[i][2];
-	private String venue = (String) notifications[i][3];
-	private String date = (String) notifications[i][4];
-	private String time = (String) notifications[i][5];
-	private int status = (int) notifications[i][6];
+	private String adminNo = notifications.get(i).getAdminNo();
+	private String name = notifications.get(i).getName();
+	private String sports = notifications.get(i).getSports();
+	private String venue = notifications.get(i).getLocation();
+	private String date = notifications.get(i).getDate();
+	private String time = notifications.get(i).getTime();
+	private int status = notifications.get(i).getStatus();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -42,11 +45,11 @@ public class NotificationController implements Initializable {
 		switch (status) {
 			case 0:
 				lblStatus.setText("Invitation");
-				lblNotification.setText(name + " has invited you to a game of " + sports + " at the " + venue + " on " + date + " " + time);
+				lblNotification.setText(name + " has invited you to a game of " + sports + " \nat the " + venue + " on " + date + " " + time);
 				break;
 			case 1:
 				lblStatus.setText("Joined");
-				lblNotification.setText(name + " has joined your game of " + sports + " at the " + venue + " on " + date + " " + time);
+				lblNotification.setText(name + " has joined your game of " + sports + " \nat the " + venue + " on " + date + " " + time);
 				break;
 			case 2:
 				lblStatus.setText("Rating");
