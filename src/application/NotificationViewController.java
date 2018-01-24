@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -25,19 +24,16 @@ public class NotificationViewController {
 
 	@FXML
 	private void initialize() {
-		if (!NotificationsDA.getNotifications().isEmpty()) {
+		notification = NotificationsDA.getNotifications();
+
+		if (!notification.isEmpty()) {
 			notificationsFlowPane.getChildren().clear();
 			notificationsFlowPane.alignmentProperty().set(Pos.TOP_CENTER);
-			showNotifications();
+			showNotification();
 		}
 	}
 
-	private void showNotifications() {
-
-		notification = NotificationsDA.getNotifications();
-
-		notificationsFlowPane.getChildren().clear();
-
+	private void showNotification() {
 		if (notification.isEmpty()) {
 			notificationsFlowPane.alignmentProperty().set(Pos.CENTER);
 			notificationsFlowPane.getChildren().add(emptyNotifications);
@@ -47,7 +43,7 @@ public class NotificationViewController {
 				try {
 					notificationsFlowPane.getChildren().add(FXMLLoader.load(notificationsURL));
 				}
-				catch (IOException e) {
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

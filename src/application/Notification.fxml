@@ -4,6 +4,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="notiGridPane" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="card" stylesheets="@assets/css/application.css" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationController">
+<GridPane fx:id="notiGridPane" alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="344.0" prefWidth="740.0" styleClass="card" stylesheets="@assets/css/application.css" vgap="5.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationController">
 	<children>
 		<Label fx:id="lblStatus" layoutX="35.0" layoutY="33.0" style="-fx-font-family: Font;" styleClass="h0" text="Status" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT">
 			<font>
@@ -26,17 +27,7 @@
          <GridPane.margin>
             <Insets left="20.0" />
          </GridPane.margin></Text>
-      <GridPane fx:id="profileGridPane" GridPane.columnSpan="2" GridPane.rowIndex="1">
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
-		</GridPane>
-      <GridPane GridPane.rowIndex="1">
+      <GridPane fx:id="profileGridPane" GridPane.rowIndex="1">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" />
         </columnConstraints>
@@ -45,13 +36,22 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-      		<Circle fx:id="circlePicture" fill="WHITE" radius="100.0" stroke="#eb0f0f" strokeType="INSIDE" strokeWidth="5.0" GridPane.columnSpan="2147483647" />
+      		<Circle fill="WHITE" radius="100.0" stroke="#ef4956" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" styleClass="dp">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></Circle>
       		<Label fx:id="lblName" text="Name" GridPane.halignment="CENTER" GridPane.rowIndex="1">
       			<font>
       				<Font size="14.0" />
       			</font>
       		</Label>
          </children>
+         <GridPane.margin>
+            <Insets left="25.0" right="25.0" />
+         </GridPane.margin>
       </GridPane>
       <Text fx:id="txtIcon" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.halignment="RIGHT">
          <styleClass>
@@ -61,7 +61,14 @@
       </Text>
       <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
          <children>
-            <JFXButton onAction="#yesBtnOnAction" prefHeight="38.0" prefWidth="355.0" styleClass="success" text="Yes" />
+            <JFXButton fx:id="yesButton" onAction="#yesBtnOnAction" prefWidth="370.0" styleClass="success" text="Yes">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXButton>
          </children>
       </FlowPane>
 	</children>
@@ -76,6 +83,6 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
    <padding>
-      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+      <Insets bottom="4.0" top="25.0" />
    </padding>
 </GridPane>

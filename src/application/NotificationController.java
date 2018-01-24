@@ -1,31 +1,33 @@
 package application;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 
 import entity.NotificationsEntity;
 
-import java.net.URL;
+import dataAccess.NotificationsDA;
+
+import modules.Misc;
+
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
 
 import javafx.event.ActionEvent;
-
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
-
-import javafx.scene.shape.Circle;
 
 import javafx.scene.layout.GridPane;
 
-public class NotificationController implements Initializable {
+public class NotificationController {
 	@FXML private GridPane notiGridPane;
 	@FXML private Label lblStatus;
 	@FXML private Text lblNotification;
 	@FXML private GridPane profileGridPane;
-	@FXML private Circle circlePicture;
 	@FXML private Label lblName;
 	@FXML private Text txtIcon;
+	@FXML private JFXButton yesButton;
 
 	private int i = NotificationViewController.getNotiIndex();
 	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
@@ -34,22 +36,28 @@ public class NotificationController implements Initializable {
 	private String name = notifications.get(i).getName();
 	private String sports = notifications.get(i).getSports();
 	private String venue = notifications.get(i).getLocation();
-	private String date = notifications.get(i).getDate();
-	private String time = notifications.get(i).getTime();
+	private LocalDateTime dateTime = notifications.get(i).getDateTime();
 	private int status = notifications.get(i).getStatus();
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		lblName.setText(name);
-
+	
+	private String fNameToUpper = name.replace(name.charAt(0), name.toUpperCase().charAt(0));
+	
+	@FXML
+	private void initialize() {
+		lblName.setText(fNameToUpper);
+		
 		switch (status) {
 			case 0:
 				lblStatus.setText("Invitation");
-				lblNotification.setText(name + " has invited you to a game of " + sports + " \nat the " + venue + " on " + date + " " + time);
+				txtIcon.setText("");
+				lblNotification.setText(fNameToUpper + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
+				//JFXButton noBtn = new JFXButton("No");
+				//noBtn.getStyleClass().add("danger");
+				//noBtn.setCursor(Cursor.HAND);
 				break;
 			case 1:
 				lblStatus.setText("Joined");
-				lblNotification.setText(name + " has joined your game of " + sports + " \nat the " + venue + " on " + date + " " + time);
+				txtIcon.setText("");
+				lblNotification.setText(fNameToUpper + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
 				break;
 			case 2:
 				lblStatus.setText("Rating");
@@ -57,9 +65,10 @@ public class NotificationController implements Initializable {
 				break;
 			case 3:
 				lblStatus.setText("Friend Request");
-				lblNotification.setText(adminNo + ", " + name + " has sent you a friend request");
+				lblNotification.setText(adminNo + ", " + fNameToUpper + " has sent you a friend request");
 				break;
 		}
+		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
 	}
 
 	// Event Listener on JFXButton.onAction
