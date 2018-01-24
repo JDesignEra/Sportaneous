@@ -153,7 +153,6 @@ public class LRFViewController {
 
 		switch (AccountsDA.login(adminNo, pass)) {
 			case 0:
-				// Initialize all Database
 				CommentsDA.initDA();
 				EquipmentsDA.initDA();
 				FacilitiesDA.initDA();

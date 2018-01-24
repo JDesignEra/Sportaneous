@@ -1,11 +1,8 @@
 package application.modules;
 
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -17,7 +14,7 @@ import modules.Misc;
 import application.FriendsViewController;
 import application.ProfileViewController;
 
-public class FriendCardViewController implements Initializable {
+public class FriendCardViewController {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt;
 	@FXML private GridPane cardContent;
 
@@ -34,8 +31,8 @@ public class FriendCardViewController implements Initializable {
 	private int matchPlayed = accounts.get(i).getMatchPlayed();
 	private int totalMatch = accounts.get(i).getTotalMatch();
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	private void initialize() {
 		nameTxt.setText(name);
 		ratingTxt.setText(new Misc().getRatingShapes(rating));
 		matchNoTxt.setText(matchPlayed + " / " + totalMatch);

@@ -42,18 +42,18 @@ public class ProfileViewController {
 	@FXML private StackPane stackPaneRoot;
 	@FXML private FlowPane buttonsFlowPane;
 
-	private static String adminNo = AccountsDA.getSession().getAdminNo();
-	private static String name = AccountsDA.getSession().getName();
-	private static String favSport = AccountsDA.getSession().getFavSport();
-	private static String intSports = AccountsDA.getSession().getInterestedSports();
-	private static String intro = AccountsDA.getSession().getIntro();
-	private static int matchPlayed = AccountsDA.getSession().getMatchPlayed();
-	private static int totalMatch = AccountsDA.getSession().getTotalMatch();
-	private static double height = AccountsDA.getSession().getHeight();
-	private static double weight = AccountsDA.getSession().getWeight();
-	private static double rating = AccountsDA.getSession().getCalRating();
-	private static boolean heightVisibility = AccountsDA.getSession().getHeightVisibility();
-	private static boolean weightVisbility = AccountsDA.getSession().getWeightVisibility();
+	private static String adminNo = AccountsDA.getAdminNo();
+	private static String name = AccountsDA.getName();
+	private static String favSport = AccountsDA.getFavSport();
+	private static String intSports = AccountsDA.getInterestedSports();
+	private static String intro = AccountsDA.getIntro();
+	private static int matchPlayed = AccountsDA.getMatchPlayed();
+	private static int totalMatch = AccountsDA.getTotalMatch();
+	private static double height = AccountsDA.getHeight();
+	private static double weight = AccountsDA.getWeight();
+	private static double rating = AccountsDA.getCalRating();
+	private static boolean heightVisibility = AccountsDA.getHeightVisibility();
+	private static boolean weightVisbility = AccountsDA.getWeightVisibility();
 
 	private static int friendStatus = 3;
 	private static String backURL;
@@ -312,18 +312,18 @@ public class ProfileViewController {
 	public static void viewSessionProfile() {
 		backURL = "";
 		friendStatus = 3;
-		adminNo = AccountsDA.getSession().getAdminNo();
-		name = AccountsDA.getSession().getName();
-		favSport = AccountsDA.getSession().getFavSport();
-		intSports = AccountsDA.getSession().getInterestedSports();
-		intro = AccountsDA.getSession().getIntro();
-		matchPlayed = AccountsDA.getSession().getMatchPlayed();
-		totalMatch = AccountsDA.getSession().getTotalMatch();
-		height = AccountsDA.getSession().getHeight();
-		weight = AccountsDA.getSession().getWeight();
-		rating = AccountsDA.getSession().getCalRating();
-		heightVisibility = AccountsDA.getSession().getHeightVisibility();
-		weightVisbility = AccountsDA.getSession().getWeightVisibility();
+		adminNo = AccountsDA.getAdminNo();
+		name = AccountsDA.getName();
+		favSport = AccountsDA.getFavSport();
+		intSports = AccountsDA.getInterestedSports();
+		intro = AccountsDA.getIntro();
+		matchPlayed = AccountsDA.getMatchPlayed();
+		totalMatch = AccountsDA.getTotalMatch();
+		height = AccountsDA.getHeight();
+		weight = AccountsDA.getWeight();
+		rating = AccountsDA.getCalRating();
+		heightVisibility = AccountsDA.getHeightVisibility();
+		weightVisbility = AccountsDA.getWeightVisibility();
 
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));

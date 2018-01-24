@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	@FXML private static BorderPane root;
-	
+
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous_small.png");
 	private final URL logoAltURL = getClass().getResource("/application/assets/img/Sportaneous_small_alt.png");
@@ -45,7 +45,7 @@ public class Main extends Application {
 
 		Scene scene = new Scene(decorator, 1600, 900);
 		scene.getStylesheets().add(stylesheetURL.toExternalForm());
-		
+
 		primaryStage.getIcons().add(new Image(logoAltURL.toExternalForm()));
 		primaryStage.setTitle("Sportaneous");
 		primaryStage.setScene(scene);

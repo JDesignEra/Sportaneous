@@ -13,7 +13,7 @@ import entity.FriendsEntity;
 public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
-	private static String sessionID = AccountsDA.getSession().getAdminNo();
+	private static String sessionID = AccountsDA.getAdminNo();
 	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {

@@ -2,9 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class AccountsEntity implements Serializable {
-	private static final long serialVersionUID = 3819033989766829058L;
-
 	private String adminNo, email, password, name, favSport, interestedSports, intro;
 	private double height, weight;
 	private int[] rating;

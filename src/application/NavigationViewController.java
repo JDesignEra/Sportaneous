@@ -1,7 +1,6 @@
 package application;
 
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -10,14 +9,13 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import dataAccess.AccountsDA;
 
-public class NavigationViewController implements Initializable {
+public class NavigationViewController {
 	@FXML private JFXButton navProfileBtn, navPlayBtn, navFriendsBtn, navRatingsBtn, navNotiBtn, navLogoutBtn;
 	@FXML private GridPane rootPane;
 
@@ -27,8 +25,8 @@ public class NavigationViewController implements Initializable {
 	private final URL notificationViewURL = getClass().getResource("/application/NotificationView.fxml");
 	private final URL ratingsViewURL = getClass().getResource("/application/RatingsView.fxml");
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	private void initialize() {
 		Platform.runLater(() -> {
 			TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), rootPane);
 			translateTransition.setFromY(rootPane.getHeight());

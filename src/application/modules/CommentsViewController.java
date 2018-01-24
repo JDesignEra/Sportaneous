@@ -26,7 +26,7 @@ public class CommentsViewController {
 
 	private static int index = 0;
 
-	private List<CommentsEntity> comments = CommentsDA.getComments(AccountsDA.getSession().getAdminNo());
+	private List<CommentsEntity> comments = CommentsDA.getComments(AccountsDA.getAdminNo());
 	private String adminNo = comments.get(index).getAdminNo();
 	private String name = comments.get(index).getName();
 	private String comment = comments.get(index).getComment();

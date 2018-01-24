@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 import entity.RatingsEntity;
@@ -25,9 +26,10 @@ public class RatingsViewController {
 	@FXML
 	private void initialize() {
 		ratings = RatingsDA.getRatings();
-
+		
 		if (!ratings.isEmpty()) {
 			ratingContentVBox.getChildren().clear();
+			ratingContentVBox.setAlignment(Pos.TOP_CENTER);
 
 			for (ratingIndex = 0; ratingIndex < ratings.size(); ratingIndex++) {
 				try {
@@ -38,5 +40,9 @@ public class RatingsViewController {
 				}
 			}
 		}
+	}
+	
+	public int getRatingIndex() {
+		return ratingIndex;
 	}
 }

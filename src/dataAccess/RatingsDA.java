@@ -1,6 +1,7 @@
 package dataAccess;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -20,17 +21,19 @@ public class RatingsDA {
 		ratings = db.getTreeMap("ratings");
 
 		List<RatingsEntity> temp = new ArrayList<>();
-		temp.add(new RatingsEntity("1", new String[] { "1", "2" }, new String[] { "1",  "2" }, new int[]{3, 0}, new boolean[] { true, true}, 1));
-		temp.add(new RatingsEntity("2", new String[] { "3", "4" }, new String[] { "1",  "2" }, new int[]{3, 0}, new boolean[] { true, true}, 1));
+		temp.add(new RatingsEntity("1", LocalDateTime.of(2017, 2, 28, 14, 00), new String[] { "1", "2" }, new String[] { "1", "2" }, new int[] { 3, 0 },
+				new boolean[] { true, true }, 1));
+		temp.add(new RatingsEntity("2", LocalDateTime.of(2017, 2, 9, 14, 00), new String[] { "3", "4" }, new String[] { "1", "2" }, new int[] { 3, 0 },
+				new boolean[] { true, true }, 1));
 		ratings.put("admin", temp);
 		db.commit();
 	}
-	
+
 	public static List<RatingsEntity> getRatings() {
 		return ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>();
 	}
 
-	public static void addRatings(String matchID, String[] adminNums) {
+	public static void addRatings(String matchID, LocalDateTime dateTime, String[] adminNums) {
 		for (String adminNo : adminNums) {
 			List<RatingsEntity> ratingList = (ratings.get(adminNo) != null ? ratings.get(adminNo) : new ArrayList<>());
 			String[] adminGrp = new String[adminNums.length - 1];
@@ -42,14 +45,13 @@ public class RatingsDA {
 				}
 			}
 
-			ratingList.add(new RatingsEntity(matchID, adminGrp, new String[adminGrp.length], new int[adminGrp.length], new boolean[adminGrp.length], 0));
+			ratingList.add(new RatingsEntity(matchID, dateTime, adminGrp, new String[adminGrp.length], new int[adminGrp.length], new boolean[adminGrp.length], 0));
 
 			ratings.put(adminNo, ratingList);
 			db.commit();
 		}
 	}
 
-	
 	public static void updateRatings(String matchID, String[] comments, int[] rating, boolean[] attendances) {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		String[] adminGrp = null;
@@ -59,20 +61,20 @@ public class RatingsDA {
 		// Update Session Account
 		for (RatingsEntity ratingsEntity : ratingList) {
 			if (ratingsEntity.getMatchID().equals(matchID)) {
-				adminGrp = ratingsEntity.getAdminNums();	// Store adminNumber there's not current sessionID
-				noRated = ratingsEntity.incrementAndGetNoRate();	// Store No. of players rated
+				adminGrp = ratingsEntity.getAdminNums(); // Store adminNumber there's not current sessionID
+				noRated = ratingsEntity.incrementAndGetNoRate(); // Store No. of players rated
 
 				ratingsEntity.setComments(comments);
 				ratingsEntity.setRatings(rating);
 
-				if (noRated == adminGrp.length) {	// If is last player to submit ratings, remove it.
+				if (noRated == adminGrp.length) { // If is last player to submit ratings, remove it.
 					ratingList.remove(i);
 					ratings.put(sessionID, ratingList);
-					
+
 					db.commit();
 					// TODO update comment's database and account's database
 				}
-				else {	// Else just replace it.
+				else { // Else just replace it.
 					ratingList.set(i, ratingsEntity);
 					ratings.put(sessionID, ratingList);
 					break;
@@ -89,31 +91,21 @@ public class RatingsDA {
 
 			for (RatingsEntity ratingsEntity : ratingList) {
 				if (ratingsEntity.getMatchID().equals(matchID)) {
-					if (ratingsEntity.getNoRated() == noRated) {	// If is last player to submit ratings, remove it.
+					if (ratingsEntity.getNoRated() == noRated) { // If is last player to submit ratings, remove it.
 						ratingsEntity.incrementAndGetNoRate();
-						
+
 						ratingList.set(i, ratingsEntity);
 						ratings.put(adminNo, ratingList);
 						db.commit();
 					}
-					else {	// Else just update No. of players rated
+					else { // Else just update No. of players rated
 						ratingList.remove(i);
 						ratings.put(adminNo, ratingList);
 					}
 				}
-				
+
 				i++;
 			}
 		}
-	}
-	
-	public static void main(String[] args) {
-		initDA();
-		
-//		for (int i = 0; i < getSesssionRatingData().length; i++) {
-//			for (Object s : getSesssionRatingData()[i]) {
-//				System.out.println(s.toString());
-//			}
-//		}
 	}
 }

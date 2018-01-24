@@ -2,8 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class FriendsEntity implements Serializable {
-	private static final long serialVersionUID = 3790262896588918586L;
 	private String userAdminNo, friendAdminNo;
 	private int status;
 

@@ -84,7 +84,7 @@ public class AccountsDA {
 	}
 
 	public static int login(String adminNo, String password) {
-		AccountsEntity accountsEntity = null;
+		AccountsEntity accountsEntity;
 		adminNo = adminNo.toLowerCase();
 
 		if (adminNo.isEmpty() || password.isEmpty()) {
@@ -280,6 +280,10 @@ public class AccountsDA {
 	}
 
 	public static double getRating() {
+		return session.getCalRating();
+	}
+
+	public static double getCalRating() {
 		return session.getCalRating();
 	}
 

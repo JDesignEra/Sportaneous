@@ -2,8 +2,8 @@ package entity;
 
 import java.io.Serializable;
 
+@SuppressWarnings("serial")
 public class NotificationsEntity implements Serializable {
-	private static final long serialVersionUID = 2577240694025111582L;
 	private String adminNo, name, sports, location, date, time;
 	private int status;
 
