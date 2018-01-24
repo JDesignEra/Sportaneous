@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class HostsEntity implements Serializable {
 	private static final long serialVersionUID = -821229972284685153L;
 
-	private String adminNo, name;
+	private String adminNo, name, facility;
 	private LocalTime time;
 	private LocalDate date;
 	private String[] userID = new String[11], userName = new String[11];
@@ -16,7 +16,7 @@ public class HostsEntity implements Serializable {
 
 	private ArrayList<String> playersRecruited;
 
-	public HostsEntity(String adminNo, String name, LocalDate date, LocalTime time, int sportsType, ArrayList<String> playersRecruited) {
+	public HostsEntity(String adminNo, String name, LocalDate date, LocalTime time, int sportsType, ArrayList<String> playersRecruited, String facility) {
 
 		if (userID.length == this.userID.length) {
 			if (userName.length == this.userName.length) {
@@ -26,6 +26,7 @@ public class HostsEntity implements Serializable {
 				this.time = time;
 				this.sportsType = sportsType;
 				this.playersRecruited = playersRecruited;
+				this.facility = facility;
 			}
 		}
 	}
@@ -52,6 +53,14 @@ public class HostsEntity implements Serializable {
 
 	public ArrayList<String> getPlayersRecruited() {
 		return playersRecruited;
+	}
+
+	public String getFacility() {
+		return facility;
+	}
+
+	public void setFacility(String facility) {
+		this.facility = facility;
 	}
 
 }

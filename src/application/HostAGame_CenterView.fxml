@@ -43,19 +43,22 @@
                   <RowConstraints maxHeight="179.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXDatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <JFXDatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="483.0" promptText="Date" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXDatePicker>
-                  <JFXTimePicker fx:id="timePicker" prefHeight="25.0" prefWidth="483.0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <JFXTimePicker fx:id="timePicker" onMouseClicked="#handleTimePicker" prefHeight="25.0" prefWidth="483.0" promptText="Time" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXTimePicker>
-                  <JFXComboBox fx:id="sportDropD" prefHeight="25.0" prefWidth="484.0" promptText="Sport" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <JFXComboBox fx:id="sportDropD" onMouseReleased="#handleSport" prefHeight="25.0" prefWidth="484.0" promptText="Sport" style="-fx-alignment: left;" styleClass="hostAGame_Input" stylesheets="@assets/css/kh.css" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
-                     </cursor></JFXComboBox>
-                  <JFXComboBox fx:id="FacilityDropD" prefHeight="25.0" prefWidth="484.0" promptText="Facility" style="-fx-font-family: roboto;" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     </cursor>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></JFXComboBox>
+                  <JFXComboBox fx:id="FacilityDropD" onMouseClicked="#handleFac" prefHeight="25.0" prefWidth="484.0" promptText="Facility" styleClass="hostAGame_Input" stylesheets="@assets/css/kh.css" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXComboBox>

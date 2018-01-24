@@ -58,7 +58,7 @@ public class FindAGame_ViewController {
     private AnchorPane whoopsPane;
 
 	private int i = 0;
-	private ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
+	static ObservableList<String> options = FXCollections.observableArrayList("", "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis");
 	public static int HostAGame_index = 0;
 	public static int VPD_index = 0;
 	static String whosegameisclicked;
@@ -91,7 +91,7 @@ public class FindAGame_ViewController {
 	}
 	
     @FXML
-    void handleHostBtn(ActionEvent event) {
+    private void handleHostBtn(ActionEvent event) {
     	try {
     		Main.getRoot().setCenter(FXMLLoader.load(HostAGameURL));
     	} catch (Exception e) {
@@ -100,7 +100,7 @@ public class FindAGame_ViewController {
     }
 
     @FXML
-    void handleSearch(ActionEvent event) throws IOException {
+    private void handleSearch(ActionEvent event) throws IOException {
     	
     	HostsDA.getSearchResults().clear();
 

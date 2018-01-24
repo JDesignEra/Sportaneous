@@ -18,7 +18,7 @@ public class HostsDA {
 	private static DB db;
 	private static ConcurrentMap<Integer, HostsEntity> hosts;
 	private static ArrayList<HostsEntity> searchResults;
-	private static String[] sports = new String[] { "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis" };
+	public final static String[] sports = new String[] { "Badminton", "Basketball", "Frisbee", "Soccer", "Squash", "Tennis" };
 	public static HashMap<String, Integer> gameSize = new HashMap<String, Integer>();
 	private static Atomic.Integer key;
 	
@@ -31,11 +31,11 @@ public class HostsDA {
 		key = db.getAtomicInteger("host_key");
 	}
 
-	public static int hostGame(String adminNo, String name, LocalDate date, LocalTime time, int sportsType, ArrayList<String> playersRecruited) {
+	public static int hostGame(String adminNo, String name, LocalDate date, LocalTime time, int sportsType, ArrayList<String> playersRecruited, String facility) {
 		int keyz = key.get();
 		ArrayList<String> duplicatedGame = new ArrayList<String>();
 		
-		if (adminNo.isEmpty() || name.isEmpty() || date == null || time==null) {
+		if (adminNo.isEmpty() || name.isEmpty() || date == null || time==null || facility.isEmpty()) {
 			return 0; // Fields required
 		}
 		
@@ -43,7 +43,11 @@ public class HostsDA {
 			if (x.getAdminNo().toLowerCase().equals(adminNo.toLowerCase())  &&  x.getDate().equals(date)  && x.getTime().equals(time)) {
 				duplicatedGame.add(x.getName());
 			}
+			if (x.getDate().equals(date)  && x.getTime().equals(time) && x.getFacility().equals(facility)) {
+				duplicatedGame.add(x.getName());
+			}
 		}
+		
 		
 		if (duplicatedGame.size() == 0) {
 			keyz = key.incrementAndGet();
@@ -52,7 +56,7 @@ public class HostsDA {
 			System.out.println("Key Value now: " + keyz);
 		}
 		
-		if (hosts.putIfAbsent(keyz, new HostsEntity(adminNo, name, date, time, sportsType, playersRecruited)) != null) {
+		if (hosts.putIfAbsent(keyz, new HostsEntity(adminNo, name, date, time, sportsType, playersRecruited, facility)) != null) {
 			return 1;
 		}
 
@@ -161,7 +165,7 @@ public class HostsDA {
 				list = new ArrayList<String>();
 				list.add(tobeaddedAd.toLowerCase());
 				HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(),
-						hosts.get(key).getSportsType(), list);
+						hosts.get(key).getSportsType(), list, hosts.get(key).getFacility());
 				hosts.replace(key, tobereplaced);
 				db.commit();
 				System.out.println("Player successfully added");
@@ -173,7 +177,7 @@ public class HostsDA {
 					System.out.println(tobeaddedAd + " not found in the list; allowed to be added");
 					list.add(tobeaddedAd);
 					HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(), hosts.get(key).getSportsType(),
-							list);
+							list, hosts.get(key).getFacility());
 					hosts.replace(key, tobereplaced);
 					db.commit();
 				}
@@ -236,28 +240,28 @@ public class HostsDA {
 //			System.out.println(i);
 //		}
 
-//		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(17, 00), 1, null)); 
-//		System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", LocalDate.of(2018, 1, 4), LocalTime.of(19, 00), 2, null));
-//		System.out.println(HostsDA.hostGame("170374Y", "Mark Zuckerberg", LocalDate.of(2018, 1, 8), LocalTime.of(11, 00), 4, null));
-//		System.out.println(HostsDA.hostGame("170463Z", "Tim Cook", LocalDate.of(2018, 1, 16), LocalTime.of(14, 00), 3, null));
-//		System.out.println(HostsDA.hostGame("170552A", "Bill Gates", LocalDate.of(2018, 2, 1), LocalTime.of(19, 00), 5, null));
-//		System.out.println(HostsDA.hostGame("170957E", "Sheldon Cooper", LocalDate.of(2018, 2, 1), LocalTime.of(17, 00), 0, null));
-//		System.out.println(HostsDA.hostGame("170707E", "Howard Wolowitz", LocalDate.of(2018, 2, 3), LocalTime.of(16, 00), 2, null));	
-//		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(18, 00), 3, null));
+		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(17, 00), 1, null, "Indoor Basketball Court")); 
+		System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", LocalDate.of(2018, 1, 4), LocalTime.of(19, 00), 2, null, "Hockey Pitch"));
+		System.out.println(HostsDA.hostGame("170374Y", "Mark Zuckerberg", LocalDate.of(2018, 1, 8), LocalTime.of(11, 00), 4, null, "Squash Court"));
+		System.out.println(HostsDA.hostGame("170463Z", "Tim Cook", LocalDate.of(2018, 1, 16), LocalTime.of(14, 00), 3, null, "Soccer court"));
+		System.out.println(HostsDA.hostGame("170552A", "Bill Gates", LocalDate.of(2018, 2, 1), LocalTime.of(19, 00), 5, null, "Tennis Court"));
+		System.out.println(HostsDA.hostGame("170957E", "Sheldon Cooper", LocalDate.of(2018, 2, 1), LocalTime.of(17, 00), 0, null, "Badminton Court"));
+		System.out.println(HostsDA.hostGame("170707E", "Howard Wolowitz", LocalDate.of(2018, 2, 3), LocalTime.of(16, 00), 2, null, "Hockey Pitch"));	
+		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(18, 00), 3, null, "Soccer Court"));
 		
 //		initializeSearchResults();
-		System.out.println(searchGame("", null, null, "Frisbee"));
-		for (HostsEntity x : searchResults) {
-			System.out.println("Search results: " + x.getName() + " " + x.getDate() + " " + x.getTime());
-		}
+//		System.out.println(searchGame("", null, null, "Frisbee"));
+//		for (HostsEntity x : searchResults) {
+//			System.out.println("Search results: " + x.getName() + " " + x.getDate() + " " + x.getTime());
+//		}
 //		
 		
 //
-//		for (int i = 0; i < getAllData().length; i++) {
-//			for (Object j : getAllData()[i]) {
-//				System.out.println(j.toString());
-//			}
-//		}
+		for (int i = 0; i < getAllData().length; i++) {
+			for (Object j : getAllData()[i]) {
+				System.out.println(j.toString());
+			}
+		}
 		
 		
 	}

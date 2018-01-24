@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import entity.AccountsEntity;
 import entity.HostsEntity;
 
 import dataAccess.AccountsDA;
@@ -46,6 +47,8 @@ public class FindAGame_ViewPlayerDetailsController {
 	
 	private Misc m;
 	
+	private AccountsEntity retrievedAcc = null;
+	
 	public void initialize() {
 		
 		AccountsDA.initDA();
@@ -56,11 +59,13 @@ public class FindAGame_ViewPlayerDetailsController {
 		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
 		peopleToDisplay = gameClicked.getPlayersRecruited();
 		
+		
 		System.out.println("(FindAGame_ViewPlayerDetailsController) Whose game has been clicked: " + target + " / Players recruited: " + peopleToDisplay.size());
 		//display details of the people who joined the game the target hosted
 		if (FindAGame_ViewController.VPD_index < this.peopleToDisplay.size()) {
 			adminNo = this.peopleToDisplay.get(FindAGame_ViewController.VPD_index++);
 			System.out.println("(FindAGame_ViewPlayerDetailsController) Recruited player being displayed now: " + adminNo);
+			retrievedAcc = AccountsDA.getAccData(adminNo);
 		}
 		
 		setName();
@@ -78,7 +83,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	private void setName() {
-		Object name = AccountsDA.getAccData(adminNo.toLowerCase())[3];
+		Object name = retrievedAcc.getName();
 		lbName.setText(name.toString());
 	}
 	
@@ -96,38 +101,38 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 
 	private void setHeightWeight() {
-		String height = "0";
-		String weight = "0";
+		double height = 0;
+		double weight = 0;
 		lbStats.setText("");
 
 		try {
-			if ((boolean) AccountsDA.getAccData(adminNo.toLowerCase())[9]) {
-				height = AccountsDA.getAccData(adminNo.toLowerCase())[7].toString();
+			if (retrievedAcc.getHeightVisibility()) {
+				height = retrievedAcc.getHeight();
 			}
 
-			if ((boolean) AccountsDA.getAccData(adminNo.toLowerCase())[10]) {
-				weight = AccountsDA.getAccData(adminNo.toLowerCase())[8].toString();
+			if (retrievedAcc.getWeightVisibility()) {
+				weight = retrievedAcc.getWeight();
 			}
 		} catch (Exception e) {
 			System.out.println("(FindAGame_ViewPlayerDetailsController) ERROR: UNABLE TO READ HEIGHT & WEIGHT");
 		}
 		
-		if (Double.parseDouble(height) == 0.0 && Double.parseDouble(weight) != 0.0) {
+		if (height == 0.0 && weight != 0.0) {
 			lbStats.setText(weight + " kg");
 		} 
 		
-		if (Double.parseDouble(height) != 0.0 && Double.parseDouble(weight) == 0.0) {
+		if (height != 0.0 && weight == 0.0) {
 			lbStats.setText(height + " m");
 		}
 		
-		if (Double.parseDouble(height) != 0.0 && Double.parseDouble(weight) != 0.0) {
+		if (height != 0.0 && weight != 0.0) {
 			lbStats.setText(weight + " kg" + " | " + height + " m");
 		}
 		
-		if (Double.parseDouble(height) == 0.0 && Double.parseDouble(weight) == 0.0) {
+		if (height == 0.0 && weight == 0.0) {
 			String line = "";
 			try {
-				for (int i = 0; i < AccountsDA.getAccData(adminNo.toLowerCase())[3].toString().length(); i++) {
+				for (int i = 0; i < retrievedAcc.getName().length(); i++) {
 					line += "-";
 				}
 				lbStats.setText(line);
@@ -139,13 +144,12 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	public void setRating() {
-		String rating = AccountsDA.getAccData(adminNo.toLowerCase())[11].toString();
-		lbPlayerRating.setText(m.getRatingShapes(Double.valueOf(rating).doubleValue()));
+		lbPlayerRating.setText(m.getRatingShapes(retrievedAcc.getCalRating()));
 	}
 	
 	public void setMatchesPlayed() {
-		String total = AccountsDA.getAccData(adminNo.toLowerCase())[13].toString();
-		String played = AccountsDA.getAccData(adminNo.toLowerCase())[12].toString();
+		int total = retrievedAcc.getTotalMatch();
+		int played = retrievedAcc.getMatchPlayed();
 		
 		lbMatchesPlayed.setText(played + " / " + total);
 	}
