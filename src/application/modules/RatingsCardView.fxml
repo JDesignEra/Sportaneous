@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="TOP_CENTER" hgap="30.0" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="TOP_CENTER" hgap="50.0" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.RatingsCardViewController">
 	<children>
 		<GridPane vgap="5.0">
 			<columnConstraints>
@@ -29,8 +29,11 @@
 				</Text>
 				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="H&#10;O&#10;S&#10;T" GridPane.rowIndex="1" />
 			</children>
+			<GridPane.margin>
+				<Insets right="-25.0" />
+			</GridPane.margin>
 		</GridPane>
-		<GridPane vgap="15.0" GridPane.columnIndex="1">
+		<GridPane fx:id="profileGridPane" vgap="10.0" GridPane.columnIndex="1">
 			<columnConstraints>
 				<ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
 			</columnConstraints>
@@ -40,7 +43,7 @@
 			</rowConstraints>
 			<children>
 				<Circle fill="DODGERBLUE" radius="75.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="NAME" GridPane.rowIndex="1" />
+				<Text fx:id="nameTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="NAME" GridPane.rowIndex="1" />
 			</children>
 		</GridPane>
 		<GridPane vgap="5.0" GridPane.columnIndex="2">
@@ -53,9 +56,9 @@
 				<RowConstraints valignment="TOP" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="DAY" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="DATE" GridPane.rowIndex="1" />
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="TIME" GridPane.rowIndex="2">
+				<Text fx:id="dayTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h4" text="DAY" />
+				<Text fx:id="dateTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="DATE" GridPane.rowIndex="1" />
+				<Text fx:id="timeTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="TIME" GridPane.rowIndex="2">
 					<GridPane.margin>
 						<Insets top="10.0" />
 					</GridPane.margin>
@@ -71,17 +74,17 @@
 				<RowConstraints valignment="TOP" vgrow="SOMETIMES" />
 			</rowConstraints>
 			<children>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-title" text="SPORT" />
-				<JFXButton styleClass="info" text="RATE PLAYERS" GridPane.rowIndex="1" />
+				<Text fx:id="sportTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt-title" text="SPORT" />
+				<JFXButton onAction="#ratePlayersBtnOnAction" styleClass="info" text="RATE PLAYERS" GridPane.rowIndex="1" />
 			</children>
 		</GridPane>
 		<VBox alignment="CENTER" spacing="5.0" GridPane.columnIndex="4">
 			<children>
-				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="0" />
+				<Text fx:id="playerCountsTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="0" />
 				<Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="PLAYERS" />
 			</children>
 		</VBox>
-		<Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="playerCountCircle" GridPane.columnIndex="4" />
+		<Circle fill="DODGERBLUE" radius="90.0" stroke="BLACK" strokeType="INSIDE" styleClass="playerCountCircle" GridPane.columnIndex="4" />
 	</children>
 	<columnConstraints>
 		<ColumnConstraints />
@@ -96,8 +99,8 @@
 	<rowConstraints>
 		<RowConstraints />
 	</rowConstraints>
-   <styleClass>
-      <String fx:value="hostCard" />
-      <String fx:value="card" />
-   </styleClass>
+	<styleClass>
+		<String fx:value="hostCard" />
+		<String fx:value="card" />
+	</styleClass>
 </GridPane>

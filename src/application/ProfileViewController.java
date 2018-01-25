@@ -159,7 +159,7 @@ public class ProfileViewController {
 
 	// Event Listener on JFXButton[#actionBtn].onAction
 	@FXML
-	public void actionBtnOnAction(ActionEvent event) {
+	private void actionBtnOnAction(ActionEvent event) {
 		switch (friendStatus) {
 			case 0:
 			case 1:
@@ -224,7 +224,7 @@ public class ProfileViewController {
 
 	// Event Listener on JFXButton[#bckBtn].onAction
 	@FXML
-	public void bckBtnOnAction(ActionEvent event) {
+	private void bckBtnOnAction(ActionEvent event) {
 		if (backURL.contains("ProfileView.fxml")) {
 			viewSessionProfile();
 		}
@@ -240,7 +240,7 @@ public class ProfileViewController {
 
 	// Event Listener on JFXButton[#prevComBtn].onAction
 	@FXML
-	public void prevComBtnOnAction(ActionEvent event) {
+	private void prevComBtnOnAction(ActionEvent event) {
 		if (CommentsViewController.getIndex() > 0) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
 				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
@@ -276,7 +276,7 @@ public class ProfileViewController {
 
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
-	public void nxtComBtnOnAction(ActionEvent event) {
+	private void nxtComBtnOnAction(ActionEvent event) {
 		if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).size() - 1) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
 					new KeyFrame(Duration.millis(300), actionEv -> {

@@ -42,7 +42,7 @@ public class FriendsViewController {
 
 	// Event Listener on JFXToggleButton[#srcTypeToggleBtn].onAction
 	@FXML
-	public void srcToggleBtnOnAction(ActionEvent event) {
+	private void srcToggleBtnOnAction(ActionEvent event) {
 		if (srcTypeToggleBtn.isSelected()) {
 			srcTypeToggleBtn.setText("ALL PLAYERS");
 			showAll();
@@ -55,7 +55,7 @@ public class FriendsViewController {
 
 	// Event Listener on JFXButton[#srcBtn].onAction
 	@FXML
-	public void srcBtnOnAction(ActionEvent event) {
+	private void srcBtnOnAction(ActionEvent event) {
 		int i = 0;
 
 		for (Node node : friendsFlowPane.getChildren()) {
@@ -104,11 +104,13 @@ public class FriendsViewController {
 		emailTxtField.clear();
 
 		for (accIndex = 0; accIndex < accounts.size(); accIndex++) {
-			try {
-				friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
-			}
-			catch (IOException e) {
-				e.printStackTrace();
+			if (!accounts.get(accIndex).getAdminNo().equals(AccountsDA.getAdminNo())) {
+				try {
+					friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}

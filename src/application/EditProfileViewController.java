@@ -1,8 +1,6 @@
 package application;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
@@ -18,7 +16,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -45,7 +42,7 @@ import dataAccess.EquipmentsDA;
 import modules.Snackbar;
 import modules.TransitionAnimation;
 
-public class EditProfileViewController implements Initializable {
+public class EditProfileViewController {
 	@FXML JFXTextField nameTxtField, heightTxtField, weightTxtField, emailTxtField;
 	@FXML JFXPasswordField cPassTxtField, cfmPassTxtField;
 	@FXML TextArea introTxtArea;
@@ -75,8 +72,8 @@ public class EditProfileViewController implements Initializable {
 	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(100, 100, 100);
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	@FXML
+	private void initialize() {
 		EquipmentsDA.initDA();
 
 		// Force Double for heightTxtField & weightTxtField

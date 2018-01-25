@@ -66,7 +66,7 @@ public class LRFViewController {
 	// Event Listener on PasswordField[#loginPassTF] &
 	// [#loginAdminNoTF].onKeyPressed
 	@FXML
-	public void loginTxtFieldOnKeyPress(KeyEvent event) {
+	private void loginTxtFieldOnKeyPress(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 			login();
 		}
@@ -74,14 +74,14 @@ public class LRFViewController {
 
 	// Event Listener on JFXButton[#loginBtn].onAction
 	@FXML
-	public void loginBtnOnAction(ActionEvent event) {
+	private void loginBtnOnAction(ActionEvent event) {
 		login();
 	}
 
 	// Event Listener on TextField[#regNameTF], [#regAdminNoTF], [#regEmailTF],
 	// [#regPassTF].onKeyPressed
 	@FXML
-	public void regTxtFieldOnKeyPress(KeyEvent event) {
+	private void regTxtFieldOnKeyPress(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 			register();
 		}
@@ -89,13 +89,13 @@ public class LRFViewController {
 
 	// Event Listener on JFXButton[#regBtn].onAction
 	@FXML
-	public void regBtnOnAction(ActionEvent event) {
+	private void regBtnOnAction(ActionEvent event) {
 		register();
 	}
 
 	// Event Listener on TextField[#fpassAdminNoTF], [#fpassEmailTF].onKeyPressed
 	@FXML
-	public void fpassOnKeyPress(KeyEvent event) {
+	private void fpassOnKeyPress(KeyEvent event) {
 		if (event.getCode().equals(KeyCode.ENTER)) {
 			resetPass();
 		}
@@ -103,13 +103,13 @@ public class LRFViewController {
 
 	// Event Listener on JFXButton[#fpassBtn].onAction
 	@FXML
-	public void fpassBtnOnAction(ActionEvent event) {
+	private void fpassBtnOnAction(ActionEvent event) {
 		resetPass();
 	}
 
 	// Event Listener on TitledPane[#loginTitledPane].onMouseClicked
 	@FXML
-	public void loginTitledPaneOnClick(MouseEvent event) {
+	private void loginTitledPaneOnClick(MouseEvent event) {
 		if (fpassTitledPane.isExpanded()) {
 			fpassTitledPane.getStyleClass().add("inactive");
 		}
@@ -122,7 +122,7 @@ public class LRFViewController {
 
 	// Event Listener on TitledPane[#regTitledPane].onMouseClicked
 	@FXML
-	public void regTitledPaneOnClick(MouseEvent event) {
+	private void regTitledPaneOnClick(MouseEvent event) {
 		if (fpassTitledPane.isExpanded()) {
 			fpassTitledPane.getStyleClass().add("inactive");
 		}
@@ -135,7 +135,7 @@ public class LRFViewController {
 
 	// Event Listener on TitledPane[#fpassTitledPane].onMouseClicked
 	@FXML
-	public void fpassTitledPaneOnClick(MouseEvent event) {
+	private void fpassTitledPaneOnClick(MouseEvent event) {
 		if (fpassTitledPane.isExpanded()) {
 			fpassTitledPane.getStyleClass().add("inactive");
 		}

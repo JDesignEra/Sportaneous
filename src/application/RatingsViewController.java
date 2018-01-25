@@ -6,23 +6,22 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import entity.RatingsEntity;
 
 import dataAccess.RatingsDA;
 
-import javafx.scene.layout.GridPane;
-
 public class RatingsViewController {
 	@FXML private VBox ratingContentVBox;
 	@FXML private GridPane emptyRatingGridPane;
 
 	private List<RatingsEntity> ratings;
-	private int ratingIndex;
+	private static int ratingIndex;
 
 	private URL ratingsCardViewURL = getClass().getResource("/application/modules/RatingsCardView.fxml");
-
+	
 	@FXML
 	private void initialize() {
 		ratings = RatingsDA.getRatings();
@@ -41,8 +40,8 @@ public class RatingsViewController {
 			}
 		}
 	}
-	
-	public int getRatingIndex() {
+
+	public static int getRatingIndex() {
 		return ratingIndex;
 	}
 }
