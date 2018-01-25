@@ -46,9 +46,7 @@ public class CommentsDA {
 		String sessionName = AccountsDA.getName();
 		List<CommentsEntity> commentsList;
 
-		if ((commentsList = comments.get(adminNo)) == null) {
-			commentsList = new ArrayList<>();
-		}
+		commentsList = comments.get(adminNo) != null ? comments.get(adminNo) : new ArrayList<>();
 
 		commentsList.add(new CommentsEntity(sessionAdminNo, sessionName, comment, rating));
 		comments.put(adminNo, commentsList);

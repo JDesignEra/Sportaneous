@@ -157,9 +157,19 @@ public class AccountsEntity implements Serializable {
 	public void setMatchPlayed(int matchPlayed) {
 		this.matchPlayed = matchPlayed;
 	}
+	
+	public int incrementAndGetMatchedPlayed() {
+		matchPlayed += 1;
+		return matchPlayed;
+	}
 
 	public void setTotalMatch(int totalMatch) {
 		this.totalMatch = totalMatch;
+	}
+	
+	public int incrementAndGetTotalMatch() {
+		totalMatch += 1;
+		return totalMatch;
 	}
 
 	public void setMatchID(int matchID) {

@@ -86,11 +86,13 @@ public class FriendsViewController {
 		}
 		else {
 			for (accIndex = 0; accIndex < accounts.size(); accIndex++) {
-				try {
-					friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
-				}
-				catch (IOException e) {
-					e.printStackTrace();
+				if (!accounts.get(accIndex).getAdminNo().equals(AccountsDA.getAdminNo())) {
+					try {
+						friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
+					}
+					catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

@@ -21,22 +21,22 @@ public class RatingsDA {
 		ratings = db.getTreeMap("ratings");
 
 		List<RatingsEntity> temp = new ArrayList<>();
-		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 0, 1 },
-				new boolean[] { true, true }, 0));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 0, 0 },
+				new boolean[] { true, true }, 1));
 		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 0, 0 },
 				new boolean[] { true, true }, 0));
 		ratings.put("admin", temp);
 
 		temp = new ArrayList<>();
-		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "4321a" }, new String[] { "", "" }, new int[] { 0, 1 },
-				new boolean[] { true, true }, 0));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "4321a" }, new String[] { "", "" }, new int[] { 0, 0 },
+				new boolean[] { true, true }, 1));
 		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "4321a" }, new String[] { "", "" }, new int[] { 0, 0 },
 				new boolean[] { true, true }, 0));
 		ratings.put("1234a", temp);
 
 		temp = new ArrayList<>();
-		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "1234a" }, new String[] { "", "" }, new int[] { 0, 1 },
-				new boolean[] { true, true }, 0));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "1234a" }, new String[] { "", "" }, new int[] { 0, 0 },
+				new boolean[] { true, true }, 1));
 		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "1234a" }, new String[] { "", "" }, new int[] { 0, 0 },
 				new boolean[] { true, true }, 0));
 		ratings.put("4321a", temp);
@@ -87,14 +87,18 @@ public class RatingsDA {
 					for (int j = 0; j < ratingsEntity.getAdminNums().length; j++) {
 						CommentsDA.addComment(ratingsEntity.getAdminNums()[j], ratingsEntity.getComments()[j], ratingsEntity.getRatings()[j]);
 						AccountsDA.updateAccRating(ratingsEntity.getAdminNums()[j], ratingsEntity.getRatings()[j]);
+						AccountsDA.incrementAccMatch(ratingsEntity.getAdminNums()[j], ratingsEntity.getAttendances()[j]);
 					}
 
 					ratingList.remove(i);
 					ratings.put(sessionID, ratingList);
+
+					break;
 				}
 				else { // Else just replace it.
 					ratingList.set(i, ratingsEntity);
 					ratings.put(sessionID, ratingList);
+
 					break;
 				}
 			}
@@ -119,10 +123,14 @@ public class RatingsDA {
 
 						ratingList.remove(i);
 						ratings.put(adminNo, ratingList);
+
+						break;
 					}
 					else { // Else just update No. of players rated
 						ratingList.set(i, ratingsEntity);
 						ratings.put(adminNo, ratingList);
+
+						break;
 					}
 				}
 

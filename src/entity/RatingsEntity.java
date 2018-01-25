@@ -114,6 +114,7 @@ public class RatingsEntity implements Serializable {
 	}
 
 	public int incrementAndGetNoRate() {
-		return ++this.noRated;
+		noRated += 1;
+		return noRated;
 	}
 }

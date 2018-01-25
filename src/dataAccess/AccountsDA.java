@@ -78,10 +78,13 @@ public class AccountsDA {
 		accounts.replace(adminNo, accountsEntity);
 	}
 
-	public static void updateAccMatch(String adminNo, int matchPlayed, int totalMatch) {
+	public static void incrementAccMatch(String adminNo, boolean attendances) {
 		AccountsEntity accountEntity = accounts.get(adminNo.toLowerCase());
-		accountEntity.setMatchPlayed(matchPlayed);
-		accountEntity.setTotalMatch(totalMatch);
+		accountEntity.incrementAndGetMatchedPlayed();
+
+		if (attendances) {
+			accountEntity.incrementAndGetTotalMatch();
+		}
 
 		accounts.remove(adminNo, accountEntity);
 	}
