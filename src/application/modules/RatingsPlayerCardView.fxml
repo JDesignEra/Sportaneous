@@ -3,9 +3,9 @@
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -103,17 +103,29 @@
 						<Insets top="25.0" />
 					</GridPane.margin>
 				</GridPane>
-				<HBox alignment="CENTER_LEFT" GridPane.rowIndex="3">
+				<HBox fx:id="ratingStarsBtnHBox" alignment="CENTER_LEFT" GridPane.rowIndex="3">
 					<children>
-						<ToggleButton fx:id="ratingStars1Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" selected="true" styleClass="ratingStarsBtn" text="">
-							<toggleGroup>
-								<ToggleGroup fx:id="ratingStarsBtnGrp" />
-							</toggleGroup>
+						<ToggleButton id="0" fx:id="ratingStars1Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" selected="true" styleClass="ratingStarsBtn" text="">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
 						</ToggleButton>
-						<ToggleButton fx:id="ratingStars2Btn" mnemonicParsing="false" styleClass="ratingStarsBtn" text="" toggleGroup="$ratingStarsBtnGrp" />
-						<ToggleButton fx:id="ratingStars3Btn" mnemonicParsing="false" styleClass="ratingStarsBtn" text="" toggleGroup="$ratingStarsBtnGrp" />
-						<ToggleButton fx:id="ratingStars4Btn" mnemonicParsing="false" styleClass="ratingStarsBtn" text="" toggleGroup="$ratingStarsBtnGrp" />
-						<ToggleButton fx:id="ratingStars5Btn" mnemonicParsing="false" styleClass="ratingStarsBtn" text="" toggleGroup="$ratingStarsBtnGrp" />
+						<ToggleButton id="1" fx:id="ratingStars2Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ToggleButton>
+						<ToggleButton id="2" fx:id="ratingStars3Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ToggleButton>
+						<ToggleButton id="3" fx:id="ratingStars4Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ToggleButton>
+						<ToggleButton id="4" fx:id="ratingStars5Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ToggleButton>
 					</children>
 				</HBox>
 				<JFXToggleButton fx:id="attendToggleBtn" selected="true" text="Present" GridPane.columnIndex="1" GridPane.rowIndex="3">

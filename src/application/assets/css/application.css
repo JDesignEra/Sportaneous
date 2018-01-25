@@ -205,7 +205,6 @@
 }
 
 .hyperlink {
-	-fx-fill: #EF4956;
 	-fx-text-fill: #EF4956;
 	-fx-border-width: 0.0;
 	-fx-underline: false;
@@ -508,8 +507,30 @@
 	-jfx-rippler-fill: none;
 }
 
-.jfx-dialog-overlay-pane.transparent > StackPane {
-    -fx-background-color: transparent;
+.ratingsDialog > StackPane {
+    -fx-background-color: #EDEDED;
+    -fx-background-radius: 4.0px;
+    -fx-pref-height: 900.0px;
+    -fx-max-height: 900.0px;
+    -fx-pref-width: 1400.0px;
+    -fx-max-width: 1400.0px;
+    -fx-padding: 30.0px 0.0 0.0 0.0;
+    -fx-background-insets: 30.0px 0.0 0.0 0.0; 
+}
+
+.ratingsDialog VBox {
+	-fx-padding: 25.0px;
+	-fx-spacing: 25.0px;
+	-fx-alignment: top-center;
+	-fx-pref-width: -1;
+	-fx-max-width: -1;
+}
+
+.ratingsDialog ScrollPane {
+	-fx-fit-to-width: true;
+	-fx-fit-to-height: true;
+	-fx-pref-height: -1;
+	-fx-background-color: transparent;
 }
 
 .info .jfx-dialog-layout .jfx-layout-body > Text,

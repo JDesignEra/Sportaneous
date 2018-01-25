@@ -282,7 +282,6 @@ public class EditProfileViewController {
 			// Dialog Save Button
 			JFXButton dialogSaveBtn = new JFXButton("SAVE");
 			dialogSaveBtn.getStyleClass().add("success");
-			dialogSaveBtn.setCursor(Cursor.HAND);
 
 			dialogSaveBtn.setOnAction(saveEV -> {
 				dialog.close();
@@ -314,8 +313,8 @@ public class EditProfileViewController {
 			// Dialog Cancel Button
 			JFXButton dialogCancelBtn = new JFXButton("CANCEL");
 			dialogCancelBtn.getStyleClass().addAll("danger");
-			dialogCancelBtn.setCursor(Cursor.HAND);
 			dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
+			
 			content.getActions().add(dialogCancelBtn);
 
 			dialog.show();

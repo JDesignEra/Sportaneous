@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -63,16 +63,20 @@ public class RatingsCardViewController {
 	// Event Listener on JFXButton[#ratePlayersBtn].onAction
 	@FXML
 	private void ratePlayersBtnOnAction(ActionEvent event) {
+		// Dialog
 		StackPane rootStackPane = (StackPane) Main.getRoot().lookup("#ratingRoot");
 		JFXDialogLayout content = new JFXDialogLayout();
-		content.setPrefWidth(1900);
-		
+
+		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+		dialog.getStyleClass().add("ratingsDialog");
+
 		VBox playerRatingContent = new VBox();
-		playerRatingContent.setFillWidth(true);
-		playerRatingContent.setAlignment(Pos.CENTER);
 		ScrollPane playerRatingScrollPane = new ScrollPane(playerRatingContent);
 
 		for (int i = 0; i < ratings.get(ratingIndex).getAdminNums().length; i++) {
+			RatingsPlayerCardViewController.setRatingIndex(ratingIndex);
+			RatingsPlayerCardViewController.setPlayerIndex(i);
+			
 			try {
 				playerRatingContent.getChildren().add(FXMLLoader.load(ratingsPlayerCardURL));
 			}
@@ -81,10 +85,32 @@ public class RatingsCardViewController {
 			}
 		}
 
-		content.setBody(playerRatingScrollPane);
+		// Submit Dialog Buttons
+		JFXButton submitBtn = new JFXButton("SUBMIT");
+		submitBtn.getStyleClass().add("success");
 
-		JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-		dialog.getStyleClass().add("transparent");
+		submitBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO update ratings
+			}
+		});
+
+		// Cancel Dialog Buttons
+		JFXButton cancelBtn = new JFXButton("CANCEL");
+		cancelBtn.getStyleClass().add("danger");
+
+		cancelBtn.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				dialog.close();
+			}
+		});
+
+		content.setHeading(new Text("RATE PLAYERS"));
+		content.setBody(playerRatingScrollPane);
+		content.getActions().addAll(submitBtn, cancelBtn);
+
 		dialog.show();
 	}
 }
