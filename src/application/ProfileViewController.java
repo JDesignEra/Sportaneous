@@ -366,4 +366,8 @@ public class ProfileViewController {
 			e.printStackTrace();
 		}
 	}
+
+	public static String getAdminNo() {
+		return adminNo;
+	}
 }

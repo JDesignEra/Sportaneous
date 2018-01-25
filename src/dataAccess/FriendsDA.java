@@ -29,7 +29,7 @@ public class FriendsDA {
 	}
 
 	public static List<FriendsEntity> getFriends() {
-		return friends.get(sessionID);
+		return friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>();
 	}
 
 	public static void addFriend(String friendAdminNo) {

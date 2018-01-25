@@ -303,9 +303,6 @@ public class EditProfileViewController {
 						emailTxtField.getStyleClass().add("danger");
 						new Snackbar().danger(rootStackPane, "Only NYP Email adress are allowed.");
 						break;
-
-					default:
-						break;
 				}
 			});
 			content.setActions(dialogSaveBtn);
@@ -314,7 +311,7 @@ public class EditProfileViewController {
 			JFXButton dialogCancelBtn = new JFXButton("CANCEL");
 			dialogCancelBtn.getStyleClass().addAll("danger");
 			dialogCancelBtn.setOnAction(cancelEV -> dialog.close());
-			
+
 			content.getActions().add(dialogCancelBtn);
 
 			dialog.show();

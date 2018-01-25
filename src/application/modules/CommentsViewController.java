@@ -10,7 +10,6 @@ import javafx.scene.text.Text;
 
 import entity.CommentsEntity;
 
-import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
 
 import modules.Misc;
@@ -26,7 +25,7 @@ public class CommentsViewController {
 
 	private static int index = 0;
 
-	private List<CommentsEntity> comments = CommentsDA.getComments(AccountsDA.getAdminNo());
+	private List<CommentsEntity> comments = CommentsDA.getComments(ProfileViewController.getAdminNo());
 	private String adminNo = comments.get(index).getAdminNo();
 	private String name = comments.get(index).getName();
 	private String comment = comments.get(index).getComment();

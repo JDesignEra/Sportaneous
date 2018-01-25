@@ -68,8 +68,11 @@ public class AccountsDA {
 		return accounts.get(adminNo.toLowerCase());
 	}
 
-	public static void updateAccRating(String adminNo, int... ratings) {
+	public static void updateAccRating(String adminNo, int rating) {
 		AccountsEntity accountsEntity = accounts.get(adminNo.toLowerCase());
+		int[] ratings = accountsEntity.getRating();
+		ratings[rating - 1] = rating;
+
 		accountsEntity.setRating(ratings);
 
 		accounts.replace(adminNo, accountsEntity);
