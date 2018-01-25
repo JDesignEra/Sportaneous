@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="rootGridPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationViewController">
+<GridPane fx:id="rootGridPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1900.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationViewController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <content>

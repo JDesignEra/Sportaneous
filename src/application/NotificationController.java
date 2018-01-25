@@ -63,17 +63,16 @@ public class NotificationController {
 				addNoBtn("Close", 740);
 				break;
 			case 2:
-				lblStatus.setText("");
 				lblStatus.setText("Rating");
+				txtIcon.setText("");
 				lblNotification.setText("You have pending ratings");
 				btnActionFlowPane.getChildren().remove(yesButton);
 				addNoBtn("Close", 740);
-
 				break;
 			case 3:
-				lblStatus.setText("");
 				lblStatus.setText("Friend Request");
-				lblNotification.setText(adminNo + ", " + fNameToUpper + " has sent you a friend request");
+				txtIcon.setText("");
+				lblNotification.setText(fNameToUpper + " has sent you a friend request");
 				yesButton.setText("Accept");
 				addNoBtn("Decline", 370);
 				break;
