@@ -21,7 +21,6 @@ import dataAccess.AccountsDA;
 import dataAccess.NotificationsDA;
 
 import modules.Misc;
-import modules.Snackbar;
 
 public class NotificationController {
 	@FXML private GridPane notiGridPane;
@@ -35,7 +34,7 @@ public class NotificationController {
 
 	private int i = NotificationViewController.getNotiIndex();
 	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
-	
+
 	private String adminNo = notifications.get(i).getAdminNo();
 	private String name = notifications.get(i).getName();
 	private String sports = notifications.get(i).getSports();
@@ -54,21 +53,21 @@ public class NotificationController {
 				lblStatus.setText("Invitation");
 				txtIcon.setText("");
 				lblNotification.setText(fNameToUpper + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
-				addNoBtn("Decline");
+				addNoBtn("Decline", 370);
 				break;
 			case 1:
 				lblStatus.setText("Joined");
 				txtIcon.setText("");
 				lblNotification.setText(fNameToUpper + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
 				btnActionFlowPane.getChildren().remove(yesButton);
-				addNoBtn("Close");
+				addNoBtn("Close", 740);
 				break;
 			case 2:
 				lblStatus.setText("");
 				lblStatus.setText("Rating");
 				lblNotification.setText("You have pending ratings");
 				btnActionFlowPane.getChildren().remove(yesButton);
-				addNoBtn("Close");
+				addNoBtn("Close", 740);
 
 				break;
 			case 3:
@@ -76,17 +75,17 @@ public class NotificationController {
 				lblStatus.setText("Friend Request");
 				lblNotification.setText(adminNo + ", " + fNameToUpper + " has sent you a friend request");
 				yesButton.setText("Accept");
-				addNoBtn("Decline");
+				addNoBtn("Decline", 370);
 				break;
 		}
 		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
 	}
 
-	public void addNoBtn(String text) {
+	public void addNoBtn(String text, int width) {
 		JFXButton noBtn = new JFXButton(text);
 		noBtn.getStyleClass().add("danger");
 		noBtn.setMinWidth(Control.USE_PREF_SIZE);
-		noBtn.setPrefWidth(340);
+		noBtn.setPrefWidth(width);
 		noBtn.setMaxWidth(Control.USE_PREF_SIZE);
 		btnActionFlowPane.getChildren().add(noBtn);
 
@@ -94,7 +93,7 @@ public class NotificationController {
 			@Override
 			public void handle(Event event) {
 				NotificationsDA.deleteNotificaions(AccountsDA.getAdminNo());
-				new Snackbar().success(notiGridPane, "Notifications cleared");
+				// new Snackbar().success(notiGridPane, "Notifications cleared");
 
 				notiGridPane.setVisible(false);
 				notiGridPane.setManaged(false);
@@ -108,5 +107,7 @@ public class NotificationController {
 	@FXML
 	public void yesBtnOnAction(ActionEvent event) {
 		NotificationsDA.addNotifications(sports, venue, dateTime, status);
+		notiGridPane.setVisible(false);
+		notiGridPane.setManaged(false);
 	}
 }

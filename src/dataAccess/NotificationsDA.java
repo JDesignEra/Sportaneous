@@ -25,15 +25,16 @@ public class NotificationsDA {
 		List<NotificationsEntity> temp = new ArrayList<>();
 		temp.add(new NotificationsEntity("admin", "Wilson", "basketball", "Basketball Court", LocalDateTime.of(2018, 2, 12, 15, 00), 0));
 		temp.add(new NotificationsEntity("admin", "john", "basketball", "Basketball Court", LocalDateTime.of(2018, 3, 22, 17, 00), 1));
+		temp.add(new NotificationsEntity("admin", "Peter", "Badminton", "Sports field", LocalDateTime.of(2018, 4, 11, 16, 15), 2));
+		temp.add(new NotificationsEntity("admin", "mary", "soccer", "Soccer field", LocalDateTime.of(2018, 2, 11, 14, 00), 3));
 		notifications.put("admin", temp);
-		 */
+		*/	
 		db.commit();
 	}
 
 	public static List<NotificationsEntity> getNotifications() {
 		return notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>();
 	}
-
 
 	public static int checkStatus(String notiID) {
 		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());

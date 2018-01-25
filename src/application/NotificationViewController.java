@@ -6,17 +6,16 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.layout.FlowPane;
-
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import entity.NotificationsEntity;
 
 import dataAccess.NotificationsDA;
 
 public class NotificationViewController {
-	@FXML private FlowPane notificationsFlowPane;
-	@FXML private GridPane emptyNotifications;
+	@FXML private GridPane emptyNotifications, rootGridPane;
+	@FXML private VBox notificationsVbox;
 
 	private final URL notificationsURL = getClass().getResource("/application/Notification.fxml");
 	private static List<NotificationsEntity> notification;
@@ -27,21 +26,22 @@ public class NotificationViewController {
 		notification = NotificationsDA.getNotifications();
 
 		if (!notification.isEmpty()) {
-			notificationsFlowPane.getChildren().clear();
-			notificationsFlowPane.alignmentProperty().set(Pos.TOP_CENTER);
+			notificationsVbox.getChildren().clear();
+			notificationsVbox.alignmentProperty().set(Pos.TOP_CENTER);
 			showNotification();
 		}
 	}
 
 	private void showNotification() {
 		if (notification.isEmpty()) {
-			notificationsFlowPane.alignmentProperty().set(Pos.CENTER);
-			notificationsFlowPane.getChildren().add(emptyNotifications);
+			notificationsVbox.alignmentProperty().set(Pos.CENTER);
+			notificationsVbox.getChildren().add(emptyNotifications);
 		}
 		else {
 			for (notiIndex = 0; notiIndex < notification.size(); notiIndex++) {
 				try {
-					notificationsFlowPane.getChildren().add(FXMLLoader.load(notificationsURL));
+					rootGridPane.setAlignment(Pos.TOP_CENTER);
+					notificationsVbox.getChildren().add(FXMLLoader.load(notificationsURL));
 				}
 				catch (Exception e) {
 					e.printStackTrace();
