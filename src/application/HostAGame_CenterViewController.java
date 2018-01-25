@@ -22,6 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 import dataAccess.AccountsDA;
+import dataAccess.EquipmentsDA;
 import dataAccess.FacilitiesDA;
 import dataAccess.HostsDA;
 
@@ -57,6 +58,7 @@ public class HostAGame_CenterViewController {
 	private final URL AddedFriendsView = getClass().getResource("/application/HostAGame_AddedFriendsView.fxml");
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private String sports;
+	private boolean canRentEq = false;
 	
 	public void initialize() {
 		
@@ -112,9 +114,14 @@ public class HostAGame_CenterViewController {
 				
 				if (FacilitiesDA.facilityIsAvailable(LocalDateTime.of(date, time), sports)) {
 					
-					HostsDA.hostGame(adminNo, name, date, formattedTime, sportIndex, new ArrayList<String>(), facility);
-					FacilitiesDA.bookFacility(LocalDateTime.of(date, formattedTime), facility);
-					new Snackbar().success(borderPane, "Success!");
+					int status = HostsDA.hostGame(adminNo, name, date, formattedTime, sportIndex, new ArrayList<String>(), facility);
+					
+					if (status == 2) {
+						FacilitiesDA.bookFacility(LocalDateTime.of(date, formattedTime), facility);
+						new Snackbar().success(borderPane, "Success!");
+					} else {
+						new Snackbar().danger(borderPane, "Booking is unsuccessful! Please check if date and time are valid.");
+					}
 					
 				} else if (FacilitiesDA.facilityIsAvailable(LocalDateTime.of(date, time), sports) == false) {
 					
@@ -144,12 +151,12 @@ public class HostAGame_CenterViewController {
 	}
 	
     @FXML
-    void handleSport(MouseEvent event) {
+    private void handleSport(MouseEvent event) {
     	FacilityDropD.setItems(null);
     }
 
     @FXML
-    void handleFac(MouseEvent event) {
+    private void handleFac(MouseEvent event) {
     	sports = sportDropD.getValue();
     	System.out.println("handleSport clicked");
     	System.out.println("Sport: " + sports);
@@ -174,7 +181,22 @@ public class HostAGame_CenterViewController {
     }
     
 	@FXML
-    void handleTimePicker(MouseEvent event) {
+    private void handleTimePicker(MouseEvent event) {
 		new Snackbar().warning(borderPane, "NOTE: Minutes will be ignored.");
+    }
+	
+    @FXML
+    private void handleEquipmentToggle(ActionEvent event) {
+    	if (equipmentToggle.isSelected() && !sportDropD.getValue().isEmpty()) {
+    		if (EquipmentsDA.equipmentIsAvailable(sportDropD.getValue())) {
+    			canRentEq = true;
+    			new Snackbar().success(borderPane, "Equipment is available!");
+    		} else {
+    			equipmentToggle.setSelected(false);
+    			new Snackbar().success(borderPane, "Equipment is not available!");
+    		}
+    	} else {
+    		new Snackbar().danger(borderPane, "Please select a sport!");
+    	}
     }
 }

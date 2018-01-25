@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane stylesheets="@assets/css/Friends.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane layoutX="-70.0" layoutY="-128.0" prefHeight="1035.0" prefWidth="1680.0" />
+      <GridPane id="profile" alignment="CENTER" hgap="25.0" layoutX="10.0" layoutY="10.0" maxHeight="1080.0" maxWidth="1920.0" prefHeight="900.0" prefWidth="1600.0" vgap="25.0">
+         <children>
+            <Pane styleClass="card" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets top="140.0" />
+               </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </Pane>
+            <GridPane fx:id="profileGridPane" alignment="CENTER" vgap="50.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints fillHeight="false" minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" valignment="CENTER" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                  <Circle fx:id="dpCircle" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp">
+                     <GridPane.margin>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </Circle>
+                  <VBox id="basicInfo" alignment="CENTER" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="60.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <children>
+                        <GridPane fx:id="basicGridPane" alignment="CENTER" vgap="5.0">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="0.0" valignment="CENTER" vgrow="ALWAYS" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Text fx:id="nameTxt" fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Name" textAlignment="CENTER" />
+                              <Text fx:id="heightWeightTxt" fill="#434343" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="small" text="Height | Weight" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Roboto" size="12.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Player Rating" textAlignment="CENTER" GridPane.rowIndex="3" />
+                              <Text fx:id="ratingTxt" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="ratingStars" text="    " GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Match Attendance" GridPane.rowIndex="6" />
+                              <Text fx:id="matchNoTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="para" text="0 / 0" GridPane.rowIndex="7" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+            </GridPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <GridPane layoutX="45.0" layoutY="149.0" prefHeight="694.0" prefWidth="693.0" vgap="50.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Pane layoutX="-1.0" layoutY="-6.0" prefHeight="710.0" prefWidth="735.0" styleClass="card">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <padding>
+                                    <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                                 </padding>
+                                 <children>
+                                    <Circle fx:id="dpCircle1" fill="DODGERBLUE" layoutX="368.0" layoutY="65.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp" />
+                                    <Button layoutX="321.0" layoutY="210.0" mnemonicParsing="false" text="Add Player" textFill="#434343">
+                                       <font>
+                                          <Font name="Roboto Medium" size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </GridPane>
+   </children>
+</AnchorPane>

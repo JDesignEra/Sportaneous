@@ -63,7 +63,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXComboBox>
                   <Label alignment="CENTER" style="-fx-font-size: 22; -fx-font-weight: bold;" styleClass="hostAGame" text="Do You Need Sports Equipment?" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
-                  <JFXToggleButton fx:id="equipmentToggle" prefHeight="72.0" prefWidth="92.0" styleClass="hostAGame" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+                  <JFXToggleButton fx:id="equipmentToggle" onAction="#handleEquipmentToggle" prefHeight="72.0" prefWidth="92.0" styleClass="hostAGame" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
                   <GridPane hgap="40.0" GridPane.rowIndex="7">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
