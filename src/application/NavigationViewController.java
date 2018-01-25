@@ -37,7 +37,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navProfileBtn].onAction
 	@FXML
-	public void navProfileBtnOnAction(ActionEvent event) {
+	private void navProfileBtnOnAction(ActionEvent event) {
 		ProfileViewController.viewSessionProfile();
 
 		for (Node node : rootPane.getChildren()) {
@@ -49,7 +49,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navPlayBtn].onAction
 	@FXML
-	public void navPlayBtnOnAction(ActionEvent event) {
+	private void navPlayBtnOnAction(ActionEvent event) {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(findGameViewURL));
 		}
@@ -66,7 +66,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navFriendsBtn].onAction
 	@FXML
-	public void navFriendsBtnOnAction(ActionEvent event) {
+	private void navFriendsBtnOnAction(ActionEvent event) {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(friendsViewURL));
 		}
@@ -83,7 +83,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navRatingsBtn].onAction
 	@FXML
-	public void navRatingsBtnOnAction(ActionEvent event) {
+	private void navRatingsBtnOnAction(ActionEvent event) {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(ratingsViewURL));
 		}
@@ -100,7 +100,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navNotiBtn].onAction
 	@FXML
-	public void navNotiBtnOnAction(ActionEvent event) {
+	private void navNotiBtnOnAction(ActionEvent event) {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(notificationViewURL));
 		}
@@ -117,7 +117,7 @@ public class NavigationViewController {
 
 	// Event Listener on JFXButton[#navLogoutBtn].onAction
 	@FXML
-	public void navLogoutBtnOnAction(ActionEvent event) {
+	private void navLogoutBtnOnAction(ActionEvent event) {
 		AccountsDA.logout();
 
 		if (AccountsDA.getSession() == null) {

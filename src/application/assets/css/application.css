@@ -508,6 +508,10 @@
 	-jfx-rippler-fill: none;
 }
 
+.jfx-dialog-overlay-pane.transparent > StackPane {
+    -fx-background-color: transparent;
+}
+
 .info .jfx-dialog-layout .jfx-layout-body > Text,
 .success .jfx-dialog-layout .jfx-layout-body > Text,
 .warning .jfx-dialog-layout .jfx-layout-body > Text,
@@ -769,13 +773,20 @@
 	-fx-effect: dropshadow(three-pass-box, #0000003b, 10.0, 0.0, 3.0, 6.0);
 }
 
-#profile .ratingStars,
-#editProfile .ratingStars,
-#friendCard .ratingStars {
+.ratingStars {
 	-fx-font-family: "FontAwesome";
 	-fx-font-size: 22.0px;
 	-fx-text-fill: #EF4956;
 	-fx-fill: #EF4956;
+}
+
+.ratingStarsBtn {
+	-fx-font-family: "FontAwesome";
+	-fx-font-size: 28.0px;
+	-fx-text-fill: #EF4956;
+	-fx-fill: #EF4956;
+	-fx-background-color: transparent;
+	-fx-padding: 5.0px;
 }
 
 #profile .comBtnFlowPane {

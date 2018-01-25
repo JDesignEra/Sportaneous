@@ -5,19 +5,22 @@ import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class RatingsEntity implements Serializable {
-	private String matchID;
+	private String hostAdminNo, sport;
 	private LocalDateTime dateTime;
 	private String[] adminNums, comments;
 	private int[] ratings;
 	private boolean[] attendances;
-	private int noRated; // Check if all players rated
+	private int matchID, noRated; // Check if all players rated
 
-	public RatingsEntity(String matchID, LocalDateTime dateTime, String[] adminNums, String[] comments, int[] ratings, boolean[] attendances, int noRated) {
+	public RatingsEntity(	int matchID, String hostAdminNo, String sport, LocalDateTime dateTime, String[] adminNums, String[] comments, int[] ratings, boolean[] attendances,
+							int noRated) {
 		if (comments.length != adminNums.length && ratings.length != adminNums.length && attendances.length != adminNums.length) {
 			throw new IllegalArgumentException("comments, adminNums, ratings and attendances argument size must be the same size of adminNums");
 		}
 
 		this.matchID = matchID;
+		this.hostAdminNo = hostAdminNo;
+		this.sport = sport;
 		this.dateTime = dateTime;
 		this.adminNums = adminNums;
 		this.comments = comments;
@@ -26,8 +29,16 @@ public class RatingsEntity implements Serializable {
 		this.noRated = noRated;
 	}
 
-	public String getMatchID() {
+	public int getMatchID() {
 		return matchID;
+	}
+
+	public String getHostAdminNo() {
+		return hostAdminNo;
+	}
+
+	public String getSport() {
+		return sport;
 	}
 
 	public LocalDateTime getDateTime() {
@@ -54,8 +65,16 @@ public class RatingsEntity implements Serializable {
 		return noRated;
 	}
 
-	public void setMatchID(String matchID) {
+	public void setMatchID(int matchID) {
 		this.matchID = matchID;
+	}
+
+	public void setHostAdminNo(String hostAdminNo) {
+		this.hostAdminNo = hostAdminNo;
+	}
+
+	public void setSport(String sport) {
+		this.sport = sport;
 	}
 
 	public void setDateTime(LocalDateTime dateTime) {

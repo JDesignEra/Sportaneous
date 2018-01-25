@@ -21,10 +21,9 @@ public class RatingsDA {
 		ratings = db.getTreeMap("ratings");
 
 		List<RatingsEntity> temp = new ArrayList<>();
-		temp.add(new RatingsEntity("1", LocalDateTime.of(2017, 2, 28, 14, 00), new String[] { "1", "2" }, new String[] { "1", "2" }, new int[] { 3, 0 },
-				new boolean[] { true, true }, 1));
-		temp.add(new RatingsEntity("2", LocalDateTime.of(2017, 2, 9, 14, 00), new String[] { "3", "4" }, new String[] { "1", "2" }, new int[] { 3, 0 },
-				new boolean[] { true, true }, 1));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] {"1234a", "4321a"} , new String[] { "", "" }, new int[] { 0, 0 }, new boolean[] { true, true }, 0));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] {"1234a", "4321a"} , new String[] { "", "" }, new int[] { 0, 0 }, new boolean[] { true, true }, 0));
+		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] {"1234a", "4321a"} , new String[] { "", "" }, new int[] { 0, 0 }, new boolean[] { true, true }, 0));
 		ratings.put("admin", temp);
 		db.commit();
 	}
@@ -33,7 +32,7 @@ public class RatingsDA {
 		return ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>();
 	}
 
-	public static void addRatings(String matchID, LocalDateTime dateTime, String[] adminNums) {
+	public static void addRatings(int matchID, String hostAdminNo, String sport, LocalDateTime dateTime, String[] adminNums) {
 		for (String adminNo : adminNums) {
 			List<RatingsEntity> ratingList = (ratings.get(adminNo) != null ? ratings.get(adminNo) : new ArrayList<>());
 			String[] adminGrp = new String[adminNums.length - 1];
@@ -45,14 +44,15 @@ public class RatingsDA {
 				}
 			}
 
-			ratingList.add(new RatingsEntity(matchID, dateTime, adminGrp, new String[adminGrp.length], new int[adminGrp.length], new boolean[adminGrp.length], 0));
+			ratingList.add(
+					new RatingsEntity(matchID, hostAdminNo, sport, dateTime, adminGrp, new String[adminGrp.length], new int[adminGrp.length], new boolean[adminGrp.length], 0));
 
 			ratings.put(adminNo, ratingList);
 			db.commit();
 		}
 	}
 
-	public static void updateRatings(String matchID, String[] comments, int[] rating, boolean[] attendances) {
+	public static void updateRatings(int matchID, String[] comments, int[] rating, boolean[] attendances) {
 		List<RatingsEntity> ratingList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
 		String[] adminGrp = null;
 		int noRated = 0;
@@ -60,7 +60,7 @@ public class RatingsDA {
 
 		// Update Session Account
 		for (RatingsEntity ratingsEntity : ratingList) {
-			if (ratingsEntity.getMatchID().equals(matchID)) {
+			if (ratingsEntity.getMatchID() == matchID) {
 				adminGrp = ratingsEntity.getAdminNums(); // Store adminNumber there's not current sessionID
 				noRated = ratingsEntity.incrementAndGetNoRate(); // Store No. of players rated
 
@@ -90,7 +90,7 @@ public class RatingsDA {
 			i = 0;
 
 			for (RatingsEntity ratingsEntity : ratingList) {
-				if (ratingsEntity.getMatchID().equals(matchID)) {
+				if (ratingsEntity.getMatchID() == matchID) {
 					if (ratingsEntity.getNoRated() == noRated) { // If is last player to submit ratings, remove it.
 						ratingsEntity.incrementAndGetNoRate();
 
