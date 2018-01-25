@@ -50,7 +50,7 @@
       		</Label>
          </children>
          <GridPane.margin>
-            <Insets left="25.0" right="25.0" />
+            <Insets left="20.0" />
          </GridPane.margin>
       </GridPane>
       <Text fx:id="txtIcon" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.halignment="RIGHT">
@@ -59,9 +59,9 @@
             <String fx:value="x2" />
          </styleClass>
       </Text>
-      <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+      <FlowPane fx:id="btnActionFlowPane" alignment="CENTER" hgap="50.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
          <children>
-            <JFXButton fx:id="yesButton" onAction="#yesBtnOnAction" prefWidth="370.0" styleClass="success" text="Yes">
+            <JFXButton fx:id="yesButton" onAction="#yesBtnOnAction" prefWidth="340.0" styleClass="success" text="Accept">
                <FlowPane.margin>
                   <Insets />
                </FlowPane.margin>
@@ -82,7 +82,4 @@
       <RowConstraints />
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
-   <padding>
-      <Insets bottom="4.0" top="25.0" />
-   </padding>
 </GridPane>

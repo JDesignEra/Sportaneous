@@ -29,27 +29,9 @@ public class NotificationsDA {
 		 */
 		db.commit();
 	}
-/*
-	public static Object[][] getAllData() {
 
-		Object[][] rowData = new Object[notifications.size()][6];
-		notificationsList = (notifications.get("admin") != null ? notifications.get("admin") : new ArrayList<>());
-
-		int i = 0;
-		for (NotificationsEntity notificationsEntity : notificationsList) {
-			rowData[i][0] = notificationsEntity.getAdminNo();
-			rowData[i][1] = notificationsEntity.getName();
-			rowData[i][2] = notificationsEntity.getSports();
-			rowData[i][3] = notificationsEntity.getLocation();
-			rowData[i][4] = notificationsEntity.getDateTime();
-			rowData[i][5] = notificationsEntity.getStatus();
-			i++;
-		}
-		return rowData;
-	}
-*/
 	public static List<NotificationsEntity> getNotifications() {
-		return notifications.get(sessionID);
+		return notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>();
 	}
 
 
@@ -90,10 +72,4 @@ public class NotificationsDA {
 		}
 		db.commit();
 	}
-	/*
-	public static void main(String[] args) {
-		initDA();
-		
-	}
-	 */
 }
