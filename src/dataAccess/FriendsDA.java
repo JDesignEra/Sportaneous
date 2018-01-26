@@ -14,7 +14,6 @@ public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
 	private static String sessionID = AccountsDA.getAdminNo();
-	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/friends.db")).closeOnJvmShutdown().make();
@@ -34,7 +33,7 @@ public class FriendsDA {
 
 	public static void addFriend(String friendAdminNo) {
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		friendsList.add(new FriendsEntity(friendAdminNo, sessionID, 0));
 		friends.put(friendAdminNo, friendsList);
 
@@ -50,7 +49,7 @@ public class FriendsDA {
 		int i = 0;
 
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
@@ -83,7 +82,7 @@ public class FriendsDA {
 		int i = 0;
 
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
@@ -116,7 +115,7 @@ public class FriendsDA {
 	}
 
 	public static int checkStatus(String friendAdminNo) {
-		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
