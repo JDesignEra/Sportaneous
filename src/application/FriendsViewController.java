@@ -27,7 +27,7 @@ public class FriendsViewController {
 	@FXML FlowPane friendsFlowPane;
 
 	private static int accIndex;
-	private static List<AccountsEntity> accounts;
+	private static List<AccountsEntity> accounts = null;
 
 	private final URL friendCardURL = getClass().getResource("/application/modules/FriendCardView.fxml");
 
@@ -123,5 +123,9 @@ public class FriendsViewController {
 
 	public static List<AccountsEntity> getAccounts() {
 		return accounts;
+	}
+	
+	public static void setAccounts(List<AccountsEntity> accList) {
+		accounts = accList;
 	}
 }
