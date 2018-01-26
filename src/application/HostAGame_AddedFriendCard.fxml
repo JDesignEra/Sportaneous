@@ -7,16 +7,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Circle?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="450.0" styleClass="card" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HostAGame_FriendCardController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="450.0" styleClass="card" stylesheets="@assets/css/kh.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.HostAGame_AddedFriendCardController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="411.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="63.0" minWidth="10.0" prefWidth="39.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="39.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="413.0" minWidth="210.0" prefWidth="411.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="278.0" prefWidth="585.0" style="-fx-background-color: white;" styleClass="hostCard">
+      <JFXButton fx:id="removeBtn" onAction="#handleRemoveBtn" prefHeight="240.0" prefWidth="43.0" style="-fx-background-color: #ef4956; -fx-font-family: fontawesome; -fx-font-size: 10;" styleClass="hostAGame_jfx-button" stylesheets="@assets/css/kh.css" text="" textFill="WHITE" />
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="278.0" prefWidth="585.0" style="-fx-background-color: white;" styleClass="hostCard" GridPane.columnIndex="1">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.0" minWidth="1.0" prefWidth="29.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="153.0" />
@@ -54,6 +55,5 @@
             <Circle fx:id="playerDP" fill="#ffffff00" radius="74.0" stroke="#ef4956" strokeType="INSIDE" strokeWidth="4.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <JFXButton fx:id="addBtn" onAction="#handleAdd" prefHeight="240.0" prefWidth="43.0" style="-fx-background-color: #26A69A; -fx-font-family: fontawesome; -fx-font-size: 10;" styleClass="hostAGame_jfx-button" stylesheets="@assets/css/kh.css" text="" textFill="WHITE" GridPane.columnIndex="1" />
    </children>
 </GridPane>

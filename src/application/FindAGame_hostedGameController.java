@@ -83,6 +83,12 @@ public class FindAGame_hostedGameController {
 		if (FindAGame_ViewController.HostAGame_index == searchR.size()) {
 			FindAGame_ViewController.HostAGame_index = 0;
 		} 
+		
+		if (admin.toLowerCase().equals(Main.currentUserAdminNo.toLowerCase())) {
+			joinBtn.setStyle("-fx-background-color: grey;");
+			joinBtn.setDisable(true);
+		}
+		
 	}
 	
 	// Event Listener on JFXButton[#joinBtn].onAction
@@ -92,6 +98,9 @@ public class FindAGame_hostedGameController {
 		
 		HostsDA.addFriends(admin, date, time, Main.currentUserAdminNo.toUpperCase());
 		joinBtn.setStyle("-fx-background-color: grey;");
+		
+		
+		
 		
 		
 		setNoOfPlayersLabel();

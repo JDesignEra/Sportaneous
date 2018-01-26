@@ -1,29 +1,27 @@
 package application;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
+import javafx.fxml.FXML;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import javax.imageio.ImageIO;
+import com.jfoenix.controls.JFXButton;
 
-import javafx.fxml.FXML;
+import javafx.event.ActionEvent;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import entity.AccountsEntity;
-import entity.HostsEntity;
 
 import dataAccess.AccountsDA;
-import dataAccess.HostsDA;
 
 import modules.Misc;
 
-public class FindAGame_ViewPlayerDetailsController {
+public class HostAGame_FriendCardController {
 	@FXML
 	private Label lbMatchesPlayed;
 	@FXML
@@ -35,38 +33,22 @@ public class FindAGame_ViewPlayerDetailsController {
 	@FXML
 	private Circle playerDP;
 	@FXML
-	private GridPane basePane;
+	private JFXButton addBtn;
 	
-	private String target;
-	
-	private HostsEntity gameClicked;
-	
-	private ArrayList<String> peopleToDisplay;
+	private List<AccountsEntity> retrievedList;
+	private AccountsEntity retrievedAcc;
 	
 	private String adminNo = "";
 	
-	private Misc m;
-	
-	private AccountsEntity retrievedAcc = null;
-	
+	private Misc misc;
+
+	// Event Listener on JFXButton[#addBtn].onAction
 	public void initialize() {
+		misc = new Misc();
 		
-		AccountsDA.initDA();
-		HostsDA.initDA();
-		
-		m = new Misc();
-		gameClicked = FindAGame_ViewController.clickedgame;
-		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
-		peopleToDisplay = gameClicked.getPlayersRecruited();
-		
-		
-		System.out.println("(FindAGame_ViewPlayerDetailsController) Whose game has been clicked: " + target + " / Players recruited: " + peopleToDisplay.size());
-		//display details of the people who joined the game the target hosted
-		if (FindAGame_ViewController.VPD_index < this.peopleToDisplay.size()) {
-			adminNo = this.peopleToDisplay.get(FindAGame_ViewController.VPD_index++);
-			System.out.println("(FindAGame_ViewPlayerDetailsController) Recruited player being displayed now: " + adminNo);
-			retrievedAcc = AccountsDA.getAccData(adminNo);
-		}
+		retrievedList = HostAGame_CenterViewController.friendsDisplayList;
+		retrievedAcc = retrievedList.get(HostAGame_CenterViewController.friendIndex);
+		adminNo = retrievedAcc.getAdminNo().toLowerCase();
 		
 		setName();
 		setDP();
@@ -74,12 +56,16 @@ public class FindAGame_ViewPlayerDetailsController {
 		setRating();
 		setMatchesPlayed();
 		
-		if (FindAGame_ViewController.VPD_index == this.peopleToDisplay.size()) {
-			FindAGame_ViewController.VPD_index = 0;
+		if (HostAGame_CenterViewController.friendIndex == HostAGame_CenterViewController.friendsDisplayList.size()-1) {
+			HostAGame_CenterViewController.friendIndex = 0;
+		} else {
+			HostAGame_CenterViewController.friendIndex++;
 		}
-		
-		System.out.println("(ViewPlayerDetails) " + gameClicked.getName() + " (" + gameClicked.getAdminNo() + ")'s recruited player ("+ "VPD index: " + FindAGame_ViewController.VPD_index + ") is being displayed now.");
-		
+	}
+	
+	@FXML
+	public void handleAdd(ActionEvent event) throws IOException {
+		HostAGame_CenterViewController.addedFriends.add(retrievedAcc);
 	}
 	
 	private void setName() {
@@ -143,7 +129,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	public void setRating() {
-		lbPlayerRating.setText(m.getRatingShapes(retrievedAcc.getCalRating()));
+		lbPlayerRating.setText(misc.getRatingShapes(retrievedAcc.getCalRating()));
 	}
 	
 	public void setMatchesPlayed() {
