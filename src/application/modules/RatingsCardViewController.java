@@ -25,7 +25,7 @@ import entity.RatingsEntity;
 import dataAccess.AccountsDA;
 import dataAccess.RatingsDA;
 
-import modules.Misc;
+import modules.Utils;
 
 import application.Main;
 import application.RatingsViewController;
@@ -51,7 +51,7 @@ public class RatingsCardViewController {
 
 	@FXML
 	private void initialize() {
-		profileGridPane.add(new Misc().cropCirclePhoto(ratings.get(ratingIndex).getHostAdminNo(), 75), 0, 0);
+		profileGridPane.add(Utils.cropCirclePhoto(ratings.get(ratingIndex).getHostAdminNo(), 75), 0, 0);
 		nameTxt.setText(name);
 		dayTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("EEEE")));
 		dateTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));

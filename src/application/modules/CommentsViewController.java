@@ -12,7 +12,7 @@ import entity.CommentsEntity;
 
 import dataAccess.CommentsDA;
 
-import modules.Misc;
+import modules.Utils;
 
 import application.ProfileViewController;
 
@@ -33,10 +33,10 @@ public class CommentsViewController {
 
 	@FXML
 	private void initialize() {
-		commContentGridPane.add(new Misc().cropCirclePhoto(adminNo, 75), 0, 0);
+		commContentGridPane.add(Utils.cropCirclePhoto(adminNo, 75), 0, 0);
 		nameTxt.setText(name);
 		commentTxt.setText(comment);
-		ratingTxt.setText(new Misc().getRatingShapes(rating));
+		ratingTxt.setText(Utils.getRatingShapes(rating));
 	}
 
 	@FXML

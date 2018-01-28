@@ -6,8 +6,8 @@ import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Circle;
 
-public class Misc {
-	public String getRatingShapes(double rating) {
+public final class Utils {
+	public static String getRatingShapes(double rating) {
 		StringBuilder ratingStars = new StringBuilder();
 		
 		if (rating > 0) {
@@ -30,13 +30,13 @@ public class Misc {
 		return ratingStars.toString();
 	}
 	
-	public ImageView cropCirclePhoto(String adminNo, double radius) {
+	public static ImageView cropCirclePhoto(String adminNo, double radius) {
 		Image img = new Image("/application/assets/uploads/default.png");
 		ImageView imgView = new ImageView(img);
 		Circle clip = new Circle(radius, radius, radius);
 		
-		if (getClass().getResource("/application/assets/uploads/" + adminNo + ".png") != null) {
-			img = new Image(getClass().getResource("/application/assets/uploads/" + adminNo + ".png").toExternalForm());
+		if (Utils.class.getResource("/application/assets/uploads/" + adminNo + ".png") != null) {
+			img = new Image(Utils.class.getResource("/application/assets/uploads/" + adminNo + ".png").toExternalForm());
 			imgView = new ImageView(img);
 
 			// Crop

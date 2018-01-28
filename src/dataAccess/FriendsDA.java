@@ -13,26 +13,26 @@ import entity.FriendsEntity;
 public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
-	private static String sessionID = AccountsDA.getAdminNo();
 	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/friends.db")).closeOnJvmShutdown().make();
 		friends = db.getTreeMap("friends");
 
-		// List<FriendsEntity> temp = new ArrayList<>();
-		// temp.add(new FriendsEntity("admin", "1234a", 1));
-		// temp.add(new FriendsEntity("admin", "4321a", 1));
-		// temp.add(new FriendsEntity("admin", "1234b", 0));
-		// friends.put("admin", temp);
+//		List<FriendsEntity> temp = new ArrayList<>();
+//		temp.add(new FriendsEntity("admin", "1234a", 1));
+//		temp.add(new FriendsEntity("admin", "4321a", 1));
+//		temp.add(new FriendsEntity("admin", "1234b", 0));
+//		friends.put("admin", temp);
 		db.commit();
 	}
 
 	public static List<FriendsEntity> getFriends() {
-		return friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>();
+		return friends.get(AccountsDA.getAdminNo()) != null ? friends.get(AccountsDA.getAdminNo()) : new ArrayList<>();
 	}
 
 	public static void addFriend(String friendAdminNo) {
+		String sessionID = AccountsDA.getAdminNo();
 		// Session's Friend's Friend List
 		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		friendsList.add(new FriendsEntity(friendAdminNo, sessionID, 0));
@@ -47,6 +47,7 @@ public class FriendsDA {
 	}
 
 	public static void removeFriend(String friendAdminNo) {
+		String sessionID = AccountsDA.getAdminNo();
 		int i = 0;
 
 		// Session's Friend's Friend List
@@ -80,6 +81,7 @@ public class FriendsDA {
 	}
 
 	public static void acceptRequest(String friendAdminNo) {
+		String sessionID = AccountsDA.getAdminNo();
 		int i = 0;
 
 		// Session's Friend's Friend List
@@ -116,6 +118,7 @@ public class FriendsDA {
 	}
 
 	public static int checkStatus(String friendAdminNo) {
+		String sessionID = AccountsDA.getAdminNo();
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 
 		for (FriendsEntity friendsEntity : friendsList) {

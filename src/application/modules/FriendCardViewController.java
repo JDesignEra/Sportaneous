@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 
 import entity.AccountsEntity;
 
-import modules.Misc;
+import modules.Utils;
 
 import application.FriendsViewController;
 import application.ProfileViewController;
@@ -34,7 +34,7 @@ public class FriendCardViewController {
 	@FXML
 	private void initialize() {
 		nameTxt.setText(name);
-		ratingTxt.setText(new Misc().getRatingShapes(rating));
+		ratingTxt.setText(Utils.getRatingShapes(rating));
 		matchNoTxt.setText(matchPlayed + " / " + totalMatch);
 
 		// Height & Weight
@@ -54,7 +54,7 @@ public class FriendCardViewController {
 			heightWeightTxt.setManaged(false);
 		}
 
-		cardContent.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
+		cardContent.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
 	}
 
 	@FXML

@@ -15,7 +15,7 @@ import entity.RatingsEntity;
 import dataAccess.AccountsDA;
 import dataAccess.RatingsDA;
 
-import modules.Misc;
+import modules.Utils;
 
 public class RatingsPlayerCardViewController {
 	@FXML private Text nameTxt;
@@ -38,7 +38,7 @@ public class RatingsPlayerCardViewController {
 	@FXML
 	private void initialize() {
 		nameTxt.setText(account.getName());
-		ratingStarsTxt.setText(new Misc().getRatingShapes(account.getCalRating()));
+		ratingStarsTxt.setText(Utils.getRatingShapes(account.getCalRating()));
 		matchesTxt.setText(Integer.toString(account.getMatchPlayed()) + " / " + Integer.toString(account.getTotalMatch()));
 
 		if (account.getHeightVisibility() || account.getWeightVisibility()) {

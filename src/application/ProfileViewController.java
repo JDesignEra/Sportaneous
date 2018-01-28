@@ -27,8 +27,8 @@ import dataAccess.AccountsDA;
 import dataAccess.CommentsDA;
 import dataAccess.FriendsDA;
 
-import modules.Misc;
 import modules.TransitionAnimation;
+import modules.Utils;
 
 import application.modules.CommentsViewController;
 
@@ -64,10 +64,10 @@ public class ProfileViewController {
 
 	@FXML
 	private void initialize() {
-		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
+		profileGridPane.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
-		ratingTxt.setText(new Misc().getRatingShapes(rating));
+		ratingTxt.setText(Utils.getRatingShapes(rating));
 
 		// Height & Weight
 		if (heightVisibility || weightVisbility) {
@@ -119,9 +119,6 @@ public class ProfileViewController {
 
 		if (!CommentsDA.getComments(adminNo).isEmpty()) {
 			commentGridPane.getChildren().remove(commContentGridPane);
-
-			commContentGridPane = new GridPane();
-			CommentsViewController.setIndex(0);
 
 			try {
 				commContentGridPane = FXMLLoader.load(commentsViewURL);
@@ -324,6 +321,7 @@ public class ProfileViewController {
 		rating = AccountsDA.getCalRating();
 		heightVisibility = AccountsDA.getHeightVisibility();
 		weightVisbility = AccountsDA.getWeightVisibility();
+		CommentsViewController.setIndex(0);
 
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
