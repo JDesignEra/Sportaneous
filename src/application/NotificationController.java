@@ -20,7 +20,7 @@ import entity.NotificationsEntity;
 import dataAccess.AccountsDA;
 import dataAccess.NotificationsDA;
 
-import modules.Misc;
+import modules.Utils;
 
 public class NotificationController {
 	@FXML private GridPane notiGridPane;
@@ -77,7 +77,7 @@ public class NotificationController {
 				addNoBtn("Decline", 370);
 				break;
 		}
-		profileGridPane.add(new Misc().cropCirclePhoto(adminNo, 100), 0, 0);
+		profileGridPane.add(new Utils().cropCirclePhoto(adminNo, 100), 0, 0);
 	}
 
 	public void addNoBtn(String text, int width) {
@@ -105,7 +105,7 @@ public class NotificationController {
 	// Event Listener on JFXButton.onAction
 	@FXML
 	public void yesBtnOnAction(ActionEvent event) {
-		NotificationsDA.addNotifications(sports, venue, dateTime, status);
+		NotificationsDA.addNotifications(adminNo, sports, venue, dateTime, status);
 		notiGridPane.setVisible(false);
 		notiGridPane.setManaged(false);
 	}

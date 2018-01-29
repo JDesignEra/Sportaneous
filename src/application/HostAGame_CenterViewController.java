@@ -32,6 +32,7 @@ import dataAccess.AccountsDA;
 import dataAccess.EquipmentsDA;
 import dataAccess.FacilitiesDA;
 import dataAccess.HostsDA;
+import dataAccess.NotificationsDA;
 
 import modules.Snackbar;
 
@@ -62,6 +63,8 @@ public class HostAGame_CenterViewController {
 	private final URL AddedFriendsView = getClass().getResource("/application/HostAGame_AddedFriendsView.fxml");
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private String sports;
+	private String facility;
+	private LocalDateTime requestedDT;
 	private boolean canRentEq = false;
 	static int friendIndex = 0;
 	static int addedFriendIndex = 0;
@@ -71,6 +74,7 @@ public class HostAGame_CenterViewController {
 	static ArrayList<AccountsEntity> searchResults = new ArrayList<AccountsEntity>();
 	static HostAGame_AddedFriendsViewController afvc;
 	static HostAGame_FriendsViewController fvc;
+	
 	
 	public void initialize() throws IOException {
 		
@@ -112,7 +116,7 @@ public class HostAGame_CenterViewController {
 		String adminNo = AccountsDA.getAdminNo();
 		String name = AccountsDA.getName();
 		sports = sportDropD.getValue();
-		String facility = FacilityDropD.getValue();
+		facility = FacilityDropD.getValue();
 		
 		LocalDate currentD = LocalDate.now();
 		LocalTime currentT = LocalTime.now();
@@ -136,23 +140,24 @@ public class HostAGame_CenterViewController {
 			System.out.println("Selected Sport's Index: " + sportIndex);
 			System.out.println("-----HostAGame_CenterViewController-----");
 			
-			LocalDateTime requestedDT = LocalDateTime.of(date, formattedTime);
+			requestedDT = LocalDateTime.of(date, formattedTime);
 			
 			if (requestedDT.isAfter(currentDT)) {
 				
 				System.out.println(requestedDT.isAfter(currentDT));
 				
-				if (FacilitiesDA.facilityIsAvailable(LocalDateTime.of(date, time), sports)) {
+				if (FacilitiesDA.facilityIsAvailable(requestedDT, facility)) {
 					
 					int status = HostsDA.hostGame(adminNo, name, date, formattedTime, sportIndex, new ArrayList<String>(), facility);
 					
 					if (status == 2) {
-						FacilitiesDA.bookFacility(LocalDateTime.of(date, formattedTime), facility);
+						
+						FacilitiesDA.bookFacility(requestedDT, facility);
 						
 						if (canRentEq) {
 							EquipmentsDA.rentEquipment(adminNo, sports);
 						}
-						
+
 						new Snackbar().success(borderPane, "Success!");
 						
 						try {
@@ -255,8 +260,14 @@ public class HostAGame_CenterViewController {
     		new Snackbar().danger(borderPane, "Please select a sport!");
     		equipmentToggle.setSelected(false);
     	}
-    	
-    	
+    }
+    
+    private void sendInvitations() {
+    	if (!addedFriends.isEmpty()) {
+    		for (AccountsEntity x : addedFriends) {
+    			NotificationsDA.addNotifications(x.getAdminNo().toLowerCase(), sports, facility, requestedDT, 0);
+    		}
+    	}
     }
 
 }

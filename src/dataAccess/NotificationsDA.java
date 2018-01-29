@@ -50,11 +50,11 @@ public class NotificationsDA {
 		return 4; // no Notifications
 	}
 
-	public static void addNotifications(String sports, String location, LocalDateTime dateTime, int status) {
+	public static void addNotifications(String adminNo, String sports, String location, LocalDateTime dateTime, int status) {
 		String sessionName = AccountsDA.getName();
 
-		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
-		notificationsList.add(new NotificationsEntity(sessionID, sessionName, sports, location, dateTime, status));
+		notificationsList = (notifications.get(adminNo) != null ? notifications.get(adminNo) : new ArrayList<>());
+		notificationsList.add(new NotificationsEntity(adminNo, sessionName, sports, location, dateTime, status));
 		notifications.put(sessionID, notificationsList);
 
 		db.commit();
