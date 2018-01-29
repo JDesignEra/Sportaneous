@@ -21,7 +21,8 @@ import entity.HostsEntity;
 import dataAccess.AccountsDA;
 import dataAccess.HostsDA;
 
-import modules.Misc;
+import modules.Utils;
+
 
 public class FindAGame_ViewPlayerDetailsController {
 	@FXML
@@ -45,7 +46,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	
 	private String adminNo = "";
 	
-	private Misc m;
+	private Utils m;
 	
 	private AccountsEntity retrievedAcc = null;
 	
@@ -54,7 +55,7 @@ public class FindAGame_ViewPlayerDetailsController {
 		AccountsDA.initDA();
 		HostsDA.initDA();
 		
-		m = new Misc();
+		m = new Utils();
 		gameClicked = FindAGame_ViewController.clickedgame;
 		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
 		peopleToDisplay = gameClicked.getPlayersRecruited();
@@ -89,7 +90,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	private void setDP() {
 		
 		try {
-			ImagePattern ip = new ImagePattern(new Misc().cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
+			ImagePattern ip = new ImagePattern(m.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
 			playerDP.setFill(ip);
 		}
 		catch (Exception e) {

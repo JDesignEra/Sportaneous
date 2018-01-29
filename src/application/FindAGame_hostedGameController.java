@@ -17,8 +17,7 @@ import javafx.scene.shape.Circle;
 import com.jfoenix.controls.JFXButton;
 
 import dataAccess.HostsDA;
-
-import modules.Misc;
+import modules.Utils;
 
 import entity.HostsEntity;
 
@@ -152,7 +151,7 @@ public class FindAGame_hostedGameController {
 	void setDP() {
 		
 		try {
-			ImagePattern ip = new ImagePattern(new Misc().cropCirclePhoto(admin, hostDP.getRadius()).getImage());
+			ImagePattern ip = new ImagePattern(Utils.cropCirclePhoto(admin, hostDP.getRadius()).getImage());
 			hostDP.setFill(ip);
 		}
 		catch (Exception e2) {

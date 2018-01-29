@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jfoenix.controls.JFXTextField;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -38,45 +40,49 @@ public class HostAGame_FriendsViewController {
     private final URL friendCardURL = getClass().getResource("/application/HostAGame_FriendCard.fxml");
     
     public void initialize() throws IOException {
+    	infoDisplayField.getChildren().clear();
+    	
+    	HostAGame_CenterViewController.fvc = this;
     	AccountsDA.initDA();
-    	HostAGame_CenterViewController.friendsDisplayList = AccountsDA.getAllData();
     	
-    	System.out.println(HostAGame_CenterViewController.friendsDisplayList.size());
-    	displayAnchor.setMaxHeight((infoDisplayField.getPrefHeight() + infoDisplayField.getVgap())*AccountsDA.getAllData().size() + infoDisplayField.getVgap());
-    	System.out.println(displayAnchor.getMaxHeight());
-    	
-    	for (int i = 0; i < HostAGame_CenterViewController.friendsDisplayList.size(); i++) {
-    		infoDisplayField.add(FXMLLoader.load(friendCardURL), 0, i);
+    	if (HostAGame_CenterViewController.displayResults) {
+    		displayAnchor.setPrefHeight((infoDisplayField.getPrefHeight() + infoDisplayField.getVgap())*HostAGame_CenterViewController.searchResults.size());
+    		for (int i = 0; i < HostAGame_CenterViewController.searchResults.size(); i++) {
+				infoDisplayField.add(FXMLLoader.load(friendCardURL), 0, i);
+			}
+    	} else {
+    		displayAnchor.setPrefHeight((infoDisplayField.getPrefHeight() + infoDisplayField.getVgap())*HostAGame_CenterViewController.friendsDisplayList.size());
+			for (int i = 0; i < HostAGame_CenterViewController.friendsDisplayList.size(); i++) {
+				infoDisplayField.add(FXMLLoader.load(friendCardURL), 0, i);
+			}
     	}
-    	
+
     }
 
     @FXML
     private void handleSearch(MouseEvent event) throws IOException {
-    	String searched = searchTF.getText();
-    	List<AccountsEntity> list = AccountsDA.getAllData();
-    	ArrayList<AccountsEntity> results = new ArrayList<AccountsEntity>();
     	
-    	if (!searched.isEmpty()) {
-    		for (AccountsEntity x : list) {
-    			if (x.getAdminNo().toLowerCase().equals(searched.toLowerCase()) || x.getName().toLowerCase().contains(searched.toLowerCase())) {
-    				results.add(x);
-    			}
+    	HostAGame_CenterViewController.searchResults.clear();
+    	String searched = searchTF.getText();
+    	searchTF.clear();
+    	List<AccountsEntity> todisplay = HostAGame_CenterViewController.friendsDisplayList;
+    	
+    	for (AccountsEntity x : todisplay) {
+    		if (x.getAdminNo().toLowerCase().equals(searched.toLowerCase()) || x.getName().toLowerCase().contains(searched.toLowerCase())) {
+    			HostAGame_CenterViewController.searchResults.add(x);
     		}
     	}
     	
-		if (!results.isEmpty()) {
-			infoDisplayField.getChildren().clear();
-			HostAGame_CenterViewController.friendsDisplayList = results;
-			for (int i = 0; i < results.size(); i++) {
-				infoDisplayField.add(FXMLLoader.load(friendCardURL), 0, i);
-			}
-		} else {
-			initialize();
-		}
+    	if (!HostAGame_CenterViewController.searchResults.isEmpty()) {
+    		HostAGame_CenterViewController.displayResults = true;
+    	} 
     	
+    	initialize();
     }
     
+    @FXML
+    private void handleSearchTF(ActionEvent event) {
+    	searchTF.clear();
+    }
     
-
 }

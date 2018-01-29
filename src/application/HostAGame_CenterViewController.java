@@ -64,11 +64,31 @@ public class HostAGame_CenterViewController {
 	private String sports;
 	private boolean canRentEq = false;
 	static int friendIndex = 0;
-	static List<AccountsEntity> friendsDisplayList = null;
-	static ArrayList<AccountsEntity> addedFriends = new ArrayList<AccountsEntity>();
-	
+	static int addedFriendIndex = 0;
+	static List<AccountsEntity> friendsDisplayList;
+	static ArrayList<AccountsEntity> addedFriends;
+	static boolean displayResults = false;
+	static ArrayList<AccountsEntity> searchResults = new ArrayList<AccountsEntity>();
+	static HostAGame_AddedFriendsViewController afvc;
+	static HostAGame_FriendsViewController fvc;
 	
 	public void initialize() throws IOException {
+		
+		friendsDisplayList = AccountsDA.getAllData();
+		addedFriends = new ArrayList<AccountsEntity>();
+		displayResults = false;
+		searchResults.clear();
+		
+    	int toberemoved = -1;
+    	for (int i = 0; i < friendsDisplayList.size(); i++) {
+    		if (friendsDisplayList.get(i).getAdminNo().toLowerCase().equals(AccountsDA.getSession().getAdminNo().toLowerCase())) {
+    			toberemoved = i;
+    		}
+    	}
+    	
+    	if (toberemoved != -1) {
+    		friendsDisplayList.remove(toberemoved);
+    	}
 		
 		try {
 			borderPane.setLeft(FXMLLoader.load(FriendsView));
@@ -135,6 +155,15 @@ public class HostAGame_CenterViewController {
 						
 						new Snackbar().success(borderPane, "Success!");
 						
+						try {
+							borderPane.setCenter(FXMLLoader.load(findGameViewURL));
+							borderPane.setLeft(null);
+							borderPane.setRight(null);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						
 					} else {
 						
 						new Snackbar().danger(borderPane, "Booking is unsuccessful! Please check that date and time are valid.");
@@ -148,7 +177,7 @@ public class HostAGame_CenterViewController {
 				}
 				
 			} else {
-				new Snackbar().danger(borderPane, "Invalid date and time!");
+				new Snackbar().danger(borderPane, "Past dates cannot be selected! Please select future/present date and time.");
 			}
 			
 		} else {
@@ -229,9 +258,5 @@ public class HostAGame_CenterViewController {
     	
     	
     }
-    
-    @FXML
-    void handleSearch(MouseEvent event) {
-    	
-    }
+
 }

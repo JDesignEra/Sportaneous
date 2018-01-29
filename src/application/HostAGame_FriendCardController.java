@@ -3,7 +3,6 @@ package application;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
@@ -17,9 +16,8 @@ import javafx.scene.shape.Circle;
 
 import entity.AccountsEntity;
 
-import dataAccess.AccountsDA;
-
 import modules.Misc;
+import modules.Utils;
 
 public class HostAGame_FriendCardController {
 	@FXML
@@ -40,14 +38,20 @@ public class HostAGame_FriendCardController {
 	
 	private String adminNo = "";
 	
-	private Misc misc;
-
+	private Utils misc;
+	
 	// Event Listener on JFXButton[#addBtn].onAction
 	public void initialize() {
-		misc = new Misc();
+		misc = new Utils();
 		
-		retrievedList = HostAGame_CenterViewController.friendsDisplayList;
+		if (HostAGame_CenterViewController.displayResults) {
+			retrievedList = HostAGame_CenterViewController.searchResults;
+		} else {
+			retrievedList = HostAGame_CenterViewController.friendsDisplayList;
+		}
+		
 		retrievedAcc = retrievedList.get(HostAGame_CenterViewController.friendIndex);
+
 		adminNo = retrievedAcc.getAdminNo().toLowerCase();
 		
 		setName();
@@ -56,7 +60,7 @@ public class HostAGame_FriendCardController {
 		setRating();
 		setMatchesPlayed();
 		
-		if (HostAGame_CenterViewController.friendIndex == HostAGame_CenterViewController.friendsDisplayList.size()-1) {
+		if (HostAGame_CenterViewController.friendIndex == retrievedList.size()-1) {
 			HostAGame_CenterViewController.friendIndex = 0;
 		} else {
 			HostAGame_CenterViewController.friendIndex++;
@@ -65,7 +69,37 @@ public class HostAGame_FriendCardController {
 	
 	@FXML
 	public void handleAdd(ActionEvent event) throws IOException {
-		HostAGame_CenterViewController.addedFriends.add(retrievedAcc);
+		
+		if (!HostAGame_CenterViewController.addedFriends.contains(retrievedAcc)) {
+			HostAGame_CenterViewController.addedFriends.add(retrievedAcc);
+		}
+		
+		int toberemoved = -1;
+		for (int i = 0; i < HostAGame_CenterViewController.friendsDisplayList.size(); i++) {
+			if (HostAGame_CenterViewController.friendsDisplayList.get(i).getAdminNo().toLowerCase().equals(retrievedAcc.getAdminNo().toLowerCase())) {
+				toberemoved = i;
+			}
+		}
+		if (toberemoved != -1) {
+			HostAGame_CenterViewController.friendsDisplayList.remove(toberemoved);
+		}
+		
+		int toberemoved1 = -1;
+		for (int i = 0; i < HostAGame_CenterViewController.searchResults.size(); i++) {
+			if (HostAGame_CenterViewController.searchResults.get(i).getAdminNo().toLowerCase().equals(retrievedAcc.getAdminNo().toLowerCase())) {
+				toberemoved1 = i;
+			}
+		}
+		if (toberemoved1 != -1) {
+			HostAGame_CenterViewController.searchResults.remove(toberemoved1);
+		}
+		
+		if (HostAGame_CenterViewController.searchResults.isEmpty()) {
+			HostAGame_CenterViewController.displayResults = false;
+		}
+		
+		HostAGame_CenterViewController.afvc.initialize();
+		HostAGame_CenterViewController.fvc.initialize();
 	}
 	
 	private void setName() {
@@ -75,7 +109,7 @@ public class HostAGame_FriendCardController {
 	private void setDP() {
 		
 		try {
-			ImagePattern ip = new ImagePattern(new Misc().cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
+			ImagePattern ip = new ImagePattern(misc.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
 			playerDP.setFill(ip);
 		}
 		catch (Exception e) {

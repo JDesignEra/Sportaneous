@@ -29,7 +29,7 @@
          <children>
             <ScrollPane fx:id="scrollPane" prefHeight="844.0" prefWidth="475.0" style="-fx-background-color: transparent;" stylesheets="@assets/css/kh.css">
                <content>
-                  <AnchorPane fx:id="displayAnchor" minHeight="0.0" minWidth="0.0" prefHeight="944.0" prefWidth="454.0" style="-fx-background-color: transparent;">
+                  <AnchorPane fx:id="displayAnchor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="944.0" prefWidth="454.0" style="-fx-background-color: transparent;">
                      <children>
                         <GridPane fx:id="infoDisplayField" layoutX="3.0" prefHeight="240.0" prefWidth="450.0" vgap="10.0">
                            <columnConstraints>

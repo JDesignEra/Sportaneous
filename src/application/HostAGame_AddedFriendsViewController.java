@@ -19,20 +19,14 @@ public class HostAGame_AddedFriendsViewController {
     private final URL addedFriendCardURL = new Object().getClass().getResource("/application/HostAGame_AddedFriendCard.fxml");
 
     public void initialize() throws IOException {
-    	for (int i = 0; i < HostAGame_CenterViewController.addedFriends.size(); i++) {
-    		infoDisplayField.add(FXMLLoader.load(addedFriendCardURL), 0, 0);
-    	}
-    }
-    
-    public void load() throws IOException {
-//    	int size = HostAGame_CenterViewController.addedFriends.size();
-//    	System.out.println(size);
-//    	displayAnchor.setMaxHeight((infoDisplayField.getPrefHeight() + infoDisplayField.getVgap())*size + infoDisplayField.getVgap());
-//    	System.out.println(displayAnchor.getMaxHeight());
-//    	
-//    	for (int i = 0; i < HostAGame_CenterViewController.addedFriends.size(); i++) {
-    		infoDisplayField.add(FXMLLoader.load(addedFriendCardURL), 0, 0);
-//    	}
+    	infoDisplayField.getChildren().clear();
+    	HostAGame_CenterViewController.afvc = this;
     	
+    	int size = HostAGame_CenterViewController.addedFriends.size();
+    	displayAnchor.setPrefHeight((infoDisplayField.getPrefHeight() + infoDisplayField.getVgap())*size);
+    	
+    	for (int i = 0; i < HostAGame_CenterViewController.addedFriends.size(); i++) {
+    		infoDisplayField.add(FXMLLoader.load(addedFriendCardURL), 0, i);
+    	}
     }
 }
