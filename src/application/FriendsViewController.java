@@ -33,11 +33,7 @@ public class FriendsViewController {
 
 	@FXML
 	private void initialize() {
-		if (!FriendsDA.getFriends().isEmpty()) {
-			friendsFlowPane.getChildren().clear();
-			friendsFlowPane.alignmentProperty().set(Pos.TOP_CENTER);
-			showFriends();
-		}
+		showFriends();
 	}
 
 	// Event Listener on JFXToggleButton[#srcTypeToggleBtn].onAction
@@ -79,12 +75,10 @@ public class FriendsViewController {
 		friendsFlowPane.getChildren().clear();
 		nameAdminNoTxtField.clear();
 		emailTxtField.clear();
-
-		if (accounts.isEmpty()) {
+		
+		if (!FriendsDA.getFriends().isEmpty()) {
 			friendsFlowPane.alignmentProperty().set(Pos.CENTER);
-			friendsFlowPane.getChildren().add(emptyFriendsContent);
-		}
-		else {
+
 			for (accIndex = 0; accIndex < accounts.size(); accIndex++) {
 				if (!accounts.get(accIndex).getAdminNo().equals(AccountsDA.getAdminNo())) {
 					try {
@@ -95,6 +89,9 @@ public class FriendsViewController {
 					}
 				}
 			}
+		}
+		else {
+			friendsFlowPane.getChildren().add(emptyFriendsContent);
 		}
 	}
 
@@ -124,7 +121,7 @@ public class FriendsViewController {
 	public static List<AccountsEntity> getAccounts() {
 		return accounts;
 	}
-	
+
 	public static void setAccounts(List<AccountsEntity> accList) {
 		accounts = accList;
 	}

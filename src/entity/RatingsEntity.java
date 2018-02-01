@@ -9,12 +9,12 @@ public class RatingsEntity implements Serializable {
 	private LocalDateTime dateTime;
 	private String[] adminNums, comments;
 	private int[] ratings;
-	private boolean[] attendances;
+	private int[] attendanceCount;
 	private int matchID, noRated; // Check if all players rated
 
-	public RatingsEntity(	int matchID, String hostAdminNo, String sport, LocalDateTime dateTime, String[] adminNums, String[] comments, int[] ratings, boolean[] attendances,
+	public RatingsEntity(	int matchID, String hostAdminNo, String sport, LocalDateTime dateTime, String[] adminNums, String[] comments, int[] ratings, int[] attendanceCount,
 							int noRated) {
-		if (comments.length != adminNums.length && ratings.length != adminNums.length && attendances.length != adminNums.length) {
+		if (comments.length != adminNums.length && ratings.length != adminNums.length && attendanceCount.length != adminNums.length) {
 			throw new IllegalArgumentException("comments, adminNums, ratings and attendances argument size must be the same size of adminNums");
 		}
 
@@ -25,7 +25,7 @@ public class RatingsEntity implements Serializable {
 		this.adminNums = adminNums;
 		this.comments = comments;
 		this.ratings = ratings;
-		this.attendances = attendances;
+		this.attendanceCount = attendanceCount;
 		this.noRated = noRated;
 	}
 
@@ -57,8 +57,8 @@ public class RatingsEntity implements Serializable {
 		return ratings;
 	}
 
-	public boolean[] getAttendances() {
-		return attendances;
+	public int[] getAttendanceCount() {
+		return attendanceCount;
 	}
 
 	public int getNoRated() {
@@ -101,15 +101,19 @@ public class RatingsEntity implements Serializable {
 		this.ratings = ratings;
 	}
 
-	public void setAttendances(boolean[] attendances) {
-		if (attendances.length != adminNums.length) {
+	public void setAttendanceCount(int[] attendanceCount) {
+		if (attendanceCount.length != adminNums.length) {
 			throw new IllegalArgumentException("attendances argument size must be the same size of adminNums");
 		}
 
-		this.attendances = attendances;
+		this.attendanceCount = attendanceCount;
+	}
+	
+	public void increaseAttendanceCount(int index) {
+		this.attendanceCount[index] += 1;
 	}
 
-	public void setStatus(int noRated) {
+	public void setNoRated(int noRated) {
 		this.noRated = noRated;
 	}
 

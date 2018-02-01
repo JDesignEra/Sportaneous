@@ -31,22 +31,13 @@ public class CommentsDA {
 		return comments.get(adminNo) != null ? comments.get(adminNo) : new ArrayList<>();
 	}
 
-	/**
-	 * @param adminNo
-	 *            - Account's administrator number
-	 * @param comment
-	 *            - Comments to be added to the associated administrator number
-	 * @param rating
-	 *            - Rating given to be added to the associated administrator number
-	 */
-	public static void addComment(String adminNo, String comment, int rating) {
-		String sessionAdminNo = AccountsDA.getAdminNo();
-		String sessionName = AccountsDA.getName();
+	public static void addComment(String fromAdminNo, String toAdminNo, String comment, int rating) {
 		List<CommentsEntity> commentsList;
 
-		commentsList = comments.get(adminNo) != null ? comments.get(adminNo) : new ArrayList<>();
-
-		commentsList.add(new CommentsEntity(sessionAdminNo, sessionName, comment, rating));
-		comments.put(adminNo, commentsList);
+		commentsList = comments.get(toAdminNo) != null ? comments.get(toAdminNo) : new ArrayList<>();
+		commentsList.add(new CommentsEntity(fromAdminNo, AccountsDA.getAccData(fromAdminNo).getName(), comment, rating));
+		
+		comments.put(toAdminNo, commentsList);
+		db.commit();
 	}
 }

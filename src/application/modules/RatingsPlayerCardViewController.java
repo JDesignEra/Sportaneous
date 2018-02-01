@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -17,26 +18,27 @@ import dataAccess.RatingsDA;
 
 import modules.Utils;
 
+import application.RatingsViewController;
+
 public class RatingsPlayerCardViewController {
 	@FXML private Text nameTxt;
 	@FXML private Text heightWeightTxt;
 	@FXML private Text ratingStarsTxt;
 	@FXML private Text matchesTxt;
 	@FXML private TextArea commentsTxtArea;
-	@FXML private ToggleButton ratingStars1Btn;
-	@FXML private ToggleButton ratingStars2Btn;
-	@FXML private ToggleButton ratingStars3Btn;
-	@FXML private ToggleButton ratingStars4Btn;
-	@FXML private ToggleButton ratingStars5Btn;
 	@FXML private HBox ratingStarsBtnHBox;
 	@FXML private JFXToggleButton attendToggleBtn;
+	@FXML private GridPane rootGridPane;
 
-	private static int ratingIndex, playerIndex;
-	private RatingsEntity rating = RatingsDA.getRatings().get(ratingIndex);
+	private int ratingIndex = RatingsViewController.getRatingIndex();
+	private RatingsEntity rating = RatingsDA.getRatings().get(ratingIndex - 1);
+	
+	private static int playerIndex;
 	private AccountsEntity account = AccountsDA.getAccData(rating.getAdminNums()[playerIndex]);
 
 	@FXML
 	private void initialize() {
+		rootGridPane.add(Utils.cropCirclePhoto(account.getAdminNo(), 100), 0, 0);
 		nameTxt.setText(account.getName());
 		ratingStarsTxt.setText(Utils.getRatingShapes(account.getCalRating()));
 		matchesTxt.setText(Integer.toString(account.getMatchPlayed()) + " / " + Integer.toString(account.getTotalMatch()));
@@ -81,12 +83,8 @@ public class RatingsPlayerCardViewController {
 			}
 		}
 	}
-
-	public static void setRatingIndex(int index) {
-		ratingIndex = index;
-	}
-
-	public static void setPlayerIndex(int playerIndex) {
-		RatingsPlayerCardViewController.playerIndex = playerIndex;
+	
+	public static void setPlayerIndex(int index) {
+		playerIndex = index;
 	}
 }

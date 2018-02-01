@@ -66,6 +66,7 @@ public class AccountsDA {
 		accountsEntity.setRating(ratings);
 
 		accounts.replace(adminNo, accountsEntity);
+		db.commit();
 	}
 
 	public static void incrementAccMatch(String adminNo, boolean attendances) {
@@ -76,7 +77,8 @@ public class AccountsDA {
 			accountEntity.incrementAndGetTotalMatch();
 		}
 
-		accounts.remove(adminNo, accountEntity);
+		accounts.replace(adminNo, accountEntity);
+		db.commit();
 	}
 
 	public static int login(String adminNo, String password) {

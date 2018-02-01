@@ -35,7 +35,7 @@
 						<Insets left="25.0" right="25.0" />
 					</GridPane.margin>
 				</JFXTextField>
-				<JFXToggleButton fx:id="srcTypeToggleBtn" onAction="#srcToggleBtnOnAction" text="FRIENDS" GridPane.columnIndex="2">
+				<JFXToggleButton id="srcTypeToggle" fx:id="srcTypeToggleBtn" onAction="#srcToggleBtnOnAction" styleClass="`" text="FRIENDS" GridPane.columnIndex="2">
 					<GridPane.margin>
 						<Insets bottom="-10.0" top="-10.0" />
 					</GridPane.margin>

@@ -180,6 +180,7 @@ public class ProfileViewController {
 					dialog.close();
 
 					FriendsDA.removeFriend(adminNo);
+					friendStatus = 2;
 
 					try {
 						Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
@@ -206,6 +207,7 @@ public class ProfileViewController {
 				actionBtn.setText("Cancel Friend Request");
 
 				FriendsDA.addFriend(adminNo);
+				friendStatus = 0;
 				break;
 
 			default:

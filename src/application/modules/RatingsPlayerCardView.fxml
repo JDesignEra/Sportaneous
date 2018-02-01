@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" hgap="50.0" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.RatingsPlayerCardViewController">
+<GridPane id="playerRatingCard" fx:id="rootGridPane" alignment="CENTER" hgap="50.0" stylesheets="@../assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.RatingsPlayerCardViewController">
 	<children>
 		<Circle fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" styleClass="dp" />
 		<GridPane alignment="CENTER" vgap="5.0" GridPane.columnIndex="1">
@@ -81,7 +81,7 @@
 						<Insets bottom="10.0" />
 					</GridPane.margin>
 				</GridPane>
-				<TextArea fx:id="commentsTxtArea" prefHeight="200.0" prefWidth="600.0" promptText="Leave a comment about this player?" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+				<TextArea id="comment" fx:id="commentsTxtArea" prefHeight="200.0" prefWidth="600.0" promptText="Leave a comment about this player?" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
 				<GridPane hgap="15.0" GridPane.rowIndex="2">
 					<columnConstraints>
 						<ColumnConstraints hgrow="NEVER" />
@@ -103,32 +103,32 @@
 						<Insets top="25.0" />
 					</GridPane.margin>
 				</GridPane>
-				<HBox fx:id="ratingStarsBtnHBox" alignment="CENTER_LEFT" GridPane.rowIndex="3">
+				<HBox id="ratingStarsGrp" fx:id="ratingStarsBtnHBox" alignment="CENTER_LEFT" GridPane.rowIndex="3">
 					<children>
-						<ToggleButton id="0" fx:id="ratingStars1Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" selected="true" styleClass="ratingStarsBtn" text="">
+						<ToggleButton id="0" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" selected="true" styleClass="ratingStarsBtn" text="">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
 						</ToggleButton>
-						<ToggleButton id="1" fx:id="ratingStars2Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+						<ToggleButton id="1" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ToggleButton>
-						<ToggleButton id="2" fx:id="ratingStars3Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+						<ToggleButton id="2" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ToggleButton>
-						<ToggleButton id="3" fx:id="ratingStars4Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+						<ToggleButton id="3" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ToggleButton>
-						<ToggleButton id="4" fx:id="ratingStars5Btn" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
+						<ToggleButton id="4" mnemonicParsing="false" onAction="#ratingStarsBtnOnAction" styleClass="ratingStarsBtn" text="">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ToggleButton>
 					</children>
 				</HBox>
-				<JFXToggleButton fx:id="attendToggleBtn" selected="true" text="Present" GridPane.columnIndex="1" GridPane.rowIndex="3">
+				<JFXToggleButton id="attendance" fx:id="attendToggleBtn" selected="true" text="Present" GridPane.columnIndex="1" GridPane.rowIndex="3">
 					<GridPane.margin>
 						<Insets />
 					</GridPane.margin>
@@ -147,11 +147,11 @@
 		<String fx:value="card" />
 	</styleClass>
 	<columnConstraints>
-		<ColumnConstraints />
+		<ColumnConstraints halignment="CENTER" hgrow="NEVER" />
 		<ColumnConstraints />
 		<ColumnConstraints />
 	</columnConstraints>
    <rowConstraints>
-      <RowConstraints />
+      <RowConstraints valignment="CENTER" vgrow="NEVER" />
    </rowConstraints>
 </GridPane>

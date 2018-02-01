@@ -5,17 +5,23 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -47,6 +53,7 @@ public class RatingsCardViewController {
 	private LocalDateTime dateTime = RatingsDA.getRatings().get(ratingIndex).getDateTime();
 	private int playerCount = RatingsDA.getRatings().get(ratingIndex).getAdminNums().length + 1;
 
+	private final URL ratingsPlayerViewURL = getClass().getResource("/application/RatingsView.fxml");
 	private final URL ratingsPlayerCardURL = getClass().getResource("/application/modules/RatingsPlayerCardView.fxml");
 
 	@FXML
@@ -74,9 +81,8 @@ public class RatingsCardViewController {
 		ScrollPane playerRatingScrollPane = new ScrollPane(playerRatingContent);
 
 		for (int i = 0; i < ratings.get(ratingIndex).getAdminNums().length; i++) {
-			RatingsPlayerCardViewController.setRatingIndex(ratingIndex);
 			RatingsPlayerCardViewController.setPlayerIndex(i);
-			
+
 			try {
 				playerRatingContent.getChildren().add(FXMLLoader.load(ratingsPlayerCardURL));
 			}
@@ -92,7 +98,45 @@ public class RatingsCardViewController {
 		submitBtn.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				// TODO update ratings
+				Set<Node> playerCards = Main.getRoot().getCenter().lookupAll("#playerRatingCard");
+				String[] playerComments = new String[playerCards.size()];
+				int[] playerRatings = new int[playerCards.size()];
+				boolean[] playerAttendances = new boolean[playerCards.size()];
+				int i = 0;
+
+				for (Node node : playerCards) {
+					if (node.lookup("#comments") instanceof TextArea) {
+						playerComments[i] = ((TextArea) node.lookup("#comments")).getText();
+					}
+
+					if (node.lookup("#ratingStarsGrp") instanceof HBox) {
+						HBox ratingStarsGrp = (HBox) node.lookup("#ratingStarsGrp");
+						int ratingStar = 0;
+
+						for (Node ratingStarBtn : ratingStarsGrp.getChildren()) {
+							if (ratingStarBtn instanceof ToggleButton && ((ToggleButton) ratingStarBtn).isSelected()) {
+								ratingStar++;
+							}
+						}
+
+						playerRatings[i] = ratingStar;
+					}
+
+					if (node.lookup("#attendance") instanceof JFXToggleButton) {
+						playerAttendances[i] = ((JFXToggleButton) node.lookup("#attendance")).isSelected();
+					}
+					
+					i++;
+				}
+				
+				RatingsDA.updateRatings(ratings.get(ratingIndex).getMatchID(), playerComments, playerRatings, playerAttendances);
+				
+				try {
+					Main.getRoot().setCenter(FXMLLoader.load(ratingsPlayerViewURL));
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 

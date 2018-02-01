@@ -56,7 +56,9 @@ public class FriendsDA {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
 				friendsList.remove(i);
+				
 				friends.put(friendAdminNo, friendsList);
+				db.commit();
 
 				break;
 			}
@@ -69,15 +71,15 @@ public class FriendsDA {
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				friendsList.remove(i);
+				
 				friends.put(sessionID, friendsList);
+				db.commit();
 
 				break;
 			}
 
 			i++;
 		}
-
-		db.commit();
 	}
 
 	public static void acceptRequest(String friendAdminNo) {
@@ -93,6 +95,7 @@ public class FriendsDA {
 				friendsEntity.setStatus(1);
 				friendsList.set(i, friendsEntity);
 				friends.put(friendAdminNo, friendsList);
+				db.commit();
 
 				break;
 			}
@@ -106,15 +109,15 @@ public class FriendsDA {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				friendsEntity.setStatus(1);
 				friendsList.set(i, friendsEntity);
+				
 				friends.put(sessionID, friendsList);
+				db.commit();
 
 				break;
 			}
 
 			i++;
 		}
-
-		db.commit();
 	}
 
 	public static int checkStatus(String friendAdminNo) {
