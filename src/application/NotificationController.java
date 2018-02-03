@@ -17,7 +17,6 @@ import javafx.scene.text.Text;
 
 import entity.NotificationsEntity;
 
-import dataAccess.AccountsDA;
 import dataAccess.NotificationsDA;
 
 import modules.Utils;
@@ -42,23 +41,21 @@ public class NotificationController {
 	private LocalDateTime dateTime = notifications.get(i).getDateTime();
 	private int status = notifications.get(i).getStatus();
 
-	private String fNameToUpper = name.replace(name.charAt(0), name.toUpperCase().charAt(0));
-
 	@FXML
 	private void initialize() {
-		lblName.setText(fNameToUpper);
+		lblName.setText(name);
 
 		switch (status) {
 			case 0:
 				lblStatus.setText("Invitation");
 				txtIcon.setText("");
-				lblNotification.setText(fNameToUpper + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
+				lblNotification.setText(name + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
 				addNoBtn("Decline", 370);
 				break;
 			case 1:
 				lblStatus.setText("Joined");
 				txtIcon.setText("");
-				lblNotification.setText(fNameToUpper + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
+				lblNotification.setText(name + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
 				btnActionFlowPane.getChildren().remove(yesButton);
 				addNoBtn("Close", 740);
 				break;
@@ -72,12 +69,12 @@ public class NotificationController {
 			case 3:
 				lblStatus.setText("Friend Request");
 				txtIcon.setText("");
-				lblNotification.setText(fNameToUpper + " has sent you a friend request");
+				lblNotification.setText(name + " has sent you a friend request");
 				yesButton.setText("Accept");
 				addNoBtn("Decline", 370);
 				break;
 		}
-		profileGridPane.add(new Utils().cropCirclePhoto(adminNo, 100), 0, 0);
+		profileGridPane.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
 	}
 
 	public void addNoBtn(String text, int width) {
@@ -91,9 +88,7 @@ public class NotificationController {
 		EventHandler noBtnAction = new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
-				NotificationsDA.deleteNotificaions(AccountsDA.getAdminNo());
-				// new Snackbar().success(notiGridPane, "Notifications cleared");
-
+				NotificationsDA.deleteNotificaions(adminNo);
 				notiGridPane.setVisible(false);
 				notiGridPane.setManaged(false);
 			}

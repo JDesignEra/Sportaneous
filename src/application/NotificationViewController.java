@@ -28,24 +28,14 @@ public class NotificationViewController {
 		if (!notification.isEmpty()) {
 			notificationsVbox.getChildren().clear();
 			notificationsVbox.alignmentProperty().set(Pos.TOP_CENTER);
-			showNotification();
-		}
-	}
 
-	private void showNotification() {
-		if (notification.isEmpty()) {
-			notificationsVbox.alignmentProperty().set(Pos.CENTER);
-			notificationsVbox.getChildren().add(emptyNotifications);
-		}
-		else {
-			for (notiIndex = 0; notiIndex < notification.size(); notiIndex++) {
-				try {
-					rootGridPane.setAlignment(Pos.TOP_CENTER);
-					notificationsVbox.getChildren().add(FXMLLoader.load(notificationsURL));
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+			for (notiIndex = 0; notiIndex < notification.size(); notiIndex++) {	
+					try {
+						notificationsVbox.getChildren().add(FXMLLoader.load(notificationsURL));
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}		
 			}
 		}
 	}

@@ -10,12 +10,12 @@ public class NotificationsEntity implements Serializable {
 	private int status;
 
 	public NotificationsEntity(String adminNo, String name, String sports, String location, LocalDateTime datetime, int status) {
-		this.adminNo = adminNo;
-		this.name = name;
-		this.sports = sports;
-		this.location = location;
-		this.dateTime = datetime;
-		this.status = status;
+		this.setAdminNo(adminNo);
+		this.setName(name);
+		this.setSports(sports);
+		this.setLocation(location);
+		this.setDateTime(datetime);
+		this.setStatus(status);
 	}
 
 	public String getAdminNo() {
@@ -40,6 +40,10 @@ public class NotificationsEntity implements Serializable {
 
 	public int getStatus() {
 		return status;
+	}
+
+	public void setAdminNo(String adminNo) {
+		this.adminNo = adminNo;
 	}
 
 	public void setName(String name) {

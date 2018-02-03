@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,13 +18,22 @@
                <children>
                   <GridPane fx:id="emptyNotifications" alignment="CENTER" vgap="25.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints vgrow="SOMETIMES" />
+                        <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text fill="#434343ba" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="No Notifications" GridPane.halignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="">
+                           <styleClass>
+                              <String fx:value="fontAwesome" />
+                              <String fx:value="x8" />
+                              <String fx:value="danger" />
+                              <String fx:value="dropshadow" />
+                           </styleClass>
+                        </Text>
+                        <Text fill="#434343ba" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="Whoops! You do not have notifications..." GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="Roboto Medium" size="24.0" />
                            </font>
