@@ -5,25 +5,31 @@ import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class NotificationsEntity implements Serializable {
-	private String adminNo, name, sports, location;
+	private String adminNo, hostName, hostAd, sports, location, userName;
 	private LocalDateTime dateTime;
 	private int status;
 
-	public NotificationsEntity(String adminNo, String name, String sports, String location, LocalDateTime datetime, int status) {
-		this.setAdminNo(adminNo);
-		this.setName(name);
+	public NotificationsEntity(String userAdminNo, String userName, String hostName, String hostAd, String sports, String location, LocalDateTime datetime, int status) {
+		this.setAdminNo(userAdminNo);
+		this.setHostName(hostName);
 		this.setSports(sports);
 		this.setLocation(location);
 		this.setDateTime(datetime);
 		this.setStatus(status);
+		this.setHostAd(hostAd);
+		this.setUserName(userName);
 	}
 
 	public String getAdminNo() {
 		return adminNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getHostName() {
+		return hostName;
+	}
+	
+	public String getHostAd() {
+		return hostAd;
 	}
 
 	public String getSports() {
@@ -46,8 +52,12 @@ public class NotificationsEntity implements Serializable {
 		this.adminNo = adminNo;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
+	}
+	
+	public void setHostAd(String hostAd) {
+		this.hostAd = hostAd;
 	}
 
 	public void setSports(String sports) {
@@ -64,5 +74,13 @@ public class NotificationsEntity implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }

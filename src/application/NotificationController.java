@@ -17,6 +17,8 @@ import javafx.scene.text.Text;
 
 import entity.NotificationsEntity;
 
+import dataAccess.AccountsDA;
+import dataAccess.HostsDA;
 import dataAccess.NotificationsDA;
 
 import modules.Utils;
@@ -34,8 +36,10 @@ public class NotificationController {
 	private int i = NotificationViewController.getNotiIndex();
 	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
 
-	private String adminNo = notifications.get(i).getAdminNo();
-	private String name = notifications.get(i).getName();
+	private String userAdminNo = notifications.get(i).getAdminNo();
+	private String userName = notifications.get(i).getUserName();
+	private String hostName = notifications.get(i).getHostName();
+	private String hostAd = notifications.get(i).getHostAd();
 	private String sports = notifications.get(i).getSports();
 	private String venue = notifications.get(i).getLocation();
 	private LocalDateTime dateTime = notifications.get(i).getDateTime();
@@ -43,19 +47,27 @@ public class NotificationController {
 
 	@FXML
 	private void initialize() {
-		lblName.setText(name);
+		
+		lblName.setText(hostName);
 
 		switch (status) {
 			case 0:
 				lblStatus.setText("Invitation");
 				txtIcon.setText("");
-				lblNotification.setText(name + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
+				lblNotification.setText(hostName + " has invited you to a game of " + sports + " \nat the " + venue + " on " + dateTime);
 				addNoBtn("Decline", 370);
 				break;
+//			case 1:
+//				lblStatus.setText("Joined");
+//				txtIcon.setText("");
+//				lblNotification.setText(name + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
+//				btnActionFlowPane.getChildren().remove(yesButton);
+//				addNoBtn("Close", 740);
+//				break;
 			case 1:
-				lblStatus.setText("Joined");
+				lblStatus.setText("Invitation declined...");
 				txtIcon.setText("");
-				lblNotification.setText(name + " has joined your game of " + sports + " \nat the " + venue + " on " + dateTime);
+				lblNotification.setText(hostName + " has declined your game of " + sports + " \nat the " + venue + " on " + dateTime);
 				btnActionFlowPane.getChildren().remove(yesButton);
 				addNoBtn("Close", 740);
 				break;
@@ -69,12 +81,12 @@ public class NotificationController {
 			case 3:
 				lblStatus.setText("Friend Request");
 				txtIcon.setText("");
-				lblNotification.setText(name + " has sent you a friend request");
+				lblNotification.setText(hostName + " has sent you a friend request");
 				yesButton.setText("Accept");
 				addNoBtn("Decline", 370);
 				break;
 		}
-		profileGridPane.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
+		profileGridPane.add(Utils.cropCirclePhoto(hostAd, 100), 0, 0);
 	}
 
 	public void addNoBtn(String text, int width) {
@@ -84,11 +96,19 @@ public class NotificationController {
 		noBtn.setPrefWidth(width);
 		noBtn.setMaxWidth(Control.USE_PREF_SIZE);
 		btnActionFlowPane.getChildren().add(noBtn);
-
+		
 		EventHandler noBtnAction = new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
-				NotificationsDA.deleteNotificaions(adminNo);
+				
+				if (status == 0) {
+					System.out.println("userAdminNo: " + userAdminNo);
+					System.out.println(HostsDA.removeFriend(hostAd, dateTime.toLocalDate(), dateTime.toLocalTime(), AccountsDA.getAdminNo().toLowerCase()));
+					NotificationsDA.deleteNotificaions(userAdminNo);
+					NotificationsDA.addNotifications(hostAd, sports, venue, dateTime, 1);
+				}
+				
+				NotificationsDA.deleteNotificaions(userAdminNo);
 				notiGridPane.setVisible(false);
 				notiGridPane.setManaged(false);
 			}
@@ -100,7 +120,7 @@ public class NotificationController {
 	// Event Listener on JFXButton.onAction
 	@FXML
 	public void yesBtnOnAction(ActionEvent event) {
-		NotificationsDA.addNotifications(adminNo, sports, venue, dateTime, status);
+		NotificationsDA.addNotifications(userAdminNo, sports, venue, dateTime, status);
 		notiGridPane.setVisible(false);
 		notiGridPane.setManaged(false);
 	}

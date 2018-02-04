@@ -11,6 +11,7 @@ import org.mapdb.Atomic;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
+import entity.AccountsEntity;
 import entity.HostsEntity;
 
 public class HostsDA {
@@ -187,7 +188,46 @@ public class HostsDA {
 		return -99;
 	}
 
-	// need to create a method to remove friend
+	public static int removeFriend(String hostAd, LocalDate date, LocalTime time, String tobeRemoved) {
+		initDA();
+		AccountsDA.initDA();
+
+		ArrayList<String> list = null;
+		int key = 0;
+
+		for (int x : hosts.keySet()) {
+			if (hosts.get(x).getAdminNo().toLowerCase().equals(hostAd.toLowerCase()) && hosts.get(x).getDate().equals(date) && hosts.get(x).getTime().equals(time)) {
+				key = x;
+			}
+		}	
+		
+		if (key != 0) {
+			System.out.println("Host found at: " + key);
+			if (hosts.get(key).getPlayersRecruited() != null) {
+				
+				list = hosts.get(key).getPlayersRecruited();
+
+				if (list.contains(tobeRemoved.toLowerCase())) {
+					int nameIndex = -1;
+					
+					for (int i = 0; i < list.size(); i++) {
+						if (list.get(i).equals(tobeRemoved.toLowerCase())) {
+							nameIndex = i;
+						}
+					}
+					list.remove(nameIndex);
+					HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(), hosts.get(key).getSportsType(),
+							list, hosts.get(key).getFacility());
+					hosts.replace(key, tobereplaced);
+					db.commit();
+					return list.size();
+				}
+			}
+		}
+		
+		return -99;
+	}
+	
 	public static Object[][] getAllData() {
 
 		Object[][] rowData = new Object[hosts.size()][5];
@@ -241,7 +281,7 @@ public class HostsDA {
 //		for (int i : hosts.keySet()) {
 //			System.out.println(i);
 //		}
-
+		hosts.clear();
 		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 3, 2), LocalTime.of(17, 00), 1, null, "Indoor Basketball Court")); 
 		System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", LocalDate.of(2018, 3, 4), LocalTime.of(19, 00), 2, null, "Hockey Pitch"));
 		System.out.println(HostsDA.hostGame("170374Y", "Mark Zuckerberg", LocalDate.of(2018, 3, 8), LocalTime.of(11, 00), 4, null, "Squash Court"));
@@ -251,19 +291,18 @@ public class HostsDA {
 		System.out.println(HostsDA.hostGame("170707E", "Howard Wolowitz", LocalDate.of(2018, 3, 3), LocalTime.of(16, 00), 2, null, "Hockey Pitch"));	
 		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 3, 2), LocalTime.of(18, 00), 3, null, "Soccer Court"));
 		
-//		initializeSearchResults();
-//		System.out.println(searchGame("", null, null, "Frisbee"));
-//		for (HostsEntity x : searchResults) {
-//			System.out.println("Search results: " + x.getName() + " " + x.getDate() + " " + x.getTime());
-//		}
-//		
 		
-//
-		for (int i = 0; i < getAllData().length; i++) {
-			for (Object j : getAllData()[i]) {
-				System.out.println(j.toString());
-			}
-		}
+//		ArrayList<String> ppl = new ArrayList<String>();
+//		ppl.add("170196w");
+//		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 9, 2), LocalTime.of(19, 00), 3, ppl, "Soccer Court"));
+//		System.out.println(HostsDA.getFriends("170146W", LocalDate.of(2018, 9, 2), LocalTime.of(19, 00)));
+//		System.out.println(HostsDA.removeFriend("170146W", LocalDate.of(2018, 9, 2), LocalTime.of(19, 00), "170196W"));
+		
+//		for (int i = 0; i < getAllData().length; i++) {
+//			for (Object j : getAllData()[i]) {
+//				System.out.println(j.toString());
+//			}
+//		}
 		
 		
 	}
