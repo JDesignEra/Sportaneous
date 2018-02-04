@@ -8,6 +8,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -41,6 +43,7 @@ public class FindAGame_hostedGameController {
 	private LocalDate date;
 	private LocalTime time;
 	private ArrayList<String> listOfRecruitedPlayers;
+	private int joinedFriendsListSize = -100;
 		
 	public void initialize() {
 		
@@ -58,7 +61,7 @@ public class FindAGame_hostedGameController {
 		listOfRecruitedPlayers = this.toBeDisplayed_HostedGame.getPlayersRecruited();
 		date = this.toBeDisplayed_HostedGame.getDate();
 		time = this.toBeDisplayed_HostedGame.getTime();
-
+		
 		setHostName();
 		setEventDay(date);
 		setEventDate(date);
@@ -66,7 +69,7 @@ public class FindAGame_hostedGameController {
 		setEventTime(time);
 		setDP();
 		setNoOfPlayersLabel();
-		
+
 		if (listOfRecruitedPlayers != null && listOfRecruitedPlayers.contains(Main.currentUserAdminNo)) {
 			joinBtn.setDisable(true);
 			joinBtn.setStyle("-fx-background-color: grey;");
@@ -95,16 +98,11 @@ public class FindAGame_hostedGameController {
 	void handleJoin(ActionEvent event) {
 		System.out.println(Main.currentUserAdminNo.toUpperCase() + " is trying to join " + admin + "'s game.");
 		
-		HostsDA.addFriends(admin, date, time, Main.currentUserAdminNo.toUpperCase());
+		this.joinedFriendsListSize = HostsDA.addFriends(admin, date, time, Main.currentUserAdminNo);
 		joinBtn.setStyle("-fx-background-color: grey;");
 		
-		
-		
-		
-		
 		setNoOfPlayersLabel();
-		
-		
+
 	}
 	
 	@FXML
@@ -113,7 +111,7 @@ public class FindAGame_hostedGameController {
 		System.out.println("(hostedGameController) Whose game is clicked: " + FindAGame_ViewController.clickedgame.getAdminNo());
 	    FindAGame_ViewController.whosegameisclicked = admin;
 		try {
-			if (listOfRecruitedPlayers != null) {
+			if (listOfRecruitedPlayers != null || this.joinedFriendsListSize != -100) {
 				Main.getRoot().setRight(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayer.fxml")));
 			} 
 	    } catch (Exception e) {
@@ -163,15 +161,19 @@ public class FindAGame_hostedGameController {
 	void setNoOfPlayersLabel() {
 		HostsDA.initDA();
 		int total = HostsDA.getGameSize(this.toBeDisplayed_HostedGame.getSportsType());
-		int current;
-		if (this.toBeDisplayed_HostedGame.getPlayersRecruited() == null) {
-			current = 0;
-		} 
-		else {
-			current = this.toBeDisplayed_HostedGame.getPlayersRecruited().size();
+		if (this.joinedFriendsListSize == -100) {
+			if (this.toBeDisplayed_HostedGame.getPlayersRecruited() == null) {
+				noOfplayers.setText(0 + " / " + total);
+			} else {
+				noOfplayers.setText(this.toBeDisplayed_HostedGame.getPlayersRecruited().size() + " / " + total);
+			}
+		} else {
+			noOfplayers.setText(this.joinedFriendsListSize + " / " + total);
 		}
-
-		noOfplayers.setText(current + " / " + total);
+//		noOfplayers.setText(current + " / " + total);
+//		String s = this.toBeDisplayed_HostedGame.getPlayersRecruited().size() + " / " + total;
+//		StringProperty sp = new SimpleStringProperty(s);
+//		noOfplayers.textProperty().bind(sp);
 	}
 	
 

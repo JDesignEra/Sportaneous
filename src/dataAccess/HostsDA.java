@@ -48,7 +48,6 @@ public class HostsDA {
 			}
 		}
 		
-		
 		if (duplicatedGame.size() == 0) {
 			keyz = key.incrementAndGet();
 			System.out.println("Key Value now: " + keyz);
@@ -144,7 +143,7 @@ public class HostsDA {
 		return searchResults;
 	}
 
-	public static void addFriends(String hostAd, LocalDate date, LocalTime time, String tobeaddedAd) {
+	public static int addFriends(String hostAd, LocalDate date, LocalTime time, String tobeaddedAd) {
 		initDA();
 		
 		ArrayList<String> list = null;
@@ -169,20 +168,23 @@ public class HostsDA {
 				hosts.replace(key, tobereplaced);
 				db.commit();
 				System.out.println("Player successfully added");
+				return list.size();
 			} else {
 				list = hosts.get(key).getPlayersRecruited();
 				
-				if (!list.contains(tobeaddedAd.toLowerCase())) {
+				if (!list.contains(tobeaddedAd.toLowerCase()) && list.size() < getGameSize(hosts.get(key).getSportsType())) {
 
-					System.out.println(tobeaddedAd + " not found in the list; allowed to be added");
-					list.add(tobeaddedAd);
+					System.out.println(tobeaddedAd + " not found in the list; allowed to be added (" + getGameSize(hosts.get(key).getSportsType()) + ")");
+					list.add(tobeaddedAd.toLowerCase());
 					HostsEntity tobereplaced = new HostsEntity(hostAd, hosts.get(key).getName(), hosts.get(key).getDate(), hosts.get(key).getTime(), hosts.get(key).getSportsType(),
 							list, hosts.get(key).getFacility());
 					hosts.replace(key, tobereplaced);
 					db.commit();
+					return list.size();
 				}
 			}
 		}
+		return -99;
 	}
 
 	// need to create a method to remove friend
@@ -240,14 +242,14 @@ public class HostsDA {
 //			System.out.println(i);
 //		}
 
-		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(17, 00), 1, null, "Indoor Basketball Court")); 
-		System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", LocalDate.of(2018, 1, 4), LocalTime.of(19, 00), 2, null, "Hockey Pitch"));
-		System.out.println(HostsDA.hostGame("170374Y", "Mark Zuckerberg", LocalDate.of(2018, 1, 8), LocalTime.of(11, 00), 4, null, "Squash Court"));
-		System.out.println(HostsDA.hostGame("170463Z", "Tim Cook", LocalDate.of(2018, 1, 16), LocalTime.of(14, 00), 3, null, "Soccer court"));
-		System.out.println(HostsDA.hostGame("170552A", "Bill Gates", LocalDate.of(2018, 2, 1), LocalTime.of(19, 00), 5, null, "Tennis Court"));
-		System.out.println(HostsDA.hostGame("170957E", "Sheldon Cooper", LocalDate.of(2018, 2, 1), LocalTime.of(17, 00), 0, null, "Badminton Court"));
-		System.out.println(HostsDA.hostGame("170707E", "Howard Wolowitz", LocalDate.of(2018, 2, 3), LocalTime.of(16, 00), 2, null, "Hockey Pitch"));	
-		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 1, 2), LocalTime.of(18, 00), 3, null, "Soccer Court"));
+		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 3, 2), LocalTime.of(17, 00), 1, null, "Indoor Basketball Court")); 
+		System.out.println(HostsDA.hostGame("170285X", "Annalise Keating", LocalDate.of(2018, 3, 4), LocalTime.of(19, 00), 2, null, "Hockey Pitch"));
+		System.out.println(HostsDA.hostGame("170374Y", "Mark Zuckerberg", LocalDate.of(2018, 3, 8), LocalTime.of(11, 00), 4, null, "Squash Court"));
+		System.out.println(HostsDA.hostGame("170463Z", "Tim Cook", LocalDate.of(2018, 3, 16), LocalTime.of(14, 00), 3, null, "Soccer court"));
+		System.out.println(HostsDA.hostGame("170552A", "Bill Gates", LocalDate.of(2018, 3, 1), LocalTime.of(19, 00), 5, null, "Tennis Court"));
+		System.out.println(HostsDA.hostGame("170957E", "Sheldon Cooper", LocalDate.of(2018, 3, 1), LocalTime.of(17, 00), 0, null, "Badminton Court"));
+		System.out.println(HostsDA.hostGame("170707E", "Howard Wolowitz", LocalDate.of(2018, 3, 3), LocalTime.of(16, 00), 2, null, "Hockey Pitch"));	
+		System.out.println(HostsDA.hostGame("170146W", "Camila Cabello", LocalDate.of(2018, 3, 2), LocalTime.of(18, 00), 3, null, "Soccer Court"));
 		
 //		initializeSearchResults();
 //		System.out.println(searchGame("", null, null, "Frisbee"));
@@ -267,6 +269,7 @@ public class HostsDA {
 	}
 
 	public static ArrayList<String> getFriends(String whosegameisclicked, LocalDate date, LocalTime time) {
+		initDA();
 		ArrayList<String> tobereturned = new ArrayList<String>();
 		for (HostsEntity x : hosts.values()) {
 			if (x.getAdminNo().toLowerCase().equals(whosegameisclicked.toLowerCase()) && x.getTime().equals(time) && x.getDate().equals(date)) {

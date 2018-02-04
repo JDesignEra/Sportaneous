@@ -38,10 +38,10 @@ public class FindAGame_ViewPlayerController {
     	
     	try {
     		ArrayList<String> listOfRecruitedPlayers = HostsDA.getFriends(clickedGame.getAdminNo(), clickedGame.getDate(), clickedGame.getTime());
-    		System.out.println("Error check: " + listOfRecruitedPlayers);
+    		System.out.println("(ViewPlayerController) listOfRecruitedPlayers: " + listOfRecruitedPlayers);
     		if (listOfRecruitedPlayers.size() > 3) {
     			anchorDisplay.setMinHeight(20+(250+20)*listOfRecruitedPlayers.size());
-    			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
+//    			infoDisplayField.add(FXMLLoader.load(getClass().getResource("/application/FindAGame_ViewPlayerDetails.fxml")), 0, a++);
     		} else {
     			scrollPane.setFitToHeight(true);	
     		}

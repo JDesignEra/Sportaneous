@@ -130,7 +130,7 @@ public class HostAGame_CenterViewController {
 			}
 		}
 		
-		if (date != null && time != null && sportIndex != -1 && !facility.isEmpty()) {
+		if (date != null && time != null && sportIndex != -1 && facility!=null) {
 			
 			LocalTime formattedTime = LocalTime.of(time.getHour(), 0);
 			System.out.println("-----HostAGame_CenterViewController-----");
@@ -157,6 +157,10 @@ public class HostAGame_CenterViewController {
 						if (canRentEq) {
 							EquipmentsDA.rentEquipment(adminNo, sports);
 						}
+						
+						if (!addedFriends.isEmpty()) {
+							sendInvitations(AccountsDA.getAdminNo());
+						}
 
 						new Snackbar().success(borderPane, "Success!");
 						
@@ -168,7 +172,6 @@ public class HostAGame_CenterViewController {
 							e.printStackTrace();
 						}
 
-						
 					} else {
 						
 						new Snackbar().danger(borderPane, "Booking is unsuccessful! Please check that date and time are valid.");
@@ -262,10 +265,12 @@ public class HostAGame_CenterViewController {
     	}
     }
     
-    private void sendInvitations() {
+    private void sendInvitations(String hostAd) {
     	if (!addedFriends.isEmpty()) {
     		for (AccountsEntity x : addedFriends) {
     			NotificationsDA.addNotifications(x.getAdminNo().toLowerCase(), sports, facility, requestedDT, 0);
+    			HostsDA.addFriends(hostAd, requestedDT.toLocalDate(), requestedDT.toLocalTime(), x.getAdminNo().toLowerCase());
+    			System.out.println("Sent a notification to " + x.getName());
     		}
     	}
     }

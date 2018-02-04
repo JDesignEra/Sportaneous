@@ -58,11 +58,12 @@ public class FindAGame_ViewPlayerDetailsController {
 		m = new Utils();
 		gameClicked = FindAGame_ViewController.clickedgame;
 		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
-		peopleToDisplay = gameClicked.getPlayersRecruited();
+		peopleToDisplay = HostsDA.getFriends(gameClicked.getAdminNo(), gameClicked.getDate(), gameClicked.getTime());
 		
 		
 		System.out.println("(FindAGame_ViewPlayerDetailsController) Whose game has been clicked: " + target + " / Players recruited: " + peopleToDisplay.size());
 		//display details of the people who joined the game the target hosted
+		System.out.println("SIZE OF RECRUITED PLAYER LIST: " + this.peopleToDisplay.size());
 		if (FindAGame_ViewController.VPD_index < this.peopleToDisplay.size()) {
 			adminNo = this.peopleToDisplay.get(FindAGame_ViewController.VPD_index++);
 			System.out.println("(FindAGame_ViewPlayerDetailsController) Recruited player being displayed now: " + adminNo);
