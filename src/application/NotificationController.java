@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import entity.NotificationsEntity;
 
 import dataAccess.AccountsDA;
+import dataAccess.FriendsDA;
 import dataAccess.HostsDA;
 import dataAccess.NotificationsDA;
 
@@ -37,7 +38,6 @@ public class NotificationController {
 	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
 
 	private String userAdminNo = notifications.get(i).getAdminNo();
-	private String userName = notifications.get(i).getUserName();
 	private String hostName = notifications.get(i).getHostName();
 	private String hostAd = notifications.get(i).getHostAd();
 	private String sports = notifications.get(i).getSports();
@@ -89,6 +89,19 @@ public class NotificationController {
 		profileGridPane.add(Utils.cropCirclePhoto(hostAd, 100), 0, 0);
 	}
 
+	// Event Listener on JFXButton.onAction
+	@FXML
+	public void yesBtnOnAction(ActionEvent event) {
+		if (status == 3) {
+			FriendsDA.acceptRequest(hostAd);
+		}
+		
+		NotificationsDA.deleteNotificaions(i);
+		
+		notiGridPane.setVisible(false);
+		notiGridPane.setManaged(false);
+	}
+
 	public void addNoBtn(String text, int width) {
 		JFXButton noBtn = new JFXButton(text);
 		noBtn.getStyleClass().add("danger");
@@ -104,24 +117,16 @@ public class NotificationController {
 				if (status == 0) {
 					System.out.println("userAdminNo: " + userAdminNo);
 					System.out.println(HostsDA.removeFriend(hostAd, dateTime.toLocalDate(), dateTime.toLocalTime(), AccountsDA.getAdminNo().toLowerCase()));
-					NotificationsDA.deleteNotificaions(userAdminNo);
+					NotificationsDA.deleteNotificaions(i);
 					NotificationsDA.addNotifications(hostAd, sports, venue, dateTime, 1);
 				}
 				
-				NotificationsDA.deleteNotificaions(userAdminNo);
+				NotificationsDA.deleteNotificaions(i);
 				notiGridPane.setVisible(false);
 				notiGridPane.setManaged(false);
 			}
 		};
 
 		noBtn.setOnAction(noBtnAction);
-	}
-
-	// Event Listener on JFXButton.onAction
-	@FXML
-	public void yesBtnOnAction(ActionEvent event) {
-		NotificationsDA.addNotifications(userAdminNo, sports, venue, dateTime, status);
-		notiGridPane.setVisible(false);
-		notiGridPane.setManaged(false);
 	}
 }

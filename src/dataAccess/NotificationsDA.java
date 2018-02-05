@@ -9,20 +9,18 @@ import java.util.concurrent.ConcurrentMap;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import entity.AccountsEntity;
 import entity.NotificationsEntity;
 
 public class NotificationsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<NotificationsEntity>> notifications;
-	private static List<NotificationsEntity> notificationsList;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/notifications.db")).closeOnJvmShutdown().make();
 		notifications = db.getTreeMap("notifications");
+
 //		List<NotificationsEntity> temp = new ArrayList<>();
-//		temp.add(new NotificationsEntity("4321a", "David Beckham", "basketball", "Basketball Court", LocalDateTime.of(2018, 2, 12, 15, 00), 0));
-//		temp.add(new NotificationsEntity("1234a", "Jimmy Butler", "basketball", "Basketball Court", LocalDateTime.of(2018, 3, 14, 16, 00), 1));
+//		temp.add(new NotificationsEntity("4321a", "David Beckham", "Jimmy Butler", "1234a", "Basketball", "Basketball Court", LocalDateTime.of(2018, 3, 14, 16, 00), 0));
 //		notifications.put("admin", temp);
 		db.commit();
 	}
@@ -33,51 +31,53 @@ public class NotificationsDA {
 
 	public static int checkStatus(String notiID) {
 		String sessionID = AccountsDA.getAdminNo();
-		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
+		List<NotificationsEntity> notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
 
 		for (NotificationsEntity notificationsEntity : notificationsList) {
 			if (notificationsEntity.getAdminNo().equals(notiID)) {
-				return notificationsEntity.getStatus();// 0 = Invitation,
-														// 1 = Joined,
-														// 2 = Rating,
-														// 3 = Friend Request
+				return notificationsEntity.getStatus();// 0 = Invitation, 1 = Joined, 2 = Rating, 3 = Friend Request
 			}
 		}
 		return 4; // no Notifications
 	}
 
+	/**
+	 * For Friend Request
+	 * 
+	 * @param userAdminNo
+	 * @param status
+	 */
+	public static void addNotifications(String userAdminNo, int status) {
+		String sessionName = AccountsDA.getName();
+		String sessionAd = AccountsDA.getAdminNo();
+		String userName = AccountsDA.getAccData(userAdminNo).getName();
+
+		List<NotificationsEntity> notificationsList = (notifications.get(userAdminNo) != null ? notifications.get(userAdminNo) : new ArrayList<>());
+		notificationsList.add(new NotificationsEntity(userAdminNo, userName, sessionName, sessionAd, null, null, null, status));
+		notifications.put(userAdminNo, notificationsList);
+
+		db.commit();
+	}
+
 	public static void addNotifications(String userAdminNo, String sports, String location, LocalDateTime dateTime, int status) {
 		String sessionName = AccountsDA.getName();
 		String sessionAd = AccountsDA.getAdminNo();
-		
-		int in = -1;
-		for (int i = 0; i < AccountsDA.getAllData().size(); i++) {
-			if (AccountsDA.getAllData().get(i).getAdminNo().toLowerCase().equals(userAdminNo.toLowerCase())) {
-				in = i;
-			}
-		}
-		String userName = AccountsDA.getAllData().get(in).getName();
+		String userName = AccountsDA.getAccData(userAdminNo).getName();
 
-		notificationsList = (notifications.get(userAdminNo) != null ? notifications.get(userAdminNo) : new ArrayList<>());
+		List<NotificationsEntity> notificationsList = (notifications.get(userAdminNo) != null ? notifications.get(userAdminNo) : new ArrayList<>());
 		notificationsList.add(new NotificationsEntity(userAdminNo, userName, sessionName, sessionAd, sports, location, dateTime, status));
 		notifications.put(userAdminNo, notificationsList);
 
 		db.commit();
 	}
 
-	public static void deleteNotificaions(String adminNo) {
+	public static void deleteNotificaions(int index) {
 		String sessionID = AccountsDA.getAdminNo();
-		int i = 0;
 
-		notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
-		for (NotificationsEntity notificationsEntity : notificationsList) {
-			if (notificationsEntity.getAdminNo().equals(adminNo)) {
-				notificationsList.remove(i);
-				notifications.put(sessionID, notificationsList);
-				db.commit();
-				break;
-			}
-			i++;
-		}
+		List<NotificationsEntity> notificationsList = (notifications.get(sessionID) != null ? notifications.get(sessionID) : new ArrayList<>());
+		notificationsList.remove(index);
+		notifications.put(sessionID, notificationsList);
+		
+		db.commit();
 	}
 }

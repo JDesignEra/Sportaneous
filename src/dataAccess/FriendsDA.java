@@ -13,7 +13,6 @@ import entity.FriendsEntity;
 public class FriendsDA {
 	private static DB db;
 	private static ConcurrentMap<String, List<FriendsEntity>> friends;
-	private static List<FriendsEntity> friendsList;
 
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/friends.db")).closeOnJvmShutdown().make();
@@ -34,7 +33,7 @@ public class FriendsDA {
 	public static void addFriend(String friendAdminNo) {
 		String sessionID = AccountsDA.getAdminNo();
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		friendsList.add(new FriendsEntity(friendAdminNo, sessionID, 0));
 		friends.put(friendAdminNo, friendsList);
 
@@ -42,6 +41,8 @@ public class FriendsDA {
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		friendsList.add(new FriendsEntity(sessionID, friendAdminNo, 0));
 		friends.put(sessionID, friendsList);
+		
+		NotificationsDA.addNotifications(friendAdminNo, 3);
 
 		db.commit();
 	}
@@ -51,7 +52,7 @@ public class FriendsDA {
 		int i = 0;
 
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
@@ -65,7 +66,8 @@ public class FriendsDA {
 
 			i++;
 		}
-
+		
+		i = 0;
 		// Session's Friend List
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
@@ -87,7 +89,7 @@ public class FriendsDA {
 		int i = 0;
 
 		// Session's Friend's Friend List
-		friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
@@ -96,6 +98,8 @@ public class FriendsDA {
 				friendsList.set(i, friendsEntity);
 				friends.put(friendAdminNo, friendsList);
 				db.commit();
+				
+				System.out.println(friendsEntity.getStatus());
 
 				break;
 			}
@@ -113,6 +117,8 @@ public class FriendsDA {
 				friends.put(sessionID, friendsList);
 				db.commit();
 
+				System.out.println(friendsEntity.getStatus());
+				
 				break;
 			}
 
@@ -122,7 +128,7 @@ public class FriendsDA {
 
 	public static int checkStatus(String friendAdminNo) {
 		String sessionID = AccountsDA.getAdminNo();
-		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
+		List<FriendsEntity> friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {

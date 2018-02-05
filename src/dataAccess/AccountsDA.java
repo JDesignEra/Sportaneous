@@ -26,15 +26,15 @@ public class AccountsDA {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
 		accounts = db.getTreeMap("accounts");
 
-//		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 5 }, 0, 0, 0));
-//		accounts.put("1234a", new AccountsEntity("1234a", "1234f@mymail.nyp.edu.sg", "password", "Jimmy Butler", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
-//				new int[] { 1, 0, 3, 0, 0 }, 0, 0, 0));
-//		accounts.put("4321a", new AccountsEntity("4321a", "4321a@mymail.nyp.edu.sg", "password", "David Beckham", "Soccer", "Soccer,Squash,Basketball", "", 0, 0, false, false,
-//				new int[] { 1, 0, 0, 0, 1 }, 0, 0, 0));
-//		accounts.put("1234b", new AccountsEntity("1234b", "1234b@mymail.nyp.edu.sg", "password", "Roger Federer", "Tennis", "Basketball,Squash,Tennis", "", 0, 0, false, false,
-//				new int[] { 1, 0, 0, 2, 0 }, 0, 0, 0));
-//		accounts.put("4321b", new AccountsEntity("4321b", "4321b@mymailnyp.edu.sg", "password", "Lee Chong Wei", "Badminton", "Badminton,Squash,Tennis", "", 0, 0, false, false,
-//				new int[] { 1, 0, 1, 0, 0 }, 0, 0, 0));
+		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 5 }, 0, 0, 0));
+		accounts.put("1234a", new AccountsEntity("1234a", "1234f@mymail.nyp.edu.sg", "password", "Jimmy Butler", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+				new int[] { 1, 0, 3, 0, 0 }, 0, 0, 0));
+		accounts.put("4321a", new AccountsEntity("4321a", "4321a@mymail.nyp.edu.sg", "password", "David Beckham", "Soccer", "Soccer,Squash,Basketball", "", 0, 0, false, false,
+				new int[] { 1, 0, 0, 0, 1 }, 0, 0, 0));
+		accounts.put("1234b", new AccountsEntity("1234b", "1234b@mymail.nyp.edu.sg", "password", "Roger Federer", "Tennis", "Basketball,Squash,Tennis", "", 0, 0, false, false,
+				new int[] { 1, 0, 0, 2, 0 }, 0, 0, 0));
+		accounts.put("4321b", new AccountsEntity("4321b", "4321b@mymailnyp.edu.sg", "password", "Lee Chong Wei", "Badminton", "Badminton,Squash,Tennis", "", 0, 0, false, false,
+				new int[] { 1, 0, 1, 0, 0 }, 0, 0, 0));
 		db.commit();
 	}
 

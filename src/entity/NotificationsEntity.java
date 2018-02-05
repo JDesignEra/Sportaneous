@@ -10,14 +10,14 @@ public class NotificationsEntity implements Serializable {
 	private int status;
 
 	public NotificationsEntity(String userAdminNo, String userName, String hostName, String hostAd, String sports, String location, LocalDateTime datetime, int status) {
-		this.setAdminNo(userAdminNo);
-		this.setHostName(hostName);
-		this.setSports(sports);
-		this.setLocation(location);
-		this.setDateTime(datetime);
-		this.setStatus(status);
-		this.setHostAd(hostAd);
-		this.setUserName(userName);
+		this.adminNo = userAdminNo;
+		this.userName = userName;
+		this.hostName = hostName;
+		this.hostAd = hostAd;
+		this.sports = sports;
+		this.location = location;
+		this.dateTime = datetime;
+		this.status = status;
 	}
 
 	public String getAdminNo() {
