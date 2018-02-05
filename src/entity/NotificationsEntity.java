@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class NotificationsEntity implements Serializable {
-	private String adminNo, hostName, hostAd, sports, location;
+	private String adminNo, hostName, hostAd, sports, location, userName;
 	private LocalDateTime dateTime;
 	private int status;
 
@@ -74,5 +74,13 @@ public class NotificationsEntity implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
