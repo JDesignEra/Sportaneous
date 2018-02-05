@@ -92,14 +92,11 @@ public class FriendsDA {
 		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
-				i = 0;
 
 				friendsEntity.setStatus(1);
 				friendsList.set(i, friendsEntity);
 				friends.put(friendAdminNo, friendsList);
 				db.commit();
-				
-				System.out.println(friendsEntity.getStatus());
 
 				break;
 			}
@@ -107,6 +104,7 @@ public class FriendsDA {
 			i++;
 		}
 
+		i = 0;
 		// Session's Friend List
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
@@ -116,8 +114,6 @@ public class FriendsDA {
 				
 				friends.put(sessionID, friendsList);
 				db.commit();
-
-				System.out.println(friendsEntity.getStatus());
 				
 				break;
 			}
