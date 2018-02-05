@@ -56,6 +56,7 @@ public class FriendsDA {
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
+				System.out.println(friendsList.get(i).getFriendAdminNo());
 				friendsList.remove(i);
 				
 				friends.put(friendAdminNo, friendsList);
@@ -72,6 +73,7 @@ public class FriendsDA {
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
+				System.out.println(friendsList.get(i).getFriendAdminNo());
 				friendsList.remove(i);
 				
 				friends.put(sessionID, friendsList);

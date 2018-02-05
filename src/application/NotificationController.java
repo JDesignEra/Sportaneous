@@ -113,12 +113,14 @@ public class NotificationController {
 		EventHandler noBtnAction = new EventHandler<Event>() {
 			@Override
 			public void handle(Event event) {
-				
 				if (status == 0) {
 					System.out.println("userAdminNo: " + userAdminNo);
 					System.out.println(HostsDA.removeFriend(hostAd, dateTime.toLocalDate(), dateTime.toLocalTime(), AccountsDA.getAdminNo().toLowerCase()));
-					NotificationsDA.deleteNotificaions(i);
 					NotificationsDA.addNotifications(hostAd, sports, venue, dateTime, 1);
+				}
+				else if (status == 3) {
+					System.out.println(userAdminNo);
+					FriendsDA.removeFriend(userAdminNo);
 				}
 				
 				NotificationsDA.deleteNotificaions(i);
