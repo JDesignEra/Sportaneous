@@ -5,11 +5,11 @@ import java.time.LocalDateTime;
 
 @SuppressWarnings("serial")
 public class NotificationsEntity implements Serializable {
-	private String adminNo, hostName, hostAd, sports, location, userName;
+	private String adminNo, hostName, hostAd, sports, location;
 	private LocalDateTime dateTime;
 	private int status;
 
-	public NotificationsEntity(String userAdminNo, String userName, String hostName, String hostAd, String sports, String location, LocalDateTime datetime, int status) {
+	public NotificationsEntity(String userAdminNo, String hostName, String hostAd, String sports, String location, LocalDateTime datetime, int status) {
 		this.setAdminNo(userAdminNo);
 		this.setHostName(hostName);
 		this.setSports(sports);
@@ -17,7 +17,6 @@ public class NotificationsEntity implements Serializable {
 		this.setDateTime(datetime);
 		this.setStatus(status);
 		this.setHostAd(hostAd);
-		this.setUserName(userName);
 	}
 
 	public String getAdminNo() {
@@ -74,13 +73,5 @@ public class NotificationsEntity implements Serializable {
 
 	public void setStatus(int status) {
 		this.status = status;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 }

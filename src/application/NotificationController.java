@@ -37,7 +37,6 @@ public class NotificationController {
 	private List<NotificationsEntity> notifications = NotificationViewController.getNotification();
 
 	private String userAdminNo = notifications.get(i).getAdminNo();
-	private String userName = notifications.get(i).getUserName();
 	private String hostName = notifications.get(i).getHostName();
 	private String hostAd = notifications.get(i).getHostAd();
 	private String sports = notifications.get(i).getSports();

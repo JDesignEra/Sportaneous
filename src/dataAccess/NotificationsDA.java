@@ -49,17 +49,9 @@ public class NotificationsDA {
 	public static void addNotifications(String userAdminNo, String sports, String location, LocalDateTime dateTime, int status) {
 		String sessionName = AccountsDA.getName();
 		String sessionAd = AccountsDA.getAdminNo();
-		
-		int in = -1;
-		for (int i = 0; i < AccountsDA.getAllData().size(); i++) {
-			if (AccountsDA.getAllData().get(i).getAdminNo().toLowerCase().equals(userAdminNo.toLowerCase())) {
-				in = i;
-			}
-		}
-		String userName = AccountsDA.getAllData().get(in).getName();
 
 		notificationsList = (notifications.get(userAdminNo) != null ? notifications.get(userAdminNo) : new ArrayList<>());
-		notificationsList.add(new NotificationsEntity(userAdminNo, userName, sessionName, sessionAd, sports, location, dateTime, status));
+		notificationsList.add(new NotificationsEntity(userAdminNo, sessionName, sessionAd, sports, location, dateTime, status));
 		notifications.put(userAdminNo, notificationsList);
 
 		db.commit();
