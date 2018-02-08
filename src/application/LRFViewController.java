@@ -173,24 +173,24 @@ public class LRFViewController {
 
 			case 1:
 				if (adminNo.isEmpty() && pass.isEmpty()) {
-					new Snackbar().danger(rootPane, "Admin Number & Password is required.");
+					Snackbar.danger(rootPane, "Admin Number & Password is required.");
 					loginAdminNoTF.getStyleClass().add("danger");
 					loginPassTF.getStyleClass().add("danger");
 				}
 				else if (adminNo.isEmpty()) {
-					new Snackbar().danger(rootPane, "Admin Number is required.");
+					Snackbar.danger(rootPane, "Admin Number is required.");
 					loginAdminNoTF.getStyleClass().add("danger");
 					loginPassTF.getStyleClass().removeAll("danger");
 				}
 				else if (pass.isEmpty()) {
-					new Snackbar().danger(rootPane, "Password is required.");
+					Snackbar.danger(rootPane, "Password is required.");
 					loginPassTF.getStyleClass().add("danger");
 					loginAdminNoTF.getStyleClass().removeAll("danger");
 				}
 				break;
 
 			case 2:
-				new Snackbar().danger(rootPane, "Admin Number or Password is wrong.");
+				Snackbar.danger(rootPane, "Admin Number or Password is wrong.");
 				break;
 		}
 	}
@@ -205,7 +205,7 @@ public class LRFViewController {
 
 		switch (AccountsDA.addAccount(name, adminNo, email, pass)) {
 			case 0:
-				new Snackbar().success(rootPane, "Successfully registered an account.");
+				Snackbar.success(rootPane, "Successfully registered an account.");
 				break;
 
 			case 1:
@@ -241,19 +241,19 @@ public class LRFViewController {
 					}
 				}
 
-				new Snackbar().danger(rootPane, msg.toString() + " is required.");
+				Snackbar.danger(rootPane, msg.toString() + " is required.");
 				break;
 
 			case 2:
 				regEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Only NYP Email address are allowed.");
+				Snackbar.danger(rootPane, "Only NYP Email address are allowed.");
 				break;
 
 			case 3:
 			case 4:
 				regEmailTF.getStyleClass().add("danger");
 
-				new Snackbar().danger(rootPane, "This Email or Admin Number is registered with us.", "Forgot Password?", ev -> {
+				Snackbar.danger(rootPane, "This Email or Admin Number is registered with us.", "Forgot Password?", ev -> {
 					fpassTitledPane.setExpanded(true);
 				});
 				break;
@@ -270,20 +270,20 @@ public class LRFViewController {
 
 		switch (AccountsDA.passwordReset(email)) {
 			case 0:
-				new Snackbar().success(rootPane, "Successfully reseted password, please check your email.");
+				Snackbar.success(rootPane, "Successfully reseted password, please check your email.");
 				break;
 
 			case 1:
 				fpassEmailTF.getStyleClass().add("danger");
-				new Snackbar().danger(rootPane, "Email is required");
+				Snackbar.danger(rootPane, "Email is required");
 				break;
 
 			case 2:
-				new Snackbar().danger(rootPane, "Email is not registered with us.", "Register?", ev -> regTitledPane.setExpanded(true));
+				Snackbar.danger(rootPane, "Email is not registered with us.", "Register?", ev -> regTitledPane.setExpanded(true));
 				break;
 
 			case 3:
-				new Snackbar().danger(rootPane, "Whoops! Something went wrong, please try again.");
+				Snackbar.danger(rootPane, "Whoops! Something went wrong, please try again.");
 				break;
 		}
 	}

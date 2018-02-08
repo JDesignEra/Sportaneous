@@ -264,7 +264,7 @@ public class ProfileViewController {
 	private void prevComBtnOnAction(ActionEvent event) {
 		if (commentIndex > 0) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
-				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
+				TransitionAnimation.fadeOut(250, commContentGridPane, 1.0);
 			}), new KeyFrame(Duration.millis(300), actionEv -> {
 				commentsViewController.setComments(adminNo, --commentIndex);
 
@@ -277,7 +277,7 @@ public class ProfileViewController {
 					prevComBtn.setDisable(false);
 				}
 
-				new TransitionAnimation().fromRightFadeIn(500, commContentGridPane, commentGridPane.getPadding().getLeft() * 2);
+				TransitionAnimation.fromRightFadeIn(500, commContentGridPane, commentGridPane.getPadding().getLeft() * 2);
 			})).play();
 		}
 	}
@@ -286,7 +286,7 @@ public class ProfileViewController {
 	@FXML
 	private void nxtComBtnOnAction(ActionEvent event) {
 		if (commentIndex < CommentsDA.getComments(adminNo).size() - 1) {
-			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
+			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> TransitionAnimation.fadeOut(250, commContentGridPane, 1.0)),
 					new KeyFrame(Duration.millis(300), actionEv -> {
 						commentsViewController.setComments(adminNo, ++commentIndex);
 
@@ -299,7 +299,7 @@ public class ProfileViewController {
 							nxtComBtn.setDisable(false);
 						}
 
-						new TransitionAnimation().fromLeftFadeIn(500, commContentGridPane, commentGridPane.getPadding().getRight() * 2);
+						TransitionAnimation.fromLeftFadeIn(500, commContentGridPane, commentGridPane.getPadding().getRight() * 2);
 					})).play();
 		}
 	}

@@ -14,26 +14,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-public class Snackbar {
-	private final URL spinnerWhite = getClass().getResource("/application/assets/img/spinner_white.gif");
-
-	public void info(Pane root, String msg) {
-		this.info(root, msg, null, null);
+public final class Snackbar {
+	private static final URL spinnerWhite = Snackbar.class.getResource("/application/assets/img/spinner_white.gif");
+	
+	private Snackbar() {
+		throw new IllegalStateException("Snackbar class");
 	}
 
-	public void success(Pane root, String msg) {
-		this.success(root, msg, null, null);
+	public static void info(Pane root, String msg) {
+		Snackbar.info(root, msg, null, null);
 	}
 
-	public void warning(Pane root, String msg) {
-		this.warning(root, msg, null, null);
+	public static void success(Pane root, String msg) {
+		Snackbar.success(root, msg, null, null);
 	}
 
-	public void danger(Pane root, String msg) {
-		this.danger(root, msg, null, null);
+	public static void warning(Pane root, String msg) {
+		Snackbar.warning(root, msg, null, null);
 	}
 
-	public void info(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+	public static void danger(Pane root, String msg) {
+		Snackbar.danger(root, msg, null, null);
+	}
+
+	public static void info(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
@@ -46,7 +50,7 @@ public class Snackbar {
 		}
 	}
 
-	public void success(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+	public static void success(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
@@ -59,7 +63,7 @@ public class Snackbar {
 		}
 	}
 
-	public void warning(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+	public static void warning(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
@@ -72,7 +76,7 @@ public class Snackbar {
 		}
 	}
 
-	public void danger(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
+	public static void danger(Pane root, String msg, String actionText, EventHandler<ActionEvent> actionHandler) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 
 		if (actionText != null && !actionText.isEmpty() && actionHandler != null) {
@@ -85,7 +89,7 @@ public class Snackbar {
 		}
 	}
 
-	public void infoSpinner(Pane root, String msg, long timeOut) {
+	public static void infoSpinner(Pane root, String msg, long timeOut) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("info");
 
@@ -110,7 +114,7 @@ public class Snackbar {
 		sb.show(msg, timeOut);
 	}
 
-	public void successSpinner(Pane root, String msg, long timeOut) {
+	public static void successSpinner(Pane root, String msg, long timeOut) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("success");
 
@@ -135,7 +139,7 @@ public class Snackbar {
 		sb.show(msg, timeOut);
 	}
 
-	public void warningSpinner(Pane root, String msg, long timeOut) {
+	public static void warningSpinner(Pane root, String msg, long timeOut) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("warning");
 
@@ -160,7 +164,7 @@ public class Snackbar {
 		sb.show(msg, timeOut);
 	}
 
-	public void dangerSpinner(Pane root, String msg, long timeOut) {
+	public static void dangerSpinner(Pane root, String msg, long timeOut) {
 		JFXSnackbar sb = new JFXSnackbar(root);
 		sb.getStyleClass().add("danger");
 

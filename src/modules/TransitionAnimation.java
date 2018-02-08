@@ -6,8 +6,12 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.util.Duration;
 
-public class TransitionAnimation {
-	public void fadeIn(double duration, Node node, double fromValue) {
+public final class TransitionAnimation {
+	private TransitionAnimation() {
+		throw new IllegalStateException("TransitionAnimation class");
+	}
+	
+	public static void fadeIn(double duration, Node node, double fromValue) {
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), node);
 		fadeTransition.setFromValue(fromValue);
 		fadeTransition.setToValue(1.0);
@@ -15,7 +19,7 @@ public class TransitionAnimation {
 		fadeTransition.play();
 	}
 	
-	public void fadeOut(double duration, Node node, double fromValue) {
+	public static void fadeOut(double duration, Node node, double fromValue) {
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration), node);
 		fadeTransition.setFromValue(fromValue);
 		fadeTransition.setToValue(0);
@@ -23,7 +27,7 @@ public class TransitionAnimation {
 		fadeTransition.play();
 	}
 	
-	public void fromLeftFadeIn(double duration, Node node, double translateFromX) {
+	public static void fromLeftFadeIn(double duration, Node node, double translateFromX) {
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration));
 		fadeTransition.setFromValue(0);
 		fadeTransition.setToValue(1.0);
@@ -36,7 +40,7 @@ public class TransitionAnimation {
 		parallelTransition.play();
 	}
 
-	public void fromRightFadeIn(double duration, Node node, double translateFromY) {
+	public static void fromRightFadeIn(double duration, Node node, double translateFromY) {
 		FadeTransition fadeTransition = new FadeTransition(Duration.millis(duration));
 		fadeTransition.setFromValue(0);
 		fadeTransition.setToValue(1.0);

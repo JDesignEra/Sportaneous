@@ -128,7 +128,7 @@ public class UploadBodyViewController {
 		success = ImageIO.write(bufferImg, "png", new File("bin/application/assets/uploads/" + adminNo + ".png"));
 
 		if (rootGridPane.getParent().getParent() instanceof VBox) {
-			new Snackbar().successSpinner((VBox) rootGridPane.getParent().getParent(), "Your photo has been uploaded successfully. You will be redirected to your profile page...",
+			Snackbar.successSpinner((VBox) rootGridPane.getParent().getParent(), "Your photo has been uploaded successfully. You will be redirected to your profile page...",
 					4000);
 
 			Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3500), ev -> {

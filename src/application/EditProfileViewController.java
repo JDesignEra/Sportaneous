@@ -239,7 +239,7 @@ public class EditProfileViewController {
 			cPassTxtField.getStyleClass().add("danger");
 			cfmPassTxtField.getStyleClass().add("danger");
 
-			new Snackbar().danger(rootStackPane, "Change Password and Confirm Change Password field does not match");
+			Snackbar.danger(rootStackPane, "Change Password and Confirm Change Password field does not match");
 		}
 		else {
 			email = emailTxtField.getText();
@@ -291,7 +291,7 @@ public class EditProfileViewController {
 
 				switch (AccountsDA.editAccount(email, pass, name, favSport, sports.toString(), intro, height, weight, heightVisibility, weightVisibility)) {
 					case 0: // Success
-						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
+						Snackbar.successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
 
 						// Delay on screen with timeline instead of using Thread.sleep()
 						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> {
@@ -306,12 +306,12 @@ public class EditProfileViewController {
 						break;
 
 					case 1: // Fail
-						new Snackbar().danger(rootStackPane, "Whoops! Something went wrong, please contact an administrator.");
+						Snackbar.danger(rootStackPane, "Whoops! Something went wrong, please contact an administrator.");
 						break;
 
 					case 2: // Email validation
 						emailTxtField.getStyleClass().add("danger");
-						new Snackbar().danger(rootStackPane, "Only NYP Email adress are allowed.");
+						Snackbar.danger(rootStackPane, "Only NYP Email adress are allowed.");
 						break;
 				}
 			});
@@ -434,7 +434,7 @@ public class EditProfileViewController {
 		if (dpOverlayGridPane.getOpacity() != 1.0) {
 			dpOverlayGridPane.toFront();
 
-			new TransitionAnimation().fadeIn(250, dpOverlayGridPane, 0);
+			TransitionAnimation.fadeIn(250, dpOverlayGridPane, 0);
 		}
 	}
 
@@ -444,7 +444,7 @@ public class EditProfileViewController {
 		if (dpOverlayGridPane.getOpacity() != 0) {
 			dpOverlayGridPane.toFront();
 
-			new TransitionAnimation().fadeOut(250, dpOverlayGridPane, 1.0);
+			TransitionAnimation.fadeOut(250, dpOverlayGridPane, 1.0);
 		}
 	}
 
