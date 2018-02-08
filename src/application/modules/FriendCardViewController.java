@@ -11,54 +11,70 @@ import entity.AccountsEntity;
 
 import modules.Utils;
 
-import application.FriendsViewController;
 import application.ProfileViewController;
 
 public class FriendCardViewController {
 	@FXML private Text nameTxt, heightWeightTxt, ratingTxt, matchNoTxt;
 	@FXML private GridPane cardContent;
 
-	private int i = FriendsViewController.getAccIndex();
-	private List<AccountsEntity> accounts = FriendsViewController.getAccounts();
+	private int i = 0;
 
-	private String adminNo = accounts.get(i).getAdminNo();
-	private String name = accounts.get(i).getName();
-	private double height = accounts.get(i).getHeight();
-	private double weight = accounts.get(i).getWeight();
-	private boolean heightVisibility = accounts.get(i).getHeightVisibility();
-	private boolean weightVisbility = accounts.get(i).getWeightVisibility();
-	private double rating = accounts.get(i).getCalRating();
-	private int matchPlayed = accounts.get(i).getMatchPlayed();
-	private int totalMatch = accounts.get(i).getTotalMatch();
+	private String adminNo;
+	private String name;
+	private double height;
+	private double weight;
+	private boolean heightVisibility;
+	private boolean weightVisbility;
+	private double rating;
+	private int matchPlayed;
+	private int totalMatch;
 
 	@FXML
 	private void initialize() {
-		nameTxt.setText(name);
-		ratingTxt.setText(Utils.getRatingShapes(rating));
-		matchNoTxt.setText(matchPlayed + " / " + totalMatch);
+		if (adminNo != null) {
+			nameTxt.setText(name);
+			ratingTxt.setText(Utils.getRatingShapes(rating));
+			matchNoTxt.setText(matchPlayed + " / " + totalMatch);
 
-		// Height & Weight
-		if (heightVisibility || weightVisbility) {
-			if (heightVisibility && weightVisbility) {
-				heightWeightTxt.setText(height + " m | " + weight + " kg");
-			}
-			else if (heightVisibility) {
-				heightWeightTxt.setText(height + " m");
+			// Height & Weight
+			if (heightVisibility || weightVisbility) {
+				if (heightVisibility && weightVisbility) {
+					heightWeightTxt.setText(height + " m | " + weight + " kg");
+				}
+				else if (heightVisibility) {
+					heightWeightTxt.setText(height + " m");
+				}
+				else {
+					heightWeightTxt.setText(weight + " kg");
+				}
 			}
 			else {
-				heightWeightTxt.setText(weight + " kg");
+				heightWeightTxt.setVisible(false);
+				heightWeightTxt.setManaged(false);
 			}
-		}
-		else {
-			heightWeightTxt.setVisible(false);
-			heightWeightTxt.setManaged(false);
-		}
 
-		cardContent.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
+			cardContent.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
+		}
 	}
 
 	@FXML
 	public void cardContentOnMouseClick(MouseEvent event) {
-		ProfileViewController.viewProfile(adminNo, "/application/FriendsView.fxml");
+		new ProfileViewController().viewProfile(adminNo, "/application/FriendsView.fxml");
+	}
+	
+	public void setAccounts(List<AccountsEntity> accounts, int index) {
+		i = index;
+		
+		adminNo = accounts.get(i).getAdminNo();
+		name = accounts.get(i).getName();
+		height = accounts.get(i).getHeight();
+		weight = accounts.get(i).getWeight();
+		heightVisibility = accounts.get(i).getHeightVisibility();
+		weightVisbility = accounts.get(i).getWeightVisibility();
+		rating = accounts.get(i).getCalRating();
+		matchPlayed = accounts.get(i).getMatchPlayed();
+		totalMatch = accounts.get(i).getTotalMatch();
+		
+		initialize();
 	}
 }

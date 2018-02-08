@@ -3,7 +3,6 @@ package dataAccess;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -21,8 +20,8 @@ public class RatingsDA {
 		ratings = db.getTreeMap("ratings");
 
 //		List<RatingsEntity> temp = new ArrayList<>();
-//		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 2));
+//		temp.add(new RatingsEntity(1, "admin", "Badminton", LocalDateTime.now(), new String[] { "1234a", "1234b", "4321a" }, new String[] { "", "", "" }, new int[] { 1, 1, 1 },
+//				new int[] { 1, 0, 1 }, 3));
 //		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 1, 1 },
 //				new int[] { 1, 0 }, 0));
 //		ratings.put("admin", temp);
@@ -58,6 +57,8 @@ public class RatingsDA {
 					adminGrp[i] = s;
 				}
 
+				NotificationsDA.addNotifications(adminNo, sport, null, dateTime, 2);
+
 				i++;
 			}
 
@@ -70,104 +71,113 @@ public class RatingsDA {
 
 	public static void updateRatings(int matchID, String[] playerComments, int[] playerRatings, boolean[] playerAttendances) {
 		String sessionID = AccountsDA.getAdminNo();
-		List<RatingsEntity> ratingsList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
-
 		List<RatingsEntity> tempList = new ArrayList<>();
 		String[] adminNums = null;
 		int noRated = 0;
 
-		int i = 0;
-
-		i = 0;
 		// Session
-		for (RatingsEntity ratingsEntity : ratingsList) {
-			if (ratingsEntity.getMatchID() == matchID) {
+		List<RatingsEntity> ratingsList = (ratings.get(sessionID) != null ? ratings.get(sessionID) : new ArrayList<>());
+
+		for (int i = 0; i < ratingsList.size(); i++) {
+			if (ratingsList.get(i).getMatchID() == matchID) {
+				RatingsEntity ratingsEntity = ratingsList.get(i);
+
 				noRated = ratingsEntity.incrementAndGetNoRate();
 
-				adminNums = new String[ratingsEntity.getAdminNums().length + 1];
-				adminNums[0] = sessionID;
+				ratingsEntity.setComments(playerComments);
+				ratingsEntity.setRatings(playerRatings);
 
-				for (int j = 0; j < ratingsEntity.getAdminNums().length; j++) {
-					adminNums[j + 1] = ratingsEntity.getAdminNums()[j];
-
+				for (int j = 0; j < playerAttendances.length; j++) {
 					if (playerAttendances[j]) {
 						ratingsEntity.increaseAttendanceCount(j);
 					}
 				}
 
-				// Last to submit
+				// Last to submit or not
 				if (noRated > ratingsEntity.getAdminNums().length) {
-					tempList.add(ratingsEntity);
-					ratingsList.remove(i);
+					adminNums = new String[ratingsEntity.getAdminNums().length + 1];
+					adminNums[0] = sessionID;
+					System.arraycopy(ratingsEntity.getAdminNums(), 0, adminNums, 1, ratingsEntity.getAdminNums().length);
 
+					tempList.add(ratingsEntity);
+
+					ratingsList.remove(i);
 					ratings.put(sessionID, ratingsList);
 					db.commit();
+
+					break;
 				}
 				else {
 					ratingsList.set(i, ratingsEntity);
-
 					ratings.put(sessionID, ratingsList);
 					db.commit();
+
+					break;
 				}
 			}
-
-			i++;
 		}
 
 		// Others
-		for (int j = 1; j < adminNums.length; j++) {
-			ratingsList = (ratings.get(adminNums[j]) != null ? ratings.get(adminNums[j]) : new ArrayList<>());
-			i = 0;
+		for (int i = 0; i < tempList.get(0).getAdminNums().length; i++) {
+			String currAdminNo = tempList.get(0).getAdminNums()[i];
+			ratingsList = (ratings.get(currAdminNo) != null ? ratings.get(currAdminNo) : new ArrayList<>());
 
-			playerAttendances = Arrays.copyOf(playerAttendances, playerAttendances.length + 1);
+			for (int j = 0; j < ratingsList.size(); j++) {
+				if (ratingsList.get(j).getMatchID() == matchID) {
+					RatingsEntity ratingsEntity = ratingsList.get(j);
 
-			for (RatingsEntity ratingsEntity : ratingsList) {
-				if (ratingsEntity.getMatchID() == matchID) {
 					ratingsEntity.setNoRated(noRated);
 
-					// Updated Attendance Count
-					for (int k = 1; k < ratingsEntity.getAdminNums().length - 1; k++) {
-						if (k != j && playerAttendances[k - 1]) {
+					for (int k = 0; k < ratingsEntity.getAttendanceCount().length; k++) {
+						if (k != 0 && k + 1 != i && playerAttendances[k]) {
+							ratingsEntity.increaseAttendanceCount(k);
+						}
+						else if (k == 0 && k + 1 != i && playerAttendances[k]) {
 							ratingsEntity.increaseAttendanceCount(k);
 						}
 					}
 
+					// Last to submit or not
 					if (noRated > ratingsEntity.getAdminNums().length) {
 						tempList.add(ratingsEntity);
-						ratingsList.remove(i);
 
-						ratings.put(adminNums[j], ratingsList);
+						ratingsList.remove(j);
+						ratings.put(currAdminNo, ratingsList);
 						db.commit();
 					}
 					else {
-						ratingsList.set(i, ratingsEntity);
-
-						ratings.put(adminNums[j], ratingsList);
+						ratingsList.set(j, ratingsEntity);
+						ratings.put(currAdminNo, ratingsList);
 						db.commit();
 					}
 				}
-
-				i++;
 			}
 		}
 
 		// Commit to account
-		if (noRated >= adminNums.length) {
-			i = 0;
+		if (adminNums != null && noRated > tempList.get(0).getAdminNums().length) {
+			int j = 0;
 
 			for (RatingsEntity ratingsEntity : tempList) {
-				for (int j = 0; j < ratingsEntity.getAdminNums().length; j++) {
-					if (ratingsEntity.getAttendanceCount()[j] >= (adminNums.length - 1) / 2) {
-						AccountsDA.updateAccRating(ratingsEntity.getAdminNums()[j], ratingsEntity.getRatings()[j]);
-						AccountsDA.incrementAccMatch(ratingsEntity.getAdminNums()[j], true);
-						CommentsDA.addComment(adminNums[i], ratingsEntity.getAdminNums()[j], ratingsEntity.getComments()[j], ratingsEntity.getRatings()[j]);
+				for (int i = 0; i < ratingsEntity.getAdminNums().length; i++) {
+					if (ratingsEntity.getAttendanceCount()[i] >= (ratingsEntity.getAdminNums().length) / 2) {
+						String adminNo = ratingsEntity.getAdminNums()[i];
+
+						AccountsDA.updateAccRating(adminNo, ratingsEntity.getRatings()[i]);
+						CommentsDA.addComment(adminNums[j], adminNo, ratingsEntity.getComments()[i], ratingsEntity.getRatings()[i]);
+						
+						if (j == 0 || (j == 1 && i == 0)) {
+							AccountsDA.incrementAccMatch(adminNo, true);
+						}
 					}
 					else {
-						AccountsDA.incrementAccMatch(ratingsEntity.getAdminNums()[j], false);
+						if (j == 0 || (j == 1 && i == 0)) {
+							AccountsDA.incrementAccMatch(ratingsEntity.getAdminNums()[i], false);
+						}
 					}
 				}
 
-				i++;
+				j++;
 			}
 		}
 	}

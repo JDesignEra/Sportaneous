@@ -23,16 +23,14 @@ public class CommentsViewController {
 	@FXML private Text ratingTxt;
 	@FXML private GridPane commContentGridPane;
 
-	private static int index = 0;
-
-	private List<CommentsEntity> comments = CommentsDA.getComments(ProfileViewController.getAdminNo());
-	private String adminNo = comments.get(index).getAdminNo();
-	private String name = comments.get(index).getName();
-	private String comment = comments.get(index).getComment();
-	private int rating = comments.get(index).getRating();
+	private String adminNo;
+	private String name;
+	private String comment;
+	private int rating;
 
 	@FXML
 	private void initialize() {
+		commContentGridPane.getChildren().remove(commContentGridPane.getChildren().size() - 1);
 		commContentGridPane.add(Utils.cropCirclePhoto(adminNo, 75), 0, 0);
 		nameTxt.setText(name);
 		commentTxt.setText(comment);
@@ -41,14 +39,20 @@ public class CommentsViewController {
 
 	@FXML
 	private void commContentGridPaneOnMouseClick(MouseEvent event) {
-		ProfileViewController.viewProfile(adminNo, "/application/ProfileView.fxml");
+		 new ProfileViewController().viewProfile(adminNo, "/application/ProfileView.fxml");
 	}
 
-	public static void setIndex(int index) {
-		CommentsViewController.index = index;
+	public String getAdminNo() {
+		return adminNo;
 	}
 
-	public static int getIndex() {
-		return index;
+	public void setComments(String adminNo, int index) {
+		List<CommentsEntity> comments = CommentsDA.getComments(adminNo);
+		name = comments.get(index).getName();
+		comment = comments.get(index).getComment();
+		rating = comments.get(index).getRating();
+		this.adminNo = comments.get(index).getAdminNo();
+
+		initialize();
 	}
 }

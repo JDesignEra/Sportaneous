@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="rootGridPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1900.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationViewController">
+<GridPane fx:id="rootGridPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@assets/css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NotificationViewController">
    <children>
       <ScrollPane fitToHeight="true" fitToWidth="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <content>
-            <VBox fx:id="notificationsVbox" alignment="CENTER">
+            <VBox fx:id="notificationsVbox" alignment="CENTER" spacing="25.0">
                <children>
                   <GridPane fx:id="emptyNotifications" alignment="CENTER" vgap="25.0">
                     <columnConstraints>
@@ -41,11 +41,14 @@
                      </children>
                   </GridPane>
                </children>
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
             </VBox>
          </content>
-         <padding>
-            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
-         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
       </ScrollPane>
    </children>
    <columnConstraints>

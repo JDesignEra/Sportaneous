@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -13,35 +14,35 @@ import entity.RatingsEntity;
 
 import dataAccess.RatingsDA;
 
+import application.modules.RatingsCardViewController;
+
 public class RatingsViewController {
 	@FXML private VBox ratingContentVBox;
 	@FXML private GridPane emptyRatingGridPane;
 
-	private List<RatingsEntity> ratings;
-	private static int ratingIndex;
-
-	private URL ratingsCardViewURL = getClass().getResource("/application/modules/RatingsCardView.fxml");
+	private final URL ratingsCardViewURL = getClass().getResource("/application/modules/RatingsCardView.fxml");
 	
 	@FXML
 	private void initialize() {
-		ratings = RatingsDA.getRatings();
+		List<RatingsEntity> ratings = RatingsDA.getRatings();
 		
 		if (!ratings.isEmpty()) {
 			ratingContentVBox.getChildren().clear();
 			ratingContentVBox.setAlignment(Pos.TOP_CENTER);
 
-			for (ratingIndex = 0; ratingIndex < ratings.size(); ratingIndex++) {
+			for (int ratingIndex = 0; ratingIndex < ratings.size(); ratingIndex++) {
+				FXMLLoader loader = new FXMLLoader(ratingsCardViewURL);
+				
 				try {
-					ratingContentVBox.getChildren().add(FXMLLoader.load(ratingsCardViewURL));
+					ratingContentVBox.getChildren().add(loader.load());
 				}
-				catch (Exception e) {
+				catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				RatingsCardViewController ratingsCardViewController = loader.getController();
+				ratingsCardViewController.setRatings(ratings, ratingIndex);
 			}
 		}
-	}
-
-	public static int getRatingIndex() {
-		return ratingIndex;
 	}
 }

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.function.UnaryOperator;
 import java.util.regex.Pattern;
 
@@ -71,11 +72,11 @@ public class EditProfileViewController {
 	private Image img = new Image("/application/assets/uploads/default.png");
 	private ImageView imgView = new ImageView(img);
 	private Circle clip = new Circle(100, 100, 100);
+	
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 
 	@FXML
 	private void initialize() {
-		EquipmentsDA.initDA();
-
 		// Force Double for heightTxtField & weightTxtField
 		Pattern dblPattern = Pattern.compile("-?(([1-9][0-9]*)|0)?(\\.[0-9]*)?");
 
@@ -137,6 +138,8 @@ public class EditProfileViewController {
 					newComboBox.setPromptText("Intrerested Sport");
 					newComboBox.setCursor(Cursor.HAND);
 
+					newComboBox.setOnAction(this::intSportComboBoxOnAction);
+					
 					intSportFlowPane.getChildren().add(newComboBox);
 					FlowPane.setMargin(newComboBox, new Insets(2.5));
 				}
@@ -291,7 +294,14 @@ public class EditProfileViewController {
 						new Snackbar().successSpinner(rootGridPane, "Your profile settings has been saved successfully. Please wait while you are being redirected...", 4000);
 
 						// Delay on screen with timeline instead of using Thread.sleep()
-						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> ProfileViewController.viewSessionProfile()));
+						Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), ev -> {
+							try {
+								Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+							}
+							catch (IOException e) {
+								e.printStackTrace();
+							}
+						}));
 						timeline.play();
 						break;
 
@@ -355,6 +365,19 @@ public class EditProfileViewController {
 		content.getActions().add(dialogNoBtn);
 		dialog.show();
 	}
+	
+	// Event Listener on JFXButton[#intSportComboBox].onAction & JFXButton[#favSportComboBox].onAction.
+	@SuppressWarnings("unchecked")
+	@FXML
+	private void intSportComboBoxOnAction(ActionEvent event) {
+		if (event.getSource() instanceof ComboBox<?>) {
+			ComboBox<String> comboBox = (ComboBox<String>) event.getSource();
+			
+			if (comboBox.getSelectionModel().getSelectedItem().equals("None")) {
+				intSportFlowPane.getChildren().remove(comboBox);
+			}
+		}
+	}
 
 	// Event Listener on JFXButton[#intSportAddBtn].onAction.
 	@FXML
@@ -374,6 +397,8 @@ public class EditProfileViewController {
 
 			newComboBox.getItems().add("None");
 			newComboBox.getItems().addAll(intSports);
+			
+			newComboBox.setOnAction(this::intSportComboBoxOnAction);
 
 			intSportFlowPane.getChildren().add(newComboBox);
 			FlowPane.setMargin(newComboBox, new Insets(2.5));

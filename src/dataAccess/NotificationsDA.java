@@ -20,7 +20,7 @@ public class NotificationsDA {
 		notifications = db.getTreeMap("notifications");
 
 //		List<NotificationsEntity> temp = new ArrayList<>();
-//		temp.add(new NotificationsEntity("4321a", "David Beckham", "Jimmy Butler", "1234a", "Basketball", "Basketball Court", LocalDateTime.of(2018, 3, 14, 16, 00), 0));
+//		temp.add(new NotificationsEntity("admin", "Administrator", "Roger Federer", "1234b", null, null, null, 3));
 //		notifications.put("admin", temp);
 		db.commit();
 	}
@@ -48,15 +48,7 @@ public class NotificationsDA {
 	 * @param status
 	 */
 	public static void addNotifications(String userAdminNo, int status) {
-		String sessionName = AccountsDA.getName();
-		String sessionAd = AccountsDA.getAdminNo();
-		String userName = AccountsDA.getAccData(userAdminNo).getName();
-
-		List<NotificationsEntity> notificationsList = (notifications.get(userAdminNo) != null ? notifications.get(userAdminNo) : new ArrayList<>());
-		notificationsList.add(new NotificationsEntity(userAdminNo, userName, sessionName, sessionAd, null, null, null, status));
-		notifications.put(userAdminNo, notificationsList);
-
-		db.commit();
+		NotificationsDA.addNotifications(userAdminNo, null, null, null, 3);
 	}
 
 	public static void addNotifications(String userAdminNo, String sports, String location, LocalDateTime dateTime, int status) {

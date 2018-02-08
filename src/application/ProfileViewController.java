@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 
 import com.jfoenix.controls.JFXButton;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -38,32 +40,41 @@ public class ProfileViewController {
 	@FXML private Circle dpCircle;
 	@FXML private TextFlow favSportTxtFlow, intSportsTxtFlow;
 	@FXML private JFXButton actionBtn, prevComBtn, nxtComBtn, bckBtn;
-	@FXML private GridPane profileGridPane, commentGridPane, commContentGridPane;
+	@FXML private GridPane profileGridPane, commentGridPane, emptyCommContentGridPane;
 	@FXML private StackPane stackPaneRoot;
 	@FXML private FlowPane buttonsFlowPane;
 
-	private static String adminNo = AccountsDA.getAdminNo();
-	private static String name = AccountsDA.getName();
-	private static String favSport = AccountsDA.getFavSport();
-	private static String intSports = AccountsDA.getInterestedSports();
-	private static String intro = AccountsDA.getIntro();
-	private static int matchPlayed = AccountsDA.getMatchPlayed();
-	private static int totalMatch = AccountsDA.getTotalMatch();
-	private static double height = AccountsDA.getHeight();
-	private static double weight = AccountsDA.getWeight();
-	private static double rating = AccountsDA.getCalRating();
-	private static boolean heightVisibility = AccountsDA.getHeightVisibility();
-	private static boolean weightVisbility = AccountsDA.getWeightVisibility();
+	private GridPane commContentGridPane;
 
-	private static int friendStatus = 3;
-	private static String backURL;
+	private String adminNo = AccountsDA.getAdminNo();
+	private String name = AccountsDA.getName();
+	private String favSport = AccountsDA.getFavSport();
+	private String intSports = AccountsDA.getInterestedSports();
+	private String intro = AccountsDA.getIntro();
+	private int matchPlayed = AccountsDA.getMatchPlayed();
+	private int totalMatch = AccountsDA.getTotalMatch();
+	private double height = AccountsDA.getHeight();
+	private double weight = AccountsDA.getWeight();
+	private double rating = AccountsDA.getCalRating();
+	private boolean heightVisibility = AccountsDA.getHeightVisibility();
+	private boolean weightVisbility = AccountsDA.getWeightVisibility();
 
-	private static final URL profileViewURL = ProfileViewController.class.getResource("/application/ProfileView.fxml");
+	private int commentIndex = 0;
+	private int friendStatus = 3;
+	private String backURL;
+
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL commentsViewURL = getClass().getResource("/application/modules/CommentsView.fxml");
 	private final URL editProfileViewURL = getClass().getResource("/application/EditProfileView.fxml");
 
+	private CommentsViewController commentsViewController;
+
 	@FXML
 	private void initialize() {
+		if (profileGridPane.getChildren().get(profileGridPane.getChildren().size() - 1) instanceof ImageView) {
+			profileGridPane.getChildren().remove(profileGridPane.getChildren().size() - 1);
+		}
+
 		profileGridPane.add(Utils.cropCirclePhoto(adminNo, 100), 0, 0);
 		nameTxt.setText(name);
 		matchNoTxt.setText(Integer.toString(matchPlayed) + " / " + Integer.toString(totalMatch));
@@ -116,19 +127,35 @@ public class ProfileViewController {
 		if (CommentsDA.getComments(adminNo).size() > 1) {
 			nxtComBtn.setDisable(false);
 		}
+		else {
+			nxtComBtn.setDisable(true);
+		}
 
 		if (!CommentsDA.getComments(adminNo).isEmpty()) {
+			commentGridPane.getChildren().remove(emptyCommContentGridPane);
 			commentGridPane.getChildren().remove(commContentGridPane);
 
+			FXMLLoader loader = new FXMLLoader(commentsViewURL);
+
 			try {
-				commContentGridPane = FXMLLoader.load(commentsViewURL);
+				commContentGridPane = loader.load();
+				commContentGridPane.getStyleClass().add("commentContent");
 			}
-			catch (Exception e) {
+			catch (IOException e) {
 				e.getStackTrace();
 			}
 
+			commentsViewController = loader.getController();
+			commentsViewController.setComments(adminNo, commentIndex);
+
 			commentGridPane.add(commContentGridPane, 0, 1);
 			GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+		}
+		else if (!commentGridPane.getChildren().contains(emptyCommContentGridPane)) {
+			commentGridPane.getChildren().remove(commContentGridPane);
+
+			commentGridPane.add(emptyCommContentGridPane, 0, 1);
+			GridPane.setColumnSpan(emptyCommContentGridPane, GridPane.REMAINING);
 		}
 
 		// Top button
@@ -183,9 +210,9 @@ public class ProfileViewController {
 					friendStatus = 2;
 
 					try {
-						Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
+						Main.getRoot().setCenter(new FXMLLoader(getClass().getResource(backURL)).load());
 					}
-					catch (Exception e) {
+					catch (IOException e) {
 						e.printStackTrace();
 					}
 				});
@@ -212,9 +239,9 @@ public class ProfileViewController {
 
 			default:
 				try {
-					Main.getRoot().setCenter(FXMLLoader.load(editProfileViewURL));
+					Main.getRoot().setCenter(new FXMLLoader(editProfileViewURL).load());
 				}
-				catch (Exception e) {
+				catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
@@ -224,44 +251,26 @@ public class ProfileViewController {
 	// Event Listener on JFXButton[#bckBtn].onAction
 	@FXML
 	private void bckBtnOnAction(ActionEvent event) {
-		if (backURL.contains("ProfileView.fxml")) {
-			viewSessionProfile();
+		try {
+			Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
 		}
-		else {
-			try {
-				Main.getRoot().setCenter(FXMLLoader.load(getClass().getResource(backURL)));
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	// Event Listener on JFXButton[#prevComBtn].onAction
 	@FXML
 	private void prevComBtnOnAction(ActionEvent event) {
-		if (CommentsViewController.getIndex() > 0) {
+		if (commentIndex > 0) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> {
 				new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0);
 			}), new KeyFrame(Duration.millis(300), actionEv -> {
-				CommentsViewController.setIndex(CommentsViewController.getIndex() - 1);
-
-				commContentGridPane = new GridPane();
-				commContentGridPane.getStyleClass().add("commContent");
-
-				try {
-					commContentGridPane = FXMLLoader.load(commentsViewURL);
-				}
-				catch (Exception e) {
-					e.getStackTrace();
-				}
-
-				commentGridPane.add(commContentGridPane, 0, 1);
-				GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+				commentsViewController.setComments(adminNo, --commentIndex);
 
 				nxtComBtn.setDisable(false);
 
-				if (CommentsViewController.getIndex() <= 0) {
+				if (commentIndex <= 0) {
 					prevComBtn.setDisable(true);
 				}
 				else {
@@ -276,27 +285,14 @@ public class ProfileViewController {
 	// Event Listener on JFXButton[#nxtComBtn].onAction
 	@FXML
 	private void nxtComBtnOnAction(ActionEvent event) {
-		if (CommentsViewController.getIndex() < CommentsDA.getComments(adminNo).size() - 1) {
+		if (commentIndex < CommentsDA.getComments(adminNo).size() - 1) {
 			new Timeline(new KeyFrame(Duration.ZERO, fadeOutEv -> new TransitionAnimation().fadeOut(250, commContentGridPane, 1.0)),
 					new KeyFrame(Duration.millis(300), actionEv -> {
-						CommentsViewController.setIndex(CommentsViewController.getIndex() + 1);
-
-						commContentGridPane = new GridPane();
-						commContentGridPane.getStyleClass().add("commContent");
-
-						try {
-							commContentGridPane = FXMLLoader.load(commentsViewURL);
-						}
-						catch (Exception e) {
-							e.getStackTrace();
-						}
-
-						commentGridPane.add(commContentGridPane, 0, 1);
-						GridPane.setColumnSpan(commContentGridPane, GridPane.REMAINING);
+						commentsViewController.setComments(adminNo, ++commentIndex);
 
 						prevComBtn.setDisable(false);
 
-						if (CommentsViewController.getIndex() == CommentsDA.getComments(adminNo).size() - 1) {
+						if (commentIndex == CommentsDA.getComments(adminNo).size() - 1) {
 							nxtComBtn.setDisable(true);
 						}
 						else {
@@ -308,31 +304,6 @@ public class ProfileViewController {
 		}
 	}
 
-	public static void viewSessionProfile() {
-		backURL = "";
-		friendStatus = 3;
-		adminNo = AccountsDA.getAdminNo();
-		name = AccountsDA.getName();
-		favSport = AccountsDA.getFavSport();
-		intSports = AccountsDA.getInterestedSports();
-		intro = AccountsDA.getIntro();
-		matchPlayed = AccountsDA.getMatchPlayed();
-		totalMatch = AccountsDA.getTotalMatch();
-		height = AccountsDA.getHeight();
-		weight = AccountsDA.getWeight();
-		rating = AccountsDA.getCalRating();
-		heightVisibility = AccountsDA.getHeightVisibility();
-		weightVisbility = AccountsDA.getWeightVisibility();
-		CommentsViewController.setIndex(0);
-
-		try {
-			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * Method for view friend's / other's profile
 	 * 
@@ -341,33 +312,41 @@ public class ProfileViewController {
 	 * @param returnLocation
 	 *            - URL location to return to
 	 */
-	public static void viewProfile(String adminNo, String returnLocation) {
-		backURL = returnLocation;
-		friendStatus = FriendsDA.checkStatus(adminNo);
-		AccountsEntity account = AccountsDA.getAccData(adminNo);
-
-		ProfileViewController.adminNo = account.getAdminNo();
-		name = account.getName();
-		favSport = account.getFavSport();
-		intSports = account.getInterestedSports();
-		intro = (account.getIntro().isEmpty() ? "It appears that this user does not need any introduction..." : account.getIntro());
-		height = account.getHeight();
-		weight = account.getWeight();
-		heightVisibility = account.getHeightVisibility();
-		weightVisbility = account.getWeightVisibility();
-		rating = account.getCalRating();
-		matchPlayed = account.getMatchPlayed();
-		totalMatch = account.getTotalMatch();
+	public void viewProfile(String adminNo, String returnLocation) {
+		FXMLLoader loader = new FXMLLoader(profileViewURL);
 
 		try {
-			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+			Main.getRoot().setCenter(loader.load());
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		ProfileViewController profileViewController = loader.getController();
+
+		profileViewController.backURL = returnLocation;
+		profileViewController.friendStatus = FriendsDA.checkStatus(adminNo);
+		AccountsEntity account = AccountsDA.getAccData(adminNo);
+
+		profileViewController.adminNo = account.getAdminNo();
+		profileViewController.name = account.getName();
+		profileViewController.favSport = account.getFavSport();
+		profileViewController.intSports = account.getInterestedSports();
+		profileViewController.intro = (account.getIntro().isEmpty() ? "It appears that this user does not need any introduction..." : account.getIntro());
+		profileViewController.matchPlayed = account.getMatchPlayed();
+		profileViewController.totalMatch = account.getTotalMatch();
+		profileViewController.height = account.getHeight();
+		profileViewController.weight = account.getWeight();
+		profileViewController.heightVisibility = account.getHeightVisibility();
+		profileViewController.weightVisbility = account.getWeightVisibility();
+		profileViewController.rating = account.getCalRating();
+		profileViewController.matchPlayed = account.getMatchPlayed();
+		profileViewController.totalMatch = account.getTotalMatch();
+
+		profileViewController.initialize();
 	}
 
-	public static String getAdminNo() {
+	public String getAdminNo() {
 		return adminNo;
 	}
 }

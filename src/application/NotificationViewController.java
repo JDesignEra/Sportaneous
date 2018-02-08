@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
@@ -13,38 +14,35 @@ import entity.NotificationsEntity;
 
 import dataAccess.NotificationsDA;
 
+import application.modules.NotificationCardViewController;
+
 public class NotificationViewController {
 	@FXML private GridPane emptyNotifications, rootGridPane;
 	@FXML private VBox notificationsVbox;
 
-	private final URL notificationsURL = getClass().getResource("/application/Notification.fxml");
-	private static List<NotificationsEntity> notification;
-	private static int notiIndex;
+	private final URL notificationsURL = getClass().getResource("/application/modules/NotificationCardView.fxml");
 
 	@FXML
 	private void initialize() {
-		notification = NotificationsDA.getNotifications();
+		List<NotificationsEntity> notifications = NotificationsDA.getNotifications();
 
-		if (!notification.isEmpty()) {
+		if (!notifications.isEmpty()) {
 			notificationsVbox.getChildren().clear();
 			notificationsVbox.alignmentProperty().set(Pos.TOP_CENTER);
 
-			for (notiIndex = 0; notiIndex < notification.size(); notiIndex++) {	
-					try {
-						notificationsVbox.getChildren().add(FXMLLoader.load(notificationsURL));
-					}
-					catch (Exception e) {
-						e.printStackTrace();
-					}		
+			for (int notiIndex = 0; notiIndex < notifications.size(); notiIndex++) {
+				FXMLLoader loader = new FXMLLoader(notificationsURL);
+				
+				try {
+					notificationsVbox.getChildren().add(loader.load());
+				}
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				NotificationCardViewController notificationCardViewController = loader.getController();
+				notificationCardViewController.setNotification(notifications, notiIndex);
 			}
 		}
-	}
-
-	public static int getNotiIndex() {
-		return notiIndex;
-	}
-
-	public static List<NotificationsEntity> getNotification() {
-		return notification;
 	}
 }

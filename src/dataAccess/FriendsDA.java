@@ -56,7 +56,6 @@ public class FriendsDA {
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
 				i = 0;
-				System.out.println(friendsList.get(i).getFriendAdminNo());
 				friendsList.remove(i);
 				
 				friends.put(friendAdminNo, friendsList);
@@ -73,7 +72,6 @@ public class FriendsDA {
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
 		for (FriendsEntity friendsEntity : friendsList) {
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
-				System.out.println(friendsList.get(i).getFriendAdminNo());
 				friendsList.remove(i);
 				
 				friends.put(sessionID, friendsList);
@@ -88,13 +86,14 @@ public class FriendsDA {
 
 	public static void acceptRequest(String friendAdminNo) {
 		String sessionID = AccountsDA.getAdminNo();
-		int i = 0;
 
 		// Session's Friend's Friend List
 		List<FriendsEntity> friendsList = (friends.get(friendAdminNo) != null ? friends.get(friendAdminNo) : new ArrayList<>());
-		for (FriendsEntity friendsEntity : friendsList) {
+		
+		for (int i = 0; i < friendsList.size(); i++) {
+			FriendsEntity friendsEntity = friendsList.get(i);
+			
 			if (friendsEntity.getFriendAdminNo().equals(sessionID)) {
-
 				friendsEntity.setStatus(1);
 				friendsList.set(i, friendsEntity);
 				friends.put(friendAdminNo, friendsList);
@@ -102,14 +101,14 @@ public class FriendsDA {
 
 				break;
 			}
-
-			i++;
 		}
 
-		i = 0;
 		// Session's Friend List
 		friendsList = (friends.get(sessionID) != null ? friends.get(sessionID) : new ArrayList<>());
-		for (FriendsEntity friendsEntity : friendsList) {
+		
+		for (int i = 0; i < friendsList.size(); i++) {
+			FriendsEntity friendsEntity = friendsList.get(i);
+			
 			if (friendsEntity.getFriendAdminNo().equals(friendAdminNo)) {
 				friendsEntity.setStatus(1);
 				friendsList.set(i, friendsEntity);
@@ -119,8 +118,6 @@ public class FriendsDA {
 				
 				break;
 			}
-
-			i++;
 		}
 	}
 

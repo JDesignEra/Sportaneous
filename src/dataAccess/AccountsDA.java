@@ -26,7 +26,7 @@ public class AccountsDA {
 		db = DBMaker.newFileDB(new File("tmp/accounts.db")).closeOnJvmShutdown().make();
 		accounts = db.getTreeMap("accounts");
 
-//		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 5 }, 0, 0, 0));
+//		accounts.put("admin", new AccountsEntity("admin", "admin@nyp.edu.sg", "password", "Administrator", "", "", "", 0, 0, false, false, new int[] { 0, 0, 0, 0, 5 }, 5, 5, 0));
 //		accounts.put("1234a", new AccountsEntity("1234a", "1234f@mymail.nyp.edu.sg", "password", "Jimmy Butler", "Basketball", "Basketball,Squash,Tennis", "", 0, 0, false, false,
 //				new int[] { 1, 0, 3, 0, 0 }, 0, 0, 0));
 //		accounts.put("4321a", new AccountsEntity("4321a", "4321a@mymail.nyp.edu.sg", "password", "David Beckham", "Soccer", "Soccer,Squash,Basketball", "", 0, 0, false, false,

@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,12 +15,15 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 import dataAccess.AccountsDA;
+import dataAccess.NotificationsDA;
+import dataAccess.RatingsDA;
 
 public class NavigationViewController {
 	@FXML private JFXButton navProfileBtn, navPlayBtn, navFriendsBtn, navRatingsBtn, navNotiBtn, navLogoutBtn;
 	@FXML private GridPane rootPane;
 
 	private final URL lrfViewURL = getClass().getResource("/application/LRFView.fxml");
+	private final URL profileViewURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL findGameViewURL = getClass().getResource("/application/FindAGame_View.fxml");
 	private final URL friendsViewURL = getClass().getResource("/application/FriendsView.fxml");
 	private final URL notificationViewURL = getClass().getResource("/application/NotificationView.fxml");
@@ -33,18 +37,27 @@ public class NavigationViewController {
 			translateTransition.setToY(0);
 			translateTransition.play();
 		});
+		
+		notificationSizeCheck();
+		ratingSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navProfileBtn].onAction
 	@FXML
 	private void navProfileBtnOnAction(ActionEvent event) {
-		ProfileViewController.viewSessionProfile();
+		try {
+			Main.getRoot().setCenter(FXMLLoader.load(profileViewURL));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		for (Node node : rootPane.getChildren()) {
 			node.getStyleClass().remove("active");
 		}
 
 		navProfileBtn.getStyleClass().add("active");
+		notificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navPlayBtn].onAction
@@ -53,7 +66,7 @@ public class NavigationViewController {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(findGameViewURL));
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -62,6 +75,7 @@ public class NavigationViewController {
 		}
 
 		navPlayBtn.getStyleClass().add("active");
+		notificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navFriendsBtn].onAction
@@ -70,7 +84,7 @@ public class NavigationViewController {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(friendsViewURL));
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -79,6 +93,7 @@ public class NavigationViewController {
 		}
 
 		navFriendsBtn.getStyleClass().add("active");
+		notificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navRatingsBtn].onAction
@@ -87,7 +102,7 @@ public class NavigationViewController {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(ratingsViewURL));
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -96,6 +111,7 @@ public class NavigationViewController {
 		}
 
 		navRatingsBtn.getStyleClass().add("active");
+		ratingSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navNotiBtn].onAction
@@ -104,7 +120,7 @@ public class NavigationViewController {
 		try {
 			Main.getRoot().setCenter(FXMLLoader.load(notificationViewURL));
 		}
-		catch (Exception e) {
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -113,6 +129,7 @@ public class NavigationViewController {
 		}
 
 		navNotiBtn.getStyleClass().add("active");
+		notificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navLogoutBtn].onAction
@@ -125,9 +142,25 @@ public class NavigationViewController {
 				Main.getRoot().setCenter(FXMLLoader.load(lrfViewURL));
 				Main.getRoot().setBottom(null);
 			}
-			catch (Exception e) {
+			catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+	}
+
+	private void notificationSizeCheck() {
+		navNotiBtn.getStyleClass().remove("badge");
+		
+		if (!NotificationsDA.getNotifications().isEmpty()) {
+			navNotiBtn.getStyleClass().add("badge");
+		}
+	}
+	
+	private void ratingSizeCheck() {
+		navNotiBtn.getStyleClass().remove("badge");
+		
+		if (!RatingsDA.getRatings().isEmpty()) {
+			navNotiBtn.getStyleClass().add("badge");
 		}
 	}
 }

@@ -7,6 +7,10 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.shape.Circle;
 
 public final class Utils {
+	private Utils() {
+		throw new IllegalStateException("Utils class");
+	}
+	
 	public static String getRatingShapes(double rating) {
 		StringBuilder ratingStars = new StringBuilder();
 		

@@ -20,14 +20,16 @@ import entity.AccountsEntity;
 import dataAccess.AccountsDA;
 import dataAccess.FriendsDA;
 
+import application.modules.FriendCardViewController;
+
 public class FriendsViewController {
 	@FXML JFXTextField nameAdminNoTxtField, emailTxtField;
 	@FXML JFXToggleButton srcTypeToggleBtn;
 	@FXML GridPane emptyFriendsContent;
 	@FXML FlowPane friendsFlowPane;
 
-	private static int accIndex;
-	private static List<AccountsEntity> accounts = null;
+	private int accIndex;
+	private List<AccountsEntity> accounts;
 
 	private final URL friendCardURL = getClass().getResource("/application/modules/FriendCardView.fxml");
 
@@ -81,12 +83,17 @@ public class FriendsViewController {
 
 			for (accIndex = 0; accIndex < accounts.size(); accIndex++) {
 				if (!accounts.get(accIndex).getAdminNo().equals(AccountsDA.getAdminNo())) {
+					FXMLLoader loader = new FXMLLoader(friendCardURL);
+					
 					try {
-						friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
+						friendsFlowPane.getChildren().add(loader.load());
 					}
 					catch (IOException e) {
 						e.printStackTrace();
 					}
+					
+					FriendCardViewController friendCardViewController = loader.getController();
+					friendCardViewController.setAccounts(accounts, accIndex);
 				}
 			}
 		}
@@ -104,25 +111,18 @@ public class FriendsViewController {
 
 		for (accIndex = 0; accIndex < accounts.size(); accIndex++) {
 			if (!accounts.get(accIndex).getAdminNo().equals(AccountsDA.getAdminNo())) {
+				FXMLLoader loader = new FXMLLoader(friendCardURL);
+				
 				try {
-					friendsFlowPane.getChildren().add(FXMLLoader.load(friendCardURL));
+					friendsFlowPane.getChildren().add(loader.load());
 				}
 				catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				FriendCardViewController friendCardViewController = loader.getController();
+				friendCardViewController.setAccounts(accounts, accIndex);
 			}
 		}
-	}
-
-	public static int getAccIndex() {
-		return accIndex;
-	}
-
-	public static List<AccountsEntity> getAccounts() {
-		return accounts;
-	}
-
-	public static void setAccounts(List<AccountsEntity> accList) {
-		accounts = accList;
 	}
 }

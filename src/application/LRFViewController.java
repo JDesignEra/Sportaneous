@@ -51,6 +51,7 @@ public class LRFViewController {
 	@FXML private JFXButton fpassBtn;
 
 	private final URL logoURL = getClass().getResource("/application/assets/img/Sportaneous.gif");
+	private final URL profileViewControllerURL = getClass().getResource("/application/ProfileView.fxml");
 	private final URL navigationViewURL = getClass().getResource("/application/NavigationView.fxml");
 
 	@FXML
@@ -162,7 +163,7 @@ public class LRFViewController {
 				RatingsDA.initDA();
 
 				try {
-					ProfileViewController.viewSessionProfile();
+					Main.getRoot().setCenter(FXMLLoader.load(profileViewControllerURL));
 					Main.getRoot().setBottom(FXMLLoader.load(navigationViewURL));
 				}
 				catch (Exception e) {

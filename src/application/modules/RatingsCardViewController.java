@@ -34,7 +34,6 @@ import dataAccess.RatingsDA;
 import modules.Utils;
 
 import application.Main;
-import application.RatingsViewController;
 
 public class RatingsCardViewController {
 	@FXML private GridPane profileGridPane;
@@ -45,26 +44,28 @@ public class RatingsCardViewController {
 	@FXML private Text sportTxt;
 	@FXML private Text playerCountsTxt;
 
-	private List<RatingsEntity> ratings = RatingsDA.getRatings();
-	private int ratingIndex = RatingsViewController.getRatingIndex();
+	private List<RatingsEntity> ratings;
+	private int ratingIndex;
 
-	private String name = AccountsDA.getAccData(ratings.get(ratingIndex).getHostAdminNo()).getName();
-	private String sport = RatingsDA.getRatings().get(ratingIndex).getSport();
-	private LocalDateTime dateTime = RatingsDA.getRatings().get(ratingIndex).getDateTime();
-	private int playerCount = RatingsDA.getRatings().get(ratingIndex).getAdminNums().length + 1;
+	private String name;
+	private String sport;
+	private LocalDateTime dateTime;
+	private int playerCount;
 
 	private final URL ratingsPlayerViewURL = getClass().getResource("/application/RatingsView.fxml");
 	private final URL ratingsPlayerCardURL = getClass().getResource("/application/modules/RatingsPlayerCardView.fxml");
 
 	@FXML
 	private void initialize() {
-		profileGridPane.add(Utils.cropCirclePhoto(ratings.get(ratingIndex).getHostAdminNo(), 75), 0, 0);
-		nameTxt.setText(name);
-		dayTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("EEEE")));
-		dateTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-		timeTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("h:m a")));
-		sportTxt.setText(sport);
-		playerCountsTxt.setText(Integer.toString(playerCount));
+		if (ratings != null && !ratings.isEmpty()) {
+			profileGridPane.add(Utils.cropCirclePhoto(ratings.get(ratingIndex).getHostAdminNo(), 75), 0, 0);
+			nameTxt.setText(name);
+			dayTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("EEEE")));
+			dateTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			timeTxt.setText(dateTime.format(DateTimeFormatter.ofPattern("h:m a")));
+			sportTxt.setText(sport);
+			playerCountsTxt.setText(Integer.toString(playerCount));
+		}
 	}
 
 	// Event Listener on JFXButton[#ratePlayersBtn].onAction
@@ -81,14 +82,17 @@ public class RatingsCardViewController {
 		ScrollPane playerRatingScrollPane = new ScrollPane(playerRatingContent);
 
 		for (int i = 0; i < ratings.get(ratingIndex).getAdminNums().length; i++) {
-			RatingsPlayerCardViewController.setPlayerIndex(i);
+			FXMLLoader loader = new FXMLLoader(ratingsPlayerCardURL);
 
 			try {
-				playerRatingContent.getChildren().add(FXMLLoader.load(ratingsPlayerCardURL));
+				playerRatingContent.getChildren().add(loader.load());
 			}
 			catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			RatingsPlayerCardViewController ratingsPlayerCardViewController = loader.getController();
+			ratingsPlayerCardViewController.setPlayerRatings(ratings.get(ratingIndex).getAdminNums()[i]);
 		}
 
 		// Submit Dialog Buttons
@@ -156,5 +160,17 @@ public class RatingsCardViewController {
 		content.getActions().addAll(submitBtn, cancelBtn);
 
 		dialog.show();
+	}
+	
+	public void setRatings(List<RatingsEntity> ratings, int index) {
+		this.ratings = ratings;
+		ratingIndex = index;
+		
+		name = AccountsDA.getAccData(ratings.get(index).getHostAdminNo()).getName();
+		sport = RatingsDA.getRatings().get(index).getSport();
+		dateTime = RatingsDA.getRatings().get(index).getDateTime();
+		playerCount = RatingsDA.getRatings().get(index).getAdminNums().length + 1;
+		
+		initialize();
 	}
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<GridPane alignment="CENTER" hgap="25.0" maxWidth="-Infinity" prefWidth="1000.0" styleClass="card" stylesheets="@../assets/css/application.css" vgap="25.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.modules.NotificationCardViewController">
+	<children>
+      <TextFlow GridPane.columnSpan="2147483647">
+         <children>
+      		<Text fx:id="iconTxt" strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <font>
+                  <Font name="Roboto Medium" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="fontAwesome" />
+                  <String fx:value="x2" />
+               </styleClass>
+            </Text>
+            <Text fx:id="titleTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h0" text="TITLE" />
+         </children>
+      </TextFlow>
+      <GridPane fx:id="profileGridPane" vgap="15.0" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+      		<Circle fill="WHITE" radius="75.0" stroke="#ef4956" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" styleClass="dp">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin></Circle>
+            <Text fx:id="nameTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h2" text="Text" GridPane.rowIndex="1" />
+         </children>
+         <GridPane.margin>
+            <Insets left="25.0" right="25.0" />
+         </GridPane.margin>
+      </GridPane>
+      <Text fx:id="contentTxt" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h3" text="Something..." textOrigin="CENTER" wrappingWidth="690.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <HBox fx:id="actionBtnHBox" alignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+         <children>
+            <JFXButton fx:id="dismissBtn" onAction="#dismissBtnOnAction" prefWidth="1600.0" styleClass="danger" text="DISMISS" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+	</children>
+   <columnConstraints>
+      <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+      <ColumnConstraints />
+      <ColumnConstraints hgrow="NEVER" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints valignment="CENTER" />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+   </padding>
+</GridPane>

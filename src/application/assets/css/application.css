@@ -446,7 +446,7 @@
 }
 
 .jfx-button.danger {
-	-fx-background-color: #EF4956;
+	-fx-background-color: #FF1744;
 }
 
 .jfx-button.info {
@@ -670,6 +670,10 @@
 	-fx-padding: 5.0px;
 }
 
+#nav .fontAwesome.badge {
+	-fx-text-fill: #26A69A;
+}
+
 #nav .fontAwesome.active {
 	-fx-text-fill: #EF4956;
 }
@@ -778,7 +782,7 @@
 
 #loginView .fpass .content .jfx-button.fpassBtn {
 	-fx-font-family: "Roboto Medium", "Roboto", "Verdana";
-	-fx-background-color: #EF4956;
+	-fx-background-color: #FF1744;
 	-fx-padding: 10.0px 30.0px 10.0px 30.0px;
 }
 

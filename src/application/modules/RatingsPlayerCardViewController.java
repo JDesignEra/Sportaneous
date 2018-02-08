@@ -11,14 +11,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 import entity.AccountsEntity;
-import entity.RatingsEntity;
 
 import dataAccess.AccountsDA;
-import dataAccess.RatingsDA;
 
 import modules.Utils;
-
-import application.RatingsViewController;
 
 public class RatingsPlayerCardViewController {
 	@FXML private Text nameTxt;
@@ -30,33 +26,31 @@ public class RatingsPlayerCardViewController {
 	@FXML private JFXToggleButton attendToggleBtn;
 	@FXML private GridPane rootGridPane;
 
-	private int ratingIndex = RatingsViewController.getRatingIndex();
-	private RatingsEntity rating = RatingsDA.getRatings().get(ratingIndex - 1);
-	
-	private static int playerIndex;
-	private AccountsEntity account = AccountsDA.getAccData(rating.getAdminNums()[playerIndex]);
+	private AccountsEntity account;
 
 	@FXML
 	private void initialize() {
-		rootGridPane.add(Utils.cropCirclePhoto(account.getAdminNo(), 100), 0, 0);
-		nameTxt.setText(account.getName());
-		ratingStarsTxt.setText(Utils.getRatingShapes(account.getCalRating()));
-		matchesTxt.setText(Integer.toString(account.getMatchPlayed()) + " / " + Integer.toString(account.getTotalMatch()));
+		if (account != null) {
+			rootGridPane.add(Utils.cropCirclePhoto(account.getAdminNo(), 100), 0, 0);
+			nameTxt.setText(account.getName());
+			ratingStarsTxt.setText(Utils.getRatingShapes(account.getCalRating()));
+			matchesTxt.setText(Integer.toString(account.getMatchPlayed()) + " / " + Integer.toString(account.getTotalMatch()));
 
-		if (account.getHeightVisibility() || account.getWeightVisibility()) {
-			if (account.getHeightVisibility() && account.getWeightVisibility()) {
-				heightWeightTxt.setText(Double.toString(account.getHeight()) + " m | " + Double.toString(account.getWeight()) + " kg");
-			}
-			else if (account.getHeightVisibility()) {
-				heightWeightTxt.setText(Double.toString(account.getHeight()) + " kg");
+			if (account.getHeightVisibility() || account.getWeightVisibility()) {
+				if (account.getHeightVisibility() && account.getWeightVisibility()) {
+					heightWeightTxt.setText(Double.toString(account.getHeight()) + " m | " + Double.toString(account.getWeight()) + " kg");
+				}
+				else if (account.getHeightVisibility()) {
+					heightWeightTxt.setText(Double.toString(account.getHeight()) + " kg");
+				}
+				else {
+					heightWeightTxt.setText(Double.toString(account.getWeight()));
+				}
 			}
 			else {
-				heightWeightTxt.setText(Double.toString(account.getWeight()));
+				heightWeightTxt.setVisible(false);
+				heightWeightTxt.setManaged(false);
 			}
-		}
-		else {
-			heightWeightTxt.setVisible(false);
-			heightWeightTxt.setManaged(false);
 		}
 	}
 
@@ -83,8 +77,9 @@ public class RatingsPlayerCardViewController {
 			}
 		}
 	}
-	
-	public static void setPlayerIndex(int index) {
-		playerIndex = index;
+
+	public void setPlayerRatings(String adminNo) {
+		account = AccountsDA.getAccData(adminNo);
+		initialize();
 	}
 }
