@@ -17,12 +17,7 @@ public class FriendsDA {
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/friends.db")).closeOnJvmShutdown().make();
 		friends = db.getTreeMap("friends");
-
-//		List<FriendsEntity> temp = new ArrayList<>();
-//		temp.add(new FriendsEntity("admin", "1234a", 1));
-//		temp.add(new FriendsEntity("admin", "4321a", 1));
-//		temp.add(new FriendsEntity("admin", "1234b", 0));
-//		friends.put("admin", temp);
+		
 		db.commit();
 	}
 

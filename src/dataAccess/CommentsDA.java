@@ -18,12 +18,6 @@ public class CommentsDA {
 		db = DBMaker.newFileDB(new File("tmp/comments.db")).closeOnJvmShutdown().make();
 		comments = db.getTreeMap("comments");
 
-//		List<CommentsEntity> ceList = new ArrayList<>();
-//		ceList.add(new CommentsEntity("1234a", "Jimmy Butler", "Great Player!", 4));
-//		ceList.add(new CommentsEntity("4321a", "David Beckham", "Awesome team player!", 5));
-//		ceList.add(new CommentsEntity("1234b", "Roger Federer", "Friendly player with pretty good skill", 3));
-//		ceList.add(new CommentsEntity("4321b", "Lee Chong Wei", "Test", 4));
-//		comments.put("admin", ceList);
 		db.commit();
 	}
 

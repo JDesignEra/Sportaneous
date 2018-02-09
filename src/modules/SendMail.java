@@ -21,7 +21,7 @@ public class SendMail {
 	private static final String SMTP_SERVER_HOST = "smtp.gmail.com";
 	private static final String SMTP_SERVER_PORT = "587";
 	private static final String SMTP_USERNAME = "joel.jdesignera.dev@gmail.com";
-	private static final String FROM_USER_EMAIL = "admin@sportaneous.com";
+	private static final String FROM_USER_EMAIL = SMTP_USERNAME;
 	private static final String FROM_USER_FULL_NAME = "Sportaneous";
 	private static final String REFRESH_TOKEN = "1/dHSTRJsFN4JQdXPmvxImmfNh-Mg5IEzavoDdTK9044U";
 	private static final String CLIENT_ID = "270557509619-0ug5hcbibgktfqk8fo0c3icjo8akq3i3.apps.googleusercontent.com";
@@ -55,7 +55,7 @@ public class SendMail {
 		}
 	}
 
-	public String refreshAccessToken() {
+	private String refreshAccessToken() {
 		try {
 			TokenResponse response = new GoogleRefreshTokenRequest(new NetHttpTransport(), new JacksonFactory(), REFRESH_TOKEN, CLIENT_ID, CLIENT_SEC).execute();
 			return response.getAccessToken();

@@ -37,13 +37,9 @@ public class HostAGame_AddedFriendCardController {
 	private AccountsEntity retrievedAcc;
 	
 	private String adminNo = "";
-	
-	private Utils misc;
 
 	// Event Listener on JFXButton[#addBtn].onAction
 	public void initialize() {
-		misc = new Utils();
-		
 		retrievedList = HostAGame_CenterViewController.addedFriends;
 		
 		if (!retrievedList.isEmpty()) {
@@ -104,7 +100,7 @@ public class HostAGame_AddedFriendCardController {
 	private void setDP() {
 		
 		try {
-			ImagePattern ip = new ImagePattern(misc.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
+			ImagePattern ip = new ImagePattern(Utils.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
 			playerDP.setFill(ip);
 		}
 		catch (Exception e) {
@@ -158,7 +154,7 @@ public class HostAGame_AddedFriendCardController {
 	}
 	
 	public void setRating() {
-		lbPlayerRating.setText(misc.getRatingShapes(retrievedAcc.getCalRating()));
+		lbPlayerRating.setText(Utils.getRatingShapes(retrievedAcc.getCalRating()));
 	}
 	
 	public void setMatchesPlayed() {

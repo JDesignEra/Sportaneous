@@ -46,8 +46,6 @@ public class FindAGame_ViewPlayerDetailsController {
 	
 	private String adminNo = "";
 	
-	private Utils m;
-	
 	private AccountsEntity retrievedAcc = null;
 	
 	public void initialize() {
@@ -55,7 +53,6 @@ public class FindAGame_ViewPlayerDetailsController {
 		AccountsDA.initDA();
 		HostsDA.initDA();
 		
-		m = new Utils();
 		gameClicked = FindAGame_ViewController.clickedgame;
 		target = gameClicked.getName() + " (" + gameClicked.getAdminNo() + ") ";
 		peopleToDisplay = HostsDA.getFriends(gameClicked.getAdminNo(), gameClicked.getDate(), gameClicked.getTime());
@@ -91,7 +88,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	private void setDP() {
 		
 		try {
-			ImagePattern ip = new ImagePattern(m.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
+			ImagePattern ip = new ImagePattern(Utils.cropCirclePhoto(adminNo, playerDP.getRadius()).getImage());
 			playerDP.setFill(ip);
 		}
 		catch (Exception e) {
@@ -145,7 +142,7 @@ public class FindAGame_ViewPlayerDetailsController {
 	}
 	
 	public void setRating() {
-		lbPlayerRating.setText(m.getRatingShapes(retrievedAcc.getCalRating()));
+		lbPlayerRating.setText(Utils.getRatingShapes(retrievedAcc.getCalRating()));
 	}
 	
 	public void setMatchesPlayed() {

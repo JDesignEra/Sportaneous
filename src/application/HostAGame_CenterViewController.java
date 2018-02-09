@@ -101,7 +101,7 @@ public class HostAGame_CenterViewController {
 			e.printStackTrace();
 		}
 		
-		new Snackbar().warning(borderPane, "NOTE: Minutes will be ignored.");
+		Snackbar.warning(borderPane, "NOTE: Minutes will be ignored.");
 		sportDropD.setItems(FindAGame_ViewController.options);
 		AccountsDA.initDA();
 		
@@ -162,7 +162,7 @@ public class HostAGame_CenterViewController {
 							sendInvitations(AccountsDA.getAdminNo());
 						}
 
-						new Snackbar().success(borderPane, "Success!");
+						Snackbar.success(borderPane, "Success!");
 						
 						try {
 							borderPane.setCenter(FXMLLoader.load(findGameViewURL));
@@ -174,22 +174,22 @@ public class HostAGame_CenterViewController {
 
 					} else {
 						
-						new Snackbar().danger(borderPane, "Booking is unsuccessful! Please check that date and time are valid.");
+						Snackbar.danger(borderPane, "Booking is unsuccessful! Please check that date and time are valid.");
 						
 					}
 					
 				} else if (FacilitiesDA.facilityIsAvailable(LocalDateTime.of(date, time), sports) == false) {
 					
-					new Snackbar().danger(borderPane, "Facility is fully booked at this date and time!");
+					Snackbar.danger(borderPane, "Facility is fully booked at this date and time!");
 					
 				}
 				
 			} else {
-				new Snackbar().danger(borderPane, "Past dates cannot be selected! Please select future/present date and time.");
+				Snackbar.danger(borderPane, "Past dates cannot be selected! Please select future/present date and time.");
 			}
 			
 		} else {
-			new Snackbar().danger(borderPane, "Please fill in all fields!");
+			Snackbar.danger(borderPane, "Please fill in all fields!");
 		}
 		
 	}
@@ -239,7 +239,7 @@ public class HostAGame_CenterViewController {
     
 	@FXML
     private void handleTimePicker(MouseEvent event) {
-		new Snackbar().warning(borderPane, "NOTE: Minutes will be ignored.");
+		Snackbar.warning(borderPane, "NOTE: Minutes will be ignored.");
     }
 	
     @FXML
@@ -248,19 +248,19 @@ public class HostAGame_CenterViewController {
 			if (equipmentToggle.isSelected() && !sportDropD.getValue().isEmpty()) {
 				if (EquipmentsDA.equipmentIsAvailable(sportDropD.getValue())) {
 					canRentEq = true;
-					new Snackbar().success(borderPane, "Equipment is available!");
+					Snackbar.success(borderPane, "Equipment is available!");
 				}
 				else {
 					equipmentToggle.setSelected(false);
-					new Snackbar().danger(borderPane, "Equipment is not available!");
+					Snackbar.danger(borderPane, "Equipment is not available!");
 				}
 			}
 			else if (equipmentToggle.isSelected() && sportDropD.getValue().isEmpty()) {
-				new Snackbar().danger(borderPane, "Please select a sport!");
+				Snackbar.danger(borderPane, "Please select a sport!");
 				equipmentToggle.setSelected(false);
 			}
     	} catch (Exception e) {
-    		new Snackbar().danger(borderPane, "Please select a sport!");
+    		Snackbar.danger(borderPane, "Please select a sport!");
     		equipmentToggle.setSelected(false);
     	}
     }

@@ -37,9 +37,8 @@ public class NavigationViewController {
 			translateTransition.setToY(0);
 			translateTransition.play();
 		});
-		
-		notificationSizeCheck();
-		ratingSizeCheck();
+
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navProfileBtn].onAction
@@ -57,7 +56,7 @@ public class NavigationViewController {
 		}
 
 		navProfileBtn.getStyleClass().add("active");
-		notificationSizeCheck();
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navPlayBtn].onAction
@@ -75,7 +74,7 @@ public class NavigationViewController {
 		}
 
 		navPlayBtn.getStyleClass().add("active");
-		notificationSizeCheck();
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navFriendsBtn].onAction
@@ -93,7 +92,7 @@ public class NavigationViewController {
 		}
 
 		navFriendsBtn.getStyleClass().add("active");
-		notificationSizeCheck();
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navRatingsBtn].onAction
@@ -111,7 +110,7 @@ public class NavigationViewController {
 		}
 
 		navRatingsBtn.getStyleClass().add("active");
-		ratingSizeCheck();
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navNotiBtn].onAction
@@ -129,7 +128,7 @@ public class NavigationViewController {
 		}
 
 		navNotiBtn.getStyleClass().add("active");
-		notificationSizeCheck();
+		ratingAndnotificationSizeCheck();
 	}
 
 	// Event Listener on JFXButton[#navLogoutBtn].onAction
@@ -148,17 +147,14 @@ public class NavigationViewController {
 		}
 	}
 
-	private void notificationSizeCheck() {
+	private void ratingAndnotificationSizeCheck() {
 		navNotiBtn.getStyleClass().remove("badge");
-		
+		navNotiBtn.getStyleClass().remove("badge");
+
 		if (!NotificationsDA.getNotifications().isEmpty()) {
 			navNotiBtn.getStyleClass().add("badge");
 		}
-	}
-	
-	private void ratingSizeCheck() {
-		navNotiBtn.getStyleClass().remove("badge");
-		
+
 		if (!RatingsDA.getRatings().isEmpty()) {
 			navNotiBtn.getStyleClass().add("badge");
 		}

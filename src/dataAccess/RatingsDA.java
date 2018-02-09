@@ -19,26 +19,6 @@ public class RatingsDA {
 		db = DBMaker.newFileDB(new File("tmp/ratings.db")).closeOnJvmShutdown().make();
 		ratings = db.getTreeMap("ratings");
 
-//		List<RatingsEntity> temp = new ArrayList<>();
-//		temp.add(new RatingsEntity(1, "admin", "Badminton", LocalDateTime.now(), new String[] { "1234a", "1234b", "4321a" }, new String[] { "", "", "" }, new int[] { 1, 1, 1 },
-//				new int[] { 1, 0, 1 }, 3));
-//		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "1234a", "4321a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 0));
-//		ratings.put("admin", temp);
-//
-//		temp = new ArrayList<>();
-//		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "4321a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 1));
-//		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "4321a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 0));
-//		ratings.put("1234a", temp);
-//
-//		temp = new ArrayList<>();
-//		temp.add(new RatingsEntity(1, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "1234a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 1));
-//		temp.add(new RatingsEntity(2, "admin", "BasketBall", LocalDateTime.now(), new String[] { "admin", "1234a" }, new String[] { "", "" }, new int[] { 1, 1 },
-//				new int[] { 1, 0 }, 0));
-//		ratings.put("4321a", temp);
 		db.commit();
 	}
 

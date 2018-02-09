@@ -1,27 +1,27 @@
 package application;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import com.jfoenix.controls.JFXButton;
-
-import dataAccess.HostsDA;
-import modules.Utils;
 
 import entity.HostsEntity;
+
+import dataAccess.HostsDA;
+
+import modules.Utils;
 
 public class FindAGame_hostedGameController {
 	@FXML private Label eventDay;

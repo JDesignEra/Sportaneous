@@ -18,10 +18,7 @@ public class NotificationsDA {
 	public static void initDA() {
 		db = DBMaker.newFileDB(new File("tmp/notifications.db")).closeOnJvmShutdown().make();
 		notifications = db.getTreeMap("notifications");
-
-//		List<NotificationsEntity> temp = new ArrayList<>();
-//		temp.add(new NotificationsEntity("admin", "Administrator", "Roger Federer", "1234b", null, null, null, 3));
-//		notifications.put("admin", temp);
+		
 		db.commit();
 	}
 

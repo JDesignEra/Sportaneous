@@ -11,7 +11,6 @@ import org.mapdb.Atomic;
 import org.mapdb.DB;
 import org.mapdb.DBMaker;
 
-import entity.AccountsEntity;
 import entity.HostsEntity;
 
 public class HostsDA {
