@@ -32,7 +32,7 @@ Notes
 * [TransitionAnimation.java](src/modules/TransitionAnimation.java)
   * Pre-made animation.
 
-<sup>* If you need additional methods in [Snackbar.java](src/modules/Snackbar.java), [Misc.java](src/modules/Misc.java) or [TransitionAnimation.java](src/modules/TransitionAnimation.java) it's open for discussion.</sup>
+<sup>* If you need additional methods in [Snackbar.java](src/modules/Snackbar.java), [Utils.java](src/modules/Utils.java) or [TransitionAnimation.java](src/modules/TransitionAnimation.java) it's open for discussion.</sup>
 
 ------
 ##### Feel free to import application.css into your CSS with the following code:
