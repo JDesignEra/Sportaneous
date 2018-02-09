@@ -18,7 +18,9 @@ import javafx.scene.text.Text;
 
 import entity.NotificationsEntity;
 
+import dataAccess.AccountsDA;
 import dataAccess.FriendsDA;
+import dataAccess.HostsDA;
 import dataAccess.NotificationsDA;
 
 import modules.Utils;
@@ -91,7 +93,9 @@ public class NotificationCardViewController {
 		}
 		else if (status == 0) {
 			NotificationsDA.addNotifications(hostAdminNo, sport, venue, dateTime, 1);
-		}
+			System.out.println(hostAdminNo);
+			HostsDA.removeFriend(hostAdminNo, dateTime.toLocalDate(), dateTime.toLocalTime(), AccountsDA.getAdminNo().toLowerCase());
+		} 
 
 		NotificationsDA.deleteNotificaions(index);
 
